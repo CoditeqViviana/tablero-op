@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tablero OP — Centro de Proceso</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
+
+.hdr{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.hdr-left h1{font-size:16px;font-weight:700;color:#1a1a1a}
+.hdr-left p{font-size:12px;color:#6b7280;margin-top:2px}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.updated{font-size:11px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px}
+.updated strong{color:#374151}
+.upload-btn{font-size:12px;padding:6px 14px;background:#1d4ed8;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:600}
+.upload-btn:hover{background:#1e40af}
+
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0}
+.kl{font-size:11px;color:#6b7280;margin-bottom:5px}
+.kv{font-size:26px;font-weight:700;line-height:1}
+.ks{font-size:11px;color:#9ca3af;margin-top:3px}
+
+.panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
+.panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0}
+.panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{padding:9px 14px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-bottom:1px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+th.maq{text-align:left;width:180px}
+td{padding:9px 14px;text-align:center;border-bottom:1px solid #f3f4f6;color:#1a1a1a}
+td.maq-cell{text-align:left;font-weight:600;font-size:12px}
+td.zero{color:#d1d5db}
+td.total-col{font-weight:700;background:#eff6ff;color:#1d4ed8}
+tr.total-row td{background:#f9fafb;font-weight:700;border-top:1px solid #e5e7eb}
+tr.total-row td.total-col{background:#dbeafe}
+tr:last-child td{border-bottom:none}
+tr:hover:not(.total-row) td{background:#fafafa}
+
+.inc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:14px 16px}
+.inc-card{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 12px}
+.inc-maq{font-size:11px;color:#991b1b;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
+.inc-n{font-size:24px;font-weight:700;color:#dc2626;line-height:1}
+.inc-label{font-size:10px;color:#ef4444;margin-top:2px}
+
+.empty{padding:40px;text-align:center;color:#9ca3af}
+.empty p{font-size:14px;margin-bottom:8px}
+.empty small{font-size:12px}
+
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center}
+.modal-bg.show{display:flex}
+.modal{background:#fff;border-radius:12px;padding:24px;width:360px;max-width:90vw}
+.modal h3{font-size:15px;font-weight:700;margin-bottom:16px;color:#1a1a1a}
+.file-zone{border:2px dashed #d1d5db;border-radius:8px;padding:24px;text-align:center;cursor:pointer;margin-bottom:14px;transition:border-color .2s}
+.file-zone:hover,.file-zone.over{border-color:#1d4ed8;background:#eff6ff}
+.file-zone p{font-size:13px;color:#6b7280;margin-bottom:4px}
+.file-zone small{font-size:11px;color:#9ca3af}
+.file-zone input{display:none}
+.modal-btns{display:flex;gap:8px;justify-content:flex-end}
+.btn-cancel{font-size:13px;padding:7px 16px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer;color:#374151}
+.btn-upload{font-size:13px;padding:7px 16px;border:none;border-radius:7px;background:#1d4ed8;color:#fff;cursor:pointer;font-weight:600}
+.btn-upload:disabled{background:#93c5fd;cursor:not-allowed}
+.msg{font-size:12px;margin-bottom:10px;padding:8px 12px;border-radius:6px;display:none}
+.msg.ok{background:#dcfce7;color:#15803d;display:block}
+.msg.err{background:#fee2e2;color:#b91c1c;display:block}
+.spinner{display:none;font-size:12px;color:#6b7280;text-align:center;padding:8px 0}
+.spinner.show{display:block}
+
+.dia-hdr{display:flex;flex-direction:column;align-items:center;gap:2px}
+.dia-nombre{font-size:11px;font-weight:700}
+.dia-fecha{font-size:10px;color:#9ca3af;font-weight:400}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>Tablero Órdenes de Producción</h1>
+    <p>Panorama semanal por centro de proceso</p>
+  </div>
+  <div class="hdr-right">
+    {% if data %}
+    <div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>
+    {% endif %}
+    <button class="upload-btn" onclick="openModal()">&#8593; Subir Excel</button>
+  </div>
+</div>
+
+{% if data %}
+
+<div class="kpis">
+  <div class="kpi" style="border-left:4px solid #dc2626">
+    <div class="kl">Órdenes incumplidas</div>
+    <div class="kv" style="color:#dc2626">{{ data.inc_total }}</div>
+    <div class="ks">con fecha de entrega vencida</div>
+  </div>
+  <div class="kpi" style="border-left:4px solid #1d4ed8">
+    <div class="kl">Órdenes esta semana</div>
+    <div class="kv" style="color:#1d4ed8">{{ data.total_semana }}</div>
+    <div class="ks">{{ data.lun }} — {{ data.vie }}</div>
+  </div>
+  <div class="kpi" style="border-left:4px solid #374151">
+    <div class="kl">Máquinas activas</div>
+    <div class="kv">{{ data.maquinas|length }}</div>
+    <div class="ks">centros de proceso</div>
+  </div>
+  <div class="kpi" style="border-left:4px solid #ca8a04">
+    <div class="kl">Día de mayor carga</div>
+    <div class="kv" style="color:#ca8a04">{{ data.dia_max_val }}</div>
+    <div class="ks">{{ data.dia_max_nombre }} {{ data.dia_max_fecha }}</div>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-hdr"><h2>Panorama semanal — órdenes a entregar por máquina</h2></div>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th class="maq">Máquina</th>
+        {% for i in range(data.dias_str|length) %}
+        <th>
+          <div class="dia-hdr">
+            <span class="dia-nombre">{{ data.dias_nombre[i] }}</span>
+            <span class="dia-fecha">{{ data.dias_label[i] }}</span>
+          </div>
+        </th>
+        {% endfor %}
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in data.maquinas %}
+      <tr>
+        <td class="maq-cell">{{ m }}</td>
+        {% set total_m = namespace(val=0) %}
+        {% for d in data.dias_str %}
+          {% set n = data.pivot[m][d] %}
+          {% set total_m.val = total_m.val + n %}
+          {% if n == 0 %}
+          <td class="zero">0</td>
+          {% else %}
+          <td>{{ n }}</td>
+          {% endif %}
+        {% endfor %}
+        <td class="total-col">{{ total_m.val }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="total-row">
+        <td class="maq-cell">Total día</td>
+        {% for d in data.dias_str %}
+        <td class="total-col">{{ data.totales_dia[d] }}</td>
+        {% endfor %}
+        <td class="total-col">{{ data.total_semana }}</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="panel">
+  <div class="panel-hdr"><h2>Órdenes incumplidas por máquina</h2></div>
+  <div class="inc-grid">
+    {% for m in data.maquinas %}
+    <div class="inc-card">
+      <div class="inc-maq">{{ m }}</div>
+      <div class="inc-n">{{ data.inc_maq.get(m, 0) }}</div>
+      <div class="inc-label">incumplidas</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% else %}
+<div class="panel">
+  <div class="empty">
+    <p>No hay datos cargados aún.</p>
+    <small>Haz clic en "Subir Excel" para cargar el primer archivo.</small>
+  </div>
+</div>
+{% endif %}
+
+<!-- Modal subir archivo -->
+<div class="modal-bg" id="modal-bg" onclick="closeOnBg(event)">
+  <div class="modal">
+    <h3>Actualizar datos</h3>
+    <div class="msg" id="msg"></div>
+    <div class="file-zone" id="drop-zone" onclick="document.getElementById('file-input').click()"
+         ondragover="event.preventDefault();this.classList.add('over')"
+         ondragleave="this.classList.remove('over')"
+         ondrop="handleDrop(event)">
+      <p id="file-name">Haz clic o arrastra el Excel aquí</p>
+      <small>.xlsx o .xls</small>
+      <input type="file" id="file-input" accept=".xlsx,.xls" onchange="handleFile(this.files[0])">
+    </div>
+    <div class="spinner" id="spinner">Procesando archivo...</div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-upload" id="btn-upload" disabled onclick="doUpload()">Actualizar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let selectedFile = null;
+
+function openModal(){
+  document.getElementById('modal-bg').classList.add('show');
+  document.getElementById('msg').className='msg';
+  document.getElementById('msg').textContent='';
+  document.getElementById('file-name').textContent='Haz clic o arrastra el Excel aquí';
+  document.getElementById('btn-upload').disabled=true;
+  document.getElementById('spinner').className='spinner';
+  selectedFile=null;
+}
+function closeModal(){document.getElementById('modal-bg').classList.remove('show');}
+function closeOnBg(e){if(e.target===document.getElementById('modal-bg'))closeModal();}
+
+function handleFile(file){
+  if(!file) return;
+  selectedFile=file;
+  document.getElementById('file-name').textContent=file.name;
+  document.getElementById('btn-upload').disabled=false;
+  document.getElementById('msg').className='msg';
+}
+function handleDrop(e){
+  e.preventDefault();
+  document.getElementById('drop-zone').classList.remove('over');
+  const file=e.dataTransfer.files[0];
+  if(file) handleFile(file);
+}
+
+function doUpload(){
+  if(!selectedFile) return;
+  const fd=new FormData();
+  fd.append('file', selectedFile);
+  document.getElementById('btn-upload').disabled=true;
+  document.getElementById('spinner').className='spinner show';
+  document.getElementById('msg').className='msg';
+  fetch('/upload',{method:'POST',body:fd})
+    .then(r=>r.json())
+    .then(d=>{
+      document.getElementById('spinner').className='spinner';
+      if(d.ok){
+        document.getElementById('msg').className='msg ok';
+        document.getElementById('msg').textContent='Datos actualizados correctamente. Recargando...';
+        setTimeout(()=>location.reload(), 1500);
+      } else {
+        document.getElementById('msg').className='msg err';
+        document.getElementById('msg').textContent='Error: '+(d.error||'intente de nuevo');
+        document.getElementById('btn-upload').disabled=false;
+      }
+    })
+    .catch(()=>{
+      document.getElementById('spinner').className='spinner';
+      document.getElementById('msg').className='msg err';
+      document.getElementById('msg').textContent='Error de conexión. Intente de nuevo.';
+      document.getElementById('btn-upload').disabled=false;
+    });
+}
+</script>
+</body>
+</html>
