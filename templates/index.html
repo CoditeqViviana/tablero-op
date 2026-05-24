@@ -39,13 +39,27 @@ tr:hover:not(.total-row) td{background:#fafafa}
 .inc-maq{font-size:11px;color:#991b1b;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
 .inc-n{font-size:24px;font-weight:700;color:#dc2626;line-height:1}
 .inc-label{font-size:10px;color:#ef4444;margin-top:2px}
+.tipos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 16px 14px}
+.tipo-card{border-radius:8px;padding:10px 14px;text-align:center}
+.tipo-label{font-size:11px;font-weight:700;margin-bottom:4px}
+.tipo-n{font-size:22px;font-weight:700;line-height:1}
+.tipo-sub{font-size:10px;margin-top:2px}
+.t-blanca{background:#f8fafc;border:1px solid #cbd5e1;color:#475569}
+.t-impresa{background:#eff6ff;border:1px solid #bfdbfe;color:#1d4ed8}
+.t-fondo{background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d}
+.t-otro{background:#fafafa;border:1px solid #e5e7eb;color:#9ca3af}
 .det-wrap{overflow-x:auto}
 .det-tbl{width:100%;border-collapse:collapse;font-size:12px}
-.det-tbl th{padding:8px 12px;text-align:left;font-size:11px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
-.det-tbl td{padding:8px 12px;border-bottom:1px solid #f3f4f6;vertical-align:middle}
+.det-tbl th{padding:8px 12px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+.det-tbl td{padding:8px 12px;border-bottom:1px solid #f3f4f6;vertical-align:middle;text-align:center}
+.det-tbl td.td-left{text-align:left}
 .det-tbl tr:last-child td{border-bottom:none}
 .det-tbl tr:hover td{background:#fafafa}
 .badge-etapa{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#dbeafe;color:#1e40af}
+.badge-blanca{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
+.badge-impresa{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#dbeafe;color:#1d4ed8}
+.badge-fondo{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#dcfce7;color:#15803d}
+.badge-otro{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#f3f4f6;color:#9ca3af}
 .fecha-vencida{color:#dc2626;font-weight:700}
 .op-num{font-weight:700;color:#374151}
 .empty{padding:40px;text-align:center;color:#9ca3af}
@@ -80,9 +94,7 @@ tr:hover:not(.total-row) td{background:#fafafa}
     <p>Panorama semanal por centro de proceso</p>
   </div>
   <div class="hdr-right">
-    {% if data %}
-    <div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>
-    {% endif %}
+    {% if data %}<div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>{% endif %}
     <button class="upload-btn" onclick="openModal()">&#8593; Subir Excel</button>
   </div>
 </div>
@@ -165,23 +177,54 @@ tr:hover:not(.total-row) td{background:#fafafa}
 
 <div class="panel">
   <div class="panel-hdr"><h2>Detalle órdenes incumplidas — {{ data.inc_total }} órdenes</h2></div>
+  <div class="tipos-grid">
+    <div class="tipo-card t-blanca">
+      <div class="tipo-label">Blancas</div>
+      <div class="tipo-n">{{ data.inc_blancas }}</div>
+      <div class="tipo-sub">Inician con BL</div>
+    </div>
+    <div class="tipo-card t-impresa">
+      <div class="tipo-label">Impresas</div>
+      <div class="tipo-n">{{ data.inc_impresas }}</div>
+      <div class="tipo-sub">Inician con IC / IS</div>
+    </div>
+    <div class="tipo-card t-fondo">
+      <div class="tipo-label">Fondos</div>
+      <div class="tipo-n">{{ data.inc_fondos }}</div>
+      <div class="tipo-sub">Inician con FD</div>
+    </div>
+    {% if data.inc_otros > 0 %}
+    <div class="tipo-card t-otro">
+      <div class="tipo-label">Otros</div>
+      <div class="tipo-n">{{ data.inc_otros }}</div>
+      <div class="tipo-sub">Otros prefijos</div>
+    </div>
+    {% endif %}
+  </div>
   <div class="det-wrap">
   <table class="det-tbl">
     <thead>
       <tr>
-        <th style="width:180px">Cliente</th>
+        <th style="width:170px">Cliente</th>
         <th>Referencia</th>
-        <th style="width:90px">OP</th>
-        <th style="width:120px">Etapa</th>
+        <th style="width:85px">OP</th>
+        <th style="width:100px">Tipo</th>
+        <th style="width:110px">Etapa</th>
         <th style="width:110px">Fecha entrega</th>
       </tr>
     </thead>
     <tbody>
       {% for r in data.inc_detalle %}
       <tr>
-        <td>{{ r.cliente }}</td>
-        <td style="font-size:11px;color:#6b7280">{{ r.referencia }}</td>
+        <td class="td-left">{{ r.cliente }}</td>
+        <td class="td-left" style="font-size:11px;color:#6b7280">{{ r.referencia }}</td>
         <td class="op-num">{{ r.op }}</td>
+        <td>
+          {% if r.tipo == 'Blanca' %}<span class="badge-blanca">Blanca</span>
+          {% elif r.tipo == 'Impresa' %}<span class="badge-impresa">Impresa</span>
+          {% elif r.tipo == 'Fondo' %}<span class="badge-fondo">Fondo</span>
+          {% else %}<span class="badge-otro">{{ r.tipo }}</span>{% endif %}
+        </td>
         <td><span class="badge-etapa">{{ r.etapa }}</span></td>
         <td class="fecha-vencida">{{ r.fecha_entrega }}</td>
       </tr>
