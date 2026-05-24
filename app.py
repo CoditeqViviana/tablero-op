@@ -22,18 +22,13 @@ def process_excel(file):
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
 
-    # Semana laboral: proximo lunes a viernes
-    days_until_monday = (7 - today.weekday()) % 7
-    if days_until_monday == 0:
-        days_until_monday = 7
-    lun = today + pd.Timedelta(days=days_until_monday)
-    # Si hoy es lunes a viernes, usar semana actual
     if today.weekday() < 5:
         lun = today - pd.Timedelta(days=today.weekday())
+    else:
+        lun = today + pd.Timedelta(days=(7 - today.weekday()))
     vie = lun + pd.Timedelta(days=4)
 
-    semana = df[(df['fecha_entrega'] >= lun) & (df['fecha_entrega'] <= vie)]
-    incumplidas = df[df['fecha_entrega'] < today]
+    incumplidas_df = df[df['fecha_entrega'] < today].copy()
 
     maquinas = sorted(df['maquina'].dropna().unique().tolist())
     dias = pd.date_range(lun, vie, freq='B')
@@ -41,7 +36,6 @@ def process_excel(file):
     dias_label = [d.strftime('%d/%m') for d in dias]
     dias_nombre = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
 
-    # Pivot semana
     pivot = {}
     totales_dia = {d: 0 for d in dias_str}
     for m in maquinas:
@@ -52,11 +46,8 @@ def process_excel(file):
             totales_dia[d] += n
 
     total_semana = sum(totales_dia.values())
+    inc_maq = incumplidas_df['maquina'].value_counts().to_dict()
 
-    # Incumplidas por maquina
-    inc_maq = incumplidas['maquina'].value_counts().to_dict()
-
-    # Dia mayor carga
     if totales_dia:
         dia_max_key = max(totales_dia, key=totales_dia.get)
         dia_max_idx = dias_str.index(dia_max_key) if dia_max_key in dias_str else 0
@@ -65,6 +56,20 @@ def process_excel(file):
         dia_max_fecha = dias_label[dia_max_idx] if dia_max_idx < len(dias_label) else ''
     else:
         dia_max_nombre, dia_max_val, dia_max_fecha = '', 0, ''
+
+    # Detalle ordenes incumplidas
+    inc_detalle = []
+    for _, row in incumplidas_df.iterrows():
+        fe = row['fecha_entrega']
+        inc_detalle.append({
+            'cliente': str(row.iloc[0]),
+            'referencia': str(row.iloc[1]),
+            'op': str(row.iloc[3]),
+            'etapa': str(row.iloc[7]),
+            'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
+        })
+    # Ordenar por fecha mas antigua primero
+    inc_detalle.sort(key=lambda x: x['fecha_entrega'])
 
     result = {
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
@@ -79,8 +84,9 @@ def process_excel(file):
         'totales_dia': totales_dia,
         'total_semana': total_semana,
         'total_ordenes': len(df),
-        'inc_total': len(incumplidas),
+        'inc_total': len(incumplidas_df),
         'inc_maq': inc_maq,
+        'inc_detalle': inc_detalle,
         'dia_max_nombre': dia_max_nombre,
         'dia_max_val': dia_max_val,
         'dia_max_fecha': dia_max_fecha,
@@ -98,7 +104,7 @@ def index():
 @app.route('/upload', methods=['POST'])
 def upload():
     if 'file' not in request.files:
-        return jsonify({'error': 'No se recibió archivo'}), 400
+        return jsonify({'error': 'No se recibio archivo'}), 400
     file = request.files['file']
     if not file.filename.endswith(('.xlsx', '.xls')):
         return jsonify({'error': 'Solo se aceptan archivos Excel (.xlsx, .xls)'}), 400
