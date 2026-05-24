@@ -7,29 +7,25 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
 body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
-
 .hdr{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.hdr-left h1{font-size:16px;font-weight:700;color:#1a1a1a}
+.hdr-left h1{font-size:16px;font-weight:700}
 .hdr-left p{font-size:12px;color:#6b7280;margin-top:2px}
 .hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .updated{font-size:11px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px}
 .updated strong{color:#374151}
 .upload-btn{font-size:12px;padding:6px 14px;background:#1d4ed8;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:600}
 .upload-btn:hover{background:#1e40af}
-
 .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
 .kpi{background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0}
 .kl{font-size:11px;color:#6b7280;margin-bottom:5px}
 .kv{font-size:26px;font-weight:700;line-height:1}
 .ks{font-size:11px;color:#9ca3af;margin-top:3px}
-
 .panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
 .panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0}
 .panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
-
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{padding:9px 14px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-bottom:1px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
-th.maq{text-align:left;width:180px}
+th.maq{text-align:left}
 td{padding:9px 14px;text-align:center;border-bottom:1px solid #f3f4f6;color:#1a1a1a}
 td.maq-cell{text-align:left;font-weight:600;font-size:12px}
 td.zero{color:#d1d5db}
@@ -38,28 +34,32 @@ tr.total-row td{background:#f9fafb;font-weight:700;border-top:1px solid #e5e7eb}
 tr.total-row td.total-col{background:#dbeafe}
 tr:last-child td{border-bottom:none}
 tr:hover:not(.total-row) td{background:#fafafa}
-
 .inc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:14px 16px}
 .inc-card{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 12px}
 .inc-maq{font-size:11px;color:#991b1b;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
 .inc-n{font-size:24px;font-weight:700;color:#dc2626;line-height:1}
 .inc-label{font-size:10px;color:#ef4444;margin-top:2px}
-
+.det-wrap{overflow-x:auto}
+.det-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.det-tbl th{padding:8px 12px;text-align:left;font-size:11px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+.det-tbl td{padding:8px 12px;border-bottom:1px solid #f3f4f6;vertical-align:middle}
+.det-tbl tr:last-child td{border-bottom:none}
+.det-tbl tr:hover td{background:#fafafa}
+.badge-etapa{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#dbeafe;color:#1e40af}
+.fecha-vencida{color:#dc2626;font-weight:700}
+.op-num{font-weight:700;color:#374151}
 .empty{padding:40px;text-align:center;color:#9ca3af}
-.empty p{font-size:14px;margin-bottom:8px}
-.empty small{font-size:12px}
-
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center}
 .modal-bg.show{display:flex}
 .modal{background:#fff;border-radius:12px;padding:24px;width:360px;max-width:90vw}
-.modal h3{font-size:15px;font-weight:700;margin-bottom:16px;color:#1a1a1a}
-.file-zone{border:2px dashed #d1d5db;border-radius:8px;padding:24px;text-align:center;cursor:pointer;margin-bottom:14px;transition:border-color .2s}
+.modal h3{font-size:15px;font-weight:700;margin-bottom:16px}
+.file-zone{border:2px dashed #d1d5db;border-radius:8px;padding:24px;text-align:center;cursor:pointer;margin-bottom:14px}
 .file-zone:hover,.file-zone.over{border-color:#1d4ed8;background:#eff6ff}
 .file-zone p{font-size:13px;color:#6b7280;margin-bottom:4px}
 .file-zone small{font-size:11px;color:#9ca3af}
 .file-zone input{display:none}
 .modal-btns{display:flex;gap:8px;justify-content:flex-end}
-.btn-cancel{font-size:13px;padding:7px 16px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer;color:#374151}
+.btn-cancel{font-size:13px;padding:7px 16px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer}
 .btn-upload{font-size:13px;padding:7px 16px;border:none;border-radius:7px;background:#1d4ed8;color:#fff;cursor:pointer;font-weight:600}
 .btn-upload:disabled{background:#93c5fd;cursor:not-allowed}
 .msg{font-size:12px;margin-bottom:10px;padding:8px 12px;border-radius:6px;display:none}
@@ -67,7 +67,6 @@ tr:hover:not(.total-row) td{background:#fafafa}
 .msg.err{background:#fee2e2;color:#b91c1c;display:block}
 .spinner{display:none;font-size:12px;color:#6b7280;text-align:center;padding:8px 0}
 .spinner.show{display:block}
-
 .dia-hdr{display:flex;flex-direction:column;align-items:center;gap:2px}
 .dia-nombre{font-size:11px;font-weight:700}
 .dia-fecha{font-size:10px;color:#9ca3af;font-weight:400}
@@ -121,12 +120,7 @@ tr:hover:not(.total-row) td{background:#fafafa}
       <tr>
         <th class="maq">Máquina</th>
         {% for i in range(data.dias_str|length) %}
-        <th>
-          <div class="dia-hdr">
-            <span class="dia-nombre">{{ data.dias_nombre[i] }}</span>
-            <span class="dia-fecha">{{ data.dias_label[i] }}</span>
-          </div>
-        </th>
+        <th><div class="dia-hdr"><span class="dia-nombre">{{ data.dias_nombre[i] }}</span><span class="dia-fecha">{{ data.dias_label[i] }}</span></div></th>
         {% endfor %}
         <th>Total</th>
       </tr>
@@ -139,11 +133,7 @@ tr:hover:not(.total-row) td{background:#fafafa}
         {% for d in data.dias_str %}
           {% set n = data.pivot[m][d] %}
           {% set total_m.val = total_m.val + n %}
-          {% if n == 0 %}
-          <td class="zero">0</td>
-          {% else %}
-          <td>{{ n }}</td>
-          {% endif %}
+          {% if n == 0 %}<td class="zero">0</td>{% else %}<td>{{ n }}</td>{% endif %}
         {% endfor %}
         <td class="total-col">{{ total_m.val }}</td>
       </tr>
@@ -173,6 +163,34 @@ tr:hover:not(.total-row) td{background:#fafafa}
   </div>
 </div>
 
+<div class="panel">
+  <div class="panel-hdr"><h2>Detalle órdenes incumplidas — {{ data.inc_total }} órdenes</h2></div>
+  <div class="det-wrap">
+  <table class="det-tbl">
+    <thead>
+      <tr>
+        <th style="width:180px">Cliente</th>
+        <th>Referencia</th>
+        <th style="width:90px">OP</th>
+        <th style="width:120px">Etapa</th>
+        <th style="width:110px">Fecha entrega</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in data.inc_detalle %}
+      <tr>
+        <td>{{ r.cliente }}</td>
+        <td style="font-size:11px;color:#6b7280">{{ r.referencia }}</td>
+        <td class="op-num">{{ r.op }}</td>
+        <td><span class="badge-etapa">{{ r.etapa }}</span></td>
+        <td class="fecha-vencida">{{ r.fecha_entrega }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
 {% else %}
 <div class="panel">
   <div class="empty">
@@ -182,7 +200,6 @@ tr:hover:not(.total-row) td{background:#fafafa}
 </div>
 {% endif %}
 
-<!-- Modal subir archivo -->
 <div class="modal-bg" id="modal-bg" onclick="closeOnBg(event)">
   <div class="modal">
     <h3>Actualizar datos</h3>
@@ -204,38 +221,15 @@ tr:hover:not(.total-row) td{background:#fafafa}
 </div>
 
 <script>
-let selectedFile = null;
-
-function openModal(){
-  document.getElementById('modal-bg').classList.add('show');
-  document.getElementById('msg').className='msg';
-  document.getElementById('msg').textContent='';
-  document.getElementById('file-name').textContent='Haz clic o arrastra el Excel aquí';
-  document.getElementById('btn-upload').disabled=true;
-  document.getElementById('spinner').className='spinner';
-  selectedFile=null;
-}
+let selectedFile=null;
+function openModal(){document.getElementById('modal-bg').classList.add('show');document.getElementById('msg').className='msg';document.getElementById('file-name').textContent='Haz clic o arrastra el Excel aquí';document.getElementById('btn-upload').disabled=true;document.getElementById('spinner').className='spinner';selectedFile=null;}
 function closeModal(){document.getElementById('modal-bg').classList.remove('show');}
 function closeOnBg(e){if(e.target===document.getElementById('modal-bg'))closeModal();}
-
-function handleFile(file){
-  if(!file) return;
-  selectedFile=file;
-  document.getElementById('file-name').textContent=file.name;
-  document.getElementById('btn-upload').disabled=false;
-  document.getElementById('msg').className='msg';
-}
-function handleDrop(e){
-  e.preventDefault();
-  document.getElementById('drop-zone').classList.remove('over');
-  const file=e.dataTransfer.files[0];
-  if(file) handleFile(file);
-}
-
+function handleFile(file){if(!file)return;selectedFile=file;document.getElementById('file-name').textContent=file.name;document.getElementById('btn-upload').disabled=false;document.getElementById('msg').className='msg';}
+function handleDrop(e){e.preventDefault();document.getElementById('drop-zone').classList.remove('over');handleFile(e.dataTransfer.files[0]);}
 function doUpload(){
-  if(!selectedFile) return;
-  const fd=new FormData();
-  fd.append('file', selectedFile);
+  if(!selectedFile)return;
+  const fd=new FormData();fd.append('file',selectedFile);
   document.getElementById('btn-upload').disabled=true;
   document.getElementById('spinner').className='spinner show';
   document.getElementById('msg').className='msg';
@@ -243,22 +237,10 @@ function doUpload(){
     .then(r=>r.json())
     .then(d=>{
       document.getElementById('spinner').className='spinner';
-      if(d.ok){
-        document.getElementById('msg').className='msg ok';
-        document.getElementById('msg').textContent='Datos actualizados correctamente. Recargando...';
-        setTimeout(()=>location.reload(), 1500);
-      } else {
-        document.getElementById('msg').className='msg err';
-        document.getElementById('msg').textContent='Error: '+(d.error||'intente de nuevo');
-        document.getElementById('btn-upload').disabled=false;
-      }
+      if(d.ok){document.getElementById('msg').className='msg ok';document.getElementById('msg').textContent='Datos actualizados. Recargando...';setTimeout(()=>location.reload(),1500);}
+      else{document.getElementById('msg').className='msg err';document.getElementById('msg').textContent='Error: '+(d.error||'intente de nuevo');document.getElementById('btn-upload').disabled=false;}
     })
-    .catch(()=>{
-      document.getElementById('spinner').className='spinner';
-      document.getElementById('msg').className='msg err';
-      document.getElementById('msg').textContent='Error de conexión. Intente de nuevo.';
-      document.getElementById('btn-upload').disabled=false;
-    });
+    .catch(()=>{document.getElementById('spinner').className='spinner';document.getElementById('msg').className='msg err';document.getElementById('msg').textContent='Error de conexión.';document.getElementById('btn-upload').disabled=false;});
 }
 </script>
 </body>
