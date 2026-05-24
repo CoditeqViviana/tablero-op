@@ -15,7 +15,6 @@ BOGOTA = pytz.timezone('America/Bogota')
 def process_excel(file):
     df = pd.read_excel(file, header=0)
     df['fecha_entrega'] = pd.to_datetime(df.iloc[:, 9], errors='coerce')
-    df['fecha_creacion'] = pd.to_datetime(df.iloc[:, 20], format='%d-%m-%Y %I:%M %p', errors='coerce')
     df['maquina'] = df.iloc[:, 16].astype(str).str.split(',').str[0].str.strip()
     df['etapa'] = df.iloc[:, 7].astype(str).str.strip()
 
@@ -57,19 +56,34 @@ def process_excel(file):
     else:
         dia_max_nombre, dia_max_val, dia_max_fecha = '', 0, ''
 
-    # Detalle ordenes incumplidas
+    # Clasificar incumplidas por tipo
     inc_detalle = []
     for _, row in incumplidas_df.iterrows():
         fe = row['fecha_entrega']
+        ref = str(row.iloc[1]).strip().upper()
+        if ref.startswith('BL'):
+            tipo = 'Blanca'
+        elif ref.startswith('IC') or ref.startswith('IS'):
+            tipo = 'Impresa'
+        elif ref.startswith('FD'):
+            tipo = 'Fondo'
+        else:
+            tipo = 'Otro'
         inc_detalle.append({
             'cliente': str(row.iloc[0]),
             'referencia': str(row.iloc[1]),
             'op': str(row.iloc[3]),
             'etapa': str(row.iloc[7]),
             'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
+            'tipo': tipo,
         })
-    # Ordenar por fecha mas antigua primero
     inc_detalle.sort(key=lambda x: x['fecha_entrega'])
+
+    # Conteos por tipo
+    inc_blancas = sum(1 for r in inc_detalle if r['tipo'] == 'Blanca')
+    inc_impresas = sum(1 for r in inc_detalle if r['tipo'] == 'Impresa')
+    inc_fondos = sum(1 for r in inc_detalle if r['tipo'] == 'Fondo')
+    inc_otros = sum(1 for r in inc_detalle if r['tipo'] == 'Otro')
 
     result = {
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
@@ -87,6 +101,10 @@ def process_excel(file):
         'inc_total': len(incumplidas_df),
         'inc_maq': inc_maq,
         'inc_detalle': inc_detalle,
+        'inc_blancas': inc_blancas,
+        'inc_impresas': inc_impresas,
+        'inc_fondos': inc_fondos,
+        'inc_otros': inc_otros,
         'dia_max_nombre': dia_max_nombre,
         'dia_max_val': dia_max_val,
         'dia_max_fecha': dia_max_fecha,
