@@ -10,7 +10,7 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 .hdr{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
 .hdr-left h1{font-size:16px;font-weight:700}
 .hdr-left p{font-size:12px;color:#6b7280;margin-top:2px}
-.hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.hdr-right{display:flex;align-items:center;gap:10px}
 .updated{font-size:11px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px}
 .updated strong{color:#374151}
 .upload-btn{font-size:12px;padding:6px 14px;background:#1d4ed8;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:600}
@@ -34,11 +34,13 @@ tr.total-row td{background:#f9fafb;font-weight:700;border-top:1px solid #e5e7eb}
 tr.total-row td.total-col{background:#dbeafe}
 tr:last-child td{border-bottom:none}
 tr:hover:not(.total-row) td{background:#fafafa}
-.inc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:14px 16px}
-.inc-card{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:10px 12px}
-.inc-maq{font-size:11px;color:#991b1b;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600}
-.inc-n{font-size:24px;font-weight:700;color:#dc2626;line-height:1}
-.inc-label{font-size:10px;color:#ef4444;margin-top:2px}
+/* Tarjetas etapa */
+.etapa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 16px}
+.etapa-card{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 14px;text-align:center}
+.etapa-nombre{font-size:12px;color:#991b1b;margin-bottom:6px;font-weight:700}
+.etapa-n{font-size:28px;font-weight:700;color:#dc2626;line-height:1}
+.etapa-label{font-size:10px;color:#ef4444;margin-top:3px}
+/* Tarjetas tipo */
 .tipos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 16px 14px}
 .tipo-card{border-radius:8px;padding:10px 14px;text-align:center}
 .tipo-label{font-size:11px;font-weight:700;margin-bottom:4px}
@@ -48,6 +50,15 @@ tr:hover:not(.total-row) td{background:#fafafa}
 .t-impresa{background:#eff6ff;border:1px solid #bfdbfe;color:#1d4ed8}
 .t-fondo{background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d}
 .t-otro{background:#fafafa;border:1px solid #e5e7eb;color:#9ca3af}
+/* Filtros */
+.filtros{padding:10px 16px;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filtros label{font-size:12px;color:#6b7280;font-weight:600}
+.filtros select{font-size:12px;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;background:#fff;color:#374151;height:30px}
+.filtros input{font-size:12px;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;height:30px;width:180px}
+.btn-limpiar{font-size:12px;padding:4px 12px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;height:30px;color:#374151}
+.conteo{font-size:12px;color:#6b7280;padding:6px 16px;background:#fafafa;border-bottom:1px solid #f0f0f0}
+.conteo strong{color:#374151}
+/* Tabla detalle */
 .det-wrap{overflow-x:auto}
 .det-tbl{width:100%;border-collapse:collapse;font-size:12px}
 .det-tbl th{padding:8px 12px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
@@ -55,14 +66,16 @@ tr:hover:not(.total-row) td{background:#fafafa}
 .det-tbl td.td-left{text-align:left}
 .det-tbl tr:last-child td{border-bottom:none}
 .det-tbl tr:hover td{background:#fafafa}
-.badge-etapa{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#dbeafe;color:#1e40af}
-.badge-blanca{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
-.badge-impresa{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#dbeafe;color:#1d4ed8}
-.badge-fondo{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#dcfce7;color:#15803d}
-.badge-otro{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700;background:#f3f4f6;color:#9ca3af}
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
+.b-etapa{background:#dbeafe;color:#1e40af}
+.b-blanca{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
+.b-impresa{background:#dbeafe;color:#1d4ed8}
+.b-fondo{background:#dcfce7;color:#15803d}
+.b-otro{background:#f3f4f6;color:#9ca3af}
 .fecha-vencida{color:#dc2626;font-weight:700}
 .op-num{font-weight:700;color:#374151}
 .empty{padding:40px;text-align:center;color:#9ca3af}
+/* Modal */
 .modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center}
 .modal-bg.show{display:flex}
 .modal{background:#fff;border-radius:12px;padding:24px;width:360px;max-width:90vw}
@@ -124,6 +137,7 @@ tr:hover:not(.total-row) td{background:#fafafa}
   </div>
 </div>
 
+<!-- Panorama semanal -->
 <div class="panel">
   <div class="panel-hdr"><h2>Panorama semanal — órdenes a entregar por máquina</h2></div>
   <div style="overflow-x:auto">
@@ -143,8 +157,7 @@ tr:hover:not(.total-row) td{background:#fafafa}
         <td class="maq-cell">{{ m }}</td>
         {% set total_m = namespace(val=0) %}
         {% for d in data.dias_str %}
-          {% set n = data.pivot[m][d] %}
-          {% set total_m.val = total_m.val + n %}
+          {% set n = data.pivot[m][d] %}{% set total_m.val = total_m.val + n %}
           {% if n == 0 %}<td class="zero">0</td>{% else %}<td>{{ n }}</td>{% endif %}
         {% endfor %}
         <td class="total-col">{{ total_m.val }}</td>
@@ -152,9 +165,7 @@ tr:hover:not(.total-row) td{background:#fafafa}
       {% endfor %}
       <tr class="total-row">
         <td class="maq-cell">Total día</td>
-        {% for d in data.dias_str %}
-        <td class="total-col">{{ data.totales_dia[d] }}</td>
-        {% endfor %}
+        {% for d in data.dias_str %}<td class="total-col">{{ data.totales_dia[d] }}</td>{% endfor %}
         <td class="total-col">{{ data.total_semana }}</td>
       </tr>
     </tbody>
@@ -162,45 +173,71 @@ tr:hover:not(.total-row) td{background:#fafafa}
   </div>
 </div>
 
+<!-- Incumplidas por etapa (col H) -->
 <div class="panel">
-  <div class="panel-hdr"><h2>Órdenes incumplidas por máquina</h2></div>
-  <div class="inc-grid">
-    {% for m in data.maquinas %}
-    <div class="inc-card">
-      <div class="inc-maq">{{ m }}</div>
-      <div class="inc-n">{{ data.inc_maq.get(m, 0) }}</div>
-      <div class="inc-label">incumplidas</div>
+  <div class="panel-hdr"><h2>Órdenes incumplidas por estatus (col H)</h2></div>
+  <div class="etapa-grid">
+    {% for etapa, n in data.inc_etapas.items() %}
+    <div class="etapa-card">
+      <div class="etapa-nombre">{{ etapa }}</div>
+      <div class="etapa-n">{{ n }}</div>
+      <div class="etapa-label">incumplidas</div>
     </div>
     {% endfor %}
   </div>
 </div>
 
+<!-- Detalle incumplidas con filtros -->
 <div class="panel">
   <div class="panel-hdr"><h2>Detalle órdenes incumplidas — {{ data.inc_total }} órdenes</h2></div>
+
+  <!-- Resumen por tipo -->
   <div class="tipos-grid">
-    <div class="tipo-card t-blanca">
+    <div class="tipo-card t-blanca" style="cursor:pointer" onclick="filtrarTipo('Blanca')">
       <div class="tipo-label">Blancas</div>
       <div class="tipo-n">{{ data.inc_blancas }}</div>
-      <div class="tipo-sub">Inician con BL</div>
+      <div class="tipo-sub">Prefijo BL</div>
     </div>
-    <div class="tipo-card t-impresa">
+    <div class="tipo-card t-impresa" style="cursor:pointer" onclick="filtrarTipo('Impresa')">
       <div class="tipo-label">Impresas</div>
       <div class="tipo-n">{{ data.inc_impresas }}</div>
-      <div class="tipo-sub">Inician con IC / IS</div>
+      <div class="tipo-sub">Prefijo IC / IS</div>
     </div>
-    <div class="tipo-card t-fondo">
+    <div class="tipo-card t-fondo" style="cursor:pointer" onclick="filtrarTipo('Fondo')">
       <div class="tipo-label">Fondos</div>
       <div class="tipo-n">{{ data.inc_fondos }}</div>
-      <div class="tipo-sub">Inician con FD</div>
+      <div class="tipo-sub">Prefijo FD</div>
     </div>
     {% if data.inc_otros > 0 %}
-    <div class="tipo-card t-otro">
+    <div class="tipo-card t-otro" style="cursor:pointer" onclick="filtrarTipo('Otro')">
       <div class="tipo-label">Otros</div>
       <div class="tipo-n">{{ data.inc_otros }}</div>
       <div class="tipo-sub">Otros prefijos</div>
     </div>
     {% endif %}
   </div>
+
+  <!-- Filtros -->
+  <div class="filtros">
+    <label>Filtrar:</label>
+    <select id="f-tipo" onchange="aplicarFiltros()">
+      <option value="">Todos los tipos</option>
+      <option value="Blanca">Blanca</option>
+      <option value="Impresa">Impresa</option>
+      <option value="Fondo">Fondo</option>
+      <option value="Otro">Otro</option>
+    </select>
+    <select id="f-etapa" onchange="aplicarFiltros()">
+      <option value="">Todos los estatus</option>
+      {% for e in data.etapas_unicas %}
+      <option value="{{ e }}">{{ e }}</option>
+      {% endfor %}
+    </select>
+    <input id="f-buscar" type="text" placeholder="Buscar cliente u OP..." oninput="aplicarFiltros()">
+    <button class="btn-limpiar" onclick="limpiarFiltros()">✕ Limpiar</button>
+  </div>
+  <div class="conteo" id="conteo-txt">Mostrando <strong>{{ data.inc_total }}</strong> órdenes</div>
+
   <div class="det-wrap">
   <table class="det-tbl">
     <thead>
@@ -208,24 +245,24 @@ tr:hover:not(.total-row) td{background:#fafafa}
         <th style="width:170px">Cliente</th>
         <th>Referencia</th>
         <th style="width:85px">OP</th>
-        <th style="width:100px">Tipo</th>
-        <th style="width:110px">Etapa</th>
+        <th style="width:90px">Tipo</th>
+        <th style="width:130px">Estatus</th>
         <th style="width:110px">Fecha entrega</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="det-body">
       {% for r in data.inc_detalle %}
-      <tr>
+      <tr data-tipo="{{ r.tipo }}" data-etapa="{{ r.etapa }}" data-cliente="{{ r.cliente|lower }}" data-op="{{ r.op }}">
         <td class="td-left">{{ r.cliente }}</td>
         <td class="td-left" style="font-size:11px;color:#6b7280">{{ r.referencia }}</td>
         <td class="op-num">{{ r.op }}</td>
         <td>
-          {% if r.tipo == 'Blanca' %}<span class="badge-blanca">Blanca</span>
-          {% elif r.tipo == 'Impresa' %}<span class="badge-impresa">Impresa</span>
-          {% elif r.tipo == 'Fondo' %}<span class="badge-fondo">Fondo</span>
-          {% else %}<span class="badge-otro">{{ r.tipo }}</span>{% endif %}
+          {% if r.tipo == 'Blanca' %}<span class="badge b-blanca">Blanca</span>
+          {% elif r.tipo == 'Impresa' %}<span class="badge b-impresa">Impresa</span>
+          {% elif r.tipo == 'Fondo' %}<span class="badge b-fondo">Fondo</span>
+          {% else %}<span class="badge b-otro">{{ r.tipo }}</span>{% endif %}
         </td>
-        <td><span class="badge-etapa">{{ r.etapa }}</span></td>
+        <td><span class="badge b-etapa">{{ r.etapa }}</span></td>
         <td class="fecha-vencida">{{ r.fecha_entrega }}</td>
       </tr>
       {% endfor %}
@@ -235,14 +272,10 @@ tr:hover:not(.total-row) td{background:#fafafa}
 </div>
 
 {% else %}
-<div class="panel">
-  <div class="empty">
-    <p>No hay datos cargados aún.</p>
-    <small>Haz clic en "Subir Excel" para cargar el primer archivo.</small>
-  </div>
-</div>
+<div class="panel"><div class="empty"><p>No hay datos cargados aún.</p><small>Haz clic en "Subir Excel" para cargar el primer archivo.</small></div></div>
 {% endif %}
 
+<!-- Modal -->
 <div class="modal-bg" id="modal-bg" onclick="closeOnBg(event)">
   <div class="modal">
     <h3>Actualizar datos</h3>
@@ -264,18 +297,47 @@ tr:hover:not(.total-row) td{background:#fafafa}
 </div>
 
 <script>
-let selectedFile=null;
+// Filtros
+function aplicarFiltros(){
+  const tipo = document.getElementById('f-tipo').value;
+  const etapa = document.getElementById('f-etapa').value;
+  const buscar = document.getElementById('f-buscar').value.toLowerCase();
+  const filas = document.querySelectorAll('#det-body tr');
+  let visible = 0;
+  filas.forEach(f => {
+    const ok = (!tipo || f.dataset.tipo === tipo)
+            && (!etapa || f.dataset.etapa === etapa)
+            && (!buscar || f.dataset.cliente.includes(buscar) || f.dataset.op.includes(buscar));
+    f.style.display = ok ? '' : 'none';
+    if(ok) visible++;
+  });
+  document.getElementById('conteo-txt').innerHTML = 'Mostrando <strong>' + visible + '</strong> órdenes';
+}
+
+function filtrarTipo(tipo){
+  document.getElementById('f-tipo').value = tipo;
+  aplicarFiltros();
+}
+
+function limpiarFiltros(){
+  document.getElementById('f-tipo').value = '';
+  document.getElementById('f-etapa').value = '';
+  document.getElementById('f-buscar').value = '';
+  aplicarFiltros();
+}
+
+// Modal
+let selectedFile = null;
 function openModal(){document.getElementById('modal-bg').classList.add('show');document.getElementById('msg').className='msg';document.getElementById('file-name').textContent='Haz clic o arrastra el Excel aquí';document.getElementById('btn-upload').disabled=true;document.getElementById('spinner').className='spinner';selectedFile=null;}
 function closeModal(){document.getElementById('modal-bg').classList.remove('show');}
 function closeOnBg(e){if(e.target===document.getElementById('modal-bg'))closeModal();}
-function handleFile(file){if(!file)return;selectedFile=file;document.getElementById('file-name').textContent=file.name;document.getElementById('btn-upload').disabled=false;document.getElementById('msg').className='msg';}
+function handleFile(f){if(!f)return;selectedFile=f;document.getElementById('file-name').textContent=f.name;document.getElementById('btn-upload').disabled=false;document.getElementById('msg').className='msg';}
 function handleDrop(e){e.preventDefault();document.getElementById('drop-zone').classList.remove('over');handleFile(e.dataTransfer.files[0]);}
 function doUpload(){
   if(!selectedFile)return;
   const fd=new FormData();fd.append('file',selectedFile);
   document.getElementById('btn-upload').disabled=true;
   document.getElementById('spinner').className='spinner show';
-  document.getElementById('msg').className='msg';
   fetch('/upload',{method:'POST',body:fd})
     .then(r=>r.json())
     .then(d=>{
