@@ -45,7 +45,6 @@ def process_excel(file):
             totales_dia[d] += n
 
     total_semana = sum(totales_dia.values())
-    inc_maq = incumplidas_df['maquina'].value_counts().to_dict()
 
     if totales_dia:
         dia_max_key = max(totales_dia, key=totales_dia.get)
@@ -56,7 +55,10 @@ def process_excel(file):
     else:
         dia_max_nombre, dia_max_val, dia_max_fecha = '', 0, ''
 
-    # Clasificar incumplidas por tipo
+    # Conteo por etapa (col H)
+    inc_etapas = incumplidas_df['etapa'].value_counts().to_dict()
+
+    # Detalle incumplidas con tipo
     inc_detalle = []
     for _, row in incumplidas_df.iterrows():
         fe = row['fecha_entrega']
@@ -79,15 +81,16 @@ def process_excel(file):
         })
     inc_detalle.sort(key=lambda x: x['fecha_entrega'])
 
-    # Conteos por tipo
-    inc_blancas = sum(1 for r in inc_detalle if r['tipo'] == 'Blanca')
+    inc_blancas  = sum(1 for r in inc_detalle if r['tipo'] == 'Blanca')
     inc_impresas = sum(1 for r in inc_detalle if r['tipo'] == 'Impresa')
-    inc_fondos = sum(1 for r in inc_detalle if r['tipo'] == 'Fondo')
-    inc_otros = sum(1 for r in inc_detalle if r['tipo'] == 'Otro')
+    inc_fondos   = sum(1 for r in inc_detalle if r['tipo'] == 'Fondo')
+    inc_otros    = sum(1 for r in inc_detalle if r['tipo'] == 'Otro')
+
+    # Etapas únicas para el filtro
+    etapas_unicas = sorted(set(r['etapa'] for r in inc_detalle))
 
     result = {
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
-        'today': today.strftime('%Y-%m-%d'),
         'lun': lun.strftime('%d/%m'),
         'vie': vie.strftime('%d/%m'),
         'maquinas': maquinas,
@@ -99,12 +102,13 @@ def process_excel(file):
         'total_semana': total_semana,
         'total_ordenes': len(df),
         'inc_total': len(incumplidas_df),
-        'inc_maq': inc_maq,
+        'inc_etapas': inc_etapas,
         'inc_detalle': inc_detalle,
         'inc_blancas': inc_blancas,
         'inc_impresas': inc_impresas,
         'inc_fondos': inc_fondos,
         'inc_otros': inc_otros,
+        'etapas_unicas': etapas_unicas,
         'dia_max_nombre': dia_max_nombre,
         'dia_max_val': dia_max_val,
         'dia_max_fecha': dia_max_fecha,
