@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Detalle del Día — Tablero OP</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
+.hdr{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.hdr-left h1{font-size:16px;font-weight:700}
+.hdr-left p{font-size:12px;color:#6b7280;margin-top:2px}
+.hdr-right{display:flex;align-items:center;gap:10px}
+.updated{font-size:11px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px}
+.updated strong{color:#374151}
+.nav-btn{font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer;color:#374151;text-decoration:none;display:inline-block}
+.nav-btn:hover{background:#f9fafb}
+/* Selector de fecha */
+.date-bar{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.date-bar label{font-size:13px;font-weight:700;color:#374151}
+.date-select{font-size:14px;padding:6px 12px;border:2px solid #1d4ed8;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer;font-weight:600}
+.date-info{font-size:12px;color:#6b7280;margin-left:4px}
+.date-info strong{color:#1d4ed8}
+.kpis{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border-radius:8px;padding:10px 12px;border:1px solid #e0e0e0;text-align:center}
+.kl{font-size:10px;color:#6b7280;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.kv{font-size:22px;font-weight:700;line-height:1}
+.ks{font-size:10px;color:#9ca3af;margin-top:2px}
+.panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
+.panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
+.panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
+.badge-total{font-size:12px;font-weight:700;background:#eff6ff;color:#1d4ed8;padding:3px 10px;border-radius:10px}
+.maq-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px 16px}
+.maq-card{border:1px solid #e5e7eb;border-radius:10px;overflow:hidden}
+.maq-hdr{padding:10px 14px;display:flex;justify-content:space-between;align-items:center;background:#f9fafb;border-bottom:1px solid #e5e7eb}
+.maq-nombre{font-size:12px;font-weight:700;color:#374151}
+.maq-total{font-size:18px;font-weight:700;color:#1d4ed8}
+.maq-lista{padding:4px 0}
+.maq-row{display:flex;align-items:center;gap:6px;padding:6px 14px;border-bottom:1px solid #f3f4f6}
+.maq-row:last-child{border-bottom:none}
+.maq-op{font-size:10px;font-weight:700;color:#6b7280;width:52px;flex-shrink:0}
+.maq-cliente{font-size:11px;color:#374151;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.maq-badges{display:flex;gap:4px;flex-shrink:0}
+.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:8px;font-weight:700;white-space:nowrap}
+.b-blanca{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
+.b-impresa{background:#dbeafe;color:#1d4ed8}
+.b-fondo{background:#dcfce7;color:#15803d}
+.b-otro{background:#f3f4f6;color:#9ca3af}
+.b-etapa{background:#fef9c3;color:#854d0e}
+.maq-empty{padding:14px;text-align:center;font-size:12px;color:#9ca3af}
+.filtros{padding:10px 16px;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.filtros label{font-size:12px;color:#6b7280;font-weight:600}
+.filtros select,.filtros input{font-size:12px;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;background:#fff;height:30px}
+.filtros input{width:180px}
+.btn-limpiar{font-size:12px;padding:4px 12px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;height:30px}
+.conteo{font-size:12px;color:#6b7280;padding:6px 16px;background:#fafafa;border-bottom:1px solid #f0f0f0}
+.conteo strong{color:#374151}
+.det-wrap{overflow-x:auto}
+.det-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.det-tbl th{padding:8px 12px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+.det-tbl td{padding:8px 12px;border-bottom:1px solid #f3f4f6;vertical-align:middle;text-align:center}
+.det-tbl td.td-left{text-align:left}
+.det-tbl tr:last-child td{border-bottom:none}
+.det-tbl tr:hover td{background:#fafafa}
+.empty{padding:40px;text-align:center;color:#9ca3af}
+.sin-ordenes{padding:20px;text-align:center;font-size:13px;color:#9ca3af}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1 id="titulo-hdr">Detalle del día</h1>
+    <p>Órdenes programadas por máquina</p>
+  </div>
+  <div class="hdr-right">
+    {% if data %}<div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>{% endif %}
+    <a href="/" class="nav-btn">← Resumen semanal</a>
+  </div>
+</div>
+
+{% if data %}
+
+<!-- Selector de fecha -->
+<div class="date-bar">
+  <label>📅 Seleccionar fecha:</label>
+  <select class="date-select" id="selector-fecha" onchange="cambiarFecha()">
+    {% for f in data.fechas_disponibles %}
+    <option value="{{ f }}" {% if f == data.hoy %}selected{% endif %}>
+      {{ f[8:10] }}/{{ f[5:7] }}/{{ f[0:4] }}
+    </option>
+    {% endfor %}
+  </select>
+  <span class="date-info">Mostrando <strong id="label-fecha">{{ data.hoy_nombre }} {{ data.hoy_label }}</strong></span>
+</div>
+
+<!-- KPIs dinámicos -->
+<div class="kpis" id="kpis-wrap">
+  <div class="kpi" style="border-left:4px solid #1d4ed8">
+    <div class="kl">Total órdenes</div>
+    <div class="kv" style="color:#1d4ed8" id="kpi-total">—</div>
+    <div class="ks">del día</div>
+  </div>
+  {% for m in data.maquinas %}
+  <div class="kpi" style="border-left:4px solid #374151">
+    <div class="kl">{{ m }}</div>
+    <div class="kv" id="kpi-{{ loop.index }}">—</div>
+    <div class="ks">órdenes</div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Tarjetas por máquina -->
+<div class="panel">
+  <div class="panel-hdr">
+    <h2>Órdenes del día por máquina</h2>
+    <span class="badge-total" id="badge-total-maq">— órdenes</span>
+  </div>
+  <div class="maq-grid" id="maq-grid">
+    <!-- Se renderiza con JS -->
+  </div>
+</div>
+
+<!-- Tabla detalle con filtros -->
+<div class="panel">
+  <div class="panel-hdr"><h2>Tabla detalle con filtros</h2></div>
+  <div class="filtros">
+    <label>Filtrar:</label>
+    <select id="f-maq" onchange="aplicarFiltros()">
+      <option value="">Todas las máquinas</option>
+      {% for m in data.maquinas %}<option value="{{ m }}">{{ m }}</option>{% endfor %}
+    </select>
+    <select id="f-tipo" onchange="aplicarFiltros()">
+      <option value="">Todos los tipos</option>
+      <option value="Blanca">Blanca</option>
+      <option value="Impresa">Impresa</option>
+      <option value="Fondo">Fondo</option>
+    </select>
+    <select id="f-etapa" onchange="aplicarFiltros()">
+      <option value="">Todos los estatus</option>
+      {% for e in data.etapas_unicas %}<option value="{{ e }}">{{ e }}</option>{% endfor %}
+    </select>
+    <input id="f-buscar" type="text" placeholder="Buscar cliente u OP..." oninput="aplicarFiltros()">
+    <button class="btn-limpiar" onclick="limpiarFiltros()">✕ Limpiar</button>
+  </div>
+  <div class="conteo" id="conteo-txt">Mostrando <strong>0</strong> órdenes</div>
+  <div class="det-wrap">
+  <table class="det-tbl">
+    <thead>
+      <tr>
+        <th style="width:85px">OP</th>
+        <th style="width:170px">Cliente</th>
+        <th>Referencia</th>
+        <th style="width:150px">Máquina</th>
+        <th style="width:90px">Tipo</th>
+        <th style="width:140px">Estatus</th>
+      </tr>
+    </thead>
+    <tbody id="det-body"></tbody>
+  </table>
+  </div>
+</div>
+
+{% else %}
+<div class="panel"><div class="empty"><p>No hay datos cargados aún.</p><small>Ve al resumen semanal y sube el Excel primero.</small></div></div>
+{% endif %}
+
+<script>
+const TODAS = {{ data.todas_ordenes | tojson }};
+const MAQUINAS = {{ data.maquinas | tojson }};
+const NOMBRES_DIA = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+
+const BADGE = {
+  'Blanca': '<span class="badge b-blanca">Blanca</span>',
+  'Impresa': '<span class="badge b-impresa">Impresa</span>',
+  'Fondo':   '<span class="badge b-fondo">Fondo</span>',
+  'Otro':    '<span class="badge b-otro">Otro</span>',
+};
+
+let ordenesDelDia = [];
+
+function cambiarFecha() {
+  const fecha = document.getElementById('selector-fecha').value;
+  ordenesDelDia = TODAS.filter(o => o.fecha === fecha);
+
+  // Actualizar label
+  const d = new Date(fecha + 'T12:00:00');
+  const nombre = NOMBRES_DIA[d.getDay()];
+  const label = `${nombre} ${fecha.slice(8,10)}/${fecha.slice(5,7)}/${fecha.slice(0,4)}`;
+  document.getElementById('label-fecha').textContent = label;
+  document.getElementById('titulo-hdr').textContent = `Detalle del día — ${label}`;
+
+  // KPIs
+  document.getElementById('kpi-total').textContent = ordenesDelDia.length;
+  MAQUINAS.forEach((m, i) => {
+    const n = ordenesDelDia.filter(o => o.maquina === m).length;
+    document.getElementById('kpi-' + (i+1)).textContent = n;
+  });
+  document.getElementById('badge-total-maq').textContent = ordenesDelDia.length + ' órdenes';
+
+  // Tarjetas
+  let html = '';
+  MAQUINAS.forEach(m => {
+    const ords = ordenesDelDia.filter(o => o.maquina === m);
+    html += `<div class="maq-card">
+      <div class="maq-hdr">
+        <span class="maq-nombre">${m}</span>
+        <span class="maq-total">${ords.length}</span>
+      </div>`;
+    if (ords.length > 0) {
+      html += '<div class="maq-lista">';
+      ords.forEach(o => {
+        html += `<div class="maq-row">
+          <span class="maq-op">${o.op}</span>
+          <span class="maq-cliente" title="${o.cliente}">${o.cliente}</span>
+          <div class="maq-badges">
+            ${BADGE[o.tipo] || BADGE['Otro']}
+            <span class="badge b-etapa">${o.etapa.slice(0,14)}</span>
+          </div>
+        </div>`;
+      });
+      html += '</div>';
+    } else {
+      html += '<div class="maq-empty">Sin órdenes</div>';
+    }
+    html += '</div>';
+  });
+  document.getElementById('maq-grid').innerHTML = html;
+
+  // Tabla
+  renderTabla();
+}
+
+function renderTabla() {
+  const maq = document.getElementById('f-maq').value;
+  const tipo = document.getElementById('f-tipo').value;
+  const etapa = document.getElementById('f-etapa').value;
+  const buscar = document.getElementById('f-buscar').value.toLowerCase();
+
+  const filtradas = ordenesDelDia.filter(o =>
+    (!maq || o.maquina === maq) &&
+    (!tipo || o.tipo === tipo) &&
+    (!etapa || o.etapa === etapa) &&
+    (!buscar || o.cliente.toLowerCase().includes(buscar) || o.op.includes(buscar))
+  );
+
+  document.getElementById('conteo-txt').innerHTML = 'Mostrando <strong>' + filtradas.length + '</strong> órdenes';
+  document.getElementById('det-body').innerHTML = filtradas.map(o => `
+    <tr>
+      <td style="font-weight:700;color:#374151">${o.op}</td>
+      <td class="td-left">${o.cliente}</td>
+      <td class="td-left" style="font-size:11px;color:#6b7280">${o.referencia}</td>
+      <td>${o.maquina}</td>
+      <td>${BADGE[o.tipo] || BADGE['Otro']}</td>
+      <td><span class="badge b-etapa">${o.etapa}</span></td>
+    </tr>`).join('');
+}
+
+function aplicarFiltros() { renderTabla(); }
+function limpiarFiltros() {
+  ['f-maq','f-tipo','f-etapa'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-buscar').value = '';
+  renderTabla();
+}
+
+// Inicializar con la fecha de hoy
+cambiarFecha();
+</script>
+</body>
+</html>
