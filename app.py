@@ -9,7 +9,6 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'data'
 DATA_FILE = os.path.join(UPLOAD_FOLDER, 'latest.json')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
 BOGOTA = pytz.timezone('America/Bogota')
 
 def get_tipo(ref):
@@ -35,7 +34,6 @@ def process_excel(file):
     vie = lun + pd.Timedelta(days=4)
 
     incumplidas_df = df[df['fecha_entrega'] < today].copy()
-
     maquinas = sorted(df['maquina'].dropna().unique().tolist())
     dias = pd.date_range(lun, vie, freq='B')
     dias_str = [d.strftime('%Y-%m-%d') for d in dias]
@@ -62,7 +60,7 @@ def process_excel(file):
     else:
         dia_max_nombre, dia_max_val, dia_max_fecha = '', 0, ''
 
-    # Detalle incumplidas
+    # Incumplidas
     inc_detalle = []
     for _, row in incumplidas_df.iterrows():
         fe = row['fecha_entrega']
@@ -77,26 +75,45 @@ def process_excel(file):
         })
     inc_detalle.sort(key=lambda x: x['fecha_entrega'])
 
-    # Agrupar por etapa con lista de ordenes
     etapas_dict = {}
     for r in inc_detalle:
         e = r['etapa']
         if e not in etapas_dict:
             etapas_dict[e] = {'total': 0, 'ordenes': []}
         etapas_dict[e]['total'] += 1
-        etapas_dict[e]['ordenes'].append({
-            'cliente': r['cliente'],
-            'tipo': r['tipo'],
-            'op': r['op'],
-        })
-
-    # Ordenar etapas por total desc
+        etapas_dict[e]['ordenes'].append({'cliente': r['cliente'], 'tipo': r['tipo'], 'op': r['op']})
     inc_etapas = dict(sorted(etapas_dict.items(), key=lambda x: x[1]['total'], reverse=True))
-
     etapas_unicas = sorted(etapas_dict.keys())
+
+    # Todas las fechas disponibles en el archivo
+    fechas_disponibles = sorted(
+        df['fecha_entrega'].dropna().dt.strftime('%Y-%m-%d').unique().tolist()
+    )
+
+    # Órdenes de hoy por defecto
+    dia_df = df[df['fecha_entrega'].dt.date == today.date()].copy()
+    dia_por_maquina = build_dia(dia_df, maquinas)
+
+    # Todas las ordenes por fecha para el selector dinámico (JSON embebido)
+    todas_ordenes = []
+    for _, row in df.iterrows():
+        fe = row['fecha_entrega']
+        if pd.isna(fe): continue
+        todas_ordenes.append({
+            'fecha': fe.strftime('%Y-%m-%d'),
+            'op': str(row.iloc[3]),
+            'cliente': str(row.iloc[0]),
+            'referencia': str(row.iloc[1]),
+            'maquina': str(row['maquina']),
+            'etapa': str(row.iloc[7]).strip(),
+            'tipo': get_tipo(row.iloc[1]),
+        })
 
     result = {
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
+        'hoy': today.strftime('%Y-%m-%d'),
+        'hoy_label': today.strftime('%d/%m/%Y'),
+        'hoy_nombre': ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'][today.weekday()],
         'lun': lun.strftime('%d/%m'),
         'vie': vie.strftime('%d/%m'),
         'maquinas': maquinas,
@@ -111,11 +128,31 @@ def process_excel(file):
         'inc_etapas': inc_etapas,
         'inc_detalle': inc_detalle,
         'etapas_unicas': etapas_unicas,
+        'dia_total': len(dia_df),
+        'dia_por_maquina': dia_por_maquina,
+        'fechas_disponibles': fechas_disponibles,
+        'todas_ordenes': todas_ordenes,
         'dia_max_nombre': dia_max_nombre,
         'dia_max_val': dia_max_val,
         'dia_max_fecha': dia_max_fecha,
     }
     return result
+
+def build_dia(dia_df, maquinas):
+    dia_por_maquina = {}
+    for m in maquinas:
+        grp = dia_df[dia_df['maquina'] == m]
+        ordenes = []
+        for _, row in grp.iterrows():
+            ordenes.append({
+                'op': str(row.iloc[3]),
+                'cliente': str(row.iloc[0]),
+                'referencia': str(row.iloc[1]),
+                'etapa': str(row.iloc[7]).strip(),
+                'tipo': get_tipo(row.iloc[1]),
+            })
+        dia_por_maquina[m] = {'total': len(ordenes), 'ordenes': ordenes}
+    return dia_por_maquina
 
 @app.route('/')
 def index():
@@ -124,6 +161,14 @@ def index():
         with open(DATA_FILE, encoding='utf-8') as f:
             data = json.load(f)
     return render_template('index.html', data=data)
+
+@app.route('/dia')
+def dia_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    return render_template('dia.html', data=data)
 
 @app.route('/upload', methods=['POST'])
 def upload():
