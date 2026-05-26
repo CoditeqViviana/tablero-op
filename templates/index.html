@@ -34,28 +34,28 @@ tr.total-row td{background:#f9fafb;font-weight:700;border-top:1px solid #e5e7eb}
 tr.total-row td.total-col{background:#dbeafe}
 tr:last-child td{border-bottom:none}
 tr:hover:not(.total-row) td{background:#fafafa}
-/* Tarjetas etapa */
-.etapa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 16px}
-.etapa-card{background:#fef2f2;border:1px solid #fecaca;border-radius:8px;padding:12px 14px;text-align:center}
-.etapa-nombre{font-size:12px;color:#991b1b;margin-bottom:6px;font-weight:700}
-.etapa-n{font-size:28px;font-weight:700;color:#dc2626;line-height:1}
-.etapa-label{font-size:10px;color:#ef4444;margin-top:3px}
-/* Tarjetas tipo */
-.tipos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:0 16px 14px}
-.tipo-card{border-radius:8px;padding:10px 14px;text-align:center}
-.tipo-label{font-size:11px;font-weight:700;margin-bottom:4px}
-.tipo-n{font-size:22px;font-weight:700;line-height:1}
-.tipo-sub{font-size:10px;margin-top:2px}
-.t-blanca{background:#f8fafc;border:1px solid #cbd5e1;color:#475569}
-.t-impresa{background:#eff6ff;border:1px solid #bfdbfe;color:#1d4ed8}
-.t-fondo{background:#f0fdf4;border:1px solid #bbf7d0;color:#15803d}
-.t-otro{background:#fafafa;border:1px solid #e5e7eb;color:#9ca3af}
+/* Tarjetas estatus */
+.etapa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px 16px}
+.etapa-card{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;overflow:hidden}
+.etapa-hdr{padding:10px 14px;border-bottom:1px solid #fecaca;display:flex;justify-content:space-between;align-items:center}
+.etapa-nombre{font-size:12px;font-weight:700;color:#991b1b}
+.etapa-total{font-size:20px;font-weight:700;color:#dc2626;line-height:1}
+.etapa-lista{padding:8px 0}
+.etapa-row{display:flex;align-items:center;justify-content:space-between;padding:5px 14px;gap:8px;border-bottom:1px solid #fef2f2}
+.etapa-row:last-child{border-bottom:none}
+.etapa-cliente{font-size:11px;color:#374151;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:8px;font-weight:700;white-space:nowrap;flex-shrink:0}
+.b-blanca{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
+.b-impresa{background:#dbeafe;color:#1d4ed8}
+.b-fondo{background:#dcfce7;color:#15803d}
+.b-otro{background:#f3f4f6;color:#9ca3af}
+.b-etapa{background:#dbeafe;color:#1e40af}
 /* Filtros */
 .filtros{padding:10px 16px;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
 .filtros label{font-size:12px;color:#6b7280;font-weight:600}
-.filtros select{font-size:12px;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;background:#fff;color:#374151;height:30px}
-.filtros input{font-size:12px;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;height:30px;width:180px}
-.btn-limpiar{font-size:12px;padding:4px 12px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;height:30px;color:#374151}
+.filtros select,.filtros input{font-size:12px;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;background:#fff;height:30px}
+.filtros input{width:180px}
+.btn-limpiar{font-size:12px;padding:4px 12px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;height:30px}
 .conteo{font-size:12px;color:#6b7280;padding:6px 16px;background:#fafafa;border-bottom:1px solid #f0f0f0}
 .conteo strong{color:#374151}
 /* Tabla detalle */
@@ -66,12 +66,6 @@ tr:hover:not(.total-row) td{background:#fafafa}
 .det-tbl td.td-left{text-align:left}
 .det-tbl tr:last-child td{border-bottom:none}
 .det-tbl tr:hover td{background:#fafafa}
-.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;font-weight:700}
-.b-etapa{background:#dbeafe;color:#1e40af}
-.b-blanca{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
-.b-impresa{background:#dbeafe;color:#1d4ed8}
-.b-fondo{background:#dcfce7;color:#15803d}
-.b-otro{background:#f3f4f6;color:#9ca3af}
 .fecha-vencida{color:#dc2626;font-weight:700}
 .op-num{font-weight:700;color:#374151}
 .empty{padding:40px;text-align:center;color:#9ca3af}
@@ -173,51 +167,35 @@ tr:hover:not(.total-row) td{background:#fafafa}
   </div>
 </div>
 
-<!-- Incumplidas por etapa (col H) -->
+<!-- Incumplidas por estatus con clientes -->
 <div class="panel">
-  <div class="panel-hdr"><h2>Órdenes incumplidas por estatus (col H)</h2></div>
+  <div class="panel-hdr"><h2>Órdenes incumplidas por estatus — {{ data.inc_total }} órdenes</h2></div>
   <div class="etapa-grid">
-    {% for etapa, n in data.inc_etapas.items() %}
+    {% for etapa, info in data.inc_etapas.items() %}
     <div class="etapa-card">
-      <div class="etapa-nombre">{{ etapa }}</div>
-      <div class="etapa-n">{{ n }}</div>
-      <div class="etapa-label">incumplidas</div>
+      <div class="etapa-hdr">
+        <span class="etapa-nombre">{{ etapa }}</span>
+        <span class="etapa-total">{{ info.total }}</span>
+      </div>
+      <div class="etapa-lista">
+        {% for o in info.ordenes %}
+        <div class="etapa-row">
+          <span class="etapa-cliente" title="{{ o.cliente }}">{{ o.cliente }}</span>
+          {% if o.tipo == 'Blanca' %}<span class="badge b-blanca">Blanca</span>
+          {% elif o.tipo == 'Impresa' %}<span class="badge b-impresa">Impresa</span>
+          {% elif o.tipo == 'Fondo' %}<span class="badge b-fondo">Fondo</span>
+          {% else %}<span class="badge b-otro">Otro</span>{% endif %}
+        </div>
+        {% endfor %}
+      </div>
     </div>
     {% endfor %}
   </div>
 </div>
 
-<!-- Detalle incumplidas con filtros -->
+<!-- Detalle con filtros -->
 <div class="panel">
-  <div class="panel-hdr"><h2>Detalle órdenes incumplidas — {{ data.inc_total }} órdenes</h2></div>
-
-  <!-- Resumen por tipo -->
-  <div class="tipos-grid">
-    <div class="tipo-card t-blanca" style="cursor:pointer" onclick="filtrarTipo('Blanca')">
-      <div class="tipo-label">Blancas</div>
-      <div class="tipo-n">{{ data.inc_blancas }}</div>
-      <div class="tipo-sub">Prefijo BL</div>
-    </div>
-    <div class="tipo-card t-impresa" style="cursor:pointer" onclick="filtrarTipo('Impresa')">
-      <div class="tipo-label">Impresas</div>
-      <div class="tipo-n">{{ data.inc_impresas }}</div>
-      <div class="tipo-sub">Prefijo IC / IS</div>
-    </div>
-    <div class="tipo-card t-fondo" style="cursor:pointer" onclick="filtrarTipo('Fondo')">
-      <div class="tipo-label">Fondos</div>
-      <div class="tipo-n">{{ data.inc_fondos }}</div>
-      <div class="tipo-sub">Prefijo FD</div>
-    </div>
-    {% if data.inc_otros > 0 %}
-    <div class="tipo-card t-otro" style="cursor:pointer" onclick="filtrarTipo('Otro')">
-      <div class="tipo-label">Otros</div>
-      <div class="tipo-n">{{ data.inc_otros }}</div>
-      <div class="tipo-sub">Otros prefijos</div>
-    </div>
-    {% endif %}
-  </div>
-
-  <!-- Filtros -->
+  <div class="panel-hdr"><h2>Detalle órdenes incumplidas</h2></div>
   <div class="filtros">
     <label>Filtrar:</label>
     <select id="f-tipo" onchange="aplicarFiltros()">
@@ -229,15 +207,12 @@ tr:hover:not(.total-row) td{background:#fafafa}
     </select>
     <select id="f-etapa" onchange="aplicarFiltros()">
       <option value="">Todos los estatus</option>
-      {% for e in data.etapas_unicas %}
-      <option value="{{ e }}">{{ e }}</option>
-      {% endfor %}
+      {% for e in data.etapas_unicas %}<option value="{{ e }}">{{ e }}</option>{% endfor %}
     </select>
     <input id="f-buscar" type="text" placeholder="Buscar cliente u OP..." oninput="aplicarFiltros()">
     <button class="btn-limpiar" onclick="limpiarFiltros()">✕ Limpiar</button>
   </div>
   <div class="conteo" id="conteo-txt">Mostrando <strong>{{ data.inc_total }}</strong> órdenes</div>
-
   <div class="det-wrap">
   <table class="det-tbl">
     <thead>
@@ -297,37 +272,21 @@ tr:hover:not(.total-row) td{background:#fafafa}
 </div>
 
 <script>
-// Filtros
 function aplicarFiltros(){
-  const tipo = document.getElementById('f-tipo').value;
-  const etapa = document.getElementById('f-etapa').value;
-  const buscar = document.getElementById('f-buscar').value.toLowerCase();
-  const filas = document.querySelectorAll('#det-body tr');
-  let visible = 0;
-  filas.forEach(f => {
-    const ok = (!tipo || f.dataset.tipo === tipo)
-            && (!etapa || f.dataset.etapa === etapa)
-            && (!buscar || f.dataset.cliente.includes(buscar) || f.dataset.op.includes(buscar));
-    f.style.display = ok ? '' : 'none';
-    if(ok) visible++;
+  const tipo=document.getElementById('f-tipo').value;
+  const etapa=document.getElementById('f-etapa').value;
+  const buscar=document.getElementById('f-buscar').value.toLowerCase();
+  const filas=document.querySelectorAll('#det-body tr');
+  let vis=0;
+  filas.forEach(f=>{
+    const ok=(!tipo||f.dataset.tipo===tipo)&&(!etapa||f.dataset.etapa===etapa)&&(!buscar||f.dataset.cliente.includes(buscar)||f.dataset.op.includes(buscar));
+    f.style.display=ok?'':'none';
+    if(ok)vis++;
   });
-  document.getElementById('conteo-txt').innerHTML = 'Mostrando <strong>' + visible + '</strong> órdenes';
+  document.getElementById('conteo-txt').innerHTML='Mostrando <strong>'+vis+'</strong> órdenes';
 }
-
-function filtrarTipo(tipo){
-  document.getElementById('f-tipo').value = tipo;
-  aplicarFiltros();
-}
-
-function limpiarFiltros(){
-  document.getElementById('f-tipo').value = '';
-  document.getElementById('f-etapa').value = '';
-  document.getElementById('f-buscar').value = '';
-  aplicarFiltros();
-}
-
-// Modal
-let selectedFile = null;
+function limpiarFiltros(){document.getElementById('f-tipo').value='';document.getElementById('f-etapa').value='';document.getElementById('f-buscar').value='';aplicarFiltros();}
+let selectedFile=null;
 function openModal(){document.getElementById('modal-bg').classList.add('show');document.getElementById('msg').className='msg';document.getElementById('file-name').textContent='Haz clic o arrastra el Excel aquí';document.getElementById('btn-upload').disabled=true;document.getElementById('spinner').className='spinner';selectedFile=null;}
 function closeModal(){document.getElementById('modal-bg').classList.remove('show');}
 function closeOnBg(e){if(e.target===document.getElementById('modal-bg'))closeModal();}
