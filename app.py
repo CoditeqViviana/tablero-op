@@ -12,6 +12,13 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 BOGOTA = pytz.timezone('America/Bogota')
 
+def get_tipo(ref):
+    r = str(ref).strip().upper()
+    if r.startswith('BL'): return 'Blanca'
+    if r.startswith('IC') or r.startswith('IS'): return 'Impresa'
+    if r.startswith('FD'): return 'Fondo'
+    return 'Otro'
+
 def process_excel(file):
     df = pd.read_excel(file, header=0)
     df['fecha_entrega'] = pd.to_datetime(df.iloc[:, 9], errors='coerce')
@@ -55,39 +62,38 @@ def process_excel(file):
     else:
         dia_max_nombre, dia_max_val, dia_max_fecha = '', 0, ''
 
-    # Conteo por etapa (col H)
-    inc_etapas = incumplidas_df['etapa'].value_counts().to_dict()
-
-    # Detalle incumplidas con tipo
+    # Detalle incumplidas
     inc_detalle = []
     for _, row in incumplidas_df.iterrows():
         fe = row['fecha_entrega']
-        ref = str(row.iloc[1]).strip().upper()
-        if ref.startswith('BL'):
-            tipo = 'Blanca'
-        elif ref.startswith('IC') or ref.startswith('IS'):
-            tipo = 'Impresa'
-        elif ref.startswith('FD'):
-            tipo = 'Fondo'
-        else:
-            tipo = 'Otro'
+        tipo = get_tipo(row.iloc[1])
         inc_detalle.append({
             'cliente': str(row.iloc[0]),
             'referencia': str(row.iloc[1]),
             'op': str(row.iloc[3]),
-            'etapa': str(row.iloc[7]),
+            'etapa': str(row.iloc[7]).strip(),
             'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
             'tipo': tipo,
         })
     inc_detalle.sort(key=lambda x: x['fecha_entrega'])
 
-    inc_blancas  = sum(1 for r in inc_detalle if r['tipo'] == 'Blanca')
-    inc_impresas = sum(1 for r in inc_detalle if r['tipo'] == 'Impresa')
-    inc_fondos   = sum(1 for r in inc_detalle if r['tipo'] == 'Fondo')
-    inc_otros    = sum(1 for r in inc_detalle if r['tipo'] == 'Otro')
+    # Agrupar por etapa con lista de ordenes
+    etapas_dict = {}
+    for r in inc_detalle:
+        e = r['etapa']
+        if e not in etapas_dict:
+            etapas_dict[e] = {'total': 0, 'ordenes': []}
+        etapas_dict[e]['total'] += 1
+        etapas_dict[e]['ordenes'].append({
+            'cliente': r['cliente'],
+            'tipo': r['tipo'],
+            'op': r['op'],
+        })
 
-    # Etapas únicas para el filtro
-    etapas_unicas = sorted(set(r['etapa'] for r in inc_detalle))
+    # Ordenar etapas por total desc
+    inc_etapas = dict(sorted(etapas_dict.items(), key=lambda x: x[1]['total'], reverse=True))
+
+    etapas_unicas = sorted(etapas_dict.keys())
 
     result = {
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
@@ -104,10 +110,6 @@ def process_excel(file):
         'inc_total': len(incumplidas_df),
         'inc_etapas': inc_etapas,
         'inc_detalle': inc_detalle,
-        'inc_blancas': inc_blancas,
-        'inc_impresas': inc_impresas,
-        'inc_fondos': inc_fondos,
-        'inc_otros': inc_otros,
         'etapas_unicas': etapas_unicas,
         'dia_max_nombre': dia_max_nombre,
         'dia_max_val': dia_max_val,
