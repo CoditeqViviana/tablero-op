@@ -12,10 +12,11 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 BOGOTA = pytz.timezone('America/Bogota')
 
 # Capacidad por maquina (metros por dia, 3 turnos)
-CAPACIDAD = {
-    'Nilpeter 1': round(7900 * 35 * 0.5 * 3 / 1000, 1),
-    'Nilpeter 2': round(7900 * 35 * 0.5 * 3 / 1000, 1),
-    'Kromia':     round(7900 * 35 * 0.5 * 3 / 1000, 1),
+CAPACIDAD = {  # 7900 metros/turno x 3 turnos
+
+    'Nilpeter 1': 7900 * 3,  # 7900 mts/turno x 3 turnos = 23700 mts/dia
+    'Nilpeter 2': 7900 * 3,
+    'Kromia':     7900 * 3,
 }
 
 def get_tipo(ref):
