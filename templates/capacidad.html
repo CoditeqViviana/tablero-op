@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Capacidad RRC — Tablero OP</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
+.hdr{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.hdr-left h1{font-size:16px;font-weight:700}
+.hdr-left p{font-size:12px;color:#6b7280;margin-top:2px}
+.hdr-right{display:flex;align-items:center;gap:10px}
+.updated{font-size:11px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px}
+.updated strong{color:#374151}
+.nav-btn{font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer;color:#374151;text-decoration:none;display:inline-block}
+.nav-btn:hover{background:#f9fafb}
+/* Info capacidad */
+.info-bar{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 20px;margin-bottom:14px;display:flex;gap:24px;flex-wrap:wrap;align-items:center}
+.info-item{font-size:12px;color:#374151}
+.info-item strong{color:#1d4ed8}
+/* KPIs maquinas */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border-radius:8px;padding:14px 16px;border:1px solid #e0e0e0}
+.kpi-maq{font-size:13px;font-weight:700;color:#374151;margin-bottom:8px}
+.kpi-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
+.kpi-lbl{color:#6b7280}
+.kpi-val{font-weight:700;color:#374151}
+.kpi-val.ok{color:#15803d}
+.kpi-val.warn{color:#ca8a04}
+.kpi-val.over{color:#dc2626}
+/* Panel */
+.panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
+.panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
+/* Selector fecha */
+.date-bar{padding:12px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fafafa}
+.date-bar label{font-size:12px;font-weight:700;color:#374151}
+.date-select{font-size:13px;padding:5px 10px;border:2px solid #1d4ed8;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer;font-weight:600}
+/* Tabla semana */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{padding:9px 14px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-bottom:1px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+th.maq{text-align:left;width:150px}
+td{padding:10px 14px;text-align:center;border-bottom:1px solid #f3f4f6;vertical-align:middle}
+td.maq-cell{text-align:left;font-weight:700;font-size:12px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafafa}
+.cell-wrap{display:flex;flex-direction:column;align-items:center;gap:3px}
+.cell-mts{font-size:13px;font-weight:700}
+.cell-cap{font-size:10px;color:#9ca3af}
+.bar-wrap{width:80px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .3s}
+.pct-ok{color:#15803d}
+.pct-warn{color:#ca8a04}
+.pct-over{color:#dc2626}
+.fill-ok{background:#16a34a}
+.fill-warn{background:#ca8a04}
+.fill-over{background:#dc2626}
+/* Cards día */
+.dia-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px}
+.dia-card{border-radius:10px;border:1px solid #e5e7eb;overflow:hidden}
+.dia-card-hdr{padding:12px 16px;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;background:#f9fafb}
+.dia-card-maq{font-size:13px;font-weight:700;color:#374151}
+.dia-card-cap{font-size:11px;color:#6b7280}
+.dia-card-body{padding:14px 16px}
+.dia-stat{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.dia-stat-lbl{font-size:12px;color:#6b7280}
+.dia-stat-val{font-size:20px;font-weight:700}
+.barra-grande{height:16px;background:#e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:6px}
+.barra-fill{height:100%;border-radius:8px;transition:width .4s}
+.dia-pct{font-size:12px;font-weight:700;text-align:center}
+.dia-ordenes{margin-top:10px;border-top:1px solid #f3f4f6;padding-top:8px}
+.dia-ord-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid #f9fafb}
+.dia-ord-row:last-child{border-bottom:none}
+.dia-ord-cliente{color:#374151;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dia-ord-mts{color:#6b7280;font-weight:600;flex-shrink:0;margin-left:8px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding:10px 16px;background:#fafafa;border-top:1px solid #f0f0f0;font-size:11px;color:#6b7280}
+.leg-item{display:flex;align-items:center;gap:5px}
+.leg-dot{width:10px;height:10px;border-radius:50%}
+.empty{padding:40px;text-align:center;color:#9ca3af}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>Capacidad RRC — NP1 · NP2 · Kromia</h1>
+    <p>Planeación vs capacidad disponible por día</p>
+  </div>
+  <div class="hdr-right">
+    {% if data %}<div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>{% endif %}
+    <a href="/dia" class="nav-btn">📅 Detalle del día</a>
+    <a href="/" class="nav-btn">← Resumen semanal</a>
+  </div>
+</div>
+
+{% if data %}
+
+<!-- Info capacidad -->
+<div class="info-bar">
+  <div class="info-item">⚙️ Capacidad calculada desde planeación de recursos</div>
+  <div class="info-item">Ml/turno: <strong>7,900</strong></div>
+  <div class="info-item">Velocidad: <strong>35</strong></div>
+  <div class="info-item">Eficiencia: <strong>50%</strong></div>
+  <div class="info-item">Turnos/día: <strong>3</strong> (Lun–Sáb)</div>
+  <div class="info-item">Capacidad diaria por máquina: <strong>414.8 mts</strong></div>
+</div>
+
+<!-- KPIs semana actual -->
+<div class="kpis">
+  {% for m in data.maquinas_rrc %}
+  {% set rrc = data.rrc_semana[m] %}
+  <div class="kpi">
+    <div class="kpi-maq">{{ m }}</div>
+    <div class="kpi-row"><span class="kpi-lbl">Capacidad/día</span><span class="kpi-val">{{ rrc.capacidad }} mts</span></div>
+    {% set total_plan = namespace(v=0) %}
+    {% for d, vals in rrc.por_dia.items() %}{% set total_plan.v = total_plan.v + vals.planeado %}{% endfor %}
+    {% set cap_semana = rrc.capacidad * 5 %}
+    {% set pct_sem = (total_plan.v / cap_semana * 100)|round(1) %}
+    <div class="kpi-row"><span class="kpi-lbl">Planeado semana</span>
+      <span class="kpi-val {% if pct_sem > 100 %}over{% elif pct_sem > 80 %}warn{% else %}ok{% endif %}">
+        {{ total_plan.v|round(0)|int }} mts ({{ pct_sem }}%)
+      </span>
+    </div>
+    <div class="kpi-row"><span class="kpi-lbl">Cap. semana (5 días)</span><span class="kpi-val">{{ cap_semana|round(0)|int }} mts</span></div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Tabla semana -->
+<div class="panel">
+  <div class="panel-hdr">
+    <h2>Semana {{ data.lun }} — {{ data.vie }} · Metros planeados vs capacidad</h2>
+  </div>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th class="maq">Máquina</th>
+        {% for i in range(data.dias_str|length) %}
+        <th>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+            <span style="font-size:11px;font-weight:700">{{ data.dias_nombre[i] }}</span>
+            <span style="font-size:10px;color:#9ca3af;font-weight:400">{{ data.dias_label[i] }}</span>
+          </div>
+        </th>
+        {% endfor %}
+        <th>Total sem.</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in data.maquinas_rrc %}
+      {% set rrc = data.rrc_semana[m] %}
+      <tr>
+        <td class="maq-cell">{{ m }}</td>
+        {% set total_m = namespace(v=0) %}
+        {% for d in data.dias_str %}
+          {% set vals = rrc.por_dia[d] %}
+          {% set total_m.v = total_m.v + vals.planeado %}
+          {% set pct = vals.pct %}
+          {% if pct > 100 %}{% set cls = 'over' %}{% set fcls = 'fill-over' %}
+          {% elif pct > 80 %}{% set cls = 'warn' %}{% set fcls = 'fill-warn' %}
+          {% else %}{% set cls = 'ok' %}{% set fcls = 'fill-ok' %}{% endif %}
+          <td>
+            <div class="cell-wrap">
+              <span class="cell-mts pct-{{ cls }}">{{ vals.planeado|round(0)|int }}</span>
+              <div class="bar-wrap"><div class="bar-fill {{ fcls }}" style="width:{{ [pct,100]|min }}%"></div></div>
+              <span class="cell-cap pct-{{ cls }}">{{ pct }}%</span>
+            </div>
+          </td>
+        {% endfor %}
+        {% set cap_total = rrc.capacidad * 5 %}
+        {% set pct_total = (total_m.v / cap_total * 100)|round(1) %}
+        {% if pct_total > 100 %}{% set tcls = 'over' %}{% elif pct_total > 80 %}{% set tcls = 'warn' %}{% else %}{% set tcls = 'ok' %}{% endif %}
+        <td><span class="pct-{{ tcls }}" style="font-weight:700">{{ total_m.v|round(0)|int }}<br><span style="font-size:10px">{{ pct_total }}%</span></span></td>
+      </tr>
+      {% endfor %}
+      <!-- Fila capacidad -->
+      <tr style="background:#f9fafb">
+        <td class="maq-cell" style="color:#6b7280">Capacidad/día</td>
+        {% for d in data.dias_str %}
+        <td style="color:#6b7280;font-size:12px">414.8 mts</td>
+        {% endfor %}
+        <td style="color:#6b7280;font-size:12px">2,074 mts</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#16a34a"></div>≤ 80% capacidad — OK</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#ca8a04"></div>80–100% — Advertencia</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#dc2626"></div>> 100% — Sobrecarga</div>
+  </div>
+</div>
+
+<!-- Detalle por día con selector -->
+<div class="panel">
+  <div class="panel-hdr"><h2>Detalle por día — metros planeados por orden</h2></div>
+  <div class="date-bar">
+    <label>📅 Seleccionar fecha:</label>
+    <select class="date-select" id="selector-fecha" onchange="cambiarFecha()">
+      {% for f in data.fechas_rrc %}
+      <option value="{{ f }}" {% if f == data.hoy %}selected{% endif %}>
+        {{ f[8:10] }}/{{ f[5:7] }}/{{ f[0:4] }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="dia-grid" id="dia-grid"></div>
+</div>
+
+{% else %}
+<div class="panel"><div class="empty"><p>No hay datos cargados aún.</p><small>Ve al resumen semanal y sube el Excel primero.</small></div></div>
+{% endif %}
+
+<script>
+const TODAS = {{ data.todas_ordenes | tojson }};
+const MAQUINAS_RRC = {{ data.maquinas_rrc | tojson }};
+const CAP_DIA = 414.8;
+const NOMBRES_DIA = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+
+function barColor(pct) {
+  if (pct > 100) return {bar:'#dc2626', text:'#dc2626'};
+  if (pct > 80)  return {bar:'#ca8a04', text:'#ca8a04'};
+  return {bar:'#16a34a', text:'#15803d'};
+}
+
+function cambiarFecha() {
+  const fecha = document.getElementById('selector-fecha').value;
+  const ordDia = TODAS.filter(o => o.fecha === fecha);
+  const d = new Date(fecha + 'T12:00:00');
+  const nombreDia = NOMBRES_DIA[d.getDay()];
+  const labelFecha = `${fecha.slice(8,10)}/${fecha.slice(5,7)}/${fecha.slice(0,4)}`;
+
+  let html = '';
+  MAQUINAS_RRC.forEach(m => {
+    const ords = ordDia.filter(o => o.maquina === m);
+    const totalMts = ords.reduce((s, o) => s + (o.mts || 0), 0);
+    const pct = Math.round(totalMts / CAP_DIA * 100 * 10) / 10;
+    const col = barColor(pct);
+    const barW = Math.min(pct, 100);
+
+    let estadoTxt = pct > 100 ? '🔴 Sobrecarga' : pct > 80 ? '🟡 Advertencia' : '🟢 OK';
+
+    let ordsHtml = '';
+    if (ords.length > 0) {
+      ordsHtml = '<div class="dia-ordenes">';
+      ords.forEach(o => {
+        ordsHtml += `<div class="dia-ord-row">
+          <span class="dia-ord-cliente" title="${o.cliente}">${o.op} — ${o.cliente}</span>
+          <span class="dia-ord-mts">${Math.round(o.mts)} mts</span>
+        </div>`;
+      });
+      ordsHtml += '</div>';
+    } else {
+      ordsHtml = '<div style="font-size:12px;color:#9ca3af;text-align:center;padding:10px">Sin órdenes</div>';
+    }
+
+    html += `<div class="dia-card">
+      <div class="dia-card-hdr">
+        <span class="dia-card-maq">${m}</span>
+        <span class="dia-card-cap">Cap: ${CAP_DIA} mts</span>
+      </div>
+      <div class="dia-card-body">
+        <div class="dia-stat">
+          <span class="dia-stat-lbl">Metros planeados</span>
+          <span class="dia-stat-val" style="color:${col.text}">${Math.round(totalMts)}</span>
+        </div>
+        <div class="barra-grande">
+          <div class="barra-fill" style="width:${barW}%;background:${col.bar}"></div>
+        </div>
+        <div class="dia-pct" style="color:${col.text}">${pct}% de capacidad · ${estadoTxt}</div>
+        <div class="dia-stat" style="margin-top:8px">
+          <span class="dia-stat-lbl">Órdenes</span>
+          <span style="font-weight:700;color:#374151">${ords.length}</span>
+        </div>
+        ${ordsHtml}
+      </div>
+    </div>`;
+  });
+  document.getElementById('dia-grid').innerHTML = html;
+}
+
+// Inicializar
+cambiarFecha();
+</script>
+</body>
+</html>
