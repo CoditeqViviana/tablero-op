@@ -99,11 +99,9 @@ tr:hover td{background:#fafafa}
 <!-- Info capacidad -->
 <div class="info-bar">
   <div class="info-item">⚙️ Capacidad calculada desde planeación de recursos</div>
-  <div class="info-item">Ml/turno: <strong>7,900</strong></div>
-  <div class="info-item">Velocidad: <strong>35</strong></div>
-  <div class="info-item">Eficiencia: <strong>50%</strong></div>
+  <div class="info-item">Metros/turno: <strong>7,900</strong></div>
   <div class="info-item">Turnos/día: <strong>3</strong> (Lun–Sáb)</div>
-  <div class="info-item">Capacidad diaria por máquina: <strong>414.8 mts</strong></div>
+  <div class="info-item">Capacidad diaria por máquina: <strong>23,700 mts</strong></div>
 </div>
 
 <!-- KPIs semana actual -->
@@ -122,7 +120,7 @@ tr:hover td{background:#fafafa}
         {{ total_plan.v|round(0)|int }} mts ({{ pct_sem }}%)
       </span>
     </div>
-    <div class="kpi-row"><span class="kpi-lbl">Cap. semana (5 días)</span><span class="kpi-val">{{ cap_semana|round(0)|int }} mts</span></div>
+    <div class="kpi-row"><span class="kpi-lbl">Cap. semana (5 días)</span><span class="kpi-val">{{ cap_semana|int }} mts</span></div>
   </div>
   {% endfor %}
 </div>
@@ -164,7 +162,7 @@ tr:hover td{background:#fafafa}
           <td>
             <div class="cell-wrap">
               <span class="cell-mts pct-{{ cls }}">{{ vals.planeado|round(0)|int }}</span>
-              <div class="bar-wrap"><div class="bar-fill {{ fcls }}" style="width:{{ [pct,100]|min }}%"></div></div>
+              <div class="bar-wrap"><div class="bar-fill {{ fcls }}" style="width:{% if pct > 100 %}100{% else %}{{ pct }}{% endif %}%"></div></div>
               <span class="cell-cap pct-{{ cls }}">{{ pct }}%</span>
             </div>
           </td>
@@ -179,9 +177,9 @@ tr:hover td{background:#fafafa}
       <tr style="background:#f9fafb">
         <td class="maq-cell" style="color:#6b7280">Capacidad/día</td>
         {% for d in data.dias_str %}
-        <td style="color:#6b7280;font-size:12px">414.8 mts</td>
+        <td style="color:#6b7280;font-size:12px">23,700 mts</td>
         {% endfor %}
-        <td style="color:#6b7280;font-size:12px">2,074 mts</td>
+        <td style="color:#6b7280;font-size:12px">118,500 mts</td>
       </tr>
     </tbody>
   </table>
@@ -216,7 +214,7 @@ tr:hover td{background:#fafafa}
 <script>
 const TODAS = {{ data.todas_ordenes | tojson }};
 const MAQUINAS_RRC = {{ data.maquinas_rrc | tojson }};
-const CAP_DIA = 414.8;
+const CAP_DIA = 23700;
 const NOMBRES_DIA = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 
 function barColor(pct) {
