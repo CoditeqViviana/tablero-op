@@ -11,6 +11,13 @@ DATA_FILE = os.path.join(UPLOAD_FOLDER, 'latest.json')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 BOGOTA = pytz.timezone('America/Bogota')
 
+# Capacidad por maquina (metros por dia, 3 turnos)
+CAPACIDAD = {
+    'Nilpeter 1': round(7900 * 35 * 0.5 * 3 / 1000, 1),
+    'Nilpeter 2': round(7900 * 35 * 0.5 * 3 / 1000, 1),
+    'Kromia':     round(7900 * 35 * 0.5 * 3 / 1000, 1),
+}
+
 def get_tipo(ref):
     r = str(ref).strip().upper()
     if r.startswith('BL'): return 'Blanca'
@@ -23,6 +30,7 @@ def process_excel(file):
     df['fecha_entrega'] = pd.to_datetime(df.iloc[:, 9], errors='coerce')
     df['maquina'] = df.iloc[:, 16].astype(str).str.split(',').str[0].str.strip()
     df['etapa'] = df.iloc[:, 7].astype(str).str.strip()
+    df['mts'] = pd.to_numeric(df.iloc[:, 8], errors='coerce').fillna(0)
 
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
@@ -85,16 +93,10 @@ def process_excel(file):
     inc_etapas = dict(sorted(etapas_dict.items(), key=lambda x: x[1]['total'], reverse=True))
     etapas_unicas = sorted(etapas_dict.keys())
 
-    # Todas las fechas disponibles en el archivo
-    fechas_disponibles = sorted(
-        df['fecha_entrega'].dropna().dt.strftime('%Y-%m-%d').unique().tolist()
-    )
+    # Todas las fechas disponibles
+    fechas_disponibles = sorted(df['fecha_entrega'].dropna().dt.strftime('%Y-%m-%d').unique().tolist())
 
-    # Órdenes de hoy por defecto
-    dia_df = df[df['fecha_entrega'].dt.date == today.date()].copy()
-    dia_por_maquina = build_dia(dia_df, maquinas)
-
-    # Todas las ordenes por fecha para el selector dinámico (JSON embebido)
+    # Todas las ordenes para selector dinámico
     todas_ordenes = []
     for _, row in df.iterrows():
         fe = row['fecha_entrega']
@@ -107,7 +109,45 @@ def process_excel(file):
             'maquina': str(row['maquina']),
             'etapa': str(row.iloc[7]).strip(),
             'tipo': get_tipo(row.iloc[1]),
+            'mts': float(row['mts']),
         })
+
+    # === CAPACIDAD RRC ===
+    maquinas_rrc = ['Nilpeter 1', 'Nilpeter 2', 'Kromia']
+
+    # Metros planeados por maquina por fecha
+    capacidad_data = {}
+    for m in maquinas_rrc:
+        grp = df[df['maquina'] == m]
+        por_fecha = grp.groupby(grp['fecha_entrega'].dt.strftime('%Y-%m-%d'))['mts'].sum()
+        capacidad_data[m] = {
+            'capacidad_dia': CAPACIDAD[m],
+            'por_fecha': {k: round(float(v), 1) for k, v in por_fecha.items()},
+        }
+
+    # Fechas con al menos una orden en las 3 maquinas RRC
+    fechas_rrc = sorted(set(
+        f for m in maquinas_rrc
+        for f in capacidad_data[m]['por_fecha'].keys()
+    ))
+
+    # Resumen semanal RRC (semana actual)
+    rrc_semana = {}
+    for m in maquinas_rrc:
+        rrc_semana[m] = {
+            'capacidad': CAPACIDAD[m],
+            'por_dia': {}
+        }
+        for d in dias_str:
+            planeado = capacidad_data[m]['por_fecha'].get(d, 0)
+            cap = CAPACIDAD[m]
+            pct = round(planeado / cap * 100, 1) if cap > 0 else 0
+            rrc_semana[m]['por_dia'][d] = {
+                'planeado': planeado,
+                'capacidad': cap,
+                'pct': pct,
+                'estado': 'ok' if pct <= 100 else 'sobrecarga',
+            }
 
     result = {
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
@@ -116,10 +156,10 @@ def process_excel(file):
         'hoy_nombre': ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'][today.weekday()],
         'lun': lun.strftime('%d/%m'),
         'vie': vie.strftime('%d/%m'),
-        'maquinas': maquinas,
         'dias_str': dias_str,
         'dias_label': dias_label,
         'dias_nombre': dias_nombre,
+        'maquinas': maquinas,
         'pivot': pivot,
         'totales_dia': totales_dia,
         'total_semana': total_semana,
@@ -128,31 +168,19 @@ def process_excel(file):
         'inc_etapas': inc_etapas,
         'inc_detalle': inc_detalle,
         'etapas_unicas': etapas_unicas,
-        'dia_total': len(dia_df),
-        'dia_por_maquina': dia_por_maquina,
+        'dia_total': len(df[df['fecha_entrega'].dt.date == today.date()]),
+        'dia_por_maquina': {},
         'fechas_disponibles': fechas_disponibles,
         'todas_ordenes': todas_ordenes,
+        'maquinas_rrc': maquinas_rrc,
+        'capacidad_data': capacidad_data,
+        'fechas_rrc': fechas_rrc,
+        'rrc_semana': rrc_semana,
         'dia_max_nombre': dia_max_nombre,
         'dia_max_val': dia_max_val,
         'dia_max_fecha': dia_max_fecha,
     }
     return result
-
-def build_dia(dia_df, maquinas):
-    dia_por_maquina = {}
-    for m in maquinas:
-        grp = dia_df[dia_df['maquina'] == m]
-        ordenes = []
-        for _, row in grp.iterrows():
-            ordenes.append({
-                'op': str(row.iloc[3]),
-                'cliente': str(row.iloc[0]),
-                'referencia': str(row.iloc[1]),
-                'etapa': str(row.iloc[7]).strip(),
-                'tipo': get_tipo(row.iloc[1]),
-            })
-        dia_por_maquina[m] = {'total': len(ordenes), 'ordenes': ordenes}
-    return dia_por_maquina
 
 @app.route('/')
 def index():
@@ -170,13 +198,21 @@ def dia_view():
             data = json.load(f)
     return render_template('dia.html', data=data)
 
+@app.route('/capacidad')
+def capacidad_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    return render_template('capacidad.html', data=data)
+
 @app.route('/upload', methods=['POST'])
 def upload():
     if 'file' not in request.files:
         return jsonify({'error': 'No se recibio archivo'}), 400
     file = request.files['file']
-    if not file.filename.endswith(('.xlsx', '.xls')):
-        return jsonify({'error': 'Solo se aceptan archivos Excel (.xlsx, .xls)'}), 400
+    if not file.filename.endswith(('.xlsx', '.xls', '.xlsm')):
+        return jsonify({'error': 'Solo se aceptan archivos Excel'}), 400
     try:
         result = process_excel(file)
         with open(DATA_FILE, 'w', encoding='utf-8') as f:
