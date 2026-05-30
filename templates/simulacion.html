@@ -187,7 +187,6 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
         <th style="width:65px" onclick="sortBy('mts')"><span id="h-mts">Mts Lin.</span></th>
         <th style="width:90px">T.Producción</th>
         <th style="width:80px">Setup</th>
-        <th style="width:100px">Velocidad</th>
         <th style="width:50px">Turno</th>
       </tr>
     </thead>
@@ -290,6 +289,8 @@ function simular() {
     // Cada orden ocupa: mins_produccion + 60 min setup
     let turnoActual = 1;
     let minsUsados = 0;
+    // Fecha base del turno 1: la fecha de entrega misma (dia del turno)
+    const fechaBase = new Date(fecha + 'T06:00:00');
 
     ords.forEach(o => {
       const dias = diasHasta(fecha);
@@ -297,16 +298,20 @@ function simular() {
       const setupSugerido = 60;
       const tiempoOrden = minsProdOrden + setupSugerido;
 
-      // Si la orden no cabe en el turno actual, pasar al siguiente
-      if (minsUsados > 0 && minsUsados + tiempoOrden > p.minsProdTurno) {
+      // Limite: minsTurno TOTALES (produccion + setup juntos)
+      if (minsUsados > 0 && minsUsados + tiempoOrden > p.minsTurno) {
         turnoActual++;
         minsUsados = 0;
       }
       minsUsados += tiempoOrden;
 
-      // Velocidad requerida: producir en el tiempo disponible del turno
-      const minsDisponibles = p.minsProdTurno - setupSugerido;
-      const velSugerida = minsDisponibles > 0 ? o.mts / minsDisponibles : p.vel;
+      // Calcular fecha y hora del turno
+      const turnoOffset = (turnoActual - 1) * p.minsTurno; // minutos desde inicio dia
+      const fechaTurno = new Date(fechaBase.getTime() + turnoOffset * 60000);
+      const diaExtra = fechaTurno.getDate() !== fechaBase.getDate();
+      const fechaTurnoStr = `${String(fechaTurno.getDate()).padStart(2,'0')}/${String(fechaTurno.getMonth()+1).padStart(2,'0')}`;
+
+      const velSugerida = p.vel; // velocidad nominal
       const minsProduccion = minsProdOrden;
 
       // Estado basado en velocidad requerida vs nominal
@@ -383,16 +388,8 @@ function renderTabla() {
   const velColor = e => e==='OK'?'#16a34a':e==='ALERTA'?'#ca8a04':'#dc2626';
 
   let html = '';
-  let fechaAnterior = null;
-
   filtrados.forEach(r => {
-    // Separador de día
-    if (r.fecha !== fechaAnterior && !fFecha) {
-      const d = new Date(r.fecha+'T12:00:00');
-      const nombreDia = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'][d.getDay()];
-      html += `<tr class="dia-sep"><td colspan="10">📅 ${nombreDia} ${r.fecha.slice(8,10)}/${r.fecha.slice(5,7)}/${r.fecha.slice(0,4)}</td></tr>`;
-      fechaAnterior = r.fecha;
-    }
+
 
     const velPct = Math.min(Math.round(r.velSugerida / r.velNominal * 100), 100);
 
@@ -407,12 +404,10 @@ function renderTabla() {
         <div style="font-weight:600;font-size:11px;color:#374151">${fmtMin(r.minsProdOrden)}</div>
       </td>
       <td style="font-weight:600;font-size:12px;color:#374151">${fmtMin(r.setupSugerido)}</td>
-      <td>
-        <span style="font-weight:700;font-size:13px;color:${velColor(r.estado)}">${r.velSugerida.toFixed(1)} m/min</span>
-      </td>
+
       <td style="text-align:center">
-        <span style="font-weight:700;font-size:15px;color:${r.turnoReal>3?'#dc2626':'#374151'}">${r.turnoReal}</span>
-        ${r.turnoReal>3?'<div style="font-size:9px;color:#dc2626">+día</div>':''}
+        <div style="font-weight:700;font-size:14px;color:${r.turnoReal>3?'#dc2626':'#374151'}">T${r.turnoReal}</div>
+        <div style="font-size:10px;color:#6b7280">${r.fechaTurno}</div>
       </td>
     </tr>`;
   });
