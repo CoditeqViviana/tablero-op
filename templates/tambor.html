@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tambor General — Tablero OP</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
+.hdr{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.hdr-left h1{font-size:16px;font-weight:700}
+.hdr-left p{font-size:12px;color:#6b7280;margin-top:2px}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.updated{font-size:11px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px}
+.updated strong{color:#374151}
+.nav-btn{font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer;color:#374151;text-decoration:none;display:inline-block}
+.nav-btn:hover{background:#f9fafb}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px}
+.kpi-badge{padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700;white-space:nowrap}
+.kpi-info .kpi-lbl{font-size:11px;color:#6b7280}
+.kpi-info .kpi-val{font-size:22px;font-weight:700;line-height:1}
+.panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
+.panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
+.badge-count{font-size:12px;font-weight:700;background:#eff6ff;color:#1d4ed8;padding:3px 10px;border-radius:10px}
+.filtros{padding:10px 16px;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:#fafafa}
+.filtros label{font-size:12px;color:#6b7280;font-weight:600}
+.filtros select,.filtros input{font-size:12px;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;background:#fff;height:30px}
+.filtros input{width:180px}
+.btn-clear{font-size:12px;padding:4px 12px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;height:30px}
+.conteo{font-size:12px;color:#6b7280;padding:6px 16px;background:#fafafa;border-bottom:1px solid #f0f0f0}
+.conteo strong{color:#374151}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:8px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px;cursor:pointer;user-select:none}
+th:hover{background:#f0f4ff;color:#1d4ed8}
+th.th-left{text-align:left}
+td{padding:7px 10px;border-bottom:1px solid #f3f4f6;vertical-align:middle;text-align:center}
+td.td-left{text-align:left}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafafa}
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
+.empty{padding:40px;text-align:center;color:#9ca3af}
+</style>
+</head>
+<body>
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>Tambor General — Órdenes próximas a vencer</h1>
+    <p>Todas las órdenes con fecha de entrega en los próximos 7 días, ordenadas por prioridad TOC</p>
+  </div>
+  <div class="hdr-right">
+    {% if data %}<div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>{% endif %}
+    <a href="/cuellos" class="nav-btn">🔴 Cuellos de Botella</a>
+    <a href="/" class="nav-btn">← Resumen</a>
+  </div>
+</div>
+
+{% if data %}
+
+<!-- KPIs por color -->
+<div class="kpis">
+  {% set colores = [('negro','#1f2937','#f3f4f6','Negro','Vencidas'),('rojo','#fee2e2','#b91c1c','Rojo','83–100%'),('amarillo','#fef9c3','#854d0e','Amarillo','67–83%'),('verde','#dcfce7','#15803d','Verde','50–67%'),('azul','#dbeafe','#1d4ed8','Azul','< 50%')] %}
+  {% for col, bg, fg, nombre, rango in colores %}
+  <div class="kpi">
+    <span class="kpi-badge" style="background:{{ bg }};color:{{ fg }}">{{ nombre }}</span>
+    <div class="kpi-info">
+      <div class="kpi-lbl">Buffer {{ rango }}</div>
+      <div class="kpi-val" style="color:{{ fg }}">{{ data.urgentes | selectattr('color_toc','equalto',col) | list | length }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="panel">
+  <div class="panel-hdr">
+    <h2>Órdenes próximas — {{ data.urgentes_total }} en total</h2>
+    <span class="badge-count">próximos 7 días</span>
+  </div>
+  <div class="filtros">
+    <label>Color:</label>
+    <select id="f-color" onchange="filtrar()">
+      <option value="">Todos</option>
+      <option value="negro">Negro</option>
+      <option value="rojo">Rojo</option>
+      <option value="amarillo">Amarillo</option>
+      <option value="verde">Verde</option>
+      <option value="azul">Azul</option>
+    </select>
+    <label>Máquina:</label>
+    <select id="f-maq" onchange="filtrar()">
+      <option value="">Todas</option>
+      {% for m in data.maquinas %}<option value="{{ m }}">{{ m }}</option>{% endfor %}
+    </select>
+    <label>Tipo:</label>
+    <select id="f-tipo" onchange="filtrar()">
+      <option value="">Todos</option>
+      <option value="Blanca">Blanca</option>
+      <option value="Impresa">Impresa</option>
+      <option value="Fondo">Fondo</option>
+    </select>
+    <input id="f-buscar" type="text" placeholder="Buscar cliente u OP..." oninput="filtrar()">
+    <button class="btn-clear" onclick="limpiar()">✕ Limpiar</button>
+  </div>
+  <div class="conteo" id="conteo">Mostrando <strong>{{ data.urgentes_total }}</strong> órdenes</div>
+  <div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th style="width:80px" onclick="sortBy('color')"><span id="h-color">Color ↑</span></th>
+        <th class="th-left" style="width:70px" onclick="sortBy('op')"><span id="h-op">OP</span></th>
+        <th class="th-left" onclick="sortBy('cliente')"><span id="h-cliente">Cliente</span></th>
+        <th style="width:55px">Tipo</th>
+        <th class="th-left" style="width:150px" onclick="sortBy('maquina')"><span id="h-maquina">Máquina</span></th>
+        <th style="width:100px" onclick="sortBy('fecha_entrega')"><span id="h-fecha">F.Entrega</span></th>
+        <th style="width:110px">Estatus</th>
+      </tr>
+    </thead>
+    <tbody id="tbl-body">
+      {% set orden_colores = ['negro','rojo','amarillo','verde','azul'] %}
+      {% for color_ord in orden_colores %}
+        {% for r in data.urgentes if r.color_toc == color_ord %}
+        {% set cmap = {'azul':'#dbeafe|#1d4ed8|Azul','verde':'#dcfce7|#15803d|Verde','amarillo':'#fef9c3|#854d0e|Amarillo','rojo':'#fee2e2|#b91c1c|Rojo','negro':'#1f2937|#f3f4f6|Negro'} %}
+        {% set c = cmap.get(r.color_toc,'#f3f4f6|#9ca3af|—').split('|') %}
+        <tr data-color="{{ r.color_toc }}" data-maq="{{ r.maquina }}" data-tipo="{{ r.tipo }}" data-cliente="{{ r.cliente|lower }}" data-op="{{ r.op }}" data-fecha="{{ r.fecha_entrega_raw }}">
+          <td><span class="badge" style="background:{{ c[0] }};color:{{ c[1] }}">{{ c[2] }}</span></td>
+          <td class="td-left" style="font-weight:700;font-size:11px">{{ r.op }}</td>
+          <td class="td-left" style="font-size:11px">{{ r.cliente }}</td>
+          <td>
+            {% if r.tipo=='Blanca' %}<span class="badge" style="background:#f1f5f9;color:#475569;border:1px solid #cbd5e1">BL</span>
+            {% elif r.tipo=='Impresa' %}<span class="badge" style="background:#dbeafe;color:#1d4ed8">IC</span>
+            {% elif r.tipo=='Fondo' %}<span class="badge" style="background:#dcfce7;color:#15803d">FD</span>
+            {% else %}<span class="badge" style="background:#f3f4f6;color:#9ca3af">—</span>{% endif %}
+          </td>
+          <td class="td-left" style="font-size:11px;color:#6b7280">{{ r.maquina }}</td>
+          <td style="font-weight:700;color:#dc2626">{{ r.fecha_entrega }}</td>
+          <td><span class="badge" style="background:#f3f4f6;color:#374151">{{ r.etapa }}</span></td>
+        </tr>
+        {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+{% else %}
+<div class="panel"><div class="empty"><p>No hay datos. Sube el Excel primero.</p></div></div>
+{% endif %}
+
+<script>
+const COLOR_ORDER = {'negro':0,'rojo':1,'amarillo':2,'verde':3,'azul':4};
+let sortCol='color', sortAsc=true;
+
+function filtrar(){
+  const fc=document.getElementById('f-color').value;
+  const fm=document.getElementById('f-maq').value;
+  const ft=document.getElementById('f-tipo').value;
+  const fb=document.getElementById('f-buscar').value.toLowerCase();
+  const filas=document.querySelectorAll('#tbl-body tr');
+  let vis=0;
+  filas.forEach(f=>{
+    const ok=(!fc||f.dataset.color===fc)&&(!fm||f.dataset.maq===fm)&&(!ft||f.dataset.tipo===ft)&&(!fb||f.dataset.cliente.includes(fb)||f.dataset.op.includes(fb));
+    f.style.display=ok?'':'none';
+    if(ok)vis++;
+  });
+  document.getElementById('conteo').innerHTML='Mostrando <strong>'+vis+'</strong> órdenes';
+}
+
+function limpiar(){
+  ['f-color','f-maq','f-tipo'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('f-buscar').value='';
+  filtrar();
+}
+
+function sortBy(col){
+  if(sortCol===col)sortAsc=!sortAsc; else{sortCol=col;sortAsc=true;}
+  const heads={color:'h-color',op:'h-op',cliente:'h-cliente',maquina:'h-maquina',fecha:'h-fecha'};
+  const labels={color:'Color',op:'OP',cliente:'Cliente',maquina:'Máquina',fecha:'F.Entrega'};
+  Object.entries(heads).forEach(([c,id])=>{
+    const el=document.getElementById(id);
+    if(el)el.textContent=labels[c]+(c===col?(sortAsc?' ↑':' ↓'):'');
+  });
+  const tbody=document.getElementById('tbl-body');
+  const rows=[...tbody.querySelectorAll('tr')];
+  rows.sort((a,b)=>{
+    let va=a.dataset[col]||'', vb=b.dataset[col]||'';
+    if(col==='color'){va=COLOR_ORDER[va]??9;vb=COLOR_ORDER[vb]??9;return sortAsc?va-vb:vb-va;}
+    return sortAsc?va.localeCompare(vb):vb.localeCompare(va);
+  });
+  rows.forEach(r=>tbody.appendChild(r));
+}
+</script>
+</body>
+</html>
