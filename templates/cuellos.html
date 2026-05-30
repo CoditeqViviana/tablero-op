@@ -15,53 +15,79 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 .updated strong{color:#374151}
 .nav-btn{font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none;display:inline-block}
 .nav-btn:hover{background:#f9fafb}
-.info-bar{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:10px 16px;margin-bottom:14px;font-size:12px;color:#374151;display:flex;gap:20px;flex-wrap:wrap}
-.info-bar span strong{color:#1d4ed8}
+
+/* Panel parámetros */
+.params-bar{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:14px 20px;margin-bottom:14px}
+.params-title{font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:10px}
+.params-grid{display:grid;grid-template-columns:repeat(8,1fr);gap:12px;align-items:end}
+.param-item{display:flex;flex-direction:column;gap:4px}
+.param-lbl{font-size:11px;color:#6b7280;font-weight:600}
+.param-input{font-size:13px;padding:5px 8px;border:1.5px solid #93c5fd;border-radius:6px;background:#fff;width:100%;font-weight:600}
+.param-input:focus{outline:none;border-color:#1d4ed8}
+.param-resultado{background:#dbeafe;border-radius:8px;padding:6px 10px}
+.param-calc-lbl{font-size:10px;color:#1e40af;font-weight:600;margin-bottom:2px}
+.param-calc{font-size:14px;font-weight:700;color:#1d4ed8;display:block}
+.param-sub{font-size:10px;color:#3b82f6}
+.param-btn{font-size:12px;padding:7px 14px;background:#1d4ed8;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:700;height:34px;width:100%}
+.param-btn:hover{background:#1e40af}
+
+/* Horizonte de tiempo */
+.horizonte-bar{background:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.horizonte-bar label{font-size:12px;font-weight:700;color:#374151}
+.h-btn{font-size:12px;padding:5px 14px;border-radius:16px;border:1.5px solid #d1d5db;cursor:pointer;font-weight:600;background:#fff;color:#6b7280}
+.h-btn.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.h-btn:hover:not(.active){background:#f9fafb}
+.h-custom{display:flex;align-items:center;gap:6px;font-size:12px;color:#6b7280}
+.h-custom input{font-size:12px;padding:4px 8px;border:1.5px solid #d1d5db;border-radius:6px;width:60px;height:30px;font-weight:700}
+.h-custom input:focus{outline:none;border-color:#1d4ed8}
+
+/* Panel */
 .panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
 .panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between}
 .panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
-/* Resumen cards */
-.maq-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px 16px}
-.maq-card{border-radius:8px;border:1px solid #e5e7eb;overflow:hidden}
-.maq-card.cuello{border-color:#fca5a5;border-width:2px}
-.maq-hdr{padding:8px 12px;display:flex;justify-content:space-between;align-items:center}
-.maq-hdr.cuello{background:#fef2f2}
-.maq-hdr.ok{background:#f9fafb}
-.maq-nombre{font-size:12px;font-weight:700;color:#374151}
-.maq-dias{font-size:18px;font-weight:700}
-.maq-dias.cuello{color:#dc2626}
-.maq-dias.ok{color:#15803d}
-.maq-body{padding:8px 12px}
-.maq-row{display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px}
-.maq-lbl{color:#6b7280}
-.maq-val{font-weight:600;color:#374151}
-.bar-wrap{height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;margin-top:6px}
-.bar-fill{height:100%;border-radius:3px}
-/* Tabla detalle */
-.tbl-wrap{overflow-x:auto}
+
+/* Tabla resumen por máquina */
+.resumen-tbl{width:100%;border-collapse:collapse;font-size:12px}
+.resumen-tbl th{padding:9px 12px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;border-bottom:1px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+.resumen-tbl th.th-left{text-align:left}
+.resumen-tbl td{padding:9px 12px;border-bottom:1px solid #f3f4f6;vertical-align:middle;text-align:center}
+.resumen-tbl td.th-left{text-align:left;font-weight:700}
+.resumen-tbl tr:last-child td{border-bottom:none}
+.resumen-tbl tr:hover td{background:#fafafa}
+.bar-cell{display:flex;align-items:center;gap:8px}
+.bar-wrap{flex:1;height:10px;background:#e5e7eb;border-radius:5px;overflow:hidden;min-width:80px}
+.bar-fill{height:100%;border-radius:5px;transition:width .3s}
+.dias-val{font-weight:700;font-size:13px;min-width:36px;text-align:right}
+.cap-val{font-size:11px;color:#9ca3af;min-width:70px}
+.fecha-prom{font-weight:700;font-size:12px}
+.cuello-tag{display:inline-block;font-size:10px;padding:1px 7px;border-radius:8px;font-weight:700;background:#fee2e2;color:#b91c1c;margin-left:4px}
+.ok-tag{display:inline-block;font-size:10px;padding:1px 7px;border-radius:8px;font-weight:700;background:#dcfce7;color:#15803d;margin-left:4px}
+
+/* Detalle ordenes */
+.selector-maq{display:flex;gap:8px;padding:12px 16px;border-bottom:1px solid #f0f0f0;flex-wrap:wrap}
+.sel-btn{font-size:11px;padding:4px 12px;border-radius:16px;border:1.5px solid #d1d5db;cursor:pointer;font-weight:600;background:#fff;color:#6b7280;white-space:nowrap}
+.sel-btn.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.sel-btn.cuello-btn{border-color:#fca5a5;color:#b91c1c}
+.sel-btn.cuello-btn.active{background:#dc2626;border-color:#dc2626;color:#fff}
+.conteo-det{font-size:12px;color:#6b7280;padding:8px 16px;background:#fafafa;border-bottom:1px solid #f0f0f0}
+.tbl-wrap{overflow-x:auto;max-height:400px;overflow-y:auto}
 table{width:100%;border-collapse:collapse;font-size:12px}
-th{padding:8px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+th{padding:8px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;position:sticky;top:0;z-index:2}
 th.th-left{text-align:left}
 td{padding:7px 10px;border-bottom:1px solid #f3f4f6;vertical-align:middle;text-align:center}
 td.td-left{text-align:left}
 tr:last-child td{border-bottom:none}
 tr:hover td{background:#fafafa}
 .badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
-.selector-maq{display:flex;gap:8px;padding:12px 16px;border-bottom:1px solid #f0f0f0;flex-wrap:wrap}
-.sel-btn{font-size:11px;padding:4px 12px;border-radius:16px;border:1.5px solid #d1d5db;cursor:pointer;font-weight:600;background:#fff;color:#6b7280;white-space:nowrap}
-.sel-btn.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
-.sel-btn.cuello-btn{border-color:#fca5a5;color:#b91c1c}
-.sel-btn.cuello-btn.active{background:#dc2626;border-color:#dc2626;color:#fff}
 .empty{padding:40px;text-align:center;color:#9ca3af}
-.conteo{font-size:12px;color:#6b7280;padding:6px 16px;background:#fafafa;border-bottom:1px solid #f0f0f0}
 </style>
 </head>
 <body>
 
 <div class="hdr">
   <div class="hdr-left">
-    <h1>🔴 Cuellos de Botella — Carga por máquina</h1>
-    <p>Metros planeados vs capacidad disponible por cada centro de proceso</p>
+    <h1>🔴 Cuellos de Botella — Simulador de carga</h1>
+    <p>Ajusta parámetros y horizonte de tiempo para identificar restricciones</p>
   </div>
   <div class="hdr-right">
     {% if data %}<div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>{% endif %}
@@ -72,50 +98,92 @@ tr:hover td{background:#fafafa}
 
 {% if data %}
 
-<div class="info-bar">
-  <span>Referencia: <strong>20 días hábiles</strong> de trabajo</span>
-  <span>🔴 Cuello de botella = <strong>> 10 días</strong> de trabajo acumulado</span>
-  <span>Capacidad: NP1/NP2/Kromia <strong>23,100 mts/día</strong> · Resto <strong>16,500 mts/día</strong></span>
+<!-- Parámetros editables -->
+<div class="params-bar">
+  <div class="params-title">⚙️ Parámetros de capacidad — modifica y presiona Recalcular</div>
+  <div class="params-grid">
+    <div class="param-item">
+      <label class="param-lbl">Vel. NP1/NP2/Kromia (m/min)</label>
+      <input type="number" class="param-input" id="p-vel-imp" value="35" step="1" min="1" max="200" onchange="recalcular()">
+    </div>
+    <div class="param-item">
+      <label class="param-lbl">Vel. Rebobinadoras (m/min)</label>
+      <input type="number" class="param-input" id="p-vel-reb" value="25" step="1" min="1" max="200" onchange="recalcular()">
+    </div>
+    <div class="param-item">
+      <label class="param-lbl">Vel. Troqueladoras (m/min)</label>
+      <input type="number" class="param-input" id="p-vel-tro" value="25" step="1" min="1" max="200" onchange="recalcular()">
+    </div>
+    <div class="param-item">
+      <label class="param-lbl">Horas trabajo/día</label>
+      <input type="number" class="param-input" id="p-horas" value="22.75" step="0.25" min="1" max="24" onchange="recalcular()">
+    </div>
+    <div class="param-item">
+      <label class="param-lbl">Eficiencia (%)</label>
+      <input type="number" class="param-input" id="p-efic" value="50" step="1" min="1" max="100" onchange="recalcular()">
+    </div>
+    <div class="param-item param-resultado">
+      <div class="param-calc-lbl">Cap/día Impresoras</div>
+      <span class="param-calc" id="r-cap-imp">23,100 mts</span>
+      <span class="param-sub">mts/día</span>
+    </div>
+    <div class="param-item param-resultado">
+      <div class="param-calc-lbl">Cap/día Rebob/Troqueladora</div>
+      <span class="param-calc" id="r-cap-reb">16,500 mts</span>
+      <span class="param-sub">mts/día</span>
+    </div>
+    <div class="param-item">
+      <button class="param-btn" onclick="recalcular()">↻ Recalcular</button>
+    </div>
+  </div>
 </div>
 
-<!-- Resumen tarjetas -->
+<!-- Horizonte de tiempo -->
+<div class="horizonte-bar">
+  <label>📅 Horizonte de análisis:</label>
+  <button class="h-btn" onclick="setHorizonte(3,this)">3 días</button>
+  <button class="h-btn" onclick="setHorizonte(5,this)">5 días</button>
+  <button class="h-btn" onclick="setHorizonte(7,this)">1 semana</button>
+  <button class="h-btn" onclick="setHorizonte(15,this)">15 días</button>
+  <button class="h-btn active" onclick="setHorizonte(0,this)">Todo</button>
+  <div class="h-custom">
+    <span>Personalizado:</span>
+    <input type="number" id="h-custom-val" placeholder="días" min="1" max="365" onchange="setHorizonte(parseInt(this.value)||0, null)">
+    <span>días</span>
+  </div>
+  <span id="h-label" style="font-size:12px;color:#6b7280;margin-left:8px"></span>
+</div>
+
+<!-- Tabla resumen -->
 <div class="panel">
-  <div class="panel-hdr"><h2>Carga total por máquina</h2></div>
-  <div class="maq-grid">
-    {% for maq, info in data.cuellos.items() %}
-    {% set pct = [info.dias_trabajo / 20 * 100, 100]|min %}
-    {% set es_cuello = info.dias_trabajo > 10 %}
-    <div class="maq-card {% if es_cuello %}cuello{% endif %}">
-      <div class="maq-hdr {% if es_cuello %}cuello{% else %}ok{% endif %}">
-        <span class="maq-nombre">{% if es_cuello %}🔴 {% endif %}{{ maq }}</span>
-        <span class="maq-dias {% if es_cuello %}cuello{% else %}ok{% endif %}">{{ info.dias_trabajo }}d</span>
-      </div>
-      <div class="maq-body">
-        <div class="maq-row"><span class="maq-lbl">Mts planeados</span><span class="maq-val">{{ "{:,}".format(info.mts_total) }}</span></div>
-        <div class="maq-row"><span class="maq-lbl">Capacidad/día</span><span class="maq-val">{{ "{:,}".format(info.capacidad_dia) }}</span></div>
-        <div class="maq-row"><span class="maq-lbl">Órdenes</span><span class="maq-val">{{ info.ordenes|length }}</span></div>
-        <div class="maq-row"><span class="maq-lbl">Fecha prometida</span><span class="maq-val {% if info.es_cuello %}style="color:#dc2626"{% endif %}">{{ info.fecha_prometida }}</span></div>
-        <div class="bar-wrap">
-          <div class="bar-fill" style="width:{{ pct }}%;background:{% if es_cuello %}#dc2626{% elif pct > 60 %}#ca8a04{% else %}#16a34a{% endif %}"></div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
+  <div class="panel-hdr">
+    <h2>Carga por máquina en el horizonte seleccionado</h2>
+    <span id="cuello-count" style="font-size:12px;color:#b91c1c;font-weight:700"></span>
+  </div>
+  <div style="overflow-x:auto">
+  <table class="resumen-tbl">
+    <thead>
+      <tr>
+        <th class="th-left" style="width:180px">Máquina</th>
+        <th style="width:90px">Mts planeados</th>
+        <th style="width:80px">Cap/día</th>
+        <th style="width:60px">Órdenes</th>
+        <th style="min-width:200px">Carga vs capacidad</th>
+        <th style="width:70px">Días</th>
+        <th style="width:100px">Fecha prometida</th>
+        <th style="width:80px">Estado</th>
+      </tr>
+    </thead>
+    <tbody id="resumen-body"></tbody>
+  </table>
   </div>
 </div>
 
 <!-- Detalle por máquina -->
 <div class="panel">
   <div class="panel-hdr"><h2>Detalle de órdenes por máquina</h2></div>
-  <div class="selector-maq" id="selector-maq">
-    {% for maq, info in data.cuellos.items() %}
-    <button class="sel-btn {% if info.es_cuello %}cuello-btn{% endif %} {% if loop.first %}active{% endif %}"
-      onclick="selMaq('{{ maq }}', this)">
-      {{ maq }} ({{ info.ordenes|length }})
-    </button>
-    {% endfor %}
-  </div>
-  <div class="conteo" id="conteo-det">—</div>
+  <div class="selector-maq" id="selector-maq"></div>
+  <div class="conteo-det" id="conteo-det">—</div>
   <div class="tbl-wrap">
   <table>
     <thead>
@@ -138,22 +206,145 @@ tr:hover td{background:#fafafa}
 {% endif %}
 
 <script>
-const CUELLOS = {{ data.cuellos | tojson }};
+const CUELLOS_RAW = {{ data.cuellos | tojson }};
+const HOY = '{{ data.hoy }}';
 const COLOR_MAP = {
-  azul:    ['#dbeafe','#1d4ed8','Azul'],
-  verde:   ['#dcfce7','#15803d','Verde'],
-  amarillo:['#fef9c3','#854d0e','Amarillo'],
-  rojo:    ['#fee2e2','#b91c1c','Rojo'],
   negro:   ['#1f2937','#f3f4f6','Negro'],
+  rojo:    ['#fee2e2','#b91c1c','Rojo'],
+  amarillo:['#fef9c3','#854d0e','Amarillo'],
+  verde:   ['#dcfce7','#15803d','Verde'],
+  azul:    ['#dbeafe','#1d4ed8','Azul'],
   gris:    ['#f3f4f6','#9ca3af','—'],
 };
-const TIPO_MAP = {
-  Blanca: ['#f1f5f9','#475569','BL'],
-  Impresa:['#dbeafe','#1d4ed8','IC'],
-  Fondo:  ['#dcfce7','#15803d','FD'],
-};
+const TIPO_MAP = {Blanca:['#f1f5f9','#475569','BL'],Impresa:['#dbeafe','#1d4ed8','IC'],Fondo:['#dcfce7','#15803d','FD']};
+const IMP = ['NP1','NP2','Kromia'];
+const REB = ['Rebobinadora 1','Rebobinadora 2','Rebobinadora 3','Rebobinadora (T) 4','Rebobinadora KM'];
+const TRO = ['Troqueladora 1','Troqueladora 2','Troqueladora 3','Troqueladora Aut 4','Troqueladora Plana'];
 
-let maqActual = Object.keys(CUELLOS)[0];
+let horizonteDias = 0; // 0 = todo
+let maqActual = Object.keys(CUELLOS_RAW)[0];
+
+// Convertir fecha dd/mm/yyyy a objeto Date
+function parseFecha(s) {
+  if (!s) return null;
+  const [d,m,y] = s.split('/');
+  return new Date(`${y}-${m}-${d}T00:00:00`);
+}
+
+function sumarDiasLab(fechaIni, dias) {
+  let f = new Date(fechaIni);
+  let d = 0;
+  while (d < Math.floor(dias)) {
+    f.setDate(f.getDate() + 1);
+    if (f.getDay() !== 0) d++; // no domingo
+  }
+  return f;
+}
+
+function fmtFecha(date) {
+  return `${String(date.getDate()).padStart(2,'0')}/${String(date.getMonth()+1).padStart(2,'0')}/${date.getFullYear()}`;
+}
+
+function getCapDia(maq) {
+  const horas = parseFloat(document.getElementById('p-horas').value) || 22.75;
+  const efic  = parseFloat(document.getElementById('p-efic').value) / 100 || 0.5;
+  const minsProd = horas * efic * 60;
+  if (IMP.includes(maq)) return Math.round(minsProd * (parseFloat(document.getElementById('p-vel-imp').value)||35));
+  if (REB.includes(maq)) return Math.round(minsProd * (parseFloat(document.getElementById('p-vel-reb').value)||25));
+  return Math.round(minsProd * (parseFloat(document.getElementById('p-vel-tro').value)||25));
+}
+
+function setHorizonte(dias, btn) {
+  horizonteDias = dias;
+  document.querySelectorAll('.h-btn').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const hoy = new Date(HOY + 'T00:00:00');
+  if (dias > 0) {
+    const hasta = new Date(hoy);
+    // Sumar dias laborales
+    let d = 0, f = new Date(hoy);
+    while (d < dias) { f.setDate(f.getDate()+1); if(f.getDay()!==0)d++; }
+    document.getElementById('h-label').textContent = `hasta ${fmtFecha(f)}`;
+  } else {
+    document.getElementById('h-label').textContent = 'todos los datos';
+  }
+  recalcular();
+}
+
+function filtrarPorHorizonte(ordenes) {
+  if (horizonteDias <= 0) return ordenes;
+  const hoy = new Date(HOY + 'T00:00:00');
+  let diasLab = 0, limite = new Date(hoy);
+  while (diasLab < horizonteDias) {
+    limite.setDate(limite.getDate() + 1);
+    if (limite.getDay() !== 0) diasLab++;
+  }
+  return ordenes.filter(o => {
+    const f = parseFecha(o.fecha);
+    return f && f <= limite;
+  });
+}
+
+function recalcular() {
+  // Actualizar panel capacidades
+  const horas = parseFloat(document.getElementById('p-horas').value) || 22.75;
+  const efic  = parseFloat(document.getElementById('p-efic').value) / 100 || 0.5;
+  const velImp = parseFloat(document.getElementById('p-vel-imp').value) || 35;
+  const velReb = parseFloat(document.getElementById('p-vel-reb').value) || 25;
+  const minsProd = horas * efic * 60;
+  document.getElementById('r-cap-imp').textContent = Math.round(minsProd * velImp).toLocaleString('es-CO') + ' mts';
+  document.getElementById('r-cap-reb').textContent = Math.round(minsProd * velReb).toLocaleString('es-CO') + ' mts';
+
+  const hoy = new Date(HOY + 'T00:00:00');
+
+  // Calcular carga filtrada por horizonte
+  const maquinas = Object.keys(CUELLOS_RAW);
+  let nCuellos = 0;
+  let rows = '';
+
+  // Rebuild selector
+  let selectorHtml = '';
+
+  maquinas.forEach(m => {
+    const info = CUELLOS_RAW[m];
+    const ordsFiltradas = filtrarPorHorizonte(info.ordenes);
+    const mtsFiltrado = ordsFiltradas.reduce((s,o) => s + (o.mts||0), 0);
+    const cap = getCapDia(m);
+    const dias = cap > 0 ? Math.round(mtsFiltrado / cap * 10) / 10 : 0;
+    const esCuello = dias > 10;
+    if (esCuello) nCuellos++;
+
+    const pct = Math.min(dias / 20 * 100, 100);
+    const color = esCuello ? '#dc2626' : dias > 7 ? '#ca8a04' : '#16a34a';
+    const fechaProm = fmtFecha(sumarDiasLab(hoy, dias));
+
+    rows += `<tr>
+      <td class="th-left" style="font-weight:700">${esCuello?'🔴 ':''}${m}</td>
+      <td style="font-weight:600">${Math.round(mtsFiltrado).toLocaleString('es-CO')}</td>
+      <td style="color:#6b7280">${cap.toLocaleString('es-CO')}</td>
+      <td>${ordsFiltradas.length}</td>
+      <td>
+        <div class="bar-cell">
+          <div class="bar-wrap"><div class="bar-fill" style="width:${pct}%;background:${color}"></div></div>
+          <span class="dias-val" style="color:${color}">${dias}d</span>
+          <span class="cap-val">${Math.round(mtsFiltrado/cap*100)||0}% cap</span>
+        </div>
+      </td>
+      <td style="font-weight:700;color:${color}">${dias}</td>
+      <td class="fecha-prom" style="color:${esCuello?'#dc2626':'#374151'}">${fechaProm}</td>
+      <td>${esCuello?'<span class="cuello-tag">CUELLO</span>':'<span class="ok-tag">OK</span>'}</td>
+    </tr>`;
+
+    selectorHtml += `<button class="sel-btn ${esCuello?'cuello-btn':''} ${m===maqActual?'active':''}"
+      onclick="selMaq('${m}',this)">${m} (${ordsFiltradas.length})</button>`;
+  });
+
+  document.getElementById('resumen-body').innerHTML = rows;
+  document.getElementById('selector-maq').innerHTML = selectorHtml;
+  document.getElementById('cuello-count').textContent = nCuellos > 0 ? `🔴 ${nCuellos} cuello${nCuellos>1?'s':''} de botella` : '✅ Sin cuellos de botella';
+
+  renderDet();
+}
 
 function selMaq(maq, btn) {
   maqActual = maq;
@@ -163,18 +354,20 @@ function selMaq(maq, btn) {
 }
 
 function renderDet() {
-  const info = CUELLOS[maqActual];
+  const info = CUELLOS_RAW[maqActual];
   if (!info) return;
-  const ords = info.ordenes;
-  document.getElementById('conteo-det').innerHTML =
-    `Máquina: <strong>${maqActual}</strong> — <strong>${ords.length}</strong> órdenes · <strong>${info.mts_total.toLocaleString('es-CO')}</strong> mts · <strong>${info.dias_trabajo}</strong> días de trabajo${info.es_cuello?' 🔴 CUELLO DE BOTELLA':''}`;
+  const ords = filtrarPorHorizonte(info.ordenes);
+  const cap = getCapDia(maqActual);
+  const dias = cap > 0 ? Math.round(ords.reduce((s,o)=>s+o.mts,0)/cap*10)/10 : 0;
+  const esCuello = dias > 10;
 
-  // Sort by color priority then fecha
+  document.getElementById('conteo-det').innerHTML =
+    `Máquina: <strong>${maqActual}</strong> — <strong>${ords.length}</strong> órdenes · <strong>${Math.round(ords.reduce((s,o)=>s+o.mts,0)).toLocaleString('es-CO')}</strong> mts · <strong>${dias}</strong> días${esCuello?' 🔴 CUELLO DE BOTELLA':''}`;
+
   const COLOR_ORDER = {negro:0,rojo:1,amarillo:2,verde:3,azul:4,gris:5};
   const sorted = [...ords].sort((a,b) => {
     const ca = COLOR_ORDER[a.color]??9, cb = COLOR_ORDER[b.color]??9;
-    if (ca !== cb) return ca - cb;
-    return a.fecha.localeCompare(b.fecha);
+    return ca !== cb ? ca-cb : (a.fecha||'').localeCompare(b.fecha||'');
   });
 
   document.getElementById('det-body').innerHTML = sorted.map(o => {
@@ -185,13 +378,14 @@ function renderDet() {
       <td class="td-left" style="font-weight:700;font-size:11px">${o.op}</td>
       <td class="td-left" style="font-size:11px">${o.cliente}</td>
       <td><span class="badge" style="background:${t[0]};color:${t[1]}">${t[2]}</span></td>
-      <td style="font-weight:600">${Math.round(o.mts).toLocaleString('es-CO')}</td>
+      <td style="font-weight:600">${Math.round(o.mts||0).toLocaleString('es-CO')}</td>
       <td style="font-weight:700;color:#374151">${o.fecha}</td>
     </tr>`;
   }).join('');
 }
 
-renderDet();
+// Inicializar
+setHorizonte(0, document.querySelector('.h-btn.active'));
 </script>
 </body>
 </html>
