@@ -25,25 +25,30 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 .param-input{font-size:13px;padding:5px 8px;border:1.5px solid #93c5fd;border-radius:6px;background:#fff;width:100%;font-weight:600}
 .param-input:focus{outline:none;border-color:#1d4ed8}
 .param-resultado{background:#dbeafe;border-radius:8px;padding:6px 10px}
-.param-calc{font-size:15px;font-weight:700;color:#1d4ed8}
-.param-lbl-res{font-size:10px;color:#1e40af;font-weight:600;margin-bottom:3px}
+.param-calc{font-size:14px;font-weight:700;color:#1d4ed8;display:block}
+.param-sub{font-size:10px;color:#3b82f6;display:block;margin-top:1px}
+.param-lbl-res{font-size:10px;color:#1e40af;font-weight:600;margin-bottom:2px}
 .param-btn{font-size:12px;padding:7px 14px;background:#1d4ed8;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:700;height:34px;width:100%}
 .param-btn:hover{background:#1e40af}
 
-/* Filtros máquina */
+/* Tabs máquina */
 .maq-tabs{display:flex;gap:8px;padding:14px 16px;border-bottom:1px solid #f0f0f0;flex-wrap:wrap}
 .maq-tab{font-size:12px;padding:6px 16px;border-radius:20px;border:1.5px solid #d1d5db;cursor:pointer;font-weight:600;background:#fff;color:#6b7280}
 .maq-tab.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
-.maq-tab:hover:not(.active){background:#f9fafb}
 
 /* Panel */
 .panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
 .panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
 .panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
-.panel-stats{display:flex;gap:12px;font-size:11px;color:#6b7280}
-.panel-stats span strong{color:#374151}
 
-/* Filtros adicionales */
+/* Métricas */
+.metricas{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px 16px;border-bottom:1px solid #f0f0f0}
+.metrica{background:#f9fafb;border-radius:8px;padding:10px 14px;border:1px solid #e5e7eb;text-align:center}
+.metrica-lbl{font-size:11px;color:#6b7280;margin-bottom:4px}
+.metrica-val{font-size:20px;font-weight:700;line-height:1}
+.metrica-sub{font-size:10px;color:#9ca3af;margin-top:3px}
+
+/* Filtros */
 .filtros{padding:10px 16px;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:#fafafa}
 .filtros label{font-size:12px;color:#6b7280;font-weight:600}
 .filtros select,.filtros input{font-size:12px;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;background:#fff;height:30px}
@@ -52,16 +57,20 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 .conteo{font-size:12px;color:#6b7280;padding:6px 16px;background:#fafafa;border-bottom:1px solid #f0f0f0}
 .conteo strong{color:#374151}
 
-/* Tabla simulación */
+/* Separador de día */
+.dia-sep{background:#f0f4ff;border-top:2px solid #bfdbfe;border-bottom:1px solid #bfdbfe}
+.dia-sep td{padding:6px 12px;font-size:11px;font-weight:700;color:#1d4ed8;text-align:left}
+
+/* Tabla */
 .tbl-wrap{overflow-x:auto}
 .sim-tbl{width:100%;border-collapse:collapse;font-size:12px}
-.sim-tbl th{padding:8px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+.sim-tbl th{padding:8px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px;cursor:pointer;user-select:none}
+.sim-tbl th:hover{background:#f0f4ff;color:#1d4ed8}
 .sim-tbl th.th-left{text-align:left}
 .sim-tbl td{padding:7px 10px;border-bottom:1px solid #f3f4f6;vertical-align:middle;text-align:center}
 .sim-tbl td.td-left{text-align:left}
 .sim-tbl tr:last-child td{border-bottom:none}
-.sim-tbl tr:hover td{background:#fafafa}
-.op-num{font-weight:700;color:#374151;font-size:11px}
+.sim-tbl tr:hover:not(.dia-sep) td{background:#fafafa}
 
 /* Badges */
 .badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
@@ -71,18 +80,16 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 .b-tipo-b{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
 .b-tipo-i{background:#dbeafe;color:#1d4ed8}
 .b-tipo-f{background:#dcfce7;color:#15803d}
+.b-tipo-o{background:#f3f4f6;color:#9ca3af}
+.turno-badge{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-size:11px;font-weight:700}
+.t1{background:#fef9c3;color:#854d0e}
+.t2{background:#dbeafe;color:#1d4ed8}
+.t3{background:#f3e8ff;color:#6b21a8}
 
-/* Barra de velocidad */
-.vel-bar{width:80px;height:7px;background:#e5e7eb;border-radius:4px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:4px}
-.vel-fill{height:100%;border-radius:4px}
-
-/* Métricas grandes */
-.metricas{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px 16px;border-bottom:1px solid #f0f0f0}
-.metrica{background:#f9fafb;border-radius:8px;padding:10px 14px;border:1px solid #e5e7eb;text-align:center}
-.metrica-lbl{font-size:11px;color:#6b7280;margin-bottom:4px}
-.metrica-val{font-size:20px;font-weight:700;line-height:1}
-.metrica-sub{font-size:10px;color:#9ca3af;margin-top:3px}
-
+/* Barra velocidad */
+.vel-row{display:flex;align-items:center;gap:5px}
+.vel-bar{width:50px;height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;flex-shrink:0}
+.vel-fill{height:100%;border-radius:3px}
 .empty{padding:40px;text-align:center;color:#9ca3af}
 </style>
 </head>
@@ -90,8 +97,8 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 
 <div class="hdr">
   <div class="hdr-left">
-    <h1>Simulación de ejecución de órdenes</h1>
-    <p>Velocidad requerida, tiempo de producción y setup por orden</p>
+    <h1>Simulación de ejecución por turnos</h1>
+    <p>Velocidad y setup sugerido por orden para cumplir fecha de entrega</p>
   </div>
   <div class="hdr-right">
     {% if data %}<div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>{% endif %}
@@ -104,7 +111,7 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 
 <!-- Parámetros -->
 <div class="params-bar">
-  <div class="params-title">⚙️ Parámetros de simulación — modifica y presiona Recalcular</div>
+  <div class="params-title">⚙️ Parámetros de simulación</div>
   <div class="params-grid">
     <div class="param-item">
       <label class="param-lbl">Horas jornada/día</label>
@@ -119,16 +126,19 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
       <input type="number" class="param-input" id="p-vel" value="35" step="1" min="1" max="500" onchange="simular()">
     </div>
     <div class="param-item param-resultado">
-      <div class="param-lbl-res">Horas producción/día</div>
-      <span class="param-calc" id="r-hprod">11.38 h</span>
+      <div class="param-lbl-res">Min producción/turno</div>
+      <span class="param-calc" id="r-mprod">227.5</span>
+      <span class="param-sub" id="r-hprod">= 3h 47min</span>
     </div>
     <div class="param-item param-resultado">
-      <div class="param-lbl-res">Horas SETUP/día</div>
-      <span class="param-calc" id="r-hsetup">11.38 h</span>
+      <div class="param-lbl-res">Min SETUP/turno</div>
+      <span class="param-calc" id="r-msetup">227.5</span>
+      <span class="param-sub" id="r-hsetup">= 3h 47min</span>
     </div>
     <div class="param-item param-resultado">
-      <div class="param-lbl-res">Capacidad/día</div>
-      <span class="param-calc" id="r-cap">23,888 mts</span>
+      <div class="param-lbl-res">Capacidad/turno</div>
+      <span class="param-calc" id="r-cap">7,963 mts</span>
+      <span class="param-sub">a 35 m/min</span>
     </div>
     <div class="param-item">
       <button class="param-btn" onclick="simular()">↻ Recalcular</button>
@@ -136,25 +146,28 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
   </div>
 </div>
 
-<!-- Tabs por máquina -->
+<!-- Tabs máquina -->
 <div class="panel">
-  <div class="maq-tabs" id="maq-tabs">
+  <div class="maq-tabs">
     <button class="maq-tab active" onclick="cambiarMaq('Nilpeter 1',this)">Nilpeter 1</button>
     <button class="maq-tab" onclick="cambiarMaq('Nilpeter 2',this)">Nilpeter 2</button>
     <button class="maq-tab" onclick="cambiarMaq('Kromia',this)">Kromia</button>
   </div>
 
-  <!-- Métricas resumen -->
+  <!-- Métricas -->
   <div class="metricas" id="metricas"></div>
 
   <!-- Filtros -->
   <div class="filtros">
     <label>Filtrar:</label>
-    <select id="f-estado" onchange="renderTabla()">
-      <option value="">Todos</option>
-      <option value="OK">✅ OK — cumple a velocidad nominal</option>
-      <option value="ALERTA">⚠️ Alerta — requiere más velocidad</option>
-      <option value="CRITICO">🔴 Crítico — no puede cumplir</option>
+    <select id="f-fecha" onchange="renderTabla()">
+      <option value="">Todas las fechas</option>
+    </select>
+    <select id="f-turno" onchange="renderTabla()">
+      <option value="">Todos los turnos</option>
+      <option value="1">Turno 1</option>
+      <option value="2">Turno 2</option>
+      <option value="3">Turno 3</option>
     </select>
     <input id="f-buscar" type="text" placeholder="Buscar cliente u OP..." oninput="renderTabla()">
     <button class="btn-clear" onclick="limpiarFiltros()">✕ Limpiar</button>
@@ -166,17 +179,15 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
   <table class="sim-tbl">
     <thead>
       <tr>
-        <th class="th-left" style="width:60px;cursor:pointer" data-col="op" data-label="OP" onclick="sortBy('op')"><span class="th-txt">OP</span></th>
-        <th class="th-left" style="width:160px;cursor:pointer" data-col="cliente" data-label="Cliente" onclick="sortBy('cliente')"><span class="th-txt">Cliente</span></th>
-        <th style="width:60px">Tipo</th>
-        <th style="width:70px;cursor:pointer;color:#1d4ed8" data-col="fecha" data-label="F. Entrega" onclick="sortBy('fecha')"><span class="th-txt">F. Entrega ↑</span></th>
-        <th style="width:55px;cursor:pointer" data-col="dias" data-label="Días disp." onclick="sortBy('dias')"><span class="th-txt">Días disp.</span></th>
-        <th style="width:65px;cursor:pointer" data-col="mts" data-label="Mts lineales" onclick="sortBy('mts')"><span class="th-txt">Mts lineales</span></th>
-        <th style="width:85px">T. Producción</th>
-        <th style="width:85px">Días necesarios</th>
-        <th style="width:110px;cursor:pointer" data-col="velReq" data-label="Vel. requerida" onclick="sortBy('velReq')"><span class="th-txt">Velocidad requerida</span></th>
-        <th style="width:90px">Setup disponible</th>
-        <th style="width:70px;cursor:pointer" data-col="estado" data-label="Estado" onclick="sortBy('estado')"><span class="th-txt">Estado</span></th>
+        <th class="th-left" style="width:60px" onclick="sortBy('op')"><span id="h-op">OP</span></th>
+        <th class="th-left" style="width:155px" onclick="sortBy('cliente')"><span id="h-cliente">Cliente</span></th>
+        <th style="width:45px">Tipo</th>
+        <th style="width:65px" onclick="sortBy('fecha')"><span id="h-fecha">F.Entrega ↑</span></th>
+        <th style="width:65px" onclick="sortBy('mts')"><span id="h-mts">Mts Lin.</span></th>
+        <th style="width:90px">T.Producción</th>
+        <th style="width:100px">Setup sugerido</th>
+        <th style="width:110px">Vel. sugerida</th>
+        <th style="width:50px">Turno</th>
       </tr>
     </thead>
     <tbody id="sim-body"></tbody>
@@ -191,194 +202,236 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 <script>
 const TODAS = {{ data.todas_ordenes | tojson }};
 const HOY = '{{ data.hoy }}';
+const NOMBRES_DIA = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 let maqActual = 'Nilpeter 1';
 let datosSimulados = [];
+let sortCol = 'fecha';
+let sortAsc = true;
 
 function getParams() {
   const horas = parseFloat(document.getElementById('p-horas').value) || 22.75;
   const efic  = parseFloat(document.getElementById('p-efic').value) / 100 || 0.5;
   const vel   = parseFloat(document.getElementById('p-vel').value) || 35;
-  const hProd  = horas * efic;
-  const hSetup = horas * (1 - efic);
-  const minsProd  = hProd * 60;
-  const minsSetup = hSetup * 60;
-  const capDia = minsProd * vel;
-  return { horas, efic, vel, hProd, hSetup, minsProd, minsSetup, capDia };
+  const minsTurno     = horas * 60 / 3;
+  const minsProdTurno = minsTurno * efic;
+  const minsSetupTurno= minsTurno * (1 - efic);
+  const capTurno      = minsProdTurno * vel;
+  return { horas, efic, vel, minsTurno, minsProdTurno, minsSetupTurno, capTurno };
+}
+
+function fmtMin(m) {
+  const h = Math.floor(m / 60);
+  const min = Math.round(m % 60);
+  return h > 0 ? `${h}h ${min}min` : `${min} min`;
 }
 
 function diasHasta(fechaStr) {
-  if (!fechaStr) return 0;
+  if (!fechaStr) return 1;
   const hoy = new Date(HOY + 'T00:00:00');
   const fe  = new Date(fechaStr + 'T00:00:00');
   return Math.max(1, Math.round((fe - hoy) / 86400000));
 }
 
+function turnoLabel(t) {
+  const cls = ['','t1','t2','t3'][t] || 't1';
+  const nombres = ['','T1 (6-14h)','T2 (14-22h)','T3 (22-6h)'];
+  return `<span class="turno-badge ${cls}">${t}</span><span style="font-size:10px;color:#6b7280;margin-left:3px">${nombres[t]||''}</span>`;
+}
+
+function tipoBadge(t) {
+  const m = {Blanca:'b-tipo-b BL',Impresa:'b-tipo-i IC',Fondo:'b-tipo-f FD'};
+  const s = m[t] || 'b-tipo-o —';
+  const [cls, lbl] = s.split(' ');
+  return `<span class="badge ${cls}">${lbl}</span>`;
+}
+
 function simular() {
   const p = getParams();
 
-  // Actualizar panel parámetros
-  document.getElementById('r-hprod').textContent  = p.hProd.toFixed(2) + ' h';
-  document.getElementById('r-hsetup').textContent = p.hSetup.toFixed(2) + ' h';
-  document.getElementById('r-cap').textContent    = Math.round(p.capDia).toLocaleString('es-CO') + ' mts';
+  // Actualizar panel
+  document.getElementById('r-mprod').textContent  = p.minsProdTurno.toFixed(1);
+  document.getElementById('r-hprod').textContent  = '= ' + fmtMin(p.minsProdTurno);
+  document.getElementById('r-msetup').textContent = p.minsSetupTurno.toFixed(1);
+  document.getElementById('r-hsetup').textContent = '= ' + fmtMin(p.minsSetupTurno);
+  document.getElementById('r-cap').textContent    = Math.round(p.capTurno).toLocaleString('es-CO') + ' mts';
 
-  // Calcular simulación por orden
-  datosSimulados = TODAS
+  // Asignar turnos secuencialmente por fecha
+  // Simular llenado de turnos: cada turno tiene una capacidad máxima
+  const ordenesFecha = TODAS
     .filter(o => o.maquina === maqActual && o.fecha >= HOY)
-    .sort((a, b) => a.fecha.localeCompare(b.fecha))
-    .map(o => {
-      const dias = diasHasta(o.fecha);
+    .sort((a,b) => a.fecha.localeCompare(b.fecha));
+
+  // Agrupar por fecha y asignar turnos dentro de cada dia
+  const porFecha = {};
+  ordenesFecha.forEach(o => {
+    if (!porFecha[o.fecha]) porFecha[o.fecha] = [];
+    porFecha[o.fecha].push(o);
+  });
+
+  datosSimulados = [];
+
+  Object.entries(porFecha).forEach(([fecha, ords]) => {
+    // Asignar turno basado en acumulado de metros en el dia
+    let acumMts = 0;
+    ords.forEach(o => {
+      const dias = diasHasta(fecha);
+      // Turnos disponibles hasta la fecha (dias * 3)
+      const turnosDisp = dias * 3;
+      // Tiempo de produccion de la orden
       const minsProdOrden = o.mts / p.vel;
-      const diasNecesarios = p.minsProd > 0 ? minsProdOrden / p.minsProd : 0;
-      const velReq = dias > 0 && p.minsProd > 0 ? o.mts / (dias * p.minsProd) : 999;
-      const setupDisp = diasNecesarios * p.minsSetup;
+      // Velocidad requerida para 1 turno
+      const velSugerida = o.mts / p.minsProdTurno;
+      // Velocidad capped a nominal
+      const velFinal = Math.min(velSugerida, p.vel);
+      // Tiempo real de produccion con vel sugerida
+      const minsProduccion = velSugerida <= p.vel
+        ? minsProdOrden
+        : o.mts / p.vel;
+      // Setup sugerido: tiempo restante del turno despues de producir
+      const setupSugerido = Math.max(0, p.minsProdTurno - minsProduccion);
+      // Turno asignado dentro del dia (1,2,3) segun acumulado
+      let turno;
+      if (acumMts < p.capTurno) turno = 1;
+      else if (acumMts < p.capTurno * 2) turno = 2;
+      else turno = 3;
+      acumMts += o.mts;
 
+      // Estado
       let estado, estadoClase;
-      if (velReq <= p.vel * 0.8) {
-        estado = 'OK'; estadoClase = 'b-ok';
-      } else if (velReq <= p.vel) {
-        estado = 'ALERTA'; estadoClase = 'b-warn';
-      } else {
-        estado = 'CRITICO'; estadoClase = 'b-over';
-      }
+      if (velSugerida <= p.vel * 0.8) { estado='OK'; estadoClase='b-ok'; }
+      else if (velSugerida <= p.vel)   { estado='ALERTA'; estadoClase='b-warn'; }
+      else                              { estado='CRITICO'; estadoClase='b-over'; }
 
-      return {
+      datosSimulados.push({
         op: o.op, cliente: o.cliente, tipo: o.tipo,
-        fecha: o.fecha, mts: o.mts,
-        dias, minsProdOrden, diasNecesarios, velReq,
-        setupDisp, estado, estadoClase,
+        fecha, mts: o.mts, dias,
+        minsProdOrden, velSugerida: Math.min(velSugerida, p.vel*1.5),
+        velFinal, minsProduccion, setupSugerido,
+        turno, estado, estadoClase,
         velNominal: p.vel,
-      };
+      });
     });
+  });
+
+  // Actualizar filtro de fechas
+  const fechas = [...new Set(datosSimulados.map(r=>r.fecha))];
+  const fFecha = document.getElementById('f-fecha');
+  const valActual = fFecha.value;
+  fFecha.innerHTML = '<option value="">Todas las fechas</option>';
+  fechas.forEach(f => {
+    const d = new Date(f+'T12:00:00');
+    const opt = document.createElement('option');
+    opt.value = f;
+    opt.textContent = `${f.slice(8,10)}/${f.slice(5,7)} — ${NOMBRES_DIA[d.getDay()]}`;
+    if (f === valActual) opt.selected = true;
+    fFecha.appendChild(opt);
+  });
 
   // Métricas
   const total = datosSimulados.length;
-  const ok = datosSimulados.filter(r => r.estado === 'OK').length;
-  const alerta = datosSimulados.filter(r => r.estado === 'ALERTA').length;
-  const critico = datosSimulados.filter(r => r.estado === 'CRITICO').length;
-  const totalMts = datosSimulados.reduce((s,r) => s + r.mts, 0);
-
+  const ok = datosSimulados.filter(r=>r.estado==='OK').length;
+  const alerta = datosSimulados.filter(r=>r.estado==='ALERTA').length;
+  const critico = datosSimulados.filter(r=>r.estado==='CRITICO').length;
   document.getElementById('metricas').innerHTML = `
-    <div class="metrica">
-      <div class="metrica-lbl">Total órdenes</div>
-      <div class="metrica-val">${total}</div>
-      <div class="metrica-sub">${maqActual}</div>
-    </div>
-    <div class="metrica">
-      <div class="metrica-lbl">✅ Cumplen OK</div>
-      <div class="metrica-val" style="color:#15803d">${ok}</div>
-      <div class="metrica-sub">vel. requerida ≤ 80% nominal</div>
-    </div>
-    <div class="metrica">
-      <div class="metrica-lbl">⚠️ En alerta</div>
-      <div class="metrica-val" style="color:#ca8a04">${alerta}</div>
-      <div class="metrica-sub">vel. requerida 80–100%</div>
-    </div>
-    <div class="metrica">
-      <div class="metrica-lbl">🔴 Críticas</div>
-      <div class="metrica-val" style="color:#dc2626">${critico}</div>
-      <div class="metrica-sub">requieren más de ${p.vel} m/min</div>
-    </div>`;
+    <div class="metrica"><div class="metrica-lbl">Total órdenes</div><div class="metrica-val">${total}</div><div class="metrica-sub">${maqActual}</div></div>
+    <div class="metrica"><div class="metrica-lbl">✅ OK</div><div class="metrica-val" style="color:#15803d">${ok}</div><div class="metrica-sub">vel. ≤ 80% nominal</div></div>
+    <div class="metrica"><div class="metrica-lbl">⚠️ Alerta</div><div class="metrica-val" style="color:#ca8a04">${alerta}</div><div class="metrica-sub">vel. 80–100%</div></div>
+    <div class="metrica"><div class="metrica-lbl">🔴 Crítico</div><div class="metrica-val" style="color:#dc2626">${critico}</div><div class="metrica-sub">supera vel. nominal</div></div>`;
 
   renderTabla();
 }
 
 function renderTabla() {
-  const fEstado = document.getElementById('f-estado').value;
-  const fBuscar = document.getElementById('f-buscar').value.toLowerCase();
+  const fFecha = document.getElementById('f-fecha').value;
+  const fTurno = document.getElementById('f-turno').value;
+  const fBuscar= document.getElementById('f-buscar').value.toLowerCase();
 
-  const sorted = [...datosSimulados].sort((a,b) => {
-    const va = getSortVal(a, sortCol);
-    const vb = getSortVal(b, sortCol);
-    if (typeof va === 'number') return sortAsc ? va-vb : vb-va;
-    return sortAsc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
-  });
-  const filtrados = sorted.filter(r =>
-    (!fEstado || r.estado === fEstado) &&
+  let filtrados = datosSimulados.filter(r =>
+    (!fFecha || r.fecha === fFecha) &&
+    (!fTurno || String(r.turno) === fTurno) &&
     (!fBuscar || r.cliente.toLowerCase().includes(fBuscar) || r.op.includes(fBuscar))
   );
+
+  // Ordenar
+  filtrados = [...filtrados].sort((a,b) => {
+    const va = {op:a.op,cliente:a.cliente,fecha:a.fecha,mts:a.mts}[sortCol] ?? a.fecha;
+    const vb = {op:b.op,cliente:b.cliente,fecha:b.fecha,mts:b.mts}[sortCol] ?? b.fecha;
+    if (typeof va==='number') return sortAsc ? va-vb : vb-va;
+    return sortAsc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+  });
 
   document.getElementById('conteo-txt').innerHTML =
     'Mostrando <strong>' + filtrados.length + '</strong> de ' + datosSimulados.length + ' órdenes';
 
-  const tipoBadge = t =>
-    t==='Blanca'  ? '<span class="badge b-tipo-b">BL</span>'  :
-    t==='Impresa' ? '<span class="badge b-tipo-i">IC</span>'  :
-    t==='Fondo'   ? '<span class="badge b-tipo-f">FD</span>'  : '—';
+  const velColor = e => e==='OK'?'#16a34a':e==='ALERTA'?'#ca8a04':'#dc2626';
 
-  const fmtMin = m => {
-    const h = Math.floor(m / 60);
-    const min = Math.round(m % 60);
-    return h > 0 ? `${h}h ${min}min` : `${min} min`;
-  };
+  let html = '';
+  let fechaAnterior = null;
 
-  const velPct = (vReq, vNom) => Math.min(Math.round(vReq / vNom * 100), 150);
-  const velColor = (est) =>
-    est==='OK' ? '#16a34a' : est==='ALERTA' ? '#ca8a04' : '#dc2626';
+  filtrados.forEach(r => {
+    // Separador de día
+    if (r.fecha !== fechaAnterior && !fFecha) {
+      const d = new Date(r.fecha+'T12:00:00');
+      const nombreDia = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'][d.getDay()];
+      html += `<tr class="dia-sep"><td colspan="9">📅 ${nombreDia} ${r.fecha.slice(8,10)}/${r.fecha.slice(5,7)}/${r.fecha.slice(0,4)} — ${r.dias} día${r.dias>1?'s':''} disponible${r.dias>1?'s':''}</td></tr>`;
+      fechaAnterior = r.fecha;
+    }
 
-  document.getElementById('sim-body').innerHTML = filtrados.map(r => `
-    <tr>
-      <td class="td-left op-num">${r.op}</td>
+    const velPct = Math.min(Math.round(r.velSugerida / r.velNominal * 100), 100);
+
+    html += `<tr>
+      <td class="td-left" style="font-weight:700;font-size:11px">${r.op}</td>
       <td class="td-left" style="font-size:11px" title="${r.cliente}">${r.cliente}</td>
       <td>${tipoBadge(r.tipo)}</td>
-      <td style="font-size:11px">${r.fecha.slice(8,10)}/${r.fecha.slice(5,7)}</td>
-      <td style="font-weight:700;color:${r.dias<=3?'#dc2626':r.dias<=7?'#ca8a04':'#374151'}">${r.dias}d</td>
+      <td style="font-size:11px;font-weight:700;color:${r.dias<=1?'#dc2626':r.dias<=3?'#ca8a04':'#374151'}">${r.fecha.slice(8,10)}/${r.fecha.slice(5,7)}</td>
       <td style="font-weight:600">${Math.round(r.mts).toLocaleString('es-CO')}</td>
       <td>
-        <div style="font-weight:600;font-size:11px">${fmtMin(r.minsProdOrden)}</div>
-        <div style="font-size:10px;color:#9ca3af">${r.diasNecesarios.toFixed(2)} días</div>
+        <div style="font-weight:600;font-size:11px;color:#374151">${fmtMin(r.minsProdOrden)}</div>
       </td>
       <td>
-        <div style="font-weight:700;color:${r.diasNecesarios>r.dias?'#dc2626':'#374151'}">${r.diasNecesarios.toFixed(2)} días</div>
-        <div style="font-size:10px;color:#9ca3af">de ${r.dias} disponibles</div>
+        <div style="font-weight:600;font-size:11px;color:#6b7280">${fmtMin(r.setupSugerido)}</div>
+        <div style="font-size:10px;color:#9ca3af">en el turno</div>
       </td>
       <td>
-        <div style="display:flex;align-items:center;gap:6px">
-          <span style="font-weight:700;color:${velColor(r.estado)};min-width:52px">${r.velReq.toFixed(1)} m/min</span>
-          <div class="vel-bar"><div class="vel-fill" style="width:${velPct(r.velReq,r.velNominal)}%;background:${velColor(r.estado)}"></div></div>
+        <div class="vel-row">
+          <span style="font-weight:700;font-size:12px;color:${velColor(r.estado)};min-width:52px">${r.velSugerida.toFixed(1)} m/min</span>
+          <div class="vel-bar"><div class="vel-fill" style="width:${velPct}%;background:${velColor(r.estado)}"></div></div>
         </div>
-        <div style="font-size:10px;color:#9ca3af">${Math.round(r.velReq/r.velNominal*100)}% de ${r.velNominal} m/min</div>
+        <div style="font-size:10px;color:#9ca3af">${velPct}% de ${r.velNominal} m/min</div>
       </td>
-      <td>
-        <div style="font-weight:600;font-size:11px">${fmtMin(r.setupDisp)}</div>
-        <div style="font-size:10px;color:#9ca3af">disponibles</div>
-      </td>
-      <td><span class="badge ${r.estadoClase}">${r.estado}</span></td>
-    </tr>`).join('');
+      <td>${turnoLabel(r.turno)}</td>
+    </tr>`;
+  });
+
+  document.getElementById('sim-body').innerHTML = html;
+}
+
+function sortBy(col) {
+  if (sortCol===col) sortAsc=!sortAsc; else { sortCol=col; sortAsc=true; }
+  const heads = {op:'h-op',cliente:'h-cliente',fecha:'h-fecha',mts:'h-mts'};
+  const labels = {op:'OP',cliente:'Cliente',fecha:'F.Entrega',mts:'Mts Lin.'};
+  Object.entries(heads).forEach(([c,id]) => {
+    const arrow = (c===col) ? (sortAsc?' ↑':' ↓') : '';
+    document.getElementById(id).textContent = labels[c] + arrow;
+  });
+  renderTabla();
 }
 
 function cambiarMaq(maq, btn) {
   maqActual = maq;
-  document.querySelectorAll('.maq-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.maq-tab').forEach(t=>t.classList.remove('active'));
   btn.classList.add('active');
   limpiarFiltros();
   simular();
 }
 
-let sortCol = 'fecha';
-let sortAsc = true;
-
-function sortBy(col) {
-  if (sortCol === col) { sortAsc = !sortAsc; }
-  else { sortCol = col; sortAsc = true; }
-  document.querySelectorAll('.sim-tbl th[data-col]').forEach(th => {
-    const arrow = th.dataset.col === col ? (sortAsc ? ' ↑' : ' ↓') : '';
-    th.querySelector('.th-txt').textContent = th.dataset.label + arrow;
-  });
-  renderTabla();
-}
-
-function getSortVal(r, col) {
-  const m = {op:r.op, cliente:r.cliente, fecha:r.fecha, dias:r.dias, mts:r.mts, velReq:r.velReq, estado:r.estado};
-  return m[col] !== undefined ? m[col] : r.fecha;
-}
-
 function limpiarFiltros() {
-  document.getElementById('f-estado').value = '';
+  document.getElementById('f-fecha').value = '';
+  document.getElementById('f-turno').value = '';
   document.getElementById('f-buscar').value = '';
   renderTabla();
 }
 
-// Inicializar
 simular();
 </script>
 </body>
