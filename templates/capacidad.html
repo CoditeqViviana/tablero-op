@@ -16,9 +16,17 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 .nav-btn{font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer;color:#374151;text-decoration:none;display:inline-block}
 .nav-btn:hover{background:#f9fafb}
 /* Info capacidad */
-.info-bar{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:12px 20px;margin-bottom:14px;display:flex;gap:24px;flex-wrap:wrap;align-items:center}
-.info-item{font-size:12px;color:#374151}
-.info-item strong{color:#1d4ed8}
+.params-bar{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:14px 20px;margin-bottom:14px}
+.params-title{font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:10px}
+.params-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;align-items:end}
+.param-item{display:flex;flex-direction:column;gap:4px}
+.param-lbl{font-size:11px;color:#6b7280;font-weight:600}
+.param-input{font-size:13px;padding:5px 8px;border:1.5px solid #93c5fd;border-radius:6px;background:#fff;color:#1a1a1a;width:100%;font-weight:600}
+.param-input:focus{outline:none;border-color:#1d4ed8}
+.param-resultado{background:#dbeafe;border-radius:8px;padding:6px 10px}
+.param-calc{font-size:16px;font-weight:700;color:#1d4ed8}
+.param-btn{font-size:12px;padding:7px 14px;background:#1d4ed8;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:700;height:34px}
+.param-btn:hover{background:#1e40af}
 /* KPIs maquinas */
 .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
 .kpi{background:#fff;border-radius:8px;padding:14px 16px;border:1px solid #e0e0e0}
@@ -97,11 +105,34 @@ tr:hover td{background:#fafafa}
 {% if data %}
 
 <!-- Info capacidad -->
-<div class="info-bar">
-  <div class="info-item">⚙️ Capacidad calculada desde planeación de recursos</div>
-  <div class="info-item">Metros/turno: <strong>7,900</strong></div>
-  <div class="info-item">Turnos/día: <strong>3</strong> (Lun–Sáb)</div>
-  <div class="info-item">Capacidad diaria por máquina: <strong>23,700 mts</strong></div>
+<!-- Barra de parámetros editables -->
+<div class="params-bar">
+  <div class="params-title">⚙️ Parámetros de capacidad</div>
+  <div class="params-grid">
+    <div class="param-item">
+      <label class="param-lbl">Horas de trabajo/día</label>
+      <input type="number" class="param-input" id="p-horas" value="22.75" step="0.25" min="1" max="24" onchange="recalcular()">
+    </div>
+    <div class="param-item">
+      <label class="param-lbl">Eficiencia (%)</label>
+      <input type="number" class="param-input" id="p-eficiencia" value="50" step="1" min="1" max="100" onchange="recalcular()">
+    </div>
+    <div class="param-item">
+      <label class="param-lbl">Velocidad (m/min)</label>
+      <input type="number" class="param-input" id="p-velocidad" value="35" step="1" min="1" max="200" onchange="recalcular()">
+    </div>
+    <div class="param-item param-resultado">
+      <label class="param-lbl">Horas reales/día</label>
+      <span class="param-calc" id="r-horas">11.38</span>
+    </div>
+    <div class="param-item param-resultado">
+      <label class="param-lbl">Capacidad/día/máquina</label>
+      <span class="param-calc" id="r-capacidad">23,888 mts</span>
+    </div>
+    <div class="param-item">
+      <button class="param-btn" onclick="recalcular()">↻ Recalcular</button>
+    </div>
+  </div>
 </div>
 
 <!-- KPIs semana actual -->
@@ -159,7 +190,7 @@ tr:hover td{background:#fafafa}
           {% if pct > 100 %}{% set cls = 'over' %}{% set fcls = 'fill-over' %}
           {% elif pct > 80 %}{% set cls = 'warn' %}{% set fcls = 'fill-warn' %}
           {% else %}{% set cls = 'ok' %}{% set fcls = 'fill-ok' %}{% endif %}
-          <td>
+          <td class="celda-cap" data-mts="{{ vals.planeado|round(0)|int }}">
             <div class="cell-wrap">
               <span class="cell-mts pct-{{ cls }}">{{ vals.planeado|round(0)|int }}</span>
               <div class="bar-wrap"><div class="bar-fill {{ fcls }}" style="width:{% if pct > 100 %}100{% else %}{{ pct }}{% endif %}%"></div></div>
@@ -177,9 +208,9 @@ tr:hover td{background:#fafafa}
       <tr style="background:#f9fafb">
         <td class="maq-cell" style="color:#6b7280">Capacidad/día</td>
         {% for d in data.dias_str %}
-        <td style="color:#6b7280;font-size:12px">23,700 mts</td>
+        <td style="color:#6b7280;font-size:12px" class="cap-dia-lbl">23,888 mts</td>
         {% endfor %}
-        <td style="color:#6b7280;font-size:12px">118,500 mts</td>
+        <td style="color:#6b7280;font-size:12px" class="cap-sem-lbl">119,325 mts</td>
       </tr>
     </tbody>
   </table>
@@ -213,8 +244,53 @@ tr:hover td{background:#fafafa}
 
 <script>
 const TODAS = {{ data.todas_ordenes | tojson }};
+
+let CAP_DIA_ACTUAL = 23888;
+
+function recalcular() {
+  const horas = parseFloat(document.getElementById('p-horas').value) || 22.75;
+  const efic = parseFloat(document.getElementById('p-eficiencia').value) / 100 || 0.5;
+  const vel = parseFloat(document.getElementById('p-velocidad').value) || 35;
+
+  const horasReales = horas * efic;
+  const capacidad = Math.round(horasReales * 60 * vel);
+  CAP_DIA_ACTUAL = capacidad;
+
+  document.getElementById('r-horas').textContent = horasReales.toFixed(2);
+  document.getElementById('r-capacidad').textContent = capacidad.toLocaleString('es-CO') + ' mts';
+
+  // Actualizar tabla semanal
+  actualizarTablaSemana();
+
+  // Actualizar vista del dia si hay fecha seleccionada
+  const sel = document.getElementById('selector-fecha');
+  if (sel) cambiarFecha();
+}
+
+function actualizarTablaSemana() {
+  // Recalcular celdas de la tabla con nueva capacidad
+  document.querySelectorAll('.celda-cap').forEach(el => {
+    const mts = parseFloat(el.dataset.mts) || 0;
+    const pct = CAP_DIA_ACTUAL > 0 ? Math.round(mts / CAP_DIA_ACTUAL * 1000) / 10 : 0;
+    const barW = Math.min(pct, 100);
+    let cls, fillCls;
+    if (pct > 100) { cls = 'pct-over'; fillCls = '#dc2626'; }
+    else if (pct > 80) { cls = 'pct-warn'; fillCls = '#ca8a04'; }
+    else { cls = 'pct-ok'; fillCls = '#16a34a'; }
+    el.innerHTML = `
+      <div class="cell-wrap">
+        <span class="cell-mts ${cls}">${Math.round(mts)}</span>
+        <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%;background:${fillCls}"></div></div>
+        <span class="cell-cap ${cls}">${pct}%</span>
+      </div>`;
+  });
+  // Actualizar filas capacidad
+  document.querySelectorAll('.cap-dia-lbl').forEach(el => {
+    el.textContent = CAP_DIA_ACTUAL.toLocaleString('es-CO') + ' mts';
+  });
+}
 const MAQUINAS_RRC = {{ data.maquinas_rrc | tojson }};
-const CAP_DIA = 23700;
+// CAP_DIA se calcula dinámicamente
 const NOMBRES_DIA = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
 
 function barColor(pct) {
@@ -232,9 +308,11 @@ function cambiarFecha() {
 
   let html = '';
   MAQUINAS_RRC.forEach(m => {
-    const ords = ordDia.filter(o => o.maquina === m);
+    const ords = ordDia.filter(o => o.maquina === m && (
+      !['NP1','NP2','Kromia'].includes(m) || o.en_impresion !== false
+    ));
     const totalMts = ords.reduce((s, o) => s + (o.mts || 0), 0);
-    const pct = Math.round(totalMts / CAP_DIA * 100 * 10) / 10;
+    const pct = Math.round(totalMts / CAP_DIA_ACTUAL * 100 * 10) / 10;
     const col = barColor(pct);
     const barW = Math.min(pct, 100);
 
