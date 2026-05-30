@@ -231,12 +231,23 @@ def process_excel(file):
                     'tipo': get_tipo(row.iloc[1]),
                 })
 
+    def sumar_dias_lab(fecha_ini, dias):
+        from datetime import timedelta
+        f = fecha_ini
+        d = 0
+        while d < int(dias):
+            f += timedelta(days=1)
+            if f.weekday() != 6:
+                d += 1
+        return f
+
     cuellos = {}
     for m, info in carga_maq.items():
         cap = MAQUINAS_CAP[m]
         mts_total = info['mts']
         dias_trabajo = round(mts_total / cap, 1) if cap > 0 else 0
-        pct_cap = round(mts_total / (cap * 20) * 100, 1)  # vs 20 dias de referencia
+        pct_cap = round(mts_total / (cap * 20) * 100, 1)
+        fecha_prom = sumar_dias_lab(today, dias_trabajo)
         cuellos[m] = {
             'capacidad_dia': cap,
             'mts_total': round(mts_total),
@@ -244,6 +255,7 @@ def process_excel(file):
             'pct_cap': pct_cap,
             'ordenes': sorted(info['ordenes'], key=lambda x: x['fecha']),
             'es_cuello': dias_trabajo > 10,
+            'fecha_prometida': fecha_prom.strftime('%d/%m/%Y'),
         }
 
     fechas_rrc = sorted(set(
@@ -270,14 +282,15 @@ def process_excel(file):
             }
 
     # Órdenes próximas: desde hoy hasta 7 días
+    # Todas las ordenes para el Tambor General
     limite_urgente = today + pd.Timedelta(days=7)
-    urgentes_df = df[(df['fecha_entrega'] >= today) & (df['fecha_entrega'] <= limite_urgente)].copy()
     urgentes = []
-    for _, row in urgentes_df.sort_values('fecha_entrega').iterrows():
+    todas_tambor = []
+    for _, row in df.sort_values('fecha_entrega').iterrows():
         fe = row['fecha_entrega']
         fc = row['fecha_creacion']
         color_toc = get_color_toc(fc, fe, today)
-        urgentes.append({
+        ord_data = {
             'op': str(row.iloc[3]),
             'cliente': str(row.iloc[0]),
             'referencia': str(row.iloc[1]),
@@ -287,7 +300,11 @@ def process_excel(file):
             'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
             'fecha_entrega_raw': fe.strftime('%Y-%m-%d') if pd.notna(fe) else '',
             'color_toc': color_toc,
-        })
+            'mts': float(row['mts']),
+        }
+        todas_tambor.append(ord_data)
+        if pd.notna(fe) and fe <= today + pd.Timedelta(days=7):
+            urgentes.append(ord_data)
 
     result = {
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
@@ -307,6 +324,7 @@ def process_excel(file):
         'inc_total': len(incumplidas_df),
         'urgentes': urgentes,
         'urgentes_total': len(urgentes),
+        'todas_tambor': todas_tambor,
         'inc_etapas': inc_etapas,
         'inc_detalle': inc_detalle,
         'etapas_unicas': etapas_unicas,
