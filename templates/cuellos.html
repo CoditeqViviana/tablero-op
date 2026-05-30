@@ -94,6 +94,7 @@ tr:hover td{background:#fafafa}
         <div class="maq-row"><span class="maq-lbl">Mts planeados</span><span class="maq-val">{{ "{:,}".format(info.mts_total) }}</span></div>
         <div class="maq-row"><span class="maq-lbl">Capacidad/día</span><span class="maq-val">{{ "{:,}".format(info.capacidad_dia) }}</span></div>
         <div class="maq-row"><span class="maq-lbl">Órdenes</span><span class="maq-val">{{ info.ordenes|length }}</span></div>
+        <div class="maq-row"><span class="maq-lbl">Fecha prometida</span><span class="maq-val {% if info.es_cuello %}style="color:#dc2626"{% endif %}">{{ info.fecha_prometida }}</span></div>
         <div class="bar-wrap">
           <div class="bar-fill" style="width:{{ pct }}%;background:{% if es_cuello %}#dc2626{% elif pct > 60 %}#ca8a04{% else %}#16a34a{% endif %}"></div>
         </div>
