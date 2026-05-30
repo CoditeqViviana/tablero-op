@@ -72,10 +72,21 @@ def process_excel(file):
 
     incumplidas_df = df[df['fecha_entrega'] < today].copy()
     maquinas = sorted(df['maquina'].dropna().unique().tolist())
-    dias = pd.date_range(lun, vie, freq='B')
-    dias_str = [d.strftime('%Y-%m-%d') for d in dias]
-    dias_label = [d.strftime('%d/%m') for d in dias]
-    dias_nombre = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
+
+    # Incluir dias anteriores que tengan ordenes pendientes
+    dias_semana = pd.date_range(lun, vie, freq='B')
+    # Buscar dias previos con ordenes (desde 2 semanas atras)
+    dos_semanas_atras = lun - pd.Timedelta(weeks=2)
+    dias_prev_con_ordenes = sorted(set(
+        df[(df['fecha_entrega'] >= dos_semanas_atras) & (df['fecha_entrega'] < lun) & df['fecha_entrega'].notna()]
+        ['fecha_entrega'].dt.strftime('%Y-%m-%d').tolist()
+    ))
+    # Combinar: dias previos + semana actual
+    todos_dias = [pd.Timestamp(d) for d in dias_prev_con_ordenes] + list(dias_semana)
+    dias_str = [d.strftime('%Y-%m-%d') for d in todos_dias]
+    dias_label = [d.strftime('%d/%m') for d in todos_dias]
+    nombres_map = {0:'Lunes',1:'Martes',2:'Miércoles',3:'Jueves',4:'Viernes',5:'Sábado',6:'Domingo'}
+    dias_nombre = [nombres_map[d.weekday()] for d in todos_dias]
 
     pivot = {}
     totales_dia = {d: 0 for d in dias_str}
@@ -86,7 +97,8 @@ def process_excel(file):
             pivot[m][d] = n
             totales_dia[d] += n
 
-    total_semana = sum(totales_dia.values())
+    # Total solo de la semana actual
+    total_semana = sum(totales_dia.get(d.strftime('%Y-%m-%d'), 0) for d in dias_semana)
 
     if totales_dia:
         dia_max_key = max(totales_dia, key=totales_dia.get)
