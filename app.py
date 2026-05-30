@@ -26,12 +26,40 @@ def get_tipo(ref):
     if r.startswith('FD'): return 'Fondo'
     return 'Otro'
 
+# Amortiguadores por familia
+FAMILIAS_AMORT = {
+    'F1':2,'F2':2,'F3':8,'F4':1,'F5':3,'F6':3,'F7':4,'F8':3,
+    'F9':5,'F10':4,'F11':5,'F12':5,'F13':3,'F14':3,'F15':4,
+    'F16':3,'F17':8,'F18':8
+}
+
+def get_color_toc(fecha_creacion, fecha_entrega, today):
+    if pd.isna(fecha_entrega) or pd.isna(fecha_creacion):
+        return 'gris'
+    duracion = (fecha_entrega - fecha_creacion).days
+    if duracion <= 0:
+        return 'negro'
+    if today > fecha_entrega:
+        return 'negro'
+    consumido = (today - fecha_creacion).days
+    pct = consumido / duracion
+    if pct <= 0.50:
+        return 'azul'
+    elif pct <= 0.6667:
+        return 'verde'
+    elif pct <= 0.8333:
+        return 'amarillo'
+    else:
+        return 'rojo'
+
 def process_excel(file):
     df = pd.read_excel(file, header=0)
     df['fecha_entrega'] = pd.to_datetime(df.iloc[:, 9], errors='coerce')
+    df['fecha_creacion'] = pd.to_datetime(df.iloc[:, 20], format='%d-%m-%Y %I:%M %p', errors='coerce')
     df['maquina'] = df.iloc[:, 16].astype(str).str.split(',').str[0].str.strip()
     df['etapa'] = df.iloc[:, 7].astype(str).str.strip()
     df['mts'] = pd.to_numeric(df.iloc[:, 8], errors='coerce').fillna(0)
+    df['familia'] = df.iloc[:, 6].astype(str).str.strip()
 
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
@@ -102,6 +130,8 @@ def process_excel(file):
     for _, row in df.iterrows():
         fe = row['fecha_entrega']
         if pd.isna(fe): continue
+        fc = row['fecha_creacion']
+        color_toc = get_color_toc(fc, fe, today)
         todas_ordenes.append({
             'fecha': fe.strftime('%Y-%m-%d'),
             'op': str(row.iloc[3]),
@@ -111,6 +141,8 @@ def process_excel(file):
             'etapa': str(row.iloc[7]).strip(),
             'tipo': get_tipo(row.iloc[1]),
             'mts': float(row['mts']),
+            'familia': str(row['familia']),
+            'color_toc': color_toc,
         })
 
     # === CAPACIDAD RRC ===
