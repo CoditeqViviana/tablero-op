@@ -11,12 +11,12 @@ DATA_FILE = os.path.join(UPLOAD_FOLDER, 'latest.json')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 BOGOTA = pytz.timezone('America/Bogota')
 
-# Capacidad por maquina (metros por dia, 3 turnos)
-CAPACIDAD = {  # 7900 metros/turno x 3 turnos
-
-    'Nilpeter 1': 7900 * 3,  # 7900 mts/turno x 3 turnos = 23700 mts/dia
-    'Nilpeter 2': 7900 * 3,
-    'Kromia':     7900 * 3,
+# Capacidad: 22.75h * 50% eficiencia * 60min * 35m/min = 23,888 mts/dia
+CAP_DEFAULT = round(22.75 * 0.50 * 60 * 35)
+CAPACIDAD = {
+    'Nilpeter 1': CAP_DEFAULT,
+    'Nilpeter 2': CAP_DEFAULT,
+    'Kromia':     CAP_DEFAULT,
 }
 
 def get_tipo(ref):
@@ -206,6 +206,14 @@ def capacidad_view():
         with open(DATA_FILE, encoding='utf-8') as f:
             data = json.load(f)
     return render_template('capacidad.html', data=data)
+
+@app.route('/simulacion')
+def simulacion_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    return render_template('simulacion.html', data=data)
 
 @app.route('/upload', methods=['POST'])
 def upload():
