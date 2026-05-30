@@ -19,6 +19,35 @@ CAPACIDAD = {
     'Kromia':     CAP_DEFAULT,
 }
 
+# Capacidades diarias por máquina (metros/día)
+MAQUINAS_CAP = {
+    'NP1': 23100, 'NP2': 23100, 'Kromia': 23100,
+    'Rebobinadora 1': 16500, 'Rebobinadora 2': 16500,
+    'Rebobinadora 3': 16500, 'Rebobinadora (T) 4': 16500,
+    'Rebobinadora KM': 16500,
+    'Troqueladora 1': 16500, 'Troqueladora 2': 16500,
+    'Troqueladora 3': 16500, 'Troqueladora Aut 4': 16500,
+    'Troqueladora Plana': 16500, 'Plegadora': 16500,
+}
+TROT_NAMES = ['Troqueladora 1','Troqueladora 2','Troqueladora 3','Troqueladora Aut 4']
+
+def get_maquinas_reales(proceso):
+    """Devuelve lista de maquinas reales para una orden segun su proceso"""
+    maquinas = []
+    p = proceso.upper()
+    if 'NILPETER 1' in p: maquinas.append('NP1')
+    if 'NILPETER 2' in p: maquinas.append('NP2')
+    if 'KROMIA' in p: maquinas.append('Kromia')
+    if 'REBOBINADORA' in p and 'MOTEX' not in p:
+        if 'NILPETER 1' in p: maquinas.append('Rebobinadora 1')
+        elif 'NILPETER 2' in p: maquinas.append('Rebobinadora 2')
+        elif 'KROMIA' in p: maquinas.append('Rebobinadora KM')
+        elif 'TROQUELADORA' in p: maquinas.append('Rebobinadora (T) 4')
+        else: maquinas.append('Rebobinadora 3')
+    if 'TROQUELADORA PLANA' in p: maquinas.append('Troqueladora Plana')
+    if 'PLEGADORA' in p or 'EMPAQUE' in p: maquinas.append('Plegadora')
+    return maquinas
+
 def get_tipo(ref):
     r = str(ref).strip().upper()
     if r.startswith('BL'): return 'Blanca'
@@ -171,6 +200,52 @@ def process_excel(file):
         }
 
     # Fechas con al menos una orden en las 3 maquinas RRC
+    # === CUELLOS DE BOTELLA ===
+    carga_maq = {m: {'mts': 0, 'ordenes': []} for m in MAQUINAS_CAP}
+    trot_counter = [0]
+
+    for _, row in df.iterrows():
+        proceso = str(row.iloc[16]).strip()
+        mts_ord = float(row['mts'])
+        fe_ord = row['fecha_entrega']
+        op_ord = str(row.iloc[3])
+        cli_ord = str(row.iloc[0])
+        color_ord = get_color_toc(row['fecha_creacion'], fe_ord, today)
+        maquinas_ord = get_maquinas_reales(proceso)
+
+        # Troqueladoras rotativas: distribuir en 4
+        if 'TROQUELADORA ROTATIVA' in proceso.upper():
+            trot = TROT_NAMES[trot_counter[0] % 4]
+            trot_counter[0] += 1
+            maquinas_ord.append(trot)
+
+        for m in maquinas_ord:
+            if m in carga_maq:
+                carga_maq[m]['mts'] += mts_ord
+                carga_maq[m]['ordenes'].append({
+                    'op': op_ord,
+                    'cliente': cli_ord,
+                    'mts': mts_ord,
+                    'fecha': fe_ord.strftime('%d/%m/%Y') if pd.notna(fe_ord) else '',
+                    'color': color_ord,
+                    'tipo': get_tipo(row.iloc[1]),
+                })
+
+    cuellos = {}
+    for m, info in carga_maq.items():
+        cap = MAQUINAS_CAP[m]
+        mts_total = info['mts']
+        dias_trabajo = round(mts_total / cap, 1) if cap > 0 else 0
+        pct_cap = round(mts_total / (cap * 20) * 100, 1)  # vs 20 dias de referencia
+        cuellos[m] = {
+            'capacidad_dia': cap,
+            'mts_total': round(mts_total),
+            'dias_trabajo': dias_trabajo,
+            'pct_cap': pct_cap,
+            'ordenes': sorted(info['ordenes'], key=lambda x: x['fecha']),
+            'es_cuello': dias_trabajo > 10,
+        }
+
     fechas_rrc = sorted(set(
         f for m in maquinas_rrc
         for f in capacidad_data[m]['por_fecha'].keys()
@@ -247,6 +322,7 @@ def process_excel(file):
         'fechas_disponibles': fechas_disponibles,
         'todas_ordenes': todas_ordenes,
         'maquinas_rrc': maquinas_rrc,
+        'cuellos': cuellos,
         'capacidad_data': capacidad_data,
         'fechas_rrc': fechas_rrc,
         'rrc_semana': rrc_semana,
@@ -279,6 +355,22 @@ def capacidad_view():
         with open(DATA_FILE, encoding='utf-8') as f:
             data = json.load(f)
     return render_template('capacidad.html', data=data)
+
+@app.route('/tambor')
+def tambor_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    return render_template('tambor.html', data=data)
+
+@app.route('/cuellos')
+def cuellos_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    return render_template('cuellos.html', data=data)
 
 @app.route('/upload', methods=['POST'])
 def upload():
