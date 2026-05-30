@@ -224,6 +224,7 @@ function simular() {
   // Calcular simulación por orden
   datosSimulados = TODAS
     .filter(o => o.maquina === maqActual && o.fecha >= HOY)
+    .sort((a, b) => a.fecha.localeCompare(b.fecha))
     .map(o => {
       const dias = diasHasta(o.fecha);
       const minsProdOrden = o.mts / p.vel;
