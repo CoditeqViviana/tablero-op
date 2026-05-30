@@ -166,17 +166,17 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
   <table class="sim-tbl">
     <thead>
       <tr>
-        <th class="th-left" style="width:60px">OP</th>
-        <th class="th-left" style="width:160px">Cliente</th>
+        <th class="th-left" style="width:60px;cursor:pointer" data-col="op" data-label="OP" onclick="sortBy('op')"><span class="th-txt">OP</span></th>
+        <th class="th-left" style="width:160px;cursor:pointer" data-col="cliente" data-label="Cliente" onclick="sortBy('cliente')"><span class="th-txt">Cliente</span></th>
         <th style="width:60px">Tipo</th>
-        <th style="width:70px">F. Entrega</th>
-        <th style="width:55px">Días disp.</th>
-        <th style="width:65px">Mts lineales</th>
+        <th style="width:70px;cursor:pointer;color:#1d4ed8" data-col="fecha" data-label="F. Entrega" onclick="sortBy('fecha')"><span class="th-txt">F. Entrega ↑</span></th>
+        <th style="width:55px;cursor:pointer" data-col="dias" data-label="Días disp." onclick="sortBy('dias')"><span class="th-txt">Días disp.</span></th>
+        <th style="width:65px;cursor:pointer" data-col="mts" data-label="Mts lineales" onclick="sortBy('mts')"><span class="th-txt">Mts lineales</span></th>
         <th style="width:85px">T. Producción</th>
         <th style="width:85px">Días necesarios</th>
-        <th style="width:110px">Velocidad requerida</th>
+        <th style="width:110px;cursor:pointer" data-col="velReq" data-label="Vel. requerida" onclick="sortBy('velReq')"><span class="th-txt">Velocidad requerida</span></th>
         <th style="width:90px">Setup disponible</th>
-        <th style="width:70px">Estado</th>
+        <th style="width:70px;cursor:pointer" data-col="estado" data-label="Estado" onclick="sortBy('estado')"><span class="th-txt">Estado</span></th>
       </tr>
     </thead>
     <tbody id="sim-body"></tbody>
@@ -286,7 +286,13 @@ function renderTabla() {
   const fEstado = document.getElementById('f-estado').value;
   const fBuscar = document.getElementById('f-buscar').value.toLowerCase();
 
-  const filtrados = datosSimulados.filter(r =>
+  const sorted = [...datosSimulados].sort((a,b) => {
+    const va = getSortVal(a, sortCol);
+    const vb = getSortVal(b, sortCol);
+    if (typeof va === 'number') return sortAsc ? va-vb : vb-va;
+    return sortAsc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
+  });
+  const filtrados = sorted.filter(r =>
     (!fEstado || r.estado === fEstado) &&
     (!fBuscar || r.cliente.toLowerCase().includes(fBuscar) || r.op.includes(fBuscar))
   );
@@ -346,6 +352,24 @@ function cambiarMaq(maq, btn) {
   btn.classList.add('active');
   limpiarFiltros();
   simular();
+}
+
+let sortCol = 'fecha';
+let sortAsc = true;
+
+function sortBy(col) {
+  if (sortCol === col) { sortAsc = !sortAsc; }
+  else { sortCol = col; sortAsc = true; }
+  document.querySelectorAll('.sim-tbl th[data-col]').forEach(th => {
+    const arrow = th.dataset.col === col ? (sortAsc ? ' ↑' : ' ↓') : '';
+    th.querySelector('.th-txt').textContent = th.dataset.label + arrow;
+  });
+  renderTabla();
+}
+
+function getSortVal(r, col) {
+  const m = {op:r.op, cliente:r.cliente, fecha:r.fecha, dias:r.dias, mts:r.mts, velReq:r.velReq, estado:r.estado};
+  return m[col] !== undefined ? m[col] : r.fecha;
 }
 
 function limpiarFiltros() {
