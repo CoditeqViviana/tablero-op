@@ -1,452 +1,266 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Simulación de Ejecución — Tablero OP</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
-.hdr{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.hdr-left h1{font-size:16px;font-weight:700}
-.hdr-left p{font-size:12px;color:#6b7280;margin-top:2px}
-.hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.updated{font-size:11px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px}
-.updated strong{color:#374151}
-.nav-btn{font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer;color:#374151;text-decoration:none;display:inline-block}
-.nav-btn:hover{background:#f9fafb}
+from flask import Flask, render_template, request, jsonify
+import pandas as pd
+import json
+import os
+from datetime import datetime
+import pytz
 
-/* Parámetros */
-.params-bar{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:14px 20px;margin-bottom:14px}
-.params-title{font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:10px}
-.params-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;align-items:end}
-.param-item{display:flex;flex-direction:column;gap:4px}
-.param-lbl{font-size:11px;color:#6b7280;font-weight:600}
-.param-input{font-size:13px;padding:5px 8px;border:1.5px solid #93c5fd;border-radius:6px;background:#fff;width:100%;font-weight:600}
-.param-input:focus{outline:none;border-color:#1d4ed8}
-.param-resultado{background:#dbeafe;border-radius:8px;padding:6px 10px}
-.param-calc{font-size:14px;font-weight:700;color:#1d4ed8;display:block}
-.param-sub{font-size:10px;color:#3b82f6;display:block;margin-top:1px}
-.param-lbl-res{font-size:10px;color:#1e40af;font-weight:600;margin-bottom:2px}
-.param-btn{font-size:12px;padding:7px 14px;background:#1d4ed8;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:700;height:34px;width:100%}
-.param-btn:hover{background:#1e40af}
+app = Flask(__name__)
+UPLOAD_FOLDER = 'data'
+DATA_FILE = os.path.join(UPLOAD_FOLDER, 'latest.json')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+BOGOTA = pytz.timezone('America/Bogota')
 
-/* Tabs máquina */
-.maq-tabs{display:flex;gap:8px;padding:14px 16px;border-bottom:1px solid #f0f0f0;flex-wrap:wrap}
-.maq-tab{font-size:12px;padding:6px 16px;border-radius:20px;border:1.5px solid #d1d5db;cursor:pointer;font-weight:600;background:#fff;color:#6b7280}
-.maq-tab.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
-
-/* Panel */
-.panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
-.panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
-.panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
-
-/* Métricas */
-.metricas{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:14px 16px;border-bottom:1px solid #f0f0f0}
-.metrica{background:#f9fafb;border-radius:8px;padding:10px 14px;border:1px solid #e5e7eb;text-align:center}
-.metrica-lbl{font-size:11px;color:#6b7280;margin-bottom:4px}
-.metrica-val{font-size:20px;font-weight:700;line-height:1}
-.metrica-sub{font-size:10px;color:#9ca3af;margin-top:3px}
-
-/* Filtros */
-.filtros{padding:10px 16px;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;flex-wrap:wrap;align-items:center;background:#fafafa}
-.filtros label{font-size:12px;color:#6b7280;font-weight:600}
-.filtros select,.filtros input{font-size:12px;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;background:#fff;height:30px}
-.filtros input{width:180px}
-.btn-clear{font-size:12px;padding:4px 12px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;height:30px}
-.conteo{font-size:12px;color:#6b7280;padding:6px 16px;background:#fafafa;border-bottom:1px solid #f0f0f0}
-.conteo strong{color:#374151}
-
-/* Separador de día */
-.dia-sep{background:#f0f4ff;border-top:2px solid #bfdbfe;border-bottom:1px solid #bfdbfe}
-.dia-sep td{padding:6px 12px;font-size:11px;font-weight:700;color:#1d4ed8;text-align:left}
-
-/* Tabla */
-.tbl-wrap{overflow-x:auto}
-.sim-tbl{width:100%;border-collapse:collapse;font-size:12px}
-.sim-tbl th{padding:8px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px;cursor:pointer;user-select:none}
-.sim-tbl th:hover{background:#f0f4ff;color:#1d4ed8}
-.sim-tbl th.th-left{text-align:left}
-.sim-tbl td{padding:7px 10px;border-bottom:1px solid #f3f4f6;vertical-align:middle;text-align:center}
-.sim-tbl td.td-left{text-align:left}
-.sim-tbl tr:last-child td{border-bottom:none}
-.sim-tbl tr:hover:not(.dia-sep) td{background:#fafafa}
-
-/* Badges */
-.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
-.b-ok{background:#dcfce7;color:#15803d}
-.b-warn{background:#fef9c3;color:#854d0e}
-.b-over{background:#fee2e2;color:#b91c1c}
-.b-tipo-b{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
-.b-tipo-i{background:#dbeafe;color:#1d4ed8}
-.b-tipo-f{background:#dcfce7;color:#15803d}
-.b-tipo-o{background:#f3f4f6;color:#9ca3af}
-.turno-badge{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;font-size:11px;font-weight:700}
-.t1{background:#fef9c3;color:#854d0e}
-.t2{background:#dbeafe;color:#1d4ed8}
-.t3{background:#f3e8ff;color:#6b21a8}
-
-/* Barra velocidad */
-.vel-row{display:flex;align-items:center;gap:5px}
-.vel-bar{width:50px;height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden;flex-shrink:0}
-.vel-fill{height:100%;border-radius:3px}
-.empty{padding:40px;text-align:center;color:#9ca3af}
-</style>
-</head>
-<body>
-
-<div class="hdr">
-  <div class="hdr-left">
-    <h1>Simulación de ejecución por turnos</h1>
-    <p>Velocidad y setup sugerido por orden para cumplir fecha de entrega</p>
-  </div>
-  <div class="hdr-right">
-    {% if data %}<div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>{% endif %}
-    <a href="/capacidad" class="nav-btn">⚙️ Capacidad</a>
-    <a href="/" class="nav-btn">← Resumen</a>
-  </div>
-</div>
-
-{% if data %}
-
-<!-- Parámetros -->
-<div class="params-bar">
-  <div class="params-title">⚙️ Parámetros de simulación</div>
-  <div class="params-grid">
-    <div class="param-item">
-      <label class="param-lbl">Horas jornada/día</label>
-      <input type="number" class="param-input" id="p-horas" value="22.75" step="0.25" min="1" max="24" onchange="simular()">
-    </div>
-    <div class="param-item">
-      <label class="param-lbl">Eficiencia (%)</label>
-      <input type="number" class="param-input" id="p-efic" value="50" step="1" min="1" max="100" onchange="simular()">
-    </div>
-    <div class="param-item">
-      <label class="param-lbl">Velocidad nominal (m/min)</label>
-      <input type="number" class="param-input" id="p-vel" value="35" step="1" min="1" max="500" onchange="simular()">
-    </div>
-    <div class="param-item param-resultado">
-      <div class="param-lbl-res">Min producción/turno</div>
-      <span class="param-calc" id="r-mprod">227.5</span>
-      <span class="param-sub" id="r-hprod">= 3h 47min</span>
-    </div>
-    <div class="param-item param-resultado">
-      <div class="param-lbl-res">Min SETUP/turno</div>
-      <span class="param-calc" id="r-msetup">227.5</span>
-      <span class="param-sub" id="r-hsetup">= 3h 47min</span>
-    </div>
-    <div class="param-item param-resultado">
-      <div class="param-lbl-res">Capacidad/turno</div>
-      <span class="param-calc" id="r-cap">7,963 mts</span>
-      <span class="param-sub">a 35 m/min</span>
-    </div>
-    <div class="param-item">
-      <button class="param-btn" onclick="simular()">↻ Recalcular</button>
-    </div>
-  </div>
-</div>
-
-<!-- Tabs máquina -->
-<div class="panel">
-  <div class="maq-tabs">
-    <button class="maq-tab active" onclick="cambiarMaq('Nilpeter 1',this)">Nilpeter 1</button>
-    <button class="maq-tab" onclick="cambiarMaq('Nilpeter 2',this)">Nilpeter 2</button>
-    <button class="maq-tab" onclick="cambiarMaq('Kromia',this)">Kromia</button>
-  </div>
-
-  <!-- Métricas -->
-  <div class="metricas" id="metricas"></div>
-
-  <!-- Filtros -->
-  <div class="filtros">
-    <label>Filtrar:</label>
-    <select id="f-fecha" onchange="renderTabla()">
-      <option value="">Todas las fechas</option>
-    </select>
-    <select id="f-turno" onchange="renderTabla()">
-      <option value="">Todos los turnos</option>
-      <option value="1">Turno 1</option>
-      <option value="2">Turno 2</option>
-      <option value="3">Turno 3</option>
-    </select>
-    <input id="f-buscar" type="text" placeholder="Buscar cliente u OP..." oninput="renderTabla()">
-    <button class="btn-clear" onclick="limpiarFiltros()">✕ Limpiar</button>
-  </div>
-  <div class="conteo" id="conteo-txt">—</div>
-
-  <!-- Tabla -->
-  <div class="tbl-wrap">
-  <table class="sim-tbl">
-    <thead>
-      <tr>
-        <th style="width:30px">TOC</th>
-        <th class="th-left" style="width:60px" onclick="sortBy('op')"><span id="h-op">OP</span></th>
-        <th class="th-left" style="width:155px" onclick="sortBy('cliente')"><span id="h-cliente">Cliente</span></th>
-        <th style="width:45px">Tipo</th>
-        <th style="width:65px" onclick="sortBy('fecha')"><span id="h-fecha">F.Entrega ↑</span></th>
-        <th style="width:65px" onclick="sortBy('mts')"><span id="h-mts">Mts Lin.</span></th>
-        <th style="width:90px">T.Producción</th>
-        <th style="width:100px">Setup sugerido</th>
-        <th style="width:110px">Vel. sugerida</th>
-        <th style="width:50px">Turno</th>
-      </tr>
-    </thead>
-    <tbody id="sim-body"></tbody>
-  </table>
-  </div>
-</div>
-
-{% else %}
-<div class="panel"><div class="empty"><p>No hay datos.</p><small>Sube el Excel primero.</small></div></div>
-{% endif %}
-
-<script>
-const TODAS = {{ data.todas_ordenes | tojson }};
-const HOY = '{{ data.hoy }}';
-const NOMBRES_DIA = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
-let maqActual = 'Nilpeter 1';
-let datosSimulados = [];
-let sortCol = 'fecha';
-let sortAsc = true;
-
-function getParams() {
-  const horas = parseFloat(document.getElementById('p-horas').value) || 22.75;
-  const efic  = parseFloat(document.getElementById('p-efic').value) / 100 || 0.5;
-  const vel   = parseFloat(document.getElementById('p-vel').value) || 35;
-  const minsTurno     = horas * 60 / 3;
-  const minsProdTurno = minsTurno * efic;
-  const minsSetupTurno= minsTurno * (1 - efic);
-  const capTurno      = minsProdTurno * vel;
-  return { horas, efic, vel, minsTurno, minsProdTurno, minsSetupTurno, capTurno };
+# Capacidad: 22.75h * 50% eficiencia * 60min * 35m/min = 23,888 mts/dia
+CAP_DEFAULT = round(22.75 * 0.50 * 60 * 35)
+CAPACIDAD = {
+    'Nilpeter 1': CAP_DEFAULT,
+    'Nilpeter 2': CAP_DEFAULT,
+    'Kromia':     CAP_DEFAULT,
 }
 
-function tocBadge(color) {
-  const m = {
-    azul:    ['#dbeafe','#1d4ed8','●'],
-    verde:   ['#dcfce7','#15803d','●'],
-    amarillo:['#fef9c3','#854d0e','●'],
-    rojo:    ['#fee2e2','#b91c1c','●'],
-    negro:   ['#1f2937','#f3f4f6','●'],
-    gris:    ['#f3f4f6','#9ca3af','●'],
-  }[color] || ['#f3f4f6','#9ca3af','●'];
-  return `<span style="background:${m[0]};color:${m[1]};display:inline-block;width:22px;height:22px;border-radius:50%;text-align:center;line-height:22px;font-size:14px;font-weight:700" title="${color}">●</span>`;
+def get_tipo(ref):
+    r = str(ref).strip().upper()
+    if r.startswith('BL'): return 'Blanca'
+    if r.startswith('IC') or r.startswith('IS'): return 'Impresa'
+    if r.startswith('FD'): return 'Fondo'
+    return 'Otro'
+
+# Amortiguadores por familia
+FAMILIAS_AMORT = {
+    'F1':2,'F2':2,'F3':8,'F4':1,'F5':3,'F6':3,'F7':4,'F8':3,
+    'F9':5,'F10':4,'F11':5,'F12':5,'F13':3,'F14':3,'F15':4,
+    'F16':3,'F17':8,'F18':8
 }
 
-function fmtMin(m) {
-  const h = Math.floor(m / 60);
-  const min = Math.round(m % 60);
-  return h > 0 ? `${h}h ${min}min` : `${min} min`;
-}
+def get_color_toc(fecha_creacion, fecha_entrega, today):
+    if pd.isna(fecha_entrega) or pd.isna(fecha_creacion):
+        return 'gris'
+    duracion = (fecha_entrega - fecha_creacion).days
+    if duracion <= 0:
+        return 'negro'
+    if today > fecha_entrega:
+        return 'negro'
+    consumido = (today - fecha_creacion).days
+    pct = consumido / duracion
+    if pct <= 0.50:
+        return 'azul'
+    elif pct <= 0.6667:
+        return 'verde'
+    elif pct <= 0.8333:
+        return 'amarillo'
+    else:
+        return 'rojo'
 
-function diasHasta(fechaStr) {
-  if (!fechaStr) return 1;
-  const hoy = new Date(HOY + 'T00:00:00');
-  const fe  = new Date(fechaStr + 'T00:00:00');
-  return Math.max(1, Math.round((fe - hoy) / 86400000));
-}
+def process_excel(file):
+    df = pd.read_excel(file, header=0)
+    df['fecha_entrega'] = pd.to_datetime(df.iloc[:, 9], errors='coerce')
+    df['fecha_creacion'] = pd.to_datetime(df.iloc[:, 20], format='%d-%m-%Y %I:%M %p', errors='coerce')
+    df['maquina'] = df.iloc[:, 16].astype(str).str.split(',').str[0].str.strip()
+    df['etapa'] = df.iloc[:, 7].astype(str).str.strip()
+    df['mts'] = pd.to_numeric(df.iloc[:, 8], errors='coerce').fillna(0)
+    df['familia'] = df.iloc[:, 6].astype(str).str.strip()
 
-function turnoLabel(t) {
-  const cls = ['','t1','t2','t3'][t] || 't1';
-  const nombres = ['','T1 (6-14h)','T2 (14-22h)','T3 (22-6h)'];
-  return `<span class="turno-badge ${cls}">${t}</span><span style="font-size:10px;color:#6b7280;margin-left:3px">${nombres[t]||''}</span>`;
-}
+    now_bogota = datetime.now(BOGOTA)
+    today = pd.Timestamp(now_bogota.date())
 
-function tipoBadge(t) {
-  const m = {Blanca:'b-tipo-b BL',Impresa:'b-tipo-i IC',Fondo:'b-tipo-f FD'};
-  const s = m[t] || 'b-tipo-o —';
-  const [cls, lbl] = s.split(' ');
-  return `<span class="badge ${cls}">${lbl}</span>`;
-}
+    if today.weekday() < 5:
+        lun = today - pd.Timedelta(days=today.weekday())
+    else:
+        lun = today + pd.Timedelta(days=(7 - today.weekday()))
+    vie = lun + pd.Timedelta(days=4)
 
-function simular() {
-  const p = getParams();
+    incumplidas_df = df[df['fecha_entrega'] < today].copy()
+    maquinas = sorted(df['maquina'].dropna().unique().tolist())
+    dias = pd.date_range(lun, vie, freq='B')
+    dias_str = [d.strftime('%Y-%m-%d') for d in dias]
+    dias_label = [d.strftime('%d/%m') for d in dias]
+    dias_nombre = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes']
 
-  // Actualizar panel
-  document.getElementById('r-mprod').textContent  = p.minsProdTurno.toFixed(1);
-  document.getElementById('r-hprod').textContent  = '= ' + fmtMin(p.minsProdTurno);
-  document.getElementById('r-msetup').textContent = p.minsSetupTurno.toFixed(1);
-  document.getElementById('r-hsetup').textContent = '= ' + fmtMin(p.minsSetupTurno);
-  document.getElementById('r-cap').textContent    = Math.round(p.capTurno).toLocaleString('es-CO') + ' mts';
+    pivot = {}
+    totales_dia = {d: 0 for d in dias_str}
+    for m in maquinas:
+        pivot[m] = {}
+        for d in dias_str:
+            n = len(df[(df['maquina'] == m) & (df['fecha_entrega'].dt.strftime('%Y-%m-%d') == d)])
+            pivot[m][d] = n
+            totales_dia[d] += n
 
-  // Asignar turnos secuencialmente por fecha
-  // Simular llenado de turnos: cada turno tiene una capacidad máxima
-  const ordenesFecha = TODAS
-    .filter(o => o.maquina === maqActual && o.fecha >= HOY)
-    .sort((a,b) => a.fecha.localeCompare(b.fecha));
+    total_semana = sum(totales_dia.values())
 
-  // Agrupar por fecha y asignar turnos dentro de cada dia
-  const porFecha = {};
-  ordenesFecha.forEach(o => {
-    if (!porFecha[o.fecha]) porFecha[o.fecha] = [];
-    porFecha[o.fecha].push(o);
-  });
+    if totales_dia:
+        dia_max_key = max(totales_dia, key=totales_dia.get)
+        dia_max_idx = dias_str.index(dia_max_key) if dia_max_key in dias_str else 0
+        dia_max_nombre = dias_nombre[dia_max_idx] if dia_max_idx < len(dias_nombre) else ''
+        dia_max_val = totales_dia[dia_max_key]
+        dia_max_fecha = dias_label[dia_max_idx] if dia_max_idx < len(dias_label) else ''
+    else:
+        dia_max_nombre, dia_max_val, dia_max_fecha = '', 0, ''
 
-  datosSimulados = [];
+    # Incumplidas
+    inc_detalle = []
+    for _, row in incumplidas_df.iterrows():
+        fe = row['fecha_entrega']
+        tipo = get_tipo(row.iloc[1])
+        inc_detalle.append({
+            'cliente': str(row.iloc[0]),
+            'referencia': str(row.iloc[1]),
+            'op': str(row.iloc[3]),
+            'etapa': str(row.iloc[7]).strip(),
+            'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
+            'tipo': tipo,
+        })
+    inc_detalle.sort(key=lambda x: x['fecha_entrega'])
 
-  Object.entries(porFecha).forEach(([fecha, ords]) => {
-    // Asignar turno basado en acumulado de metros en el dia
-    let acumMts = 0;
-    ords.forEach(o => {
-      const dias = diasHasta(fecha);
-      // Turnos disponibles hasta la fecha (dias * 3)
-      const turnosDisp = dias * 3;
-      // Tiempo de produccion de la orden
-      const minsProdOrden = o.mts / p.vel;
-      // Velocidad requerida para 1 turno
-      const velSugerida = o.mts / p.minsProdTurno;
-      // Velocidad capped a nominal
-      const velFinal = Math.min(velSugerida, p.vel);
-      // Tiempo real de produccion con vel sugerida
-      const minsProduccion = velSugerida <= p.vel
-        ? minsProdOrden
-        : o.mts / p.vel;
-      // Setup sugerido: tiempo restante del turno despues de producir
-      const setupSugerido = 60; // 60 minutos fijos por orden
-      // Turno asignado dentro del dia (1,2,3) segun acumulado
-      let turno;
-      if (acumMts < p.capTurno) turno = 1;
-      else if (acumMts < p.capTurno * 2) turno = 2;
-      else turno = 3;
-      acumMts += o.mts;
+    etapas_dict = {}
+    for r in inc_detalle:
+        e = r['etapa']
+        if e not in etapas_dict:
+            etapas_dict[e] = {'total': 0, 'ordenes': []}
+        etapas_dict[e]['total'] += 1
+        etapas_dict[e]['ordenes'].append({'cliente': r['cliente'], 'tipo': r['tipo'], 'op': r['op']})
+    inc_etapas = dict(sorted(etapas_dict.items(), key=lambda x: x[1]['total'], reverse=True))
+    etapas_unicas = sorted(etapas_dict.keys())
 
-      // Estado
-      let estado, estadoClase;
-      if (velSugerida <= p.vel * 0.8) { estado='OK'; estadoClase='b-ok'; }
-      else if (velSugerida <= p.vel)   { estado='ALERTA'; estadoClase='b-warn'; }
-      else                              { estado='CRITICO'; estadoClase='b-over'; }
+    # Todas las fechas disponibles
+    fechas_disponibles = sorted(df['fecha_entrega'].dropna().dt.strftime('%Y-%m-%d').unique().tolist())
 
-      datosSimulados.push({
-        op: o.op, cliente: o.cliente, tipo: o.tipo,
-        fecha, mts: o.mts, dias,
-        minsProdOrden, velSugerida: Math.min(velSugerida, p.vel*1.5),
-        velFinal, minsProduccion, setupSugerido,
-        turno, estado, estadoClase,
-        velNominal: p.vel,
-      });
-    });
-  });
+    # Todas las ordenes para selector dinámico
+    todas_ordenes = []
+    for _, row in df.iterrows():
+        fe = row['fecha_entrega']
+        if pd.isna(fe): continue
+        fc = row['fecha_creacion']
+        color_toc = get_color_toc(fc, fe, today)
+        todas_ordenes.append({
+            'fecha': fe.strftime('%Y-%m-%d'),
+            'op': str(row.iloc[3]),
+            'cliente': str(row.iloc[0]),
+            'referencia': str(row.iloc[1]),
+            'maquina': str(row['maquina']),
+            'etapa': str(row.iloc[7]).strip(),
+            'tipo': get_tipo(row.iloc[1]),
+            'mts': float(row['mts']),
+            'familia': str(row['familia']),
+            'color_toc': color_toc,
+        })
 
-  // Actualizar filtro de fechas
-  const fechas = [...new Set(datosSimulados.map(r=>r.fecha))];
-  const fFecha = document.getElementById('f-fecha');
-  const valActual = fFecha.value;
-  fFecha.innerHTML = '<option value="">Todas las fechas</option>';
-  fechas.forEach(f => {
-    const d = new Date(f+'T12:00:00');
-    const opt = document.createElement('option');
-    opt.value = f;
-    opt.textContent = `${f.slice(8,10)}/${f.slice(5,7)} — ${NOMBRES_DIA[d.getDay()]}`;
-    if (f === valActual) opt.selected = true;
-    fFecha.appendChild(opt);
-  });
+    # === CAPACIDAD RRC ===
+    maquinas_rrc = ['Nilpeter 1', 'Nilpeter 2', 'Kromia']
 
-  // Métricas
-  const total = datosSimulados.length;
-  const ok = datosSimulados.filter(r=>r.estado==='OK').length;
-  const alerta = datosSimulados.filter(r=>r.estado==='ALERTA').length;
-  const critico = datosSimulados.filter(r=>r.estado==='CRITICO').length;
-  document.getElementById('metricas').innerHTML = `
-    <div class="metrica"><div class="metrica-lbl">Total órdenes</div><div class="metrica-val">${total}</div><div class="metrica-sub">${maqActual}</div></div>
-    <div class="metrica"><div class="metrica-lbl">✅ OK</div><div class="metrica-val" style="color:#15803d">${ok}</div><div class="metrica-sub">vel. ≤ 80% nominal</div></div>
-    <div class="metrica"><div class="metrica-lbl">⚠️ Alerta</div><div class="metrica-val" style="color:#ca8a04">${alerta}</div><div class="metrica-sub">vel. 80–100%</div></div>
-    <div class="metrica"><div class="metrica-lbl">🔴 Crítico</div><div class="metrica-val" style="color:#dc2626">${critico}</div><div class="metrica-sub">supera vel. nominal</div></div>`;
+    # Metros planeados por maquina por fecha
+    capacidad_data = {}
+    for m in maquinas_rrc:
+        grp = df[df['maquina'] == m]
+        por_fecha = grp.groupby(grp['fecha_entrega'].dt.strftime('%Y-%m-%d'))['mts'].sum()
+        capacidad_data[m] = {
+            'capacidad_dia': CAPACIDAD[m],
+            'por_fecha': {k: round(float(v), 1) for k, v in por_fecha.items()},
+        }
 
-  renderTabla();
-}
+    # Fechas con al menos una orden en las 3 maquinas RRC
+    fechas_rrc = sorted(set(
+        f for m in maquinas_rrc
+        for f in capacidad_data[m]['por_fecha'].keys()
+    ))
 
-function renderTabla() {
-  const fFecha = document.getElementById('f-fecha').value;
-  const fTurno = document.getElementById('f-turno').value;
-  const fBuscar= document.getElementById('f-buscar').value.toLowerCase();
+    # Resumen semanal RRC (semana actual)
+    rrc_semana = {}
+    for m in maquinas_rrc:
+        rrc_semana[m] = {
+            'capacidad': CAPACIDAD[m],
+            'por_dia': {}
+        }
+        for d in dias_str:
+            planeado = capacidad_data[m]['por_fecha'].get(d, 0)
+            cap = CAPACIDAD[m]
+            pct = round(planeado / cap * 100, 1) if cap > 0 else 0
+            rrc_semana[m]['por_dia'][d] = {
+                'planeado': planeado,
+                'capacidad': cap,
+                'pct': pct,
+                'estado': 'ok' if pct <= 100 else 'sobrecarga',
+            }
 
-  let filtrados = datosSimulados.filter(r =>
-    (!fFecha || r.fecha === fFecha) &&
-    (!fTurno || String(r.turno) === fTurno) &&
-    (!fBuscar || r.cliente.toLowerCase().includes(fBuscar) || r.op.includes(fBuscar))
-  );
-
-  // Ordenar
-  filtrados = [...filtrados].sort((a,b) => {
-    const va = {op:a.op,cliente:a.cliente,fecha:a.fecha,mts:a.mts}[sortCol] ?? a.fecha;
-    const vb = {op:b.op,cliente:b.cliente,fecha:b.fecha,mts:b.mts}[sortCol] ?? b.fecha;
-    if (typeof va==='number') return sortAsc ? va-vb : vb-va;
-    return sortAsc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
-  });
-
-  document.getElementById('conteo-txt').innerHTML =
-    'Mostrando <strong>' + filtrados.length + '</strong> de ' + datosSimulados.length + ' órdenes';
-
-  const velColor = e => e==='OK'?'#16a34a':e==='ALERTA'?'#ca8a04':'#dc2626';
-
-  let html = '';
-  let fechaAnterior = null;
-
-  filtrados.forEach(r => {
-    // Separador de día
-    if (r.fecha !== fechaAnterior && !fFecha) {
-      const d = new Date(r.fecha+'T12:00:00');
-      const nombreDia = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'][d.getDay()];
-      html += `<tr class="dia-sep"><td colspan="10">📅 ${nombreDia} ${r.fecha.slice(8,10)}/${r.fecha.slice(5,7)}/${r.fecha.slice(0,4)}</td></tr>`;
-      fechaAnterior = r.fecha;
+    result = {
+        'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
+        'hoy': today.strftime('%Y-%m-%d'),
+        'hoy_label': today.strftime('%d/%m/%Y'),
+        'hoy_nombre': ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo'][today.weekday()],
+        'lun': lun.strftime('%d/%m'),
+        'vie': vie.strftime('%d/%m'),
+        'dias_str': dias_str,
+        'dias_label': dias_label,
+        'dias_nombre': dias_nombre,
+        'maquinas': maquinas,
+        'pivot': pivot,
+        'totales_dia': totales_dia,
+        'total_semana': total_semana,
+        'total_ordenes': len(df),
+        'inc_total': len(incumplidas_df),
+        'inc_etapas': inc_etapas,
+        'inc_detalle': inc_detalle,
+        'etapas_unicas': etapas_unicas,
+        'dia_total': len(df[df['fecha_entrega'].dt.date == today.date()]),
+        'dia_por_maquina': {},
+        'fechas_disponibles': fechas_disponibles,
+        'todas_ordenes': todas_ordenes,
+        'maquinas_rrc': maquinas_rrc,
+        'capacidad_data': capacidad_data,
+        'fechas_rrc': fechas_rrc,
+        'rrc_semana': rrc_semana,
+        'dia_max_nombre': dia_max_nombre,
+        'dia_max_val': dia_max_val,
+        'dia_max_fecha': dia_max_fecha,
     }
+    return result
 
-    const velPct = Math.min(Math.round(r.velSugerida / r.velNominal * 100), 100);
+@app.route('/')
+def index():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    return render_template('index.html', data=data)
 
-    html += `<tr>
-      <td style="text-align:center">${tocBadge(r.color_toc||'gris')}</td>
-      <td class="td-left" style="font-weight:700;font-size:11px">${r.op}</td>
-      <td class="td-left" style="font-size:11px" title="${r.cliente}">${r.cliente}</td>
-      <td>${tipoBadge(r.tipo)}</td>
-      <td style="font-size:11px;font-weight:700;color:${r.dias<=1?'#dc2626':r.dias<=3?'#ca8a04':'#374151'}">${r.fecha.slice(8,10)}/${r.fecha.slice(5,7)}</td>
-      <td style="font-weight:600">${Math.round(r.mts).toLocaleString('es-CO')}</td>
-      <td>
-        <div style="font-weight:600;font-size:11px;color:#374151">${fmtMin(r.minsProdOrden)}</div>
-      </td>
-      <td>
-        <div style="font-weight:600;font-size:11px;color:#6b7280">${fmtMin(r.setupSugerido)}</div>
-        <div style="font-size:10px;color:#9ca3af">en el turno</div>
-      </td>
-      <td>
-        <div class="vel-row">
-          <span style="font-weight:700;font-size:12px;color:${velColor(r.estado)};min-width:52px">${r.velSugerida.toFixed(1)} m/min</span>
-          <div class="vel-bar"><div class="vel-fill" style="width:${velPct}%;background:${velColor(r.estado)}"></div></div>
-        </div>
-        <div style="font-size:10px;color:#9ca3af">${velPct}% de ${r.velNominal} m/min</div>
-      </td>
-      <td>${turnoLabel(r.turno)}</td>
-    </tr>`;
-  });
+@app.route('/dia')
+def dia_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    return render_template('dia.html', data=data)
 
-  document.getElementById('sim-body').innerHTML = html;
-}
+@app.route('/capacidad')
+def capacidad_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    return render_template('capacidad.html', data=data)
 
-function sortBy(col) {
-  if (sortCol===col) sortAsc=!sortAsc; else { sortCol=col; sortAsc=true; }
-  const heads = {op:'h-op',cliente:'h-cliente',fecha:'h-fecha',mts:'h-mts'};
-  const labels = {op:'OP',cliente:'Cliente',fecha:'F.Entrega',mts:'Mts Lin.'};
-  Object.entries(heads).forEach(([c,id]) => {
-    const arrow = (c===col) ? (sortAsc?' ↑':' ↓') : '';
-    document.getElementById(id).textContent = labels[c] + arrow;
-  });
-  renderTabla();
-}
+@app.route('/simulacion')
+def simulacion_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    return render_template('simulacion.html', data=data)
 
-function cambiarMaq(maq, btn) {
-  maqActual = maq;
-  document.querySelectorAll('.maq-tab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  limpiarFiltros();
-  simular();
-}
+@app.route('/upload', methods=['POST'])
+def upload():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No se recibio archivo'}), 400
+    file = request.files['file']
+    if not file.filename.endswith(('.xlsx', '.xls', '.xlsm')):
+        return jsonify({'error': 'Solo se aceptan archivos Excel'}), 400
+    try:
+        result = process_excel(file)
+        with open(DATA_FILE, 'w', encoding='utf-8') as f:
+            json.dump(result, f, ensure_ascii=False)
+        return jsonify({'ok': True, 'updated_at': result['updated_at']})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
-function limpiarFiltros() {
-  document.getElementById('f-fecha').value = '';
-  document.getElementById('f-turno').value = '';
-  document.getElementById('f-buscar').value = '';
-  renderTabla();
-}
-
-simular();
-</script>
-</body>
-</html>
+if __name__ == '__main__':
+    app.run(debug=False)
