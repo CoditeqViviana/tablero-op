@@ -204,14 +204,26 @@ def process_excel(file):
     REB_NAMES = ['Rebobinadora 1','Rebobinadora 2','Rebobinadora 3','Rebobinadora (T) 4','Rebobinadora KM']
     reb_counter = [0]
 
+    # Etapas válidas para impresoras (aún en proceso de impresión)
+    ETAPAS_IMPRESION = {'Preparacion', 'En cola impresión NP1', 'Impresion',
+                        'En cola impresion NP1', 'En cola impresión NP2', 'En cola impresión Kromia'}
+
     for _, row in df.iterrows():
         proceso = str(row.iloc[16]).strip()
+        etapa_ord = str(row.iloc[7]).strip()
         mts_ord = float(row['mts'])
         fe_ord = row['fecha_entrega']
         op_ord = str(row.iloc[3])
         cli_ord = str(row.iloc[0])
         color_ord = get_color_toc(row['fecha_creacion'], fe_ord, today)
         maquinas_ord = get_maquinas_reales(proceso)
+
+        # Si la orden ya salió de impresión, no contarla en las impresoras
+        p_upper = proceso.upper()
+        en_impresora = any(m in ['NP1','NP2','Kromia'] for m in maquinas_ord)
+        if en_impresora and etapa_ord not in ETAPAS_IMPRESION:
+            # Quitar impresoras de la lista, solo dejar rebobinadoras/troqueladoras
+            maquinas_ord = [m for m in maquinas_ord if m not in ['NP1','NP2','Kromia']]
 
         # Resolver marcadores de balanceo
         maquinas_final = []
@@ -311,17 +323,19 @@ def process_excel(file):
         fe = row['fecha_entrega']
         fc = row['fecha_creacion']
         color_toc = get_color_toc(fc, fe, today)
+        etapa_str = str(row.iloc[7]).strip()
         ord_data = {
             'op': str(row.iloc[3]),
             'cliente': str(row.iloc[0]),
             'referencia': str(row.iloc[1]),
             'maquina': str(row['maquina']),
-            'etapa': str(row.iloc[7]).strip(),
+            'etapa': etapa_str,
             'tipo': get_tipo(row.iloc[1]),
             'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
             'fecha_entrega_raw': fe.strftime('%Y-%m-%d') if pd.notna(fe) else '',
             'color_toc': color_toc,
             'mts': float(row['mts']),
+            'en_impresion': etapa_str in {'Preparacion','En cola impresión NP1','Impresion','En cola impresion NP1'},
         }
         todas_tambor.append(ord_data)
         if pd.notna(fe) and fe <= today + pd.Timedelta(days=7):
