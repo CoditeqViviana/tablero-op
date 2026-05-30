@@ -20,6 +20,8 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 .fecha-prom-bar{background:#fff;border-radius:10px;padding:12px 16px;margin-bottom:14px;border:1px solid #e0e0e0}
 .fecha-prom-title{font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:.4px;margin-bottom:10px}
 .fecha-prom-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+.fecha-prom-grid-top{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:8px}
+.fecha-prom-grid-bot{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
 .fp-card{background:#f9fafb;border-radius:8px;padding:8px 10px;border:1px solid #e5e7eb;text-align:center}
 .fp-card.cuello{background:#fef2f2;border-color:#fca5a5}
 .fp-maq{font-size:10px;color:#6b7280;margin-bottom:3px;font-weight:600}
@@ -91,13 +93,30 @@ tr:hover td{background:#fafafa}
 <!-- Fechas prometidas por máquina -->
 <div class="fecha-prom-bar">
   <div class="fecha-prom-title">📅 Fecha prometida de entrega por máquina (según carga actual)</div>
-  <div class="fecha-prom-grid">
-    {% for maq, info in data.cuellos.items() %}
+  {% set top = ['NP1','NP2','Kromia','Troqueladora 1','Troqueladora 2','Troqueladora 3','Troqueladora Aut 4'] %}
+  {% set bot = ['Rebobinadora 1','Rebobinadora 2','Rebobinadora 3','Rebobinadora (T) 4','Rebobinadora KM','Troqueladora Plana','Plegadora'] %}
+  <div class="fecha-prom-grid-top">
+    {% for maq in top %}
+    {% if maq in data.cuellos %}
+    {% set info = data.cuellos[maq] %}
     <div class="fp-card {% if info.es_cuello %}cuello{% endif %}">
       <div class="fp-maq">{{ maq }}</div>
       <div class="fp-fecha {% if info.es_cuello %}cuello{% else %}ok{% endif %}">{{ info.fecha_prometida }}</div>
       <div class="fp-dias">{{ info.dias_trabajo }}d trabajo</div>
     </div>
+    {% endif %}
+    {% endfor %}
+  </div>
+  <div class="fecha-prom-grid-bot">
+    {% for maq in bot %}
+    {% if maq in data.cuellos %}
+    {% set info = data.cuellos[maq] %}
+    <div class="fp-card {% if info.es_cuello %}cuello{% endif %}">
+      <div class="fp-maq">{{ maq }}</div>
+      <div class="fp-fecha {% if info.es_cuello %}cuello{% else %}ok{% endif %}">{{ info.fecha_prometida }}</div>
+      <div class="fp-dias">{{ info.dias_trabajo }}d trabajo</div>
+    </div>
+    {% endif %}
     {% endfor %}
   </div>
 </div>
