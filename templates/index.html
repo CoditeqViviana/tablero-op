@@ -214,7 +214,11 @@ tr:hover:not(.total-row) td{background:#fafafa}
       <tr>
         <th class="maq">Máquina</th>
         {% for i in range(data.dias_str|length) %}
+        {% if data.dias_str[i] < data.hoy %}
+        <th style="background:#fef3c7"><div class="dia-hdr"><span class="dia-nombre" style="color:#92400e">{{ data.dias_nombre[i] }}</span><span class="dia-fecha" style="color:#b45309">{{ data.dias_label[i] }}</span></div></th>
+        {% else %}
         <th><div class="dia-hdr"><span class="dia-nombre">{{ data.dias_nombre[i] }}</span><span class="dia-fecha">{{ data.dias_label[i] }}</span></div></th>
+        {% endif %}
         {% endfor %}
         <th>Total</th>
       </tr>
@@ -226,7 +230,11 @@ tr:hover:not(.total-row) td{background:#fafafa}
         {% set total_m = namespace(val=0) %}
         {% for d in data.dias_str %}
           {% set n = data.pivot[m][d] %}{% set total_m.val = total_m.val + n %}
-          {% if n == 0 %}<td class="zero">0</td>{% else %}<td>{{ n }}</td>{% endif %}
+          {% if data.dias_str[loop.index0] < data.hoy %}
+            {% if n == 0 %}<td class="zero" style="background:#fffbeb">0</td>{% else %}<td style="background:#fffbeb;color:#92400e;font-weight:700">{{ n }}</td>{% endif %}
+          {% else %}
+            {% if n == 0 %}<td class="zero">0</td>{% else %}<td>{{ n }}</td>{% endif %}
+          {% endif %}
         {% endfor %}
         <td class="total-col">{{ total_m.val }}</td>
       </tr>
