@@ -182,6 +182,26 @@ def process_excel(file):
                 'estado': 'ok' if pct <= 100 else 'sobrecarga',
             }
 
+    # Órdenes próximas: desde hoy hasta 7 días
+    limite_urgente = today + pd.Timedelta(days=7)
+    urgentes_df = df[(df['fecha_entrega'] >= today) & (df['fecha_entrega'] <= limite_urgente)].copy()
+    urgentes = []
+    for _, row in urgentes_df.sort_values('fecha_entrega').iterrows():
+        fe = row['fecha_entrega']
+        fc = row['fecha_creacion']
+        color_toc = get_color_toc(fc, fe, today)
+        urgentes.append({
+            'op': str(row.iloc[3]),
+            'cliente': str(row.iloc[0]),
+            'referencia': str(row.iloc[1]),
+            'maquina': str(row['maquina']),
+            'etapa': str(row.iloc[7]).strip(),
+            'tipo': get_tipo(row.iloc[1]),
+            'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
+            'fecha_entrega_raw': fe.strftime('%Y-%m-%d') if pd.notna(fe) else '',
+            'color_toc': color_toc,
+        })
+
     result = {
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
         'hoy': today.strftime('%Y-%m-%d'),
@@ -198,9 +218,18 @@ def process_excel(file):
         'total_semana': total_semana,
         'total_ordenes': len(df),
         'inc_total': len(incumplidas_df),
+        'urgentes': urgentes,
+        'urgentes_total': len(urgentes),
         'inc_etapas': inc_etapas,
         'inc_detalle': inc_detalle,
         'etapas_unicas': etapas_unicas,
+        'colores_resumen': {
+            'azul': sum(1 for o in todas_ordenes if o['color_toc']=='azul'),
+            'verde': sum(1 for o in todas_ordenes if o['color_toc']=='verde'),
+            'amarillo': sum(1 for o in todas_ordenes if o['color_toc']=='amarillo'),
+            'rojo': sum(1 for o in todas_ordenes if o['color_toc']=='rojo'),
+            'negro': sum(1 for o in todas_ordenes if o['color_toc']=='negro'),
+        },
         'dia_total': len(df[df['fecha_entrega'].dt.date == today.date()]),
         'dia_por_maquina': {},
         'fechas_disponibles': fechas_disponibles,
@@ -238,14 +267,6 @@ def capacidad_view():
         with open(DATA_FILE, encoding='utf-8') as f:
             data = json.load(f)
     return render_template('capacidad.html', data=data)
-
-@app.route('/simulacion')
-def simulacion_view():
-    data = None
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, encoding='utf-8') as f:
-            data = json.load(f)
-    return render_template('simulacion.html', data=data)
 
 @app.route('/upload', methods=['POST'])
 def upload():
