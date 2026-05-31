@@ -446,6 +446,15 @@ def wip_view():
             wip_data = json.load(f)
     return render_template('wip.html', data=data, wip=wip_data)
 
+@app.route('/pareto')
+def pareto_view():
+    wip_data = None
+    WIP_FILE = os.path.join(UPLOAD_FOLDER, 'wip.json')
+    if os.path.exists(WIP_FILE):
+        with open(WIP_FILE, encoding='utf-8') as f:
+            wip_data = json.load(f)
+    return render_template('pareto.html', wip=wip_data)
+
 @app.route('/upload_wip', methods=['POST'])
 def upload_wip():
     if 'file' not in request.files:
@@ -454,11 +463,18 @@ def upload_wip():
     if not file.filename.endswith(('.xlsx', '.xls', '.xlsm')):
         return jsonify({'error': 'Solo se aceptan archivos Excel'}), 400
     try:
-        df = pd.read_excel(file, header=1)
-        df.columns = ['area','ordenes_cola','tiempo_espera','acumulacion_alta','causa']
-        df = df.dropna(subset=['area'])
+        import pytz
+        from datetime import datetime
+        now = datetime.now(pytz.timezone('America/Bogota'))
+        file_bytes = file.read()
+        import io
+
+        # Hoja WIP
+        df_wip = pd.read_excel(io.BytesIO(file_bytes), sheet_name='Wip', header=1)
+        df_wip.columns = ['area','ordenes_cola','tiempo_espera','acumulacion_alta','causa']
+        df_wip = df_wip.dropna(subset=['area'])
         filas = []
-        for _, row in df.iterrows():
+        for _, row in df_wip.iterrows():
             filas.append({
                 'area': str(row['area']).strip(),
                 'ordenes_cola': int(row['ordenes_cola']) if pd.notna(row['ordenes_cola']) else 0,
@@ -466,14 +482,44 @@ def upload_wip():
                 'acumulacion_alta': str(row['acumulacion_alta']).strip() if pd.notna(row['acumulacion_alta']) else 'N',
                 'causa': str(row['causa']).strip() if pd.notna(row['causa']) else '',
             })
-        from datetime import datetime
-        import pytz
-        now = datetime.now(pytz.timezone('America/Bogota'))
+
+        # Hoja Pareto Problemas
+        df_pareto = pd.read_excel(io.BytesIO(file_bytes), sheet_name='Pareto Problemas', header=0)
+        col_problema = df_pareto.columns[-1]  # última columna = Problema
+        df_pareto = df_pareto.dropna(subset=[col_problema])
+        pareto_ordenes = []
+        for _, row in df_pareto.iterrows():
+            fe = row.iloc[9]  # Fecha de Entrega
+            pareto_ordenes.append({
+                'cliente': str(row.iloc[0]).strip(),
+                'referencia': str(row.iloc[1]).strip()[:60],
+                'op': str(row.iloc[3]).strip(),
+                'etiquetas': int(row.iloc[4]) if pd.notna(row.iloc[4]) else 0,
+                'mts': float(row.iloc[8]) if pd.notna(row.iloc[8]) else 0,
+                'fecha_entrega': pd.to_datetime(fe, errors='coerce').strftime('%d/%m/%Y') if pd.notna(fe) else '',
+                'proceso': str(row.iloc[17]).strip() if pd.notna(row.iloc[17]) else '',
+                'problema': str(row[col_problema]).strip(),
+            })
+
+        # Conteo Pareto por problema
+        from collections import Counter
+        conteo = Counter(o['problema'] for o in pareto_ordenes)
+        total_prob = sum(conteo.values())
+        pareto_items = []
+        acum = 0
+        for prob, cnt in sorted(conteo.items(), key=lambda x: -x[1]):
+            pct = round(cnt / total_prob * 100, 1) if total_prob > 0 else 0
+            acum += pct
+            pareto_items.append({'problema': prob, 'cantidad': cnt, 'pct': pct, 'acum': round(acum, 1)})
+
         wip_result = {
             'updated_at': now.strftime('%d/%m/%Y %H:%M'),
             'filas': filas,
             'total_ordenes': sum(f['ordenes_cola'] for f in filas),
             'areas_criticas': sum(1 for f in filas if f['acumulacion_alta'] == 'S'),
+            'pareto_items': pareto_items,
+            'pareto_ordenes': pareto_ordenes,
+            'pareto_total': len(pareto_ordenes),
         }
         WIP_FILE = os.path.join(UPLOAD_FOLDER, 'wip.json')
         with open(WIP_FILE, 'w', encoding='utf-8') as f:
