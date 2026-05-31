@@ -192,6 +192,7 @@ tr:hover td{background:#fafafa}
         <th class="th-left" style="width:70px">OP</th>
         <th class="th-left">Cliente</th>
         <th style="width:55px">Tipo</th>
+        <th style="width:110px">Estatus (Col H)</th>
         <th style="width:90px">Mts</th>
         <th style="width:100px">F. Entrega</th>
       </tr>
@@ -298,7 +299,11 @@ function recalcular() {
   const hoy = new Date(HOY + 'T00:00:00');
 
   // Calcular carga filtrada por horizonte
-  const maquinas = Object.keys(CUELLOS_RAW);
+  const MAQ_ORDER = ['NP1','NP2','Kromia',
+    'Troqueladora 1','Troqueladora 2','Troqueladora 3','Troqueladora Aut 4',
+    'Rebobinadora 1','Rebobinadora 2','Rebobinadora 3','Rebobinadora (T) 4','Rebobinadora KM',
+    'Troqueladora Plana','Plegadora'];
+  const maquinas = MAQ_ORDER.filter(m => CUELLOS_RAW[m] !== undefined);
   let nCuellos = 0;
   let rows = '';
 
@@ -378,6 +383,7 @@ function renderDet() {
       <td class="td-left" style="font-weight:700;font-size:11px">${o.op}</td>
       <td class="td-left" style="font-size:11px">${o.cliente}</td>
       <td><span class="badge" style="background:${t[0]};color:${t[1]}">${t[2]}</span></td>
+      <td style="font-size:11px;color:#6b7280">${o.etapa||'—'}</td>
       <td style="font-weight:600">${Math.round(o.mts||0).toLocaleString('es-CO')}</td>
       <td style="font-weight:700;color:#374151">${o.fecha}</td>
     </tr>`;
