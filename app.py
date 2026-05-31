@@ -469,8 +469,8 @@ def upload_wip():
         file_bytes = file.read()
         import io
 
-        # Hoja WIP
-        df_wip = pd.read_excel(io.BytesIO(file_bytes), sheet_name='Wip', header=1)
+        # Hoja WIP — header=0 tiene los encabezados en fila 1, datos desde fila 2
+        df_wip = pd.read_excel(io.BytesIO(file_bytes), sheet_name='Wip', header=0)
         df_wip.columns = ['area','ordenes_cola','tiempo_espera','acumulacion_alta','causa']
         df_wip = df_wip.dropna(subset=['area'])
         filas = []
