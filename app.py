@@ -433,6 +433,55 @@ def cuellos_view():
             data = json.load(f)
     return render_template('cuellos.html', data=data)
 
+@app.route('/wip')
+def wip_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    wip_data = None
+    WIP_FILE = os.path.join(UPLOAD_FOLDER, 'wip.json')
+    if os.path.exists(WIP_FILE):
+        with open(WIP_FILE, encoding='utf-8') as f:
+            wip_data = json.load(f)
+    return render_template('wip.html', data=data, wip=wip_data)
+
+@app.route('/upload_wip', methods=['POST'])
+def upload_wip():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No se recibio archivo'}), 400
+    file = request.files['file']
+    if not file.filename.endswith(('.xlsx', '.xls', '.xlsm')):
+        return jsonify({'error': 'Solo se aceptan archivos Excel'}), 400
+    try:
+        df = pd.read_excel(file, header=1)
+        df.columns = ['area','ordenes_cola','tiempo_espera','acumulacion_alta','causa']
+        df = df.dropna(subset=['area'])
+        filas = []
+        for _, row in df.iterrows():
+            filas.append({
+                'area': str(row['area']).strip(),
+                'ordenes_cola': int(row['ordenes_cola']) if pd.notna(row['ordenes_cola']) else 0,
+                'tiempo_espera': float(row['tiempo_espera']) if pd.notna(row['tiempo_espera']) else 0,
+                'acumulacion_alta': str(row['acumulacion_alta']).strip() if pd.notna(row['acumulacion_alta']) else 'N',
+                'causa': str(row['causa']).strip() if pd.notna(row['causa']) else '',
+            })
+        from datetime import datetime
+        import pytz
+        now = datetime.now(pytz.timezone('America/Bogota'))
+        wip_result = {
+            'updated_at': now.strftime('%d/%m/%Y %H:%M'),
+            'filas': filas,
+            'total_ordenes': sum(f['ordenes_cola'] for f in filas),
+            'areas_criticas': sum(1 for f in filas if f['acumulacion_alta'] == 'S'),
+        }
+        WIP_FILE = os.path.join(UPLOAD_FOLDER, 'wip.json')
+        with open(WIP_FILE, 'w', encoding='utf-8') as f:
+            json.dump(wip_result, f, ensure_ascii=False)
+        return jsonify({'ok': True, 'updated_at': wip_result['updated_at']})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/upload', methods=['POST'])
 def upload():
     if 'file' not in request.files:
