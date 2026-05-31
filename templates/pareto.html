@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pareto de Problemas — Tablero OP</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
+.hdr{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.hdr-left h1{font-size:16px;font-weight:700}
+.hdr-left p{font-size:12px;color:#6b7280;margin-top:2px}
+.hdr-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.updated{font-size:11px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px}
+.updated strong{color:#374151}
+.nav-btn{font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none;display:inline-block}
+.nav-btn:hover{background:#f9fafb}
+.upload-btn{font-size:12px;padding:6px 14px;background:#1d4ed8;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:600}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0}
+.kl{font-size:11px;color:#6b7280;margin-bottom:5px}
+.kv{font-size:26px;font-weight:700;line-height:1}
+.ks{font-size:11px;color:#9ca3af;margin-top:3px}
+
+/* Gráfico Pareto */
+.chart-panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;padding:20px}
+.chart-title{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px;margin-bottom:16px}
+.pareto-chart{display:flex;align-items:flex-end;gap:0;height:220px;border-left:2px solid #e5e7eb;border-bottom:2px solid #e5e7eb;padding:0 0 0 8px;position:relative;overflow:visible}
+.pareto-bar-wrap{display:flex;flex-direction:column;align-items:center;flex:1;height:100%;justify-content:flex-end;position:relative;cursor:pointer}
+.pareto-bar{width:70%;border-radius:4px 4px 0 0;transition:opacity .2s;position:relative;min-width:40px}
+.pareto-bar:hover{opacity:.85}
+.pareto-bar-lbl{font-size:10px;font-weight:700;color:#374151;text-align:center;margin-bottom:4px}
+.pareto-bar-pct{font-size:11px;font-weight:700;color:#fff;position:absolute;top:4px;left:50%;transform:translateX(-50%);white-space:nowrap}
+.pareto-x-lbl{font-size:10px;color:#6b7280;text-align:center;margin-top:6px;max-width:120px;line-height:1.3;word-break:break-word}
+/* Línea acumulada */
+.acum-line{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none}
+
+/* Tabla pareto */
+.panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
+.panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
+.filtro-problema{font-size:12px;padding:4px 10px;border:1px solid #d1d5db;border-radius:6px;background:#fff;height:30px}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{padding:8px 12px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+th.th-left{text-align:left}
+td{padding:8px 12px;border-bottom:1px solid #f3f4f6;vertical-align:middle;text-align:center}
+td.td-left{text-align:left}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafafa}
+.badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
+.bar-h-wrap{height:10px;background:#e5e7eb;border-radius:5px;overflow:hidden;display:inline-block;vertical-align:middle;margin-left:6px}
+.bar-h-fill{height:100%;border-radius:5px}
+.problema-badge{font-size:11px;padding:3px 10px;border-radius:8px;font-weight:600;display:inline-block}
+.empty{padding:40px;text-align:center;color:#9ca3af}
+.conteo{font-size:12px;color:#6b7280;padding:6px 16px;background:#fafafa;border-bottom:1px solid #f0f0f0}
+.conteo strong{color:#374151}
+
+/* Modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center}
+.modal-bg.show{display:flex}
+.modal{background:#fff;border-radius:12px;padding:24px;width:380px;max-width:90vw}
+.modal h3{font-size:15px;font-weight:700;margin-bottom:16px}
+.file-zone{border:2px dashed #d1d5db;border-radius:8px;padding:24px;text-align:center;cursor:pointer;margin-bottom:14px}
+.file-zone:hover,.file-zone.over{border-color:#1d4ed8;background:#eff6ff}
+.file-zone p{font-size:13px;color:#6b7280;margin-bottom:4px}
+.file-zone small{font-size:11px;color:#9ca3af}
+.file-zone input{display:none}
+.modal-btns{display:flex;gap:8px;justify-content:flex-end}
+.btn-cancel{font-size:13px;padding:7px 16px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer}
+.btn-upload{font-size:13px;padding:7px 16px;border:none;border-radius:7px;background:#1d4ed8;color:#fff;cursor:pointer;font-weight:600}
+.btn-upload:disabled{background:#93c5fd;cursor:not-allowed}
+.msg{font-size:12px;margin-bottom:10px;padding:8px 12px;border-radius:6px;display:none}
+.msg.ok{background:#dcfce7;color:#15803d;display:block}
+.msg.err{background:#fee2e2;color:#b91c1c;display:block}
+.spinner{display:none;font-size:12px;color:#6b7280;text-align:center;padding:8px 0}
+.spinner.show{display:block}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>📊 Pareto de Problemas</h1>
+    <p>Análisis de causas de incumplimiento por frecuencia — 80/20</p>
+  </div>
+  <div class="hdr-right">
+    {% if wip %}<div class="updated">Actualizado: <strong>{{ wip.updated_at }}</strong></div>{% endif %}
+    <a href="/wip" class="nav-btn">📋 WIP</a>
+    <a href="/tambor" class="nav-btn">⚠️ Tambor</a>
+    <a href="/" class="nav-btn">← Resumen</a>
+    <button class="upload-btn" onclick="openModal()">↑ Subir WIP</button>
+  </div>
+</div>
+
+{% if wip and wip.pareto_items %}
+
+<!-- KPIs -->
+<div class="kpis">
+  <div class="kpi" style="border-left:4px solid #dc2626">
+    <div class="kl">Total órdenes con problema</div>
+    <div class="kv" style="color:#dc2626">{{ wip.pareto_total }}</div>
+    <div class="ks">órdenes registradas</div>
+  </div>
+  <div class="kpi" style="border-left:4px solid #ca8a04">
+    <div class="kl">Tipos de problemas</div>
+    <div class="kv" style="color:#ca8a04">{{ wip.pareto_items|length }}</div>
+    <div class="ks">causas identificadas</div>
+  </div>
+  <div class="kpi" style="border-left:4px solid #1d4ed8">
+    <div class="kl">Problema principal</div>
+    <div class="kv" style="font-size:14px;color:#1d4ed8">{{ wip.pareto_items[0].problema[:35] }}{% if wip.pareto_items[0].problema|length > 35 %}...{% endif %}</div>
+    <div class="ks">{{ wip.pareto_items[0].cantidad }} órdenes · {{ wip.pareto_items[0].pct }}% del total</div>
+  </div>
+</div>
+
+<!-- Gráfico Pareto -->
+<div class="chart-panel">
+  <div class="chart-title">Diagrama de Pareto — Frecuencia por tipo de problema</div>
+
+  <!-- Barras -->
+  <div style="display:flex;gap:12px;align-items:flex-end;margin-bottom:20px">
+    {% set max_cant = wip.pareto_items[0].cantidad %}
+    {% set colores = ['#1d4ed8','#dc2626','#ca8a04','#15803d','#7c3aed','#0891b2','#c2410c'] %}
+    {% for item in wip.pareto_items %}
+    {% set col = colores[loop.index0 % colores|length] %}
+    {% set pct_altura = (item.cantidad / max_cant * 180)|round %}
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center">
+      <div style="font-size:12px;font-weight:700;color:{{ col }};margin-bottom:4px">{{ item.cantidad }}</div>
+      <div style="width:100%;height:{{ pct_altura }}px;background:{{ col }};border-radius:6px 6px 0 0;position:relative;min-height:20px">
+        <div style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;color:{{ col }};white-space:nowrap">{{ item.pct }}%</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Leyenda -->
+  <div style="margin-top:24px;border-top:1px solid #f0f0f0;padding-top:14px">
+    {% set colores = ['#1d4ed8','#dc2626','#ca8a04','#15803d','#7c3aed','#0891b2','#c2410c'] %}
+    {% for item in wip.pareto_items %}
+    {% set col = colores[loop.index0 % colores|length] %}
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+      <div style="width:14px;height:14px;border-radius:3px;background:{{ col }};flex-shrink:0"></div>
+      <div style="flex:1;font-size:12px;color:#374151;font-weight:600">{{ item.problema }}</div>
+      <div style="font-size:12px;font-weight:700;color:{{ col }};min-width:30px;text-align:right">{{ item.cantidad }}</div>
+      <div style="font-size:11px;color:#6b7280;min-width:40px;text-align:right">{{ item.pct }}%</div>
+      <div style="font-size:11px;color:#9ca3af;min-width:60px;text-align:right">acum. {{ item.acum }}%</div>
+      <div style="width:120px">
+        <div style="height:6px;background:#e5e7eb;border-radius:3px;overflow:hidden">
+          <div style="height:100%;width:{{ item.pct }}%;background:{{ col }};border-radius:3px"></div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <!-- Regla 80/20 -->
+  {% set items_80 = wip.pareto_items|selectattr('acum','le',80)|list %}
+  <div style="margin-top:12px;padding:10px 14px;background:#eff6ff;border-radius:8px;font-size:12px;color:#1d4ed8">
+    <strong>Regla 80/20:</strong>
+    {% if items_80|length > 0 %}
+      Los primeros <strong>{{ items_80|length }}</strong> problema{{ 's' if items_80|length > 1 else '' }}
+      representan el <strong>{{ items_80[-1].acum }}%</strong> de los incumplimientos.
+      Enfocarse en resolverlos tiene el mayor impacto.
+    {% else %}
+      Con un solo tipo de problema ya se supera el 80% de los incumplimientos.
+    {% endif %}
+  </div>
+</div>
+
+<!-- Tabla resumen por problema -->
+<div class="panel">
+  <div class="panel-hdr">
+    <h2>Resumen por tipo de problema</h2>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:40px">#</th>
+        <th class="th-left">Problema</th>
+        <th style="width:90px">Cantidad</th>
+        <th style="width:80px">% del total</th>
+        <th style="width:100px">% Acumulado</th>
+        <th style="width:150px">Frecuencia</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% set colores = ['#1d4ed8','#dc2626','#ca8a04','#15803d','#7c3aed','#0891b2','#c2410c'] %}
+      {% for item in wip.pareto_items %}
+      {% set col = colores[loop.index0 % colores|length] %}
+      <tr>
+        <td style="font-weight:700;color:#6b7280">{{ loop.index }}</td>
+        <td class="td-left">
+          <span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:{{ col }};margin-right:6px;vertical-align:middle"></span>
+          <span style="font-weight:600">{{ item.problema }}</span>
+        </td>
+        <td style="font-weight:700;font-size:14px;color:{{ col }}">{{ item.cantidad }}</td>
+        <td style="font-weight:700;color:{{ col }}">{{ item.pct }}%</td>
+        <td>
+          <span style="font-size:12px;font-weight:600;color:{% if item.acum <= 80 %}#dc2626{% else %}#6b7280{% endif %}">
+            {{ item.acum }}%
+          </span>
+          {% if item.acum <= 80 %}<span style="font-size:10px;color:#dc2626;margin-left:4px">← 80%</span>{% endif %}
+        </td>
+        <td>
+          <div style="height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden">
+            <div style="height:100%;width:{{ item.pct }}%;background:{{ col }};border-radius:4px"></div>
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<!-- Detalle ordenes por problema -->
+<div class="panel">
+  <div class="panel-hdr">
+    <h2>Detalle de órdenes por problema</h2>
+    <select class="filtro-problema" id="f-problema" onchange="filtrarOrdenes()">
+      <option value="">Todos los problemas</option>
+      {% for item in wip.pareto_items %}
+      <option value="{{ item.problema }}">{{ item.problema }} ({{ item.cantidad }})</option>
+      {% endfor %}
+    </select>
+  </div>
+  <div class="conteo" id="conteo-ord">Mostrando <strong>{{ wip.pareto_total }}</strong> órdenes</div>
+  <div style="overflow-x:auto">
+  <table>
+    <thead>
+      <tr>
+        <th class="th-left" style="width:180px">Cliente</th>
+        <th style="width:75px">OP</th>
+        <th style="width:90px">Mts</th>
+        <th style="width:100px">F.Entrega</th>
+        <th class="th-left" style="width:160px">Proceso</th>
+        <th class="th-left">Problema</th>
+      </tr>
+    </thead>
+    <tbody id="det-ord">
+      {% for o in wip.pareto_ordenes %}
+      <tr data-problema="{{ o.problema }}">
+        <td class="td-left" style="font-size:11px">{{ o.cliente }}</td>
+        <td style="font-weight:700">{{ o.op }}</td>
+        <td style="font-weight:600">{{ "{:,.0f}".format(o.mts) }}</td>
+        <td style="font-weight:700;color:#dc2626">{{ o.fecha_entrega }}</td>
+        <td class="td-left" style="font-size:11px;color:#6b7280">{{ o.proceso[:30] }}</td>
+        <td class="td-left">
+          <span style="font-size:11px;font-weight:600;color:#374151">{{ o.problema }}</span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  </div>
+</div>
+
+{% else %}
+<div class="panel">
+  <div class="empty">
+    <p style="margin-bottom:8px">No hay datos de Pareto cargados aún.</p>
+    <small>Haz clic en "Subir WIP" y selecciona el archivo con la hoja "Pareto Problemas".</small>
+  </div>
+</div>
+{% endif %}
+
+<!-- Modal -->
+<div class="modal-bg" id="modal-bg" onclick="closeOnBg(event)">
+  <div class="modal">
+    <h3>Actualizar WIP y Pareto</h3>
+    <div class="msg" id="msg"></div>
+    <div class="file-zone" id="drop-zone" onclick="document.getElementById('file-input').click()"
+         ondragover="event.preventDefault();this.classList.add('over')"
+         ondragleave="this.classList.remove('over')"
+         ondrop="handleDrop(event)">
+      <p id="file-name">Haz clic o arrastra el Excel WIP aquí</p>
+      <small>Debe contener hojas "Wip" y "Pareto Problemas"</small>
+      <input type="file" id="file-input" accept=".xlsx,.xls,.xlsm" onchange="handleFile(this.files[0])">
+    </div>
+    <div class="spinner" id="spinner">Procesando archivo...</div>
+    <div class="modal-btns">
+      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-upload" id="btn-upload" disabled onclick="doUpload()">Actualizar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function filtrarOrdenes() {
+  const f = document.getElementById('f-problema').value;
+  const filas = document.querySelectorAll('#det-ord tr');
+  let vis = 0;
+  filas.forEach(r => {
+    const ok = !f || r.dataset.problema === f;
+    r.style.display = ok ? '' : 'none';
+    if (ok) vis++;
+  });
+  document.getElementById('conteo-ord').innerHTML = 'Mostrando <strong>' + vis + '</strong> órdenes';
+}
+
+let selectedFile = null;
+function openModal(){document.getElementById('modal-bg').classList.add('show');document.getElementById('msg').className='msg';document.getElementById('file-name').textContent='Haz clic o arrastra el Excel WIP aquí';document.getElementById('btn-upload').disabled=true;document.getElementById('spinner').className='spinner';selectedFile=null;}
+function closeModal(){document.getElementById('modal-bg').classList.remove('show');}
+function closeOnBg(e){if(e.target===document.getElementById('modal-bg'))closeModal();}
+function handleFile(f){if(!f)return;selectedFile=f;document.getElementById('file-name').textContent=f.name;document.getElementById('btn-upload').disabled=false;document.getElementById('msg').className='msg';}
+function handleDrop(e){e.preventDefault();document.getElementById('drop-zone').classList.remove('over');handleFile(e.dataTransfer.files[0]);}
+function doUpload(){
+  if(!selectedFile)return;
+  const fd=new FormData();fd.append('file',selectedFile);
+  document.getElementById('btn-upload').disabled=true;
+  document.getElementById('spinner').className='spinner show';
+  fetch('/upload_wip',{method:'POST',body:fd})
+    .then(r=>r.json())
+    .then(d=>{
+      document.getElementById('spinner').className='spinner';
+      if(d.ok){document.getElementById('msg').className='msg ok';document.getElementById('msg').textContent='Datos actualizados. Recargando...';setTimeout(()=>location.reload(),1500);}
+      else{document.getElementById('msg').className='msg err';document.getElementById('msg').textContent='Error: '+(d.error||'intente de nuevo');document.getElementById('btn-upload').disabled=false;}
+    })
+    .catch(()=>{document.getElementById('spinner').className='spinner';document.getElementById('msg').className='msg err';document.getElementById('msg').textContent='Error de conexión.';document.getElementById('btn-upload').disabled=false;});
+}
+</script>
+</body>
+</html>
