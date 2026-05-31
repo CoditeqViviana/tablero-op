@@ -283,7 +283,12 @@ function filtrar() {
     const c = COLOR_MAP[r.color_toc] || COLOR_MAP.gris;
     const t = TIPO_MAP[r.tipo] || ['#f3f4f6','#9ca3af','—'];
     return `<tr>
-      <td><span class="badge" style="background:${c[0]};color:${c[1]}">${c[2]}</span></td>
+      <td>
+        <div style="text-align:center">
+          <span class="badge" style="background:${c[0]};color:${c[1]};display:block;margin-bottom:2px">${c[2]}</span>
+          <span style="font-size:10px;font-weight:700;color:${c[1]}">${r.pct_buffer}%</span>
+        </div>
+      </td>
       <td class="td-left" style="font-weight:700;font-size:11px">${r.op}</td>
       <td class="td-left" style="font-size:11px">${r.cliente}</td>
       <td><span class="badge" style="background:${t[0]};color:${t[1]}">${t[2]}</span></td>
