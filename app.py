@@ -250,6 +250,7 @@ def process_excel(file):
                     'fecha': fe_ord.strftime('%d/%m/%Y') if pd.notna(fe_ord) else '',
                     'color': color_ord,
                     'tipo': get_tipo(row.iloc[1]),
+                    'etapa': etapa_ord,
                 })
 
     def sumar_dias_lab(fecha_ini, dias):
