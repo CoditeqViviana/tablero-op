@@ -325,6 +325,12 @@ def process_excel(file):
         fc = row['fecha_creacion']
         color_toc = get_color_toc(fc, fe, today)
         etapa_str = str(row.iloc[7]).strip()
+        fc_ord = row['fecha_creacion']
+        if pd.notna(fe) and pd.notna(fc_ord):
+            dur = (fe - fc_ord).days
+            pct_buf = round((today - fc_ord).days / dur * 100, 1) if dur > 0 else 0
+        else:
+            pct_buf = 0
         ord_data = {
             'op': str(row.iloc[3]),
             'cliente': str(row.iloc[0]),
@@ -336,6 +342,7 @@ def process_excel(file):
             'fecha_entrega_raw': fe.strftime('%Y-%m-%d') if pd.notna(fe) else '',
             'color_toc': color_toc,
             'mts': float(row['mts']),
+            'pct_buffer': pct_buf,
             'en_impresion': etapa_str in {'Preparacion','En cola impresión NP1','Impresion','En cola impresion NP1'},
         }
         todas_tambor.append(ord_data)
