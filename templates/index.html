@@ -1,351 +1,980 @@
-<!DOCTYPE html>
+{%- raw -%}<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tablero OP — Centro de Proceso</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>ProducciónOps — Tablero en Vivo</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
-.hdr{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.hdr-left h1{font-size:16px;font-weight:700}
-.hdr-left p{font-size:12px;color:#6b7280;margin-top:2px}
-.hdr-right{display:flex;align-items:center;gap:10px}
-.updated{font-size:11px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px}
-.updated strong{color:#374151}
-.upload-btn{font-size:12px;padding:6px 14px;background:#1d4ed8;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:600}
-.upload-btn:hover{background:#1e40af}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}
-.kpi{background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0}
-.kl{font-size:11px;color:#6b7280;margin-bottom:5px}
-.kv{font-size:26px;font-weight:700;line-height:1}
-.ks{font-size:11px;color:#9ca3af;margin-top:3px}
-.panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
-.panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0}
-.panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{padding:9px 14px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-bottom:1px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
-th.maq{text-align:left}
-td{padding:9px 14px;text-align:center;border-bottom:1px solid #f3f4f6;color:#1a1a1a}
-td.maq-cell{text-align:left;font-weight:600;font-size:12px}
-td.zero{color:#d1d5db}
-td.total-col{font-weight:700;background:#eff6ff;color:#1d4ed8}
-tr.total-row td{background:#f9fafb;font-weight:700;border-top:1px solid #e5e7eb}
-tr.total-row td.total-col{background:#dbeafe}
-tr:last-child td{border-bottom:none}
-tr:hover:not(.total-row) td{background:#fafafa}
-/* Tarjetas estatus */
-.etapa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:14px 16px}
-.etapa-card{background:#fef2f2;border:1px solid #fecaca;border-radius:10px;overflow:hidden}
-.etapa-hdr{padding:10px 14px;border-bottom:1px solid #fecaca;display:flex;justify-content:space-between;align-items:center}
-.etapa-nombre{font-size:12px;font-weight:700;color:#991b1b}
-.etapa-total{font-size:20px;font-weight:700;color:#dc2626;line-height:1}
-.etapa-lista{padding:8px 0}
-.etapa-row{display:flex;align-items:center;justify-content:space-between;padding:5px 14px;gap:8px;border-bottom:1px solid #fef2f2}
-.etapa-row:last-child{border-bottom:none}
-.etapa-cliente{font-size:11px;color:#374151;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.badge{display:inline-block;font-size:10px;padding:1px 7px;border-radius:8px;font-weight:700;white-space:nowrap;flex-shrink:0}
-.b-blanca{background:#f1f5f9;color:#475569;border:1px solid #cbd5e1}
-.b-impresa{background:#dbeafe;color:#1d4ed8}
-.b-fondo{background:#dcfce7;color:#15803d}
-.b-otro{background:#f3f4f6;color:#9ca3af}
-.b-etapa{background:#dbeafe;color:#1e40af}
-/* Filtros */
-.filtros{padding:10px 16px;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.filtros label{font-size:12px;color:#6b7280;font-weight:600}
-.filtros select,.filtros input{font-size:12px;padding:4px 8px;border:1px solid #d1d5db;border-radius:6px;background:#fff;height:30px}
-.filtros input{width:180px}
-.btn-limpiar{font-size:12px;padding:4px 12px;border:1px solid #d1d5db;border-radius:6px;background:#fff;cursor:pointer;height:30px}
-.conteo{font-size:12px;color:#6b7280;padding:6px 16px;background:#fafafa;border-bottom:1px solid #f0f0f0}
-.conteo strong{color:#374151}
-/* Tabla detalle */
-.det-wrap{overflow-x:auto}
-.det-tbl{width:100%;border-collapse:collapse;font-size:12px}
-.det-tbl th{padding:8px 12px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-bottom:2px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
-.det-tbl td{padding:8px 12px;border-bottom:1px solid #f3f4f6;vertical-align:middle;text-align:center}
-.det-tbl td.td-left{text-align:left}
-.det-tbl tr:last-child td{border-bottom:none}
-.det-tbl tr:hover td{background:#fafafa}
-.fecha-vencida{color:#dc2626;font-weight:700}
-.op-num{font-weight:700;color:#374151}
-.empty{padding:40px;text-align:center;color:#9ca3af}
-/* Modal */
-.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center}
-.modal-bg.show{display:flex}
-.modal{background:#fff;border-radius:12px;padding:24px;width:360px;max-width:90vw}
-.modal h3{font-size:15px;font-weight:700;margin-bottom:16px}
-.file-zone{border:2px dashed #d1d5db;border-radius:8px;padding:24px;text-align:center;cursor:pointer;margin-bottom:14px}
-.file-zone:hover,.file-zone.over{border-color:#1d4ed8;background:#eff6ff}
-.file-zone p{font-size:13px;color:#6b7280;margin-bottom:4px}
-.file-zone small{font-size:11px;color:#9ca3af}
-.file-zone input{display:none}
-.modal-btns{display:flex;gap:8px;justify-content:flex-end}
-.btn-cancel{font-size:13px;padding:7px 16px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer}
-.btn-upload{font-size:13px;padding:7px 16px;border:none;border-radius:7px;background:#1d4ed8;color:#fff;cursor:pointer;font-weight:600}
-.btn-upload:disabled{background:#93c5fd;cursor:not-allowed}
-.msg{font-size:12px;margin-bottom:10px;padding:8px 12px;border-radius:6px;display:none}
-.msg.ok{background:#dcfce7;color:#15803d;display:block}
-.msg.err{background:#fee2e2;color:#b91c1c;display:block}
-.spinner{display:none;font-size:12px;color:#6b7280;text-align:center;padding:8px 0}
-.spinner.show{display:block}
-.dia-hdr{display:flex;flex-direction:column;align-items:center;gap:2px}
-.dia-nombre{font-size:11px;font-weight:700}
-.dia-fecha{font-size:10px;color:#9ca3af;font-weight:400}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans','Segoe UI',sans-serif;background:#0F172A;color:#E2E8F0;min-height:100vh}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#1E293B}::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}
+@media print{body{background:#fff;color:#000}#hdr{display:none!important}#status-bar{display:none!important}#main{padding:0}.card{border:1px solid #ccc;background:#fff}.badge{border:1px solid #ccc}#view-dashboard{display:none!important}#view-maquinas{display:none!important}#view-ordenes{display:none!important}#view-nueva{display:none!important}#view-detalle{display:none!important}#view-reporte{display:block!important}}
+.card{background:#1E293B;border:1px solid #334155;border-radius:12px}
+.btn{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-weight:600;transition:all .15s;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
+.pulse{animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.fade-in{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+/* header */
+#hdr{background:#0F172A;border-bottom:1px solid #1E293B;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:100}
+#hdr-left{display:flex;align-items:center;gap:12px}
+#logo{width:32px;height:32px;background:linear-gradient(135deg,#3B82F6,#8B5CF6);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+#live-dot{width:8px;height:8px;background:#10B981;border-radius:50%;margin-left:4px}
+#nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.nav-btn{padding:6px 16px;font-size:13px;border:1px solid #334155;background:#1E293B;color:#94A3B8;border-radius:8px;cursor:pointer;font-family:inherit;font-weight:600;transition:all .15s}
+.nav-btn.active,.nav-btn:hover{background:#3B82F6;color:#fff;border-color:#3B82F6}
+/* status bar */
+#status-bar{padding:6px 24px;font-size:12px;display:flex;justify-content:space-between;align-items:center;display:none}
+/* main */
+#main{padding:24px;max-width:1500px;margin:0 auto}
+/* kpis */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.kpi{padding:20px}
+.kpi-label{font-size:12px;color:#64748B;margin-bottom:6px;font-weight:500}
+.kpi-val{font-size:32px;font-weight:700;font-family:'JetBrains Mono',monospace;line-height:1}
+.kpi-sub{font-size:11px;color:#475569;margin-top:6px}
+.kpi-icon{font-size:28px}
+/* order cards */
+.orders-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(390px,1fr));gap:16px}
+.order-card{padding:20px;transition:border-color .3s}
+.order-card.alert{border-color:#EF444440!important}
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:12px}
+.tbl th{padding:10px 14px;text-align:left;color:#64748B;font-weight:600;white-space:nowrap;border-bottom:1px solid #334155}
+.tbl td{padding:10px 14px;border-bottom:1px solid #1E293B}
+.tbl tr:nth-child(even) td{background:#0F172A10}
+/* machine view */
+.maq-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(400px,1fr));gap:20px}
+/* forms */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+label.lbl{display:block;font-size:12px;color:#64748B;margin-bottom:6px;font-weight:500}
+input.inp,select.inp,textarea.inp{width:100%;padding:10px 12px;background:#0F172A;border:1px solid #334155;border-radius:8px;color:#E2E8F0;font-size:14px;font-family:inherit;outline:none}
+input.inp:focus,select.inp:focus{border-color:#3B82F6}
+/* detail grid */
+.detail-grid{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.state-times{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.time-box{background:#0F172A;border-radius:10px;padding:12px;border:1px solid #1E293B;transition:border-color .3s}
+.time-box.live{border-color:var(--c)!important}
+/* accion alerts */
+.accion{font-size:12px;padding:7px 10px;border-radius:7px;margin-bottom:5px}
+.accion.critica{background:#7F1D1D20;color:#FCA5A5;border:1px solid #7F1D1D60}
+.accion.advertencia{background:#78350F20;color:#FCD34D;border:1px solid #78350F60}
+.accion.ok{background:#052E1620;color:#6EE7B7;border:1px solid #052E1660}
+/* history */
+.hist-item{display:flex;gap:12px;align-items:flex-start;margin-bottom:10px}
+.hist-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+/* velocity bar */
+.vel-bar-wrap{background:#0F172A;border-radius:8px;height:10px;overflow:hidden;margin:8px 0}
+.vel-bar{height:100%;border-radius:8px;transition:width .4s}
+/* empty state */
+.empty-state{padding:60px;text-align:center}
+/* modal overlay */
+#modal{position:fixed;inset:0;background:#00000080;z-index:200;display:none;align-items:center;justify-content:center}
+#modal.open{display:flex}
+#modal-box{background:#1E293B;border:1px solid #334155;border-radius:16px;padding:28px;width:90%;max-width:680px;max-height:90vh;overflow-y:auto}
+/* responsive */
+@media(max-width:700px){.kpi-grid{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr}.detail-grid{grid-template-columns:1fr}.state-times{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 
-<div class="hdr">
-  <div class="hdr-left">
-    <h1>Tablero Órdenes de Producción</h1>
-    <p>Panorama semanal por centro de proceso</p>
+<!-- HEADER -->
+<div id="hdr">
+  <div id="hdr-left">
+    <div id="logo">🏭</div>
+    <span style="font-weight:700;font-size:16px;letter-spacing:-.3px">ProducciónOps</span>
+    <div id="live-dot" class="pulse"></div>
+    <span id="conn-label" style="font-size:11px;color:#64748B;margin-left:4px">conectando…</span>
   </div>
-  <div class="hdr-right">
-    {% if data %}<div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>{% endif %}
-    <a href="/dia" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">📅 Detalle del día</a>
-    <a href="/tambor" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">⚠️ Tambor General</a>
-    <a href="/wip" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">📋 WIP</a>
-    <a href="/pareto" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">📊 Pareto</a>
-    <a href="/cuellos" style="font-size:12px;padding:6px 14px;border:1px solid #fca5a5;border-radius:7px;background:#fff;color:#b91c1c;text-decoration:none">🔴 Cuellos de Botella</a>
-    <a href="/capacidad" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">⚙️ Capacidad RRC</a>
-    <button class="upload-btn" onclick="openModal()">&#8593; Subir Excel</button>
-  </div>
-</div>
-
-{% if data %}
-
-<div class="kpis">
-  <div class="kpi" style="border-left:4px solid #dc2626">
-    <div class="kl">Órdenes incumplidas</div>
-    <div class="kv" style="color:#dc2626">{{ data.inc_total }}</div>
-    <div class="ks">con fecha de entrega vencida</div>
-  </div>
-  <div class="kpi" style="border-left:4px solid #1d4ed8">
-    <div class="kl">Órdenes esta semana</div>
-    <div class="kv" style="color:#1d4ed8">{{ data.total_semana }}</div>
-    <div class="ks">{{ data.lun }} — {{ data.vie }}</div>
-  </div>
-  <div class="kpi" style="border-left:4px solid #374151">
-    <div class="kl">Máquinas activas</div>
-    <div class="kv">{{ data.maquinas|length }}</div>
-    <div class="ks">centros de proceso</div>
-  </div>
-  <div class="kpi" style="border-left:4px solid #ca8a04">
-    <div class="kl">Día de mayor carga</div>
-    <div class="kv" style="color:#ca8a04">{{ data.dia_max_val }}</div>
-    <div class="ks">{{ data.dia_max_nombre }} {{ data.dia_max_fecha }}</div>
+  <div id="nav">
+    <input type="file" id="excel-input" accept=".xlsx,.xls" style="display:none"/>
+    <button class="btn" onclick="document.getElementById('excel-input').click()" style="padding:6px 14px;font-size:12px;background:#064E3B;color:#6EE7B7;border:1px solid #065F46">📂 Subir Excel</button>
+    <button class="nav-btn active" id="nav-dashboard" onclick="setView('dashboard')">📊 Dashboard</button>
+    <button class="nav-btn" id="nav-maquinas"  onclick="setView('maquinas')">🖥️ Por Máquina</button>
+    <button class="nav-btn" id="nav-ordenes"   onclick="setView('ordenes')">📋 Órdenes</button>
+    <button class="nav-btn" id="nav-nueva"     onclick="setView('nueva')">＋ Nueva Orden</button>
+    <button class="nav-btn" id="nav-reporte"   onclick="setView('reporte')">📈 Reporte</button>
   </div>
 </div>
 
-<!-- Panorama semanal -->
-<!-- Resumen TOC — orden: negro, rojo, amarillo, verde, azul -->
-<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px">
-  <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px">
-    <span style="background:#1f2937;color:#f3f4f6;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700">Negro</span>
-    <div><div style="font-size:11px;color:#6b7280">Vencidas</div><div style="font-size:22px;font-weight:700;color:#1f2937">{{ data.colores_resumen.negro }}</div></div>
-  </div>
-  <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px">
-    <span style="background:#fee2e2;color:#b91c1c;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700">Rojo</span>
-    <div><div style="font-size:11px;color:#6b7280">83–100%</div><div style="font-size:22px;font-weight:700;color:#b91c1c">{{ data.colores_resumen.rojo }}</div></div>
-  </div>
-  <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px">
-    <span style="background:#fef9c3;color:#854d0e;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700">Amarillo</span>
-    <div><div style="font-size:11px;color:#6b7280">67–83%</div><div style="font-size:22px;font-weight:700;color:#854d0e">{{ data.colores_resumen.amarillo }}</div></div>
-  </div>
-  <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px">
-    <span style="background:#dcfce7;color:#15803d;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700">Verde</span>
-    <div><div style="font-size:11px;color:#6b7280">50–67%</div><div style="font-size:22px;font-weight:700;color:#15803d">{{ data.colores_resumen.verde }}</div></div>
-  </div>
-  <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px">
-    <span style="background:#dbeafe;color:#1d4ed8;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700">Azul</span>
-    <div><div style="font-size:11px;color:#6b7280">Buffer &lt; 50%</div><div style="font-size:22px;font-weight:700;color:#1d4ed8">{{ data.colores_resumen.azul }}</div></div>
-  </div>
+<!-- STATUS BAR -->
+<div id="status-bar"></div>
+
+<!-- MAIN -->
+<div id="main">
+  <div id="view-dashboard" class="fade-in"></div>
+  <div id="view-maquinas"  class="fade-in" style="display:none"></div>
+  <div id="view-ordenes"   class="fade-in" style="display:none"></div>
+  <div id="view-nueva"     class="fade-in" style="display:none"></div>
+  <div id="view-detalle"   class="fade-in" style="display:none"></div>
+  <div id="view-reporte"   class="fade-in" style="display:none"></div>
 </div>
 
-
-<div class="panel">
-  <div class="panel-hdr"><h2>Panorama semanal — órdenes a entregar por máquina</h2></div>
-  <div style="overflow-x:auto">
-  <table>
-    <thead>
-      <tr>
-        <th class="maq">Máquina</th>
-        {% for i in range(data.dias_str|length) %}
-        {% if data.dias_str[i] < data.hoy %}
-        <th style="background:#fef3c7"><div class="dia-hdr"><span class="dia-nombre" style="color:#92400e">{{ data.dias_nombre[i] }}</span><span class="dia-fecha" style="color:#b45309">{{ data.dias_label[i] }}</span></div></th>
-        {% else %}
-        <th><div class="dia-hdr"><span class="dia-nombre">{{ data.dias_nombre[i] }}</span><span class="dia-fecha">{{ data.dias_label[i] }}</span></div></th>
-        {% endif %}
-        {% endfor %}
-        <th>Total</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for m in data.maquinas %}
-      <tr>
-        <td class="maq-cell">{{ m }}</td>
-        {% set total_m = namespace(val=0) %}
-        {% for d in data.dias_str %}
-          {% set n = data.pivot[m][d] %}{% set total_m.val = total_m.val + n %}
-          {% if data.dias_str[loop.index0] < data.hoy %}
-            {% if n == 0 %}<td class="zero" style="background:#fffbeb">0</td>{% else %}<td style="background:#fffbeb;color:#92400e;font-weight:700">{{ n }}</td>{% endif %}
-          {% else %}
-            {% if n == 0 %}<td class="zero">0</td>{% else %}<td>{{ n }}</td>{% endif %}
-          {% endif %}
-        {% endfor %}
-        <td class="total-col">{{ total_m.val }}</td>
-      </tr>
-      {% endfor %}
-      <tr class="total-row">
-        <td class="maq-cell">Total día</td>
-        {% for d in data.dias_str %}<td class="total-col">{{ data.totales_dia[d] }}</td>{% endfor %}
-        <td class="total-col">{{ data.total_semana }}</td>
-      </tr>
-    </tbody>
-  </table>
-  </div>
-</div>
-
-<!-- Incumplidas por estatus con clientes -->
-<div class="panel">
-  <div class="panel-hdr"><h2>Órdenes incumplidas por estatus — {{ data.inc_total }} órdenes</h2></div>
-  <div class="etapa-grid">
-    {% for etapa, info in data.inc_etapas.items() %}
-    <div class="etapa-card">
-      <div class="etapa-hdr">
-        <span class="etapa-nombre">{{ etapa }}</span>
-        <span class="etapa-total">{{ info.total }}</span>
-      </div>
-      <div class="etapa-lista">
-        {% for o in info.ordenes %}
-        <div class="etapa-row">
-          <span class="etapa-cliente" title="{{ o.cliente }}">{{ o.cliente }}</span>
-          {% if o.tipo == 'Blanca' %}<span class="badge b-blanca">Blanca</span>
-          {% elif o.tipo == 'Impresa' %}<span class="badge b-impresa">Impresa</span>
-          {% elif o.tipo == 'Fondo' %}<span class="badge b-fondo">Fondo</span>
-          {% else %}<span class="badge b-otro">Otro</span>{% endif %}
-        </div>
-        {% endfor %}
-      </div>
+<!-- MODAL (ajuste) -->
+<div id="modal">
+  <div id="modal-box">
+    <h3 style="font-size:16px;font-weight:700;margin-bottom:16px;color:#F1F5F9">📋 Registrar Novedad</h3>
+    <div style="margin-bottom:12px">
+      <label class="lbl">Descripción de Novedad *</label>
+      <textarea id="aj-desc" class="inp" rows="3" placeholder="Describe la novedad presentada…"></textarea>
     </div>
-    {% endfor %}
-  </div>
-</div>
-
-<!-- Detalle con filtros -->
-<div class="panel">
-  <div class="panel-hdr"><h2>Detalle órdenes incumplidas</h2></div>
-  <div class="filtros">
-    <label>Filtrar:</label>
-    <select id="f-tipo" onchange="aplicarFiltros()">
-      <option value="">Todos los tipos</option>
-      <option value="Blanca">Blanca</option>
-      <option value="Impresa">Impresa</option>
-      <option value="Fondo">Fondo</option>
-      <option value="Otro">Otro</option>
-    </select>
-    <select id="f-etapa" onchange="aplicarFiltros()">
-      <option value="">Todos los estatus</option>
-      {% for e in data.etapas_unicas %}<option value="{{ e }}">{{ e }}</option>{% endfor %}
-    </select>
-    <input id="f-buscar" type="text" placeholder="Buscar cliente u OP..." oninput="aplicarFiltros()">
-    <button class="btn-limpiar" onclick="limpiarFiltros()">✕ Limpiar</button>
-  </div>
-  <div class="conteo" id="conteo-txt">Mostrando <strong>{{ data.inc_total }}</strong> órdenes</div>
-  <div class="det-wrap">
-  <table class="det-tbl">
-    <thead>
-      <tr>
-        <th style="width:170px">Cliente</th>
-        <th>Referencia</th>
-        <th style="width:85px">OP</th>
-        <th style="width:90px">Tipo</th>
-        <th style="width:130px">Estatus</th>
-        <th style="width:110px">Fecha entrega</th>
-      </tr>
-    </thead>
-    <tbody id="det-body">
-      {% for r in data.inc_detalle %}
-      <tr data-tipo="{{ r.tipo }}" data-etapa="{{ r.etapa }}" data-cliente="{{ r.cliente|lower }}" data-op="{{ r.op }}">
-        <td class="td-left">{{ r.cliente }}</td>
-        <td class="td-left" style="font-size:11px;color:#6b7280">{{ r.referencia }}</td>
-        <td class="op-num">{{ r.op }}</td>
-        <td>
-          {% if r.tipo == 'Blanca' %}<span class="badge b-blanca">Blanca</span>
-          {% elif r.tipo == 'Impresa' %}<span class="badge b-impresa">Impresa</span>
-          {% elif r.tipo == 'Fondo' %}<span class="badge b-fondo">Fondo</span>
-          {% else %}<span class="badge b-otro">{{ r.tipo }}</span>{% endif %}
-        </td>
-        <td><span class="badge b-etapa">{{ r.etapa }}</span></td>
-        <td class="fecha-vencida">{{ r.fecha_entrega }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-  </div>
-</div>
-
-
-{% else %}
-<div class="panel"><div class="empty"><p>No hay datos cargados aún.</p><small>Haz clic en "Subir Excel" para cargar el primer archivo.</small></div></div>
-{% endif %}
-
-<!-- Modal -->
-<div class="modal-bg" id="modal-bg" onclick="closeOnBg(event)">
-  <div class="modal">
-    <h3>Actualizar datos</h3>
-    <div class="msg" id="msg"></div>
-    <div class="file-zone" id="drop-zone" onclick="document.getElementById('file-input').click()"
-         ondragover="event.preventDefault();this.classList.add('over')"
-         ondragleave="this.classList.remove('over')"
-         ondrop="handleDrop(event)">
-      <p id="file-name">Haz clic o arrastra el Excel aquí</p>
-      <small>.xlsx o .xls</small>
-      <input type="file" id="file-input" accept=".xlsx,.xls" onchange="handleFile(this.files[0])">
+    <div style="margin-bottom:12px">
+      <label class="lbl">Persona que Reporta</label>
+      <select id="aj-reporta" class="inp">
+        <option value="">— Seleccionar —</option>
+      </select>
     </div>
-    <div class="spinner" id="spinner">Procesando archivo...</div>
-    <div class="modal-btns">
-      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
-      <button class="btn-upload" id="btn-upload" disabled onclick="doUpload()">Actualizar</button>
+    <div style="margin-bottom:20px">
+      <label class="lbl">Duración (minutos)</label>
+      <input id="aj-dur" class="inp" type="number" placeholder="0"/>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn" onclick="submitAjuste()" style="flex:1;padding:11px;background:#4C1D95;color:#fff;font-size:14px">💾 Guardar Novedad</button>
+      <button class="btn" onclick="closeModal()" style="padding:11px 18px;background:#0F172A;color:#94A3B8;border:1px solid #334155;font-size:13px">Cancelar</button>
     </div>
   </div>
 </div>
 
 <script>
-function aplicarFiltros(){
-  const tipo=document.getElementById('f-tipo').value;
-  const etapa=document.getElementById('f-etapa').value;
-  const buscar=document.getElementById('f-buscar').value.toLowerCase();
-  const filas=document.querySelectorAll('#det-body tr');
-  let vis=0;
-  filas.forEach(f=>{
-    const ok=(!tipo||f.dataset.tipo===tipo)&&(!etapa||f.dataset.etapa===etapa)&&(!buscar||f.dataset.cliente.includes(buscar)||f.dataset.op.includes(buscar));
-    f.style.display=ok?'':'none';
-    if(ok)vis++;
+// ═══════════════════════════════════════════════
+// CONFIG
+// ═══════════════════════════════════════════════
+const MACHINES = ["Nilpeter 1","Nilpeter 2","Kromia"];
+const STATUS_CONFIG = {
+  setup:      {label:"Montaje",    color:"#F59E0B",dark:"#92400E",bg:"#FEF3C7",icon:"🔩"},
+  ajuste:     {label:"Ajuste",     color:"#8B5CF6",dark:"#4C1D95",bg:"#F5F3FF",icon:"🔧"},
+  produccion: {label:"Producción", color:"#3B82F6",dark:"#1D4ED8",bg:"#EFF6FF",icon:"🏭"},
+  finalizada: {label:"Finalizada", color:"#10B981",dark:"#064E3B",bg:"#ECFDF5",icon:"✅"},
+};
+const STATUS_KEYS = ["setup","ajuste","produccion","finalizada"];
+
+const OPERARIOS = [
+  "ALONSO RIOS MANUEL RICARDO",
+  "ANAYA BASTIDAS WILMER",
+  "CHAGUALA YAIMA LEONEL ANDRES",
+  "CORTES PINZON ULISES",
+  "CUELLAR MORA ANDRES ANTONIO",
+  "DONCEL AVENDAÑO ERNESTO",
+  "LIZARAZO MONTOYA OSCAR JAVIER",
+  "MEDINA CORTES SANTIAGO ADOLFO",
+  "MOLINA CHITIVA JULIAN DAVID",
+  "MOYANO URREA HARLY YINNET",
+  "OSORIO MUÑOZ GLEIBER JOSE",
+  "RAMIREZ TORRES BETTY LISSETTE",
+  "SERRANO CARDENAS ANDRES FABIAN",
+];
+
+function getTurno(isoDate) {
+  // T1: 06:00-14:00, T2: 14:00-22:00, T3: 22:00-06:00 — Colombia GMT-5
+  const d = new Date(isoDate);
+  const h = new Date(d.getTime() - 5*60*60*1000).getUTCHours();
+  if (h >= 6  && h < 14) return "T1 (06:00-14:00)";
+  if (h >= 14 && h < 22) return "T2 (14:00-22:00)";
+  return "T3 (22:00-06:00)";
+}
+function getFechaCol(isoDate) {
+  if (!isoDate) return "—";
+  const d = new Date(new Date(isoDate).getTime() - 5*60*60*1000);
+  return d.toISOString().slice(0,10).split("-").reverse().join("/");
+}
+function getFecha(isoDate) {
+  if (!isoDate) return "—";
+  return new Date(isoDate).toLocaleDateString("es-CO", {day:"2-digit",month:"2-digit",year:"numeric"});
+}
+
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+let orders   = [];
+let catalog  = [];
+let curView  = "dashboard";
+let detailId = null;
+let ajusteOid = null;
+let tickInterval = null;
+
+// ═══════════════════════════════════════════════
+// SSE — real-time connection
+// ═══════════════════════════════════════════════
+function connectSSE() {
+  const es = new EventSource("/stream");
+  es.addEventListener("init",   e => { onData(JSON.parse(e.data)); });
+  es.addEventListener("update", e => { onData(JSON.parse(e.data)); });
+  es.onopen  = () => setConnLabel(true);
+  es.onerror = () => { setConnLabel(false); setTimeout(connectSSE, 3000); es.close(); };
+}
+function setConnLabel(ok) {
+  document.getElementById("conn-label").textContent = ok ? "en vivo" : "reconectando…";
+  document.getElementById("conn-label").style.color  = ok ? "#10B981" : "#EF4444";
+  document.getElementById("live-dot").style.background = ok ? "#10B981" : "#EF4444";
+}
+function onData(data) {
+  orders = data.orders || [];
+  renderCurrent();
+}
+
+// ═══════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════
+function fmtTime(s) {
+  if (!s && s !== 0) return "—";
+  const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),sec=s%60;
+  if(h>0) return `${h}h ${m}m ${sec}s`;
+  if(m>0) return `${m}m ${sec}s`;
+  return `${sec}s`;
+}
+function fmtDT(iso) {
+  if (!iso) return "—";
+  return new Date(iso).toLocaleTimeString("es-CO",{hour:"2-digit",minute:"2-digit",second:"2-digit"});
+}
+function velColor(p) { return p>=90?"#10B981":p>=70?"#F59E0B":"#EF4444"; }
+
+function computeTimes(order) {
+  const t={tSetup:0,tProduccion:0,tAjuste:0,tFinalizada:0};
+  const keyMap={setup:"tSetup",produccion:"tProduccion",ajuste:"tAjuste",finalizada:"tFinalizada"};
+  const hist=order.history||[];
+  const now=Date.now();
+  for(let i=0;i<hist.length;i++){
+    const start=new Date(hist[i].at).getTime();
+    const end=hist[i+1]?new Date(hist[i+1].at).getTime():now;
+    const k=keyMap[hist[i].status];
+    if(k) t[k]+=Math.floor((end-start)/1000);
+  }
+  return t;
+}
+
+function getAcciones(o) {
+  const acc=[];
+  const vp=Number(o.velocidadObjetivo)>0?(Number(o.velocidadActual)/Number(o.velocidadObjetivo))*100:0;
+  // pausada estado removed
+  if(vp>0&&vp<70)  acc.push({tipo:"critica",msg:`🔴 Velocidad baja (${vp.toFixed(0)}%) — revisar proceso`});
+  else if(vp>0&&vp<90) acc.push({tipo:"advertencia",msg:`🟡 Velocidad al ${vp.toFixed(0)}% — optimizar`});
+  const tSetup=(computeTimes(o).tSetup||0);
+  if(tSetup>1800) acc.push({tipo:"advertencia",msg:`⏱️ Montaje prolongado (${Math.floor(tSetup/60)} min) — analizar causa`});
+  if((o.ajustes?.length||0)>=3) acc.push({tipo:"critica",msg:`🔧 ${o.ajustes.length} ajustes — revisar estabilidad`});
+  if(acc.length===0&&o.status!=="finalizada") acc.push({tipo:"ok",msg:"✅ Ejecución dentro de parámetros"});
+  return acc;
+}
+
+function badge(status){
+  const c=STATUS_CONFIG[status]||STATUS_CONFIG.setup;
+  return `<span class="badge" style="background:${c.bg};color:${c.color}">${c.icon} ${c.label}</span>`;
+}
+
+// ═══════════════════════════════════════════════
+// VIEW ROUTER
+// ═══════════════════════════════════════════════
+function setView(v, oid) {
+  curView=v;
+  if(oid) detailId=oid;
+  ["dashboard","maquinas","ordenes","nueva","detalle"].forEach(x=>{
+    document.getElementById("view-"+x).style.display = x===v?"block":"none";
   });
-  document.getElementById('conteo-txt').innerHTML='Mostrando <strong>'+vis+'</strong> órdenes';
+  ["dashboard","maquinas","ordenes","nueva","reporte"].forEach(x=>{
+    const b=document.getElementById("nav-"+x);
+    if(b) b.classList.toggle("active", x===v);
+  });
+  // Always render on explicit navigation; ticker skips "nueva" to protect form inputs
+  if(v==="nueva") renderNueva();
+  else if(v==="reporte") renderReporte();
+  else renderCurrent();
 }
-function limpiarFiltros(){document.getElementById('f-tipo').value='';document.getElementById('f-etapa').value='';document.getElementById('f-buscar').value='';aplicarFiltros();}
-let selectedFile=null;
-function openModal(){document.getElementById('modal-bg').classList.add('show');document.getElementById('msg').className='msg';document.getElementById('file-name').textContent='Haz clic o arrastra el Excel aquí';document.getElementById('btn-upload').disabled=true;document.getElementById('spinner').className='spinner';selectedFile=null;}
-function closeModal(){document.getElementById('modal-bg').classList.remove('show');}
-function closeOnBg(e){if(e.target===document.getElementById('modal-bg'))closeModal();}
-function handleFile(f){if(!f)return;selectedFile=f;document.getElementById('file-name').textContent=f.name;document.getElementById('btn-upload').disabled=false;document.getElementById('msg').className='msg';}
-function handleDrop(e){e.preventDefault();document.getElementById('drop-zone').classList.remove('over');handleFile(e.dataTransfer.files[0]);}
-function doUpload(){
-  if(!selectedFile)return;
-  const fd=new FormData();fd.append('file',selectedFile);
-  document.getElementById('btn-upload').disabled=true;
-  document.getElementById('spinner').className='spinner show';
-  fetch('/upload',{method:'POST',body:fd})
-    .then(r=>r.json())
-    .then(d=>{
-      document.getElementById('spinner').className='spinner';
-      if(d.ok){document.getElementById('msg').className='msg ok';document.getElementById('msg').textContent='Datos actualizados. Recargando...';setTimeout(()=>location.reload(),1500);}
-      else{document.getElementById('msg').className='msg err';document.getElementById('msg').textContent='Error: '+(d.error||'intente de nuevo');document.getElementById('btn-upload').disabled=false;}
-    })
-    .catch(()=>{document.getElementById('spinner').className='spinner';document.getElementById('msg').className='msg err';document.getElementById('msg').textContent='Error de conexión.';document.getElementById('btn-upload').disabled=false;});
+function renderCurrent() {
+  if(curView==="dashboard") renderDashboard();
+  else if(curView==="maquinas")  renderMaquinas();
+  else if(curView==="ordenes")   renderOrdenes();
+  else if(curView==="nueva")     { /* no re-render on tick */ }
+  else if(curView==="detalle") {
+    // Don't wipe vel-inp if user is actively editing it
+    const velEl=document.getElementById("vel-inp");
+    if(velEl && document.activeElement===velEl) return;
+    renderDetalle();
+  }
+  else if(curView==="reporte")   renderReporte();
 }
+
+// ═══════════════════════════════════════════════
+// LIVE TICK — re-render every second for timers
+// ═══════════════════════════════════════════════
+function startTick() {
+  if(tickInterval) clearInterval(tickInterval);
+  tickInterval=setInterval(()=>{ renderCurrent(); },1000);
+}
+
+// ═══════════════════════════════════════════════
+// DASHBOARD
+// ═══════════════════════════════════════════════
+function renderDashboard() {
+  const active    = orders.filter(o=>o.status!=="finalizada").length;
+  const finaliz   = orders.filter(o=>o.status==="finalizada").length;
+  const enProd    = orders.filter(o=>o.status==="produccion").length;
+  const criticas  = orders.filter(o=>getAcciones(o).some(a=>a.tipo==="critica")).length;
+  const withVel   = orders.filter(o=>Number(o.velocidadObjetivo)>0);
+  const avgVel    = withVel.length>0
+    ? withVel.reduce((s,o)=>s+(Number(o.velocidadActual)/Number(o.velocidadObjetivo))*100,0)/withVel.length : 0;
+
+  const kpis=[
+    {label:"Órdenes Activas",  val:active,           icon:"📋",color:"#3B82F6",    sub:`${finaliz} finalizadas`},
+    {label:"En Producción",    val:enProd,            icon:"🏭",color:"#10B981",    sub:"corriendo ahora"},
+    {label:"Eficiencia Prom.", val:`${avgVel.toFixed(0)}%`,icon:"⚡",color:velColor(avgVel),sub:"vs velocidad objetivo"},
+    {label:"Alertas Críticas", val:criticas,          icon:"🚨",color:criticas>0?"#EF4444":"#10B981",sub:criticas>0?"requieren atención":"sin alertas"},
+  ];
+
+  let html=`<div class="kpi-grid">`;
+  kpis.forEach(k=>{
+    html+=`<div class="card kpi"><div style="display:flex;justify-content:space-between;align-items:flex-start">
+      <div><div class="kpi-label">${k.label}</div>
+      <div class="kpi-val" style="color:${k.color}">${k.val}</div>
+      <div class="kpi-sub">${k.sub}</div></div>
+      <span class="kpi-icon">${k.icon}</span></div></div>`;
+  });
+  html+=`</div>`;
+
+  const activeOrds=orders.filter(o=>o.status!=="finalizada");
+  if(activeOrds.length===0){
+    html+=`<div class="card empty-state"><div style="font-size:48px;margin-bottom:16px">🏭</div>
+      <div style="font-size:18px;font-weight:600;color:#94A3B8;margin-bottom:8px">Sin órdenes de producción</div>
+      <div style="color:#475569;margin-bottom:24px">Crea la primera orden o sube el catálogo Excel</div>
+      <button class="btn" onclick="setView('nueva')" style="padding:10px 24px;background:#3B82F6;color:#fff;font-size:14px">＋ Nueva Orden</button></div>`;
+  } else {
+    html+=`<div class="orders-grid">`;
+    orders.filter(o=>o.status!=="finalizada").forEach(order=>{
+      const t=computeTimes(order);
+      const vp=Number(order.velocidadObjetivo)>0?Math.min((Number(order.velocidadActual)/Number(order.velocidadObjetivo))*100,100):0;
+      const vc=velColor(vp);
+      const acc=getAcciones(order);
+      const cfg=STATUS_CONFIG[order.status]||STATUS_CONFIG.setup;
+      const circ=2*Math.PI*28;
+      const offset=circ-(vp/100)*circ;
+      const isAlert=acc.some(a=>a.tipo==="critica");
+
+      const timeRows=STATUS_KEYS.map(k=>{
+        const tc=STATUS_CONFIG[k];
+        return `<div style="background:#0F172A;border-radius:7px;padding:6px 8px;border:1px solid ${order.status===k?tc.color+"80":"#0F172A"}">
+          <div style="font-size:9px;color:#64748B">${tc.icon} ${tc.label}</div>
+          <div style="font-size:12px;font-weight:600;font-family:'JetBrains Mono',monospace;color:${tc.color};margin-top:2px">${fmtTime(t["t"+k.charAt(0).toUpperCase()+k.slice(1)])}</div>
+        </div>`;
+      }).join("");
+
+      const accHtml=acc.map(a=>`<div class="accion ${a.tipo}">${a.msg}</div>`).join("");
+
+      const btns=STATUS_KEYS.filter(k=>k!==order.status).map(k=>{
+        const sc=STATUS_CONFIG[k];
+        return `<button class="btn" onclick="patchStatus('${order.id}','${k}')" style="padding:4px 10px;font-size:11px;background:${sc.dark};color:#fff">${sc.icon}</button>`;
+      }).join("");
+
+      html+=`<div class="card order-card ${isAlert?"alert":""}" style="border-color:${isAlert?"#EF444440":"#334155"}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px">
+          <div>
+            <div style="font-size:11px;color:#64748B;font-family:'JetBrains Mono',monospace">${order.ordenId}</div>
+            <div style="font-size:16px;font-weight:700;color:#F1F5F9;margin-top:2px">${order.producto}</div>
+            ${order.maquina?`<div style="font-size:11px;color:#8B5CF6;margin-top:3px">🖥️ ${order.maquina}</div>`:""}
+            ${order.cliente?`<div style="font-size:11px;color:#64748B;margin-top:1px">👤 ${order.cliente}</div>`:""}
+            ${order.operario?`<div style="font-size:11px;color:#10B981;margin-top:1px">👷 ${order.operario}</div>`:""}
+            ${order.turno?`<div style="font-size:10px;color:#475569;margin-top:1px">🕐 ${order.turno}</div>`:""}
+          </div>${badge(order.status)}</div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:14px">
+          <svg width="68" height="68" viewBox="0 0 72 72" style="flex-shrink:0">
+            <circle cx="36" cy="36" r="28" fill="none" stroke="#1E293B" stroke-width="6"/>
+            <circle cx="36" cy="36" r="28" fill="none" stroke="${vc}" stroke-width="6"
+              stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
+              stroke-linecap="round" transform="rotate(-90 36 36)" style="transition:stroke-dashoffset .6s"/>
+            <text x="36" y="40" text-anchor="middle" fill="${vc}" font-size="12" font-weight="700" font-family="JetBrains Mono,monospace">${vp.toFixed(0)}%</text>
+          </svg>
+          <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:6px">${timeRows}</div>
+        </div>
+        <div style="margin-bottom:12px">${accHtml}</div>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          ${btns}
+          <button class="btn" onclick="setView('detalle','${order.id}')" style="padding:4px 10px;font-size:11px;background:#1E293B;color:#94A3B8;border:1px solid #334155;margin-left:auto">Ver →</button>
+        </div>
+      </div>`;
+    });
+    html+=`</div>`;
+  }
+  document.getElementById("view-dashboard").innerHTML=html;
+}
+
+// ═══════════════════════════════════════════════
+// POR MÁQUINA
+// ═══════════════════════════════════════════════
+function renderMaquinas() {
+  let html=`<h2 style="font-size:20px;font-weight:700;margin-bottom:20px">🖥️ Tablero por Máquina</h2>
+    <div class="maq-grid">`;
+
+  MACHINES.forEach(m=>{
+    const mos=orders.filter(o=>o.maquina===m);
+    const times=mos.reduce((acc,o)=>{
+      const t=computeTimes(o);
+      Object.keys(t).forEach(k=>{ acc[k]=(acc[k]||0)+t[k]; });
+      return acc;
+    },{});
+    const total=Object.values(times).reduce((a,b)=>a+b,0)||1;
+    const withVel=mos.filter(o=>Number(o.velocidadObjetivo)>0);
+    const ef=withVel.length>0
+      ? withVel.reduce((s,o)=>s+(Number(o.velocidadActual)/Number(o.velocidadObjetivo))*100,0)/withVel.length : null;
+    const active=mos.filter(o=>o.status!=="finalizada").length;
+
+    const stateRows=STATUS_KEYS.map(k=>{
+      const tc=STATUS_CONFIG[k];
+      const tKey="t"+k.charAt(0).toUpperCase()+k.slice(1);
+      const secs=times[tKey]||0;
+      const pct=((secs/total)*100);
+      return `<div style="background:#0F172A;border-radius:8px;padding:10px 12px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+          <span style="font-size:11px;color:${tc.color};font-weight:600">${tc.icon} ${tc.label}</span>
+          <span style="font-size:11px;color:#64748B">${pct.toFixed(0)}%</span>
+        </div>
+        <div style="background:#1E293B;border-radius:4px;height:6px;overflow:hidden;margin-bottom:4px">
+          <div style="width:${pct}%;background:${tc.color};height:100%;border-radius:4px;transition:width .4s"></div>
+        </div>
+        <div style="font-size:13px;font-weight:700;color:${tc.color};font-family:'JetBrains Mono',monospace">${fmtTime(secs)}</div>
+      </div>`;
+    }).join("");
+
+    const orderRows=mos.map(o=>{
+      const cfg=STATUS_CONFIG[o.status]||STATUS_CONFIG.setup;
+      return `<div style="display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:#0F172A;border-radius:8px;margin-bottom:6px;cursor:pointer"
+          onclick="setView('detalle','${o.id}')">
+        <div>
+          <span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:#94A3B8">${o.ordenId} </span>
+          <span style="font-size:13px;font-weight:600;color:#E2E8F0">${o.producto}</span>
+        </div>
+        ${badge(o.status)}
+      </div>`;
+    }).join("");
+
+    html+=`<div class="card" style="padding:24px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px">
+        <div>
+          <div style="font-size:18px;font-weight:700;color:#F1F5F9">${m}</div>
+          <div style="font-size:12px;color:#64748B;margin-top:2px">${mos.length} órdenes · ${active} activas</div>
+        </div>
+        ${ef!==null?`<div style="text-align:center">
+          <div style="font-size:26px;font-weight:700;color:${velColor(ef)};font-family:'JetBrains Mono',monospace">${ef.toFixed(0)}%</div>
+          <div style="font-size:10px;color:#64748B">eficiencia</div>
+        </div>`:""}
+      </div>
+      <div style="font-size:11px;color:#64748B;margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">Tiempo acumulado por estado</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">${stateRows}</div>
+      ${mos.length>0?`<div style="font-size:11px;color:#64748B;margin-bottom:8px;font-weight:600;text-transform:uppercase;letter-spacing:.5px">Órdenes</div>${orderRows}`
+        :`<div style="font-size:13px;color:#475569;text-align:center;padding:16px">Sin órdenes asignadas</div>`}
+    </div>`;
+  });
+
+  html+=`</div>`;
+  document.getElementById("view-maquinas").innerHTML=html;
+}
+
+// ═══════════════════════════════════════════════
+// TABLA ÓRDENES
+// ═══════════════════════════════════════════════
+function renderOrdenes() {
+  let html=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px">
+    <h2 style="font-size:20px;font-weight:700">📋 Todas las Órdenes</h2>
+    <button class="btn" onclick="setView('nueva')" style="padding:8px 20px;background:#3B82F6;color:#fff;font-size:13px">＋ Nueva</button>
+  </div>`;
+
+  const activeOrds=orders.filter(o=>o.status!=="finalizada");
+  if(activeOrds.length===0){
+    html+=`<div class="card" style="padding:40px;text-align:center;color:#475569">Sin órdenes registradas</div>`;
+  } else {
+    html+=`<div class="card" style="overflow:auto"><table class="tbl">
+      <thead><tr>${["Orden","Producto","Máquina","Estado","Montaje","Ajuste","Producción","Finalizada","Efic.",""].map(h=>`<th>${h}</th>`).join("")}</tr></thead>
+      <tbody>`;
+    orders.forEach((o,i)=>{
+      const t=computeTimes(o);
+      const vp=Number(o.velocidadObjetivo)>0?(Number(o.velocidadActual)/Number(o.velocidadObjetivo)*100).toFixed(0):"—";
+      html+=`<tr>
+        <td style="font-family:'JetBrains Mono',monospace;color:#94A3B8">${o.ordenId}</td>
+        <td style="font-weight:600;color:#E2E8F0">${o.producto}</td>
+        <td style="color:#8B5CF6;font-size:11px">${o.maquina||"—"}</td>
+        <td>${badge(o.status)}</td>
+        <td style="font-family:'JetBrains Mono',monospace;color:#94A3B8;font-size:11px">${fmtTime(t.tSetup)}</td>
+        <td style="font-family:'JetBrains Mono',monospace;color:#94A3B8;font-size:11px">${fmtTime(t.tAjuste)}</td>
+        <td style="font-family:'JetBrains Mono',monospace;color:#94A3B8;font-size:11px">${fmtTime(t.tProduccion)}</td>
+        <td style="font-family:'JetBrains Mono',monospace;color:#94A3B8;font-size:11px">${fmtTime(t.tFinalizada)}</td>
+        <td>${vp!=="—"?`<span style="color:${velColor(Number(vp))};font-weight:700">${vp}%</span>`:"—"}</td>
+        <td><button class="btn" onclick="setView('detalle','${o.id}')" style="padding:4px 10px;font-size:11px;background:#1E293B;color:#94A3B8;border:1px solid #334155">Ver →</button></td>
+      </tr>`;
+    });
+    html+=`</tbody></table></div>`;
+  }
+  document.getElementById("view-ordenes").innerHTML=html;
+}
+
+// ═══════════════════════════════════════════════
+// NUEVA ORDEN
+// ═══════════════════════════════════════════════
+function renderNueva() {
+  const catInfo=catalog.length>0
+    ?`<div style="background:#052E16;border:1px solid #065F46;border-radius:10px;padding:10px 16px;margin-bottom:16px;font-size:12px;color:#6EE7B7">
+        📂 Catálogo activo: <strong>${catalog.length}</strong> órdenes · Escribe el # y el sistema autocompletará los datos
+      </div>`:
+    `<div style="background:#1E293B;border:1px solid #334155;border-radius:10px;padding:10px 16px;margin-bottom:16px;font-size:12px;color:#64748B">
+        💡 Sube un Excel con tu catálogo de órdenes para autocompletado automático
+      </div>`;
+
+  const statusOpts=["setup","ajuste","produccion","finalizada"].map(k=>{
+    const c=STATUS_CONFIG[k];
+    return `<option value="${k}">${c.icon} ${c.label}</option>`;
+  }).join("");
+
+  const machineOpts=`<option value="">— Seleccionar máquina —</option>`+MACHINES.map(m=>`<option value="${m}">${m}</option>`).join("");
+
+  document.getElementById("view-nueva").innerHTML=`
+    <div style="max-width:640px">
+      <h2 style="font-size:22px;font-weight:700;margin-bottom:24px;color:#F1F5F9">＋ Nueva Orden de Producción</h2>
+      ${catInfo}
+      <div class="card" style="padding:28px">
+        <div class="form-grid">
+          <div>
+            <label class="lbl"># Orden * ${catalog.length>0?'<span style="color:#10B981">↵ autocompletará</span>':''}</label>
+            <input id="f-ordenId" class="inp" placeholder="Ej. OP-001" oninput="autofillOrder(this.value)"/>
+          </div>
+          <div><label class="lbl">Producto *</label><input id="f-producto" class="inp" placeholder="Nombre del producto"/></div>
+          <div><label class="lbl">Cliente</label><input id="f-cliente" class="inp" placeholder="Nombre del cliente"/></div>
+          <div><label class="lbl">Cantidad objetivo</label><input id="f-cantidad" class="inp" type="text" placeholder="0" readonly style="color:#94A3B8;cursor:not-allowed;opacity:.8"/></div>
+          <div><label class="lbl">Vel. Objetivo (uds/hr)</label><input id="f-velObj" class="inp" type="number" placeholder="0"/></div>
+          <div><label class="lbl">Vel. Actual (uds/hr)</label><input id="f-velAct" class="inp" type="number" placeholder="0"/></div>
+          <div><label class="lbl">Máquina</label><select id="f-maquina" class="inp">${machineOpts}</select></div>
+          <div style="grid-column:span 2"><label class="lbl">Operario</label><select id="f-operario" class="inp">
+            <option value="">— Seleccionar operario —</option>
+            ${OPERARIOS.map(op=>`<option value="${op}">${op}</option>`).join("")}
+          </select></div>
+          <div><label class="lbl">Estado inicial</label><select id="f-status" class="inp">${statusOpts}</select></div>
+          <div style="grid-column:span 2"><label class="lbl">Notas</label>
+            <textarea id="f-notas" class="inp" rows="3" placeholder="Observaciones iniciales…"></textarea></div>
+        </div>
+        <div style="display:flex;gap:12px;margin-top:24px">
+          <button class="btn" onclick="submitOrder()" style="flex:1;padding:12px;background:linear-gradient(135deg,#3B82F6,#6366F1);color:#fff;font-size:15px">＋ Crear Orden</button>
+          <button class="btn" onclick="setView('dashboard')" style="padding:12px 20px;background:#1E293B;color:#94A3B8;border:1px solid #334155;font-size:14px">Cancelar</button>
+        </div>
+      </div>
+    </div>`;
+}
+
+function autofillOrder(val) {
+  if(!val||catalog.length===0) return;
+  const norm=s=>String(s).toLowerCase().trim();
+  const found=catalog.find(r=>norm(r.ordenId)===norm(val));
+  if(!found) return;
+  if(found.producto)          document.getElementById("f-producto").value=found.producto;
+  if(found.cliente)           document.getElementById("f-cliente").value=found.cliente;
+  if(found.cantidad)          document.getElementById("f-cantidad").value=Number(found.cantidad).toLocaleString("es-CO");
+  if(found.velocidadObjetivo) document.getElementById("f-velObj").value=found.velocidadObjetivo;
+  if(found.maquina){
+    const sel=document.getElementById("f-maquina");
+    for(let i=0;i<sel.options.length;i++){
+      if(sel.options[i].value===found.maquina){sel.selectedIndex=i;break;}
+    }
+  }
+  // Turno se asigna automáticamente al crear la orden (en el servidor)
+}
+
+async function submitOrder() {
+  const ordenId=document.getElementById("f-ordenId").value.trim();
+  const producto=document.getElementById("f-producto").value.trim();
+  if(!ordenId||!producto){ alert("# Orden y Producto son obligatorios"); return; }
+  const body={
+    ordenId, producto,
+    cliente:  document.getElementById("f-cliente").value.trim(),
+    maquina:  document.getElementById("f-maquina").value,
+    operario: document.getElementById("f-operario")?document.getElementById("f-operario").value:"",
+    cantidad: Number(String(document.getElementById("f-cantidad").value).replace(/\./g,"").replace(/,/g,""))||0,
+    velocidadObjetivo: Number(document.getElementById("f-velObj").value)||0,
+    velocidadActual:   Number(document.getElementById("f-velAct").value)||0,
+    notas:    document.getElementById("f-notas").value.trim(),
+    status:   document.getElementById("f-status").value,
+  };
+  await fetch("/api/orders",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
+  setView("dashboard");
+}
+
+// ═══════════════════════════════════════════════
+// DETALLE ORDEN
+// ═══════════════════════════════════════════════
+function renderDetalle() {
+  const order=orders.find(o=>o.id===detailId);
+  if(!order){ document.getElementById("view-detalle").innerHTML=`<div style="color:#64748B">Orden no encontrada</div>`; return; }
+
+  const t=computeTimes(order);
+  const vp=Number(order.velocidadObjetivo)>0?Math.min((Number(order.velocidadActual)/Number(order.velocidadObjetivo))*100,100):0;
+  const acc=getAcciones(order);
+  const cfg=STATUS_CONFIG[order.status]||STATUS_CONFIG.setup;
+
+  // State time boxes
+  const timeBoxes=STATUS_KEYS.map(k=>{
+    const tc=STATUS_CONFIG[k];
+    const tKey="t"+k.charAt(0).toUpperCase()+k.slice(1);
+    const live=order.status===k;
+    return `<div class="time-box${live?" live":""}" style="--c:${tc.color};${live?"border-color:"+tc.color:""}">
+      ${live?`<div style="width:7px;height:7px;background:${tc.color};border-radius:50%;margin-bottom:6px" class="pulse"></div>`:""}
+      <div style="font-size:10px;color:#64748B;margin-bottom:4px">${tc.icon} ${tc.label}</div>
+      <div style="font-size:16px;font-weight:700;color:${tc.color};font-family:'JetBrains Mono',monospace">${fmtTime(t[tKey])}</div>
+    </div>`;
+  }).join("");
+
+  // History
+  const hist=order.history||[];
+  const histHtml=hist.map((h,i)=>{
+    const next=hist[i+1];
+    const dur=next?Math.floor((new Date(next.at)-new Date(h.at))/1000):null;
+    const hc=STATUS_CONFIG[h.status]||STATUS_CONFIG.setup;
+    return `<div class="hist-item">
+      <div class="hist-dot" style="background:${hc.dark}">${hc.icon}</div>
+      <div style="flex:1">
+        <div style="display:flex;justify-content:space-between">
+          <span style="font-size:13px;font-weight:600;color:${hc.color}">${hc.label}</span>
+          <span style="font-size:11px;color:#475569;font-family:'JetBrains Mono',monospace">${fmtDT(h.at)}</span>
+        </div>
+        ${dur!==null?`<div style="font-size:11px;color:#64748B">Duración: ${fmtTime(dur)}</div>`:""}
+      </div>
+    </div>`;
+  }).join("");
+
+  // Acciones
+  const accHtml=acc.map(a=>`<div class="accion ${a.tipo}">${a.msg}</div>`).join("");
+
+  // Status buttons
+  const statusBtns=STATUS_KEYS.map(k=>{
+    const sc=STATUS_CONFIG[k];
+    const isCur=order.status===k;
+    return `<button class="btn" onclick="patchStatus('${order.id}','${k}')" ${isCur?"disabled":""}
+      style="padding:10px;font-size:13px;text-align:left;width:100%;background:${isCur?sc.color:"#0F172A"};color:${isCur?"#fff":"#94A3B8"};border:1px solid ${isCur?sc.color:"#334155"};opacity:${isCur?"1":".85"}">
+      ${sc.icon} ${sc.label} ${isCur?"← actual":""}
+    </button>`;
+  }).join("");
+
+  // Ajustes list
+  const ajList=(order.ajustes||[]).length>0
+    ? (order.ajustes||[]).map(a=>`
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 12px;background:#0F172A;border-radius:8px;margin-bottom:6px">
+          <div>
+            <span style="font-size:13px;color:#E2E8F0">${a.descripcion}</span>
+            ${a.duracion?`<span style="font-size:11px;color:#64748B;margin-left:8px">(${a.duracion} min)</span>`:""}
+            ${a.reporta?`<span style="font-size:11px;color:#10B981;margin-left:8px">👤 ${a.reporta}</span>`:""}
+          </div>
+          <span style="font-size:11px;color:#475569;font-family:'JetBrains Mono',monospace">${fmtDT(a.at)}</span>
+        </div>`).join("")
+    : `<div style="color:#475569;font-size:13px;text-align:center;padding:16px">Sin novedades registradas</div>`;
+
+  document.getElementById("view-detalle").innerHTML=`
+    <div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap">
+        <button class="btn" onclick="setView('dashboard')" style="padding:6px 14px;font-size:13px;background:#1E293B;color:#94A3B8;border:1px solid #334155">← Volver</button>
+        <h2 style="font-size:20px;font-weight:700">${order.producto}</h2>
+        <span style="font-family:'JetBrains Mono',monospace;color:#64748B;font-size:13px">${order.ordenId}</span>
+        ${order.maquina?`<span style="font-size:12px;color:#8B5CF6;background:#1E1B4B;padding:3px 10px;border-radius:20px;border:1px solid #4C1D95">🖥️ ${order.maquina}</span>`:""}
+        ${order.cliente?`<span style="font-size:12px;color:#64748B">👤 ${order.cliente}</span>`:""}
+        ${order.operario?`<span style="font-size:12px;color:#10B981;background:#052E16;padding:3px 10px;border-radius:20px;border:1px solid #065F46">👷 ${order.operario}</span>`:""}
+        ${order.turno?`<span style="font-size:12px;color:#475569">🕐 ${order.turno}</span>`:""}
+        ${badge(order.status)}
+      </div>
+
+      <div class="detail-grid">
+        <div>
+          <!-- Tiempos -->
+          <div class="card" style="padding:20px;margin-bottom:16px">
+            <h3 style="font-size:14px;font-weight:600;color:#94A3B8;margin-bottom:14px">⏱️ Tiempos por Estado</h3>
+            <div class="state-times">${timeBoxes}</div>
+          </div>
+          <!-- Historial -->
+          <div class="card" style="padding:20px;margin-bottom:16px">
+            <h3 style="font-size:14px;font-weight:600;color:#94A3B8;margin-bottom:14px">📅 Historial de Estados</h3>
+            <div style="max-height:180px;overflow:auto">${histHtml}</div>
+          </div>
+          <!-- Velocidad -->
+          <div class="card" style="padding:20px;margin-bottom:16px">
+            <h3 style="font-size:14px;font-weight:600;color:#94A3B8;margin-bottom:14px">⚡ Velocidad</h3>
+            <div style="display:flex;align-items:center;gap:16px">
+              <div style="flex:1">
+                <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+                  <span style="font-size:12px;color:#64748B">Actual: <strong style="color:#E2E8F0">${order.velocidadActual||0}</strong> uds/hr</span>
+                  <span style="font-size:12px;color:#64748B">Objetivo: <strong style="color:#E2E8F0">${order.velocidadObjetivo||0}</strong> uds/hr</span>
+                </div>
+                <div class="vel-bar-wrap"><div class="vel-bar" style="width:${vp}%;background:${velColor(vp)}"></div></div>
+                <div style="text-align:right;font-size:12px;margin-top:4px;color:${velColor(vp)};font-weight:700">${vp.toFixed(0)}%</div>
+              </div>
+              <div style="display:flex;gap:8px;align-items:center">
+                <input id="vel-inp" type="number" value="${order.velocidadActual||0}"
+                  style="width:90px;padding:8px 10px;background:#0F172A;border:1px solid #334155;border-radius:8px;color:#E2E8F0;font-size:14px;font-family:inherit"/>
+                <button class="btn" onclick="patchVel('${order.id}')" style="padding:8px 14px;background:#1D4ED8;color:#fff;font-size:13px">Actualizar</button>
+              </div>
+            </div>
+          </div>
+          <!-- Ajustes -->
+          <div class="card" style="padding:20px">
+            <h3 style="font-size:14px;font-weight:600;color:#94A3B8;margin-bottom:14px">📋 Novedades</h3>
+            <button class="btn" onclick="openModal('${order.id}')" style="padding:8px 16px;background:#4C1D95;color:#fff;font-size:13px;margin-bottom:14px">＋ Registrar Novedad</button>
+            ${ajList}
+          </div>
+        </div>
+        <!-- Right -->
+        <div>
+          <div class="card" style="padding:20px;margin-bottom:16px">
+            <h3 style="font-size:14px;font-weight:600;color:#94A3B8;margin-bottom:14px">🎛️ Control de Estado</h3>
+            <div style="display:flex;flex-direction:column;gap:8px">${statusBtns}</div>
+          </div>
+          <div class="card" style="padding:20px">
+            <h3 style="font-size:14px;font-weight:600;color:#94A3B8;margin-bottom:14px">🎯 Acciones Recomendadas</h3>
+            ${accHtml}
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+// ═══════════════════════════════════════════════
+// API CALLS
+// ═══════════════════════════════════════════════
+async function patchStatus(id, status) {
+  await fetch(`/api/orders/${id}/status`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({status})});
+}
+async function patchVel(id) {
+  const el=document.getElementById("vel-inp");
+  if(!el){console.error("vel-inp not found");return;}
+  const vel=Number(el.value)||0;
+  el.style.borderColor="#10B981";
+  setTimeout(()=>{if(el)el.style.borderColor="";},1500);
+  await fetch(`/api/orders/${id}/velocidad`,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({velocidadActual:vel})});
+}
+
+// ── Modal ajuste ──
+function openModal(oid) {
+  ajusteOid=oid;
+  document.getElementById("aj-desc").value="";
+  document.getElementById("aj-dur").value="";
+  // Populate operarios in reporta select
+  const sel=document.getElementById("aj-reporta");
+  sel.innerHTML='<option value="">— Seleccionar —</option>'+OPERARIOS.map(op=>`<option value="${op}">${op}</option>`).join("");
+  document.getElementById("modal").classList.add("open");
+  setTimeout(()=>document.getElementById("aj-desc").focus(),100);
+}
+function closeModal() { document.getElementById("modal").classList.remove("open"); ajusteOid=null; }
+async function submitAjuste() {
+  const desc=document.getElementById("aj-desc").value.trim();
+  if(!desc||!ajusteOid) return;
+  const dur=document.getElementById("aj-dur").value;
+  const reporta=document.getElementById("aj-reporta").value;
+  await fetch(`/api/orders/${ajusteOid}/ajuste`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({descripcion:desc,duracion:dur,reporta})});
+  closeModal();
+}
+document.getElementById("modal").addEventListener("click",e=>{ if(e.target===document.getElementById("modal")) closeModal(); });
+
+// ── Excel upload ──
+document.getElementById("excel-input").addEventListener("change",async function(e){
+  const file=e.target.files[0]; if(!file) return;
+  const reader=new FileReader();
+  reader.onload=async ev=>{
+    try{
+      const wb=XLSX.read(ev.target.result,{type:"binary"});
+      const ws=wb.Sheets[wb.SheetNames[0]];
+      const rows=XLSX.utils.sheet_to_json(ws,{defval:""});
+      const normalize=s=>String(s).toLowerCase().trim().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/\s+/g,"");
+      const MAQUINAS_CAT=["Nilpeter 1","Nilpeter 2","Kromia"];
+      const mapped=rows.map(row=>{
+        const norm={}; Object.entries(row).forEach(([k,v])=>{norm[normalize(k)]=v;});
+        // # Orden — columna especifica del Excel de planta
+        const ordenId=String(norm["ordendeproduccionordendeproduccionnumber"]||norm["ordendeproduccionordendeproductionnumber"]||norm["orden"]||norm["norden"]||norm["id"]||"").trim();
+        // Producto = Referencia
+        const producto=String(norm["produccionreferencia"]||norm["referencia"]||norm["producto"]||norm["descripcion"]||"").trim();
+        // Cliente = Organizacion
+        const cliente=String(norm["produccionorganizacion"]||norm["organizacion"]||norm["cliente"]||"").trim();
+        // Cantidad = Total Etiquetas
+        const cantidad=Number(norm["ordendeproducciontotaletiquetas"]||norm["totaletiquetas"]||norm["cantidad"]||0);
+        // Metros lineales
+        const metros=Number(norm["ordendeproducciontotalmtslineales"]||norm["totalmtslineales"]||norm["metros"]||0);
+        // Maquina = Centro de Proceso (primera si hay varias)
+        const rawMaq=String(norm["ordendeproduccioncentrodeproceso"]||norm["centrodeproceso"]||norm["maquina"]||"").split(",")[0].trim();
+        const maquina=MAQUINAS_CAT.find(m=>normalize(rawMaq).includes(normalize(m)))||rawMaq||"";
+        return { ordenId, producto, cliente, cantidad, metros, velocidadObjetivo:0, maquina };
+      }).filter(r=>r.ordenId!=="");
+      await fetch("/api/catalog",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({rows:mapped})});
+      catalog=mapped;
+      showStatusBar(`✅ ${mapped.length} órdenes cargadas desde "${file.name}"`, true);
+    }catch(err){ showStatusBar("❌ Error leyendo el archivo. Verifica que sea .xlsx válido.", false); }
+  };
+  reader.readAsBinaryString(file);
+  e.target.value="";
+});
+
+function showStatusBar(msg, ok) {
+  const bar=document.getElementById("status-bar");
+  bar.style.display="flex";
+  bar.style.background=ok?"#052E16":"#450A0A";
+  bar.style.color=ok?"#6EE7B7":"#FCA5A5";
+  bar.style.borderBottom="1px solid #334155";
+  bar.innerHTML=`<span>${msg}</span><span style="cursor:pointer;color:#64748B" onclick="this.parentElement.style.display='none'">✕</span>`;
+}
+
+// ── Load catalog on start ──
+async function loadCatalog() {
+  try{
+    const r=await fetch("/api/catalog");
+    const d=await r.json();
+    catalog=d.catalog||[];
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════════════
+// REPORTE
+// ═══════════════════════════════════════════════
+function renderReporte() {
+  const finalizadas = orders.filter(o=>o.status==="finalizada");
+  const todas = [...orders]; // todas incluyendo activas
+
+  // Summary cards
+  const totalOrds = todas.length;
+  const totalFin  = finalizadas.length;
+  const totalActivas = todas.filter(o=>o.status!=="finalizada").length;
+  
+  if(totalOrds===0){
+    document.getElementById("view-reporte").innerHTML=`<div class="card" style="padding:60px;text-align:center">
+      <div style="font-size:48px;margin-bottom:16px">📈</div>
+      <div style="font-size:18px;font-weight:600;color:#94A3B8;margin-bottom:8px">Sin órdenes registradas</div>
+      <div style="color:#475569">Crea órdenes de producción para ver el reporte</div>
+    </div>`;
+    return;
+  }
+
+  let html = `<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+    <h2 style="font-size:20px;font-weight:700">📈 Reporte de Órdenes</h2>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" onclick="exportReporte('csv')" style="padding:8px 16px;background:#10B981;color:#fff;font-size:13px">⬇️ CSV</button>
+      <button class="btn" onclick="exportReporte('excel')" style="padding:8px 16px;background:#1D4ED8;color:#fff;font-size:13px">⬇️ Excel</button>
+      <button class="btn" onclick="window.print()" style="padding:8px 16px;background:#4C1D95;color:#fff;font-size:13px">🖨️ Imprimir/PDF</button>
+    </div>
+  </div>`;
+
+  // KPI row
+  html += `<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px">
+    ${[
+      {l:"Total Órdenes",v:totalOrds,c:"#3B82F6"},
+      {l:"Finalizadas",v:totalFin,c:"#10B981"},
+      {l:"En Proceso",v:totalActivas,c:"#F59E0B"},
+      {l:"Operarios Activos",v:[...new Set(todas.filter(o=>o.operario).map(o=>o.operario))].length,c:"#8B5CF6"},
+    ].map(k=>`<div class="card" style="padding:16px">
+      <div style="font-size:11px;color:#64748B;margin-bottom:4px">${k.l}</div>
+      <div style="font-size:28px;font-weight:700;color:${k.c};font-family:'JetBrains Mono',monospace">${k.v}</div>
+    </div>`).join("")}
+  </div>`;
+
+  if(todas.length===0){
+    html+=`<div class="card" style="padding:40px;text-align:center;color:#475569">Sin órdenes registradas aún</div>`;
+  } else {
+    html+=`<div class="card" style="overflow:auto"><table class="tbl">
+      <thead><tr>
+        <th>Orden</th><th>Producto</th><th>Cliente</th><th>Máquina</th><th>Operario</th>
+        <th>Turno</th><th>Fecha</th><th>Estado</th>
+        <th>T.Montaje</th><th>T.Ajuste</th><th>T.Producción</th><th>T.Total</th>
+        <th>Vel.Obj</th><th>Vel.Real</th><th>Efic.</th>
+        <th>Novedades</th>
+      </tr></thead><tbody>`;
+
+    todas.forEach((o,i)=>{
+      const t=computeTimes(o);
+      const tTotal=(t.tSetup||0)+(t.tAjuste||0)+(t.tProduccion||0)+(t.tFinalizada||0);
+      const vp=Number(o.velocidadObjetivo)>0?((Number(o.velocidadActual)/Number(o.velocidadObjetivo))*100).toFixed(0):"—";
+      const cfg=STATUS_CONFIG[o.status]||STATUS_CONFIG.setup;
+      const firstAt=o.history&&o.history.length>0?o.history[0].at:o.createdAt;
+      const turno=getTurno(firstAt);
+      const fecha=getFechaCol(firstAt);
+      const ajustesLista=(o.ajustes||[]).map(a=>a.descripcion).join(" | ")||"—";
+
+      html+=`<tr style="background:${i%2?"#0F172A10":"transparent"}">
+        <td style="font-family:'JetBrains Mono',monospace;color:#94A3B8;white-space:nowrap">${o.ordenId}</td>
+        <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#E2E8F0;font-weight:600" title="${o.producto}">${o.producto}</td>
+        <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#94A3B8" title="${o.cliente||''}">${o.cliente||"—"}</td>
+        <td style="color:#8B5CF6;font-size:11px;white-space:nowrap">${o.maquina||"—"}</td>
+        <td style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#10B981;font-size:11px" title="${o.operario||''}">${o.operario||"—"}</td>
+        <td style="font-size:11px;color:#64748B;white-space:nowrap">${turno}</td>
+        <td style="font-size:11px;color:#64748B;white-space:nowrap">${fecha}</td>
+        <td><span class="badge" style="background:${cfg.bg};color:${cfg.color};white-space:nowrap">${cfg.icon} ${cfg.label}</span></td>
+        <td style="font-family:'JetBrains Mono',monospace;color:#F59E0B;font-size:11px;white-space:nowrap">${fmtTime(t.tSetup)}</td>
+        <td style="font-family:'JetBrains Mono',monospace;color:#8B5CF6;font-size:11px;white-space:nowrap">${fmtTime(t.tAjuste)}</td>
+        <td style="font-family:'JetBrains Mono',monospace;color:#3B82F6;font-size:11px;white-space:nowrap">${fmtTime(t.tProduccion)}</td>
+        <td style="font-family:'JetBrains Mono',monospace;color:#E2E8F0;font-size:11px;font-weight:600;white-space:nowrap">${fmtTime(tTotal)}</td>
+        <td style="font-family:'JetBrains Mono',monospace;color:#64748B;font-size:11px">${o.velocidadObjetivo||0}</td>
+        <td style="font-family:'JetBrains Mono',monospace;color:#64748B;font-size:11px">${o.velocidadActual||0}</td>
+        <td style="font-weight:700;font-size:12px;white-space:nowrap;color:${vp!=="—"?velColor(Number(vp)):"#475569"}">${vp!=="—"?vp+"%":"—"}</td>
+        <td style="font-size:11px;color:#64748B;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${(o.ajustes||[]).map(a=>a.descripcion+(a.reporta?' ['+a.reporta+']':'')).join(' | ')}">${(o.ajustes||[]).length} nov.</td>
+      </tr>`;
+    });
+    html+=`</tbody></table></div>`;
+  }
+  document.getElementById("view-reporte").innerHTML=html;
+}
+
+function buildReporteRows(){
+  const rows=[["Orden","Producto","Cliente","Máquina","Operario","Turno","Fecha","Estado",
+    "T.Montaje","T.Ajuste","T.Producción","T.Total",
+    "Vel.Objetivo","Vel.Real","Eficiencia%",
+    "Cant.Novedades","Detalle Novedades","Historial Estados"]];
+  orders.forEach(o=>{
+    const t=computeTimes(o);
+    const tTotal=(t.tSetup||0)+(t.tAjuste||0)+(t.tProduccion||0)+(t.tFinalizada||0);
+    const vp=Number(o.velocidadObjetivo)>0?((Number(o.velocidadActual)/Number(o.velocidadObjetivo))*100).toFixed(1):"";
+    const firstAt=o.history&&o.history.length>0?o.history[0].at:o.createdAt;
+    const histStr=(o.history||[]).map(h=>`${STATUS_CONFIG[h.status]?.label||h.status} @ ${fmtDT(h.at)}`).join(" → ");
+    const novStr=(o.ajustes||[]).map(a=>`${a.descripcion}${a.reporta?" ["+a.reporta+"]":""}${a.duracion?" ("+a.duracion+"min)":""}`).join(" | ");
+    rows.push([
+      o.ordenId, o.producto, o.cliente||"", o.maquina||"", o.operario||"",
+      o.turno||getTurno(firstAt), getFechaCol(firstAt), STATUS_CONFIG[o.status]?.label||o.status,
+      fmtTime(t.tSetup), fmtTime(t.tAjuste), fmtTime(t.tProduccion), fmtTime(tTotal),
+      o.velocidadObjetivo||0, o.velocidadActual||0, vp?vp+"%":"—",
+      (o.ajustes||[]).length, novStr||"—", histStr,
+    ]);
+  });
+  return rows;
+}
+
+function exportReporte(fmt) {
+  const rows=buildReporteRows();
+  const fecha=new Date().toISOString().slice(0,10);
+
+  if(fmt==="excel") {
+    // Build HTML table that Excel can open
+    let html='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel">';
+    html+='<head><meta charset="UTF-8"><style>th{background:#1e3a5f;color:#fff;padding:6px}td{padding:5px;border:1px solid #ccc}</style></head><body>';
+    html+='<table border="1">';
+    rows.forEach((row,i)=>{
+      html+='<tr>';
+      row.forEach(cell=>{
+        const tag=i===0?'th':'td';
+        html+=`<${tag}>${String(cell).replace(/&/g,'&amp;').replace(/</g,'&lt;')}</${tag}>`;
+      });
+      html+='</tr>';
+    });
+    html+='</table></body></html>';
+    const blob=new Blob([html],{type:"application/vnd.ms-excel;charset=utf-8"});
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download=`reporte-produccion-${fecha}.xls`;
+    a.click();
+  } else {
+    // CSV with BOM for Excel spanish locale
+    const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(";")).join("\n");
+    const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8"});
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);
+    a.download=`reporte-produccion-${fecha}.csv`;
+    a.click();
+  }
+}
+
+// ═══════════════════════════════════════════════
+// BOOT
+// ═══════════════════════════════════════════════
+connectSSE();
+loadCatalog();
+startTick();
 </script>
 </body>
 </html>
+{%- endraw -%}
