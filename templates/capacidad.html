@@ -270,11 +270,13 @@ function getDiasLaboralesEnRango(desde, hasta) {
   return dias;
 }
 
+function getOrdenesEnFecha(maq, fecha) {
+  return TODAS.filter(o => o.maquina === maq && o.fecha === fecha &&
+    (!['Nilpeter 1','Nilpeter 2','Kromia'].includes(maq) || o.en_impresion !== false));
+}
+
 function getMtsPorFecha(maq, fecha) {
-  return TODAS
-    .filter(o => o.maquina === maq && o.fecha === fecha &&
-      (!['Nilpeter 1','Nilpeter 2','Kromia'].includes(maq) || o.en_impresion !== false))
-    .reduce((s,o) => s + (o.mts||0), 0);
+  return getOrdenesEnFecha(maq, fecha).reduce((s,o) => s + (o.mts||0), 0);
 }
 
 function renderTablaSemana(desde, hasta) {
@@ -303,13 +305,15 @@ function renderTablaSemana(desde, hasta) {
     let totalMts = 0;
     let celdas = '';
     dias.forEach(d => {
-      const mts = getMtsPorFecha(m, d);
+      const ords = getOrdenesEnFecha(m, d);
+      const mts = ords.reduce((s,o) => s + (o.mts||0), 0);
       totalMts += mts;
       const pct = CAP_DIA_ACTUAL > 0 ? Math.round(mts / CAP_DIA_ACTUAL * 1000)/10 : 0;
       const barW = Math.min(pct, 100);
       const col = pct>100?'#dc2626':pct>80?'#ca8a04':'#16a34a';
+      const nOp = ords.length;
       celdas += `<td><div class="cell-wrap">
-        <span class="cell-mts" style="color:${col}">${Math.round(mts).toLocaleString('es-CO')}</span>
+        <span class="cell-mts" style="color:${col}">${mts>0?Math.round(mts).toLocaleString('es-CO'):'0'}${nOp>0?` <span style="font-size:10px;font-weight:400;color:#6b7280">(${nOp} OP)</span>`:''}</span>
         <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%;background:${col}"></div></div>
         <span class="cell-cap" style="color:${col}">${pct}%</span>
       </div></td>`;
