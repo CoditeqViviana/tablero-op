@@ -45,6 +45,10 @@ body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
 .date-bar{padding:12px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fafafa}
 .date-bar label{font-size:12px;font-weight:700;color:#374151}
 .date-select{font-size:13px;padding:5px 10px;border:2px solid #1d4ed8;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer;font-weight:600}
+/* Botones rango semana */
+.rango-sem-btn{font-size:12px;padding:5px 12px;border-radius:14px;border:1.5px solid #d1d5db;cursor:pointer;font-weight:600;background:#fff;color:#6b7280}
+.rango-sem-btn.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.rango-sem-btn:hover:not(.active){background:#f9fafb}
 /* Tabla semana */
 table{width:100%;border-collapse:collapse;font-size:13px}
 th{padding:9px 14px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-bottom:1px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
@@ -156,63 +160,31 @@ tr:hover td{background:#fafafa}
   {% endfor %}
 </div>
 
-<!-- Tabla semana -->
+<!-- Tabla semana dinámica -->
 <div class="panel">
   <div class="panel-hdr">
-    <h2>Semana {{ data.lun }} — {{ data.vie }} · Metros planeados vs capacidad</h2>
+    <h2 id="tabla-titulo">Metros planeados vs capacidad</h2>
+  </div>
+  <!-- Selector de rango -->
+  <div style="padding:10px 16px;border-bottom:1px solid #f0f0f0;background:#fafafa;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="rango-sem-btn active" onclick="setRangoSem('esta',this)">Esta semana</button>
+      <button class="rango-sem-btn" onclick="setRangoSem('sig',this)">Próxima semana</button>
+      <button class="rango-sem-btn" onclick="setRangoSem('2sem',this)">2 semanas</button>
+      <button class="rango-sem-btn" onclick="setRangoSem('mes',this)">Este mes</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#6b7280">
+      <span style="font-weight:600">Desde:</span>
+      <input type="date" id="rango-desde" style="font-size:12px;padding:4px 8px;border:1.5px solid #d1d5db;border-radius:6px;height:30px" onchange="setRangoSem('custom',null)">
+      <span style="font-weight:600">Hasta:</span>
+      <input type="date" id="rango-hasta" style="font-size:12px;padding:4px 8px;border:1.5px solid #d1d5db;border-radius:6px;height:30px" onchange="setRangoSem('custom',null)">
+      <button onclick="aplicarRangoCustom()" style="font-size:12px;padding:4px 12px;background:#1d4ed8;color:#fff;border:none;border-radius:6px;cursor:pointer;height:30px">Ver</button>
+    </div>
   </div>
   <div style="overflow-x:auto">
-  <table>
-    <thead>
-      <tr>
-        <th class="maq">Máquina</th>
-        {% for i in range(data.dias_str|length) %}
-        <th>
-          <div style="display:flex;flex-direction:column;align-items:center;gap:2px">
-            <span style="font-size:11px;font-weight:700">{{ data.dias_nombre[i] }}</span>
-            <span style="font-size:10px;color:#9ca3af;font-weight:400">{{ data.dias_label[i] }}</span>
-          </div>
-        </th>
-        {% endfor %}
-        <th>Total sem.</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for m in data.maquinas_rrc %}
-      {% set rrc = data.rrc_semana[m] %}
-      <tr>
-        <td class="maq-cell">{{ m }}</td>
-        {% set total_m = namespace(v=0) %}
-        {% for d in data.dias_str %}
-          {% set vals = rrc.por_dia[d] %}
-          {% set total_m.v = total_m.v + vals.planeado %}
-          {% set pct = vals.pct %}
-          {% if pct > 100 %}{% set cls = 'over' %}{% set fcls = 'fill-over' %}
-          {% elif pct > 80 %}{% set cls = 'warn' %}{% set fcls = 'fill-warn' %}
-          {% else %}{% set cls = 'ok' %}{% set fcls = 'fill-ok' %}{% endif %}
-          <td class="celda-cap" data-mts="{{ vals.planeado|round(0)|int }}">
-            <div class="cell-wrap">
-              <span class="cell-mts pct-{{ cls }}">{{ vals.planeado|round(0)|int }}</span>
-              <div class="bar-wrap"><div class="bar-fill {{ fcls }}" style="width:{% if pct > 100 %}100{% else %}{{ pct }}{% endif %}%"></div></div>
-              <span class="cell-cap pct-{{ cls }}">{{ pct }}%</span>
-            </div>
-          </td>
-        {% endfor %}
-        {% set cap_total = rrc.capacidad * 5 %}
-        {% set pct_total = (total_m.v / cap_total * 100)|round(1) %}
-        {% if pct_total > 100 %}{% set tcls = 'over' %}{% elif pct_total > 80 %}{% set tcls = 'warn' %}{% else %}{% set tcls = 'ok' %}{% endif %}
-        <td><span class="pct-{{ tcls }}" style="font-weight:700">{{ total_m.v|round(0)|int }}<br><span style="font-size:10px">{{ pct_total }}%</span></span></td>
-      </tr>
-      {% endfor %}
-      <!-- Fila capacidad -->
-      <tr style="background:#f9fafb">
-        <td class="maq-cell" style="color:#6b7280">Capacidad/día</td>
-        {% for d in data.dias_str %}
-        <td style="color:#6b7280;font-size:12px" class="cap-dia-lbl">23,888 mts</td>
-        {% endfor %}
-        <td style="color:#6b7280;font-size:12px" class="cap-sem-lbl">119,325 mts</td>
-      </tr>
-    </tbody>
+  <table id="tabla-semana">
+    <thead id="tabla-thead"></thead>
+    <tbody id="tabla-tbody"></tbody>
   </table>
   </div>
   <div class="legend">
@@ -267,32 +239,134 @@ function recalcular() {
   if (sel) cambiarFecha();
 }
 
+const NOMBRES_DIA_CORTO = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const HOY_CAP = '{{ data.hoy }}';
+
+function getLunesDe(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  return d;
+}
+
+function addDias(date, n) {
+  const d = new Date(date);
+  d.setDate(d.getDate() + n);
+  return d;
+}
+
+function fmtISO(d) { return d.toISOString().slice(0,10); }
+function fmtLabel(d) { return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`; }
+
+function getDiasLaboralesEnRango(desde, hasta) {
+  const dias = [];
+  let d = new Date(desde + 'T12:00:00');
+  const fin = new Date(hasta + 'T12:00:00');
+  while (d <= fin) {
+    if (d.getDay() !== 0) dias.push(fmtISO(d)); // excluir domingos
+    d.setDate(d.getDate() + 1);
+  }
+  return dias;
+}
+
+function getMtsPorFecha(maq, fecha) {
+  return TODAS
+    .filter(o => o.maquina === maq && o.fecha === fecha &&
+      (!['Nilpeter 1','Nilpeter 2','Kromia'].includes(maq) || o.en_impresion !== false))
+    .reduce((s,o) => s + (o.mts||0), 0);
+}
+
+function renderTablaSemana(desde, hasta) {
+  const dias = getDiasLaboralesEnRango(desde, hasta);
+  if (dias.length === 0) return;
+
+  const d1 = new Date(desde+'T12:00:00'), d2 = new Date(hasta+'T12:00:00');
+  document.getElementById('tabla-titulo').textContent =
+    `Semana ${fmtLabel(d1)} — ${fmtLabel(d2)} · Metros planeados vs capacidad`;
+
+  // Thead
+  let thead = '<tr><th class="maq">Máquina</th>';
+  dias.forEach(d => {
+    const dt = new Date(d+'T12:00:00');
+    thead += `<th><div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+      <span style="font-size:11px;font-weight:700">${NOMBRES_DIA_CORTO[dt.getDay()]}</span>
+      <span style="font-size:10px;color:#9ca3af">${fmtLabel(dt)}</span>
+    </div></th>`;
+  });
+  thead += '<th>Total</th></tr>';
+  document.getElementById('tabla-thead').innerHTML = thead;
+
+  // Tbody
+  let tbody = '';
+  MAQUINAS_RRC.forEach(m => {
+    let totalMts = 0;
+    let celdas = '';
+    dias.forEach(d => {
+      const mts = getMtsPorFecha(m, d);
+      totalMts += mts;
+      const pct = CAP_DIA_ACTUAL > 0 ? Math.round(mts / CAP_DIA_ACTUAL * 1000)/10 : 0;
+      const barW = Math.min(pct, 100);
+      const col = pct>100?'#dc2626':pct>80?'#ca8a04':'#16a34a';
+      celdas += `<td><div class="cell-wrap">
+        <span class="cell-mts" style="color:${col}">${Math.round(mts).toLocaleString('es-CO')}</span>
+        <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%;background:${col}"></div></div>
+        <span class="cell-cap" style="color:${col}">${pct}%</span>
+      </div></td>`;
+    });
+    const pctTot = CAP_DIA_ACTUAL>0?Math.round(totalMts/(CAP_DIA_ACTUAL*dias.length)*1000)/10:0;
+    const colTot = pctTot>100?'#dc2626':pctTot>80?'#ca8a04':'#16a34a';
+    tbody += `<tr><td class="maq-cell">${m}</td>${celdas}
+      <td><span style="font-weight:700;color:${colTot}">${Math.round(totalMts).toLocaleString('es-CO')}<br>
+      <span style="font-size:10px">${pctTot}%</span></span></td></tr>`;
+  });
+  // Fila capacidad
+  tbody += `<tr style="background:#f9fafb"><td class="maq-cell" style="color:#6b7280">Cap/día</td>`;
+  dias.forEach(() => { tbody += `<td style="color:#6b7280;font-size:11px">${CAP_DIA_ACTUAL.toLocaleString('es-CO')}</td>`; });
+  tbody += `<td style="color:#6b7280;font-size:11px">${(CAP_DIA_ACTUAL*dias.length).toLocaleString('es-CO')}</td></tr>`;
+  document.getElementById('tabla-tbody').innerHTML = tbody;
+}
+
+function setRangoSem(tipo, btn) {
+  document.querySelectorAll('.rango-sem-btn').forEach(b=>b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const hoy = new Date(HOY_CAP+'T12:00:00');
+  let desde, hasta;
+  if (tipo==='esta') {
+    const lun = getLunesDe(HOY_CAP);
+    desde = fmtISO(lun); hasta = fmtISO(addDias(lun,4));
+  } else if (tipo==='sig') {
+    const lun = getLunesDe(HOY_CAP);
+    const sigLun = addDias(lun,7);
+    desde = fmtISO(sigLun); hasta = fmtISO(addDias(sigLun,4));
+  } else if (tipo==='2sem') {
+    const lun = getLunesDe(HOY_CAP);
+    desde = fmtISO(lun); hasta = fmtISO(addDias(lun,11));
+  } else if (tipo==='mes') {
+    const y=hoy.getFullYear(), m=hoy.getMonth();
+    desde = fmtISO(new Date(y,m,1));
+    hasta = fmtISO(new Date(y,m+1,0));
+  } else { return; }
+  document.getElementById('rango-desde').value = desde;
+  document.getElementById('rango-hasta').value = hasta;
+  renderTablaSemana(desde, hasta);
+}
+
+function aplicarRangoCustom() {
+  const desde = document.getElementById('rango-desde').value;
+  const hasta = document.getElementById('rango-hasta').value;
+  if (!desde || !hasta) return;
+  document.querySelectorAll('.rango-sem-btn').forEach(b=>b.classList.remove('active'));
+  renderTablaSemana(desde, hasta);
+}
+
 function actualizarTablaSemana() {
-  // Recalcular celdas de la tabla con nueva capacidad
-  document.querySelectorAll('.celda-cap').forEach(el => {
-    const mts = parseFloat(el.dataset.mts) || 0;
-    const pct = CAP_DIA_ACTUAL > 0 ? Math.round(mts / CAP_DIA_ACTUAL * 1000) / 10 : 0;
-    const barW = Math.min(pct, 100);
-    let cls, fillCls;
-    if (pct > 100) { cls = 'pct-over'; fillCls = '#dc2626'; }
-    else if (pct > 80) { cls = 'pct-warn'; fillCls = '#ca8a04'; }
-    else { cls = 'pct-ok'; fillCls = '#16a34a'; }
-    el.innerHTML = `
-      <div class="cell-wrap">
-        <span class="cell-mts ${cls}">${Math.round(mts)}</span>
-        <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%;background:${fillCls}"></div></div>
-        <span class="cell-cap ${cls}">${pct}%</span>
-      </div>`;
-  });
-  // Actualizar filas capacidad
-  document.querySelectorAll('.cap-dia-lbl').forEach(el => {
-    el.textContent = CAP_DIA_ACTUAL.toLocaleString('es-CO') + ' mts';
-  });
+  const desde = document.getElementById('rango-desde').value;
+  const hasta = document.getElementById('rango-hasta').value;
+  if (desde && hasta) renderTablaSemana(desde, hasta);
 }
 const MAQUINAS_RRC = {{ data.maquinas_rrc | tojson }};
 // CAP_DIA se calcula dinámicamente
-const NOMBRES_DIA = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-
 function barColor(pct) {
   if (pct > 100) return {bar:'#dc2626', text:'#dc2626'};
   if (pct > 80)  return {bar:'#ca8a04', text:'#ca8a04'};
@@ -358,6 +432,7 @@ function cambiarFecha() {
 }
 
 // Inicializar
+setRangoSem('esta', document.querySelector('.rango-sem-btn.active'));
 cambiarFecha();
 </script>
 </body>
