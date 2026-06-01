@@ -82,10 +82,30 @@ def process_excel(file):
     df = pd.read_excel(file, header=0)
     df['fecha_entrega'] = pd.to_datetime(df.iloc[:, 9], errors='coerce')
     df['fecha_creacion'] = pd.to_datetime(df.iloc[:, 20], format='%d-%m-%Y %I:%M %p', errors='coerce')
-    df['maquina'] = df.iloc[:, 16].astype(str).str.split(',').str[0].str.strip()
     df['etapa'] = df.iloc[:, 7].astype(str).str.strip()
     df['mts'] = pd.to_numeric(df.iloc[:, 8], errors='coerce').fillna(0)
     df['familia'] = df.iloc[:, 6].astype(str).str.strip()
+
+    # Etapas que indican que la orden ya salió de impresión y está en rebobinado
+    ETAPAS_REBOBINADO = {'RM4 - Reboninado', 'En cola Rebobinadora 1', 'En cola Rebobinadora',
+                         'Rebobinando', 'Cola rebobinado'}
+    # Etapas que indican troquelado
+    ETAPAS_TROQUELADO = {'En cola Troqueladora 4', 'En cola Troqueladora', 'Troquelando'}
+
+    def asignar_maquina(row):
+        etapa = str(row.iloc[7]).strip()
+        proceso = str(row.iloc[16]).strip()
+        primera = proceso.split(',')[0].strip()
+        # Si está en rebobinado → asignar a Rebobinadora
+        if etapa in ETAPAS_REBOBINADO or 'RM4' in etapa.upper() or 'REBOB' in etapa.upper():
+            return 'Rebobinadora'
+        # Si está en cola de troqueladora → asignar a Troqueladora Rotativa
+        if etapa in ETAPAS_TROQUELADO or 'TROQUELAD' in etapa.upper():
+            return 'Troqueladora Rotativa 1'
+        # Default: primera máquina del proceso
+        return primera
+
+    df['maquina'] = df.apply(asignar_maquina, axis=1)
 
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
