@@ -199,16 +199,18 @@ tr:hover td{background:#fafafa}
 <div class="panel">
   <div class="panel-hdr"><h2>Detalle por día — metros planeados por orden</h2></div>
   <div class="date-bar">
-    <label>📅 Seleccionar fecha:</label>
+    <label>📅 Seleccionar fecha objetivo:</label>
     <select class="date-select" id="selector-fecha" onchange="cambiarFecha()">
-      {% for f in data.fechas_rrc %}
-      <option value="{{ f }}" {% if f == data.hoy %}selected{% endif %}>
+      {% if lib %}
+      {% for f in lib.fechas_rrc %}
+      <option value="{{ f }}">
         {{ f[8:10] }}/{{ f[5:7] }}/{{ f[0:4] }}
       </option>
       {% endfor %}
+      {% endif %}
     </select>
   </div>
-  <div class="dia-grid" id="dia-grid"></div>
+  <div id="dia-grid"></div>
 </div>
 
 {% else %}
@@ -217,6 +219,7 @@ tr:hover td{background:#fafafa}
 
 <script>
 const TODAS_LIB = {{ lib.ordenes | tojson if lib else [] }};
+const TODAS = {{ data.todas_ordenes | tojson if data else [] }};
 
 let CAP_DIA_ACTUAL = 23888;
 
