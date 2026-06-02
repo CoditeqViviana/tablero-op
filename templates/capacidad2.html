@@ -435,13 +435,12 @@ function cambiarFecha() {
 
     ords.forEach(o => {
       const fLib = o.fecha_lib ? `${o.fecha_lib.slice(8,10)}/${o.fecha_lib.slice(5,7)}` : '—';
-      const full = (TODAS||[]).find(t => String(t.op) === String(o.op)) || {};
-      const fEnt = full.fecha_entrega || '—';
-      const ref = (full.referencia || o.proceso || '—').substring(0, 55);
+      const fEnt = o.fecha_entrega || '—';
+      const ref = (o.referencia || o.proceso || '—').substring(0, 55);
       html += `<tr style="border-bottom:1px solid #f3f4f6">
         <td style="padding:7px 10px;font-weight:700;font-size:11px">${o.op}</td>
         <td style="padding:7px 10px;font-size:11px">${o.cliente}</td>
-        <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${full.referencia||''}">${ref}</td>
+        <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${o.referencia||''}">${ref}</td>
         <td style="padding:7px 10px;text-align:right;font-weight:600">${Math.round(o.mts||0).toLocaleString('es-CO')}</td>
         <td style="padding:7px 10px;text-align:center;color:#6b7280">${fLib}</td>
         <td style="padding:7px 10px;text-align:center;font-weight:700;color:#dc2626">${fEnt}</td>
