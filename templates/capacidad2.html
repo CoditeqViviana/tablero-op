@@ -209,8 +209,9 @@ tr:hover td{background:#fafafa}
       {% endfor %}
       {% endif %}
     </select>
+    <button onclick="cambiarFecha()" style="font-size:12px;padding:5px 12px;background:#1d4ed8;color:#fff;border:none;border-radius:6px;cursor:pointer;margin-left:8px">Ver órdenes</button>
   </div>
-  <div id="dia-grid"></div>
+  <div id="dia-grid" style="padding:0 16px 16px"></div>
 </div>
 
 {% else %}
@@ -456,10 +457,17 @@ function renderKpisLib() {
   document.getElementById('kpis-lib').innerHTML = html;
 }
 
-// Inicializar
-renderKpisLib();
-setRangoSem('esta', document.querySelector('.rango-sem-btn.active'));
-cambiarFecha();
+// Inicializar cuando el DOM esté listo
+window.addEventListener('load', function() {
+  renderKpisLib();
+  setRangoSem('esta', document.querySelector('.rango-sem-btn.active'));
+  // Seleccionar primera fecha disponible y mostrar detalle
+  const sel = document.getElementById('selector-fecha');
+  if (sel && sel.options.length > 0) {
+    sel.selectedIndex = 0;
+    cambiarFecha();
+  }
+});
 </script>
 <!-- Modal subir liberacion -->
 <div id="modal-lib" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center">
