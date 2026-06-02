@@ -421,15 +421,18 @@ function cambiarFecha() {
           <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Cliente</th>
           <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Referencia</th>
           <th style="padding:7px 10px;text-align:right;font-size:10px;font-weight:700;color:#6b7280;width:85px">Mts</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:90px">F. Entrega</th>
           <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:90px">Estatus</th>
         </tr></thead>
         <tbody>`;
     ords.forEach(o => {
+      const fe = o.fecha_entrega || '—';
       html += `<tr style="border-bottom:1px solid #f3f4f6">
         <td style="padding:7px 10px;font-weight:700;font-size:11px">${o.op}</td>
         <td style="padding:7px 10px;font-size:11px">${o.cliente}</td>
         <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${o.referencia||''}">${(o.referencia||'—').substring(0,55)}</td>
         <td style="padding:7px 10px;text-align:right;font-weight:600">${Math.round(o.mts||0).toLocaleString('es-CO')}</td>
+        <td style="padding:7px 10px;text-align:center;font-weight:700;color:#dc2626">${fe}</td>
         <td style="padding:7px 10px;text-align:center;font-size:11px;color:#6b7280">${o.etapa||'—'}</td>
       </tr>`;
     });
