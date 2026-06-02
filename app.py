@@ -60,14 +60,17 @@ FAMILIAS_AMORT = {
 }
 
 def get_color_toc(fecha_creacion, fecha_entrega, today):
-    if pd.isna(fecha_entrega) or pd.isna(fecha_creacion):
+    if pd.isna(fecha_entrega):
         return 'gris'
-    duracion = (fecha_entrega - fecha_creacion).days
-    if duracion <= 0:
-        return 'negro'
-    # Negro solo si YA PASÓ la fecha (día siguiente en adelante), no el mismo día
+    # Negro solo si YA PASÓ la fecha (día siguiente en adelante)
     if today.date() > fecha_entrega.date():
         return 'negro'
+    # Si no hay fecha de creación, usar solo la fecha de entrega
+    if pd.isna(fecha_creacion):
+        return 'rojo'  # sin info de buffer, marcar como urgente
+    duracion = (fecha_entrega - fecha_creacion).days
+    if duracion <= 0:
+        return 'rojo'  # orden con duración 0 o negativa pero no vencida = rojo
     consumido = (today - fecha_creacion).days
     pct = consumido / duracion
     if pct <= 0.50:
@@ -193,6 +196,7 @@ def process_excel(file):
         color_toc = get_color_toc(fc, fe, today)
         todas_ordenes.append({
             'fecha': fe.strftime('%Y-%m-%d'),
+            'fecha_entrega': fe.strftime('%d/%m/%Y'),
             'op': str(row.iloc[3]),
             'cliente': str(row.iloc[0]),
             'referencia': str(row.iloc[1]),
@@ -575,6 +579,7 @@ def upload_liberacion():
         df = pd.read_excel(file, header=0)
         df.columns = ['op','fecha_lib','cliente','descripcion','fecha_entrega','mts','centro_proceso','proceso']
         df['fecha_lib'] = pd.to_datetime(df['fecha_lib'], dayfirst=True, errors='coerce')
+        df['fecha_entrega'] = pd.to_datetime(df['fecha_entrega'], dayfirst=True, errors='coerce')
         df['mts'] = pd.to_numeric(df['mts'], errors='coerce').fillna(0)
 
         def sumar_dias_hab(fecha, dias):
@@ -600,6 +605,8 @@ def upload_liberacion():
                 'mts': float(row['mts']),
                 'fecha_lib': row['fecha_lib'].strftime('%Y-%m-%d') if pd.notna(row['fecha_lib']) else '',
                 'fecha_objetivo': fo.strftime('%Y-%m-%d') if fo else '',
+                'fecha_entrega': row['fecha_entrega'].strftime('%d/%m/%Y') if pd.notna(row['fecha_entrega']) else '',
+                'referencia': str(row['descripcion']).strip()[:80],
                 'proceso': str(row['centro_proceso']),
             })
 
