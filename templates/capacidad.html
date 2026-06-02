@@ -379,65 +379,76 @@ function barColor(pct) {
 
 function cambiarFecha() {
   const fecha = document.getElementById('selector-fecha').value;
-  const ordDia = TODAS.filter(o => o.fecha === fecha);
-  const d = new Date(fecha + 'T12:00:00');
-  const nombreDia = NOMBRES_DIA[d.getDay()];
-  const labelFecha = `${fecha.slice(8,10)}/${fecha.slice(5,7)}/${fecha.slice(0,4)}`;
+  if (!fecha) { document.getElementById('dia-grid').innerHTML = ''; return; }
 
-  let html = '';
-  MAQUINAS_RRC.forEach(m => {
-    const ords = ordDia.filter(o => o.maquina === m && (
-      !['NP1','NP2','Kromia'].includes(m) || o.en_impresion !== false
-    ));
-    const totalMts = ords.reduce((s, o) => s + (o.mts || 0), 0);
-    const pct = Math.round(totalMts / CAP_DIA_ACTUAL * 100 * 10) / 10;
-    const col = barColor(pct);
-    const barW = Math.min(pct, 100);
+  const ordsDia = (TODAS||[]).filter(o => o.fecha === fecha);
 
-    let estadoTxt = pct > 100 ? '🔴 Sobrecarga' : pct > 80 ? '🟡 Advertencia' : '🟢 OK';
+  let html = `<div style="margin-bottom:10px;font-size:12px;color:#6b7280">
+    Fecha: <strong>${fecha.slice(8,10)}/${fecha.slice(5,7)}/${fecha.slice(0,4)}</strong>
+    — <strong>${ordsDia.length}</strong> órdenes totales
+  </div>`;
 
-    let ordsHtml = '';
-    if (ords.length > 0) {
-      ordsHtml = '<div class="dia-ordenes">';
-      ords.forEach(o => {
-        ordsHtml += `<div class="dia-ord-row">
-          <span class="dia-ord-cliente" title="${o.cliente}">${o.op} — ${o.cliente}</span>
-          <span class="dia-ord-mts">${Math.round(o.mts)} mts</span>
-        </div>`;
-      });
-      ordsHtml += '</div>';
-    } else {
-      ordsHtml = '<div style="font-size:12px;color:#9ca3af;text-align:center;padding:10px">Sin órdenes</div>';
-    }
-
-    html += `<div class="dia-card">
-      <div class="dia-card-hdr">
-        <span class="dia-card-maq">${m}</span>
-        <span class="dia-card-cap">Cap: ${CAP_DIA} mts</span>
+  // Resumen por máquina
+  html += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">`;
+  (MAQUINAS_RRC||[]).forEach(m => {
+    const ords = ordsDia.filter(o => o.maquina === m && o.en_impresion !== false);
+    const totalMts = ords.reduce((s,o) => s+(o.mts||0), 0);
+    const pct = CAP_DIA_ACTUAL > 0 ? Math.round(totalMts/CAP_DIA_ACTUAL*1000)/10 : 0;
+    const col = pct>100?'#dc2626':pct>80?'#ca8a04':'#16a34a';
+    const barW = Math.min(pct,100);
+    html += `<div style="background:#fff;border-radius:8px;border:1px solid #e5e7eb;padding:12px 14px">
+      <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:6px">${m}</div>
+      <div style="font-size:20px;font-weight:700;color:${col}">${Math.round(totalMts).toLocaleString('es-CO')} mts</div>
+      <div style="height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden;margin:6px 0">
+        <div style="height:100%;width:${barW}%;background:${col};border-radius:4px"></div>
       </div>
-      <div class="dia-card-body">
-        <div class="dia-stat">
-          <span class="dia-stat-lbl">Metros planeados</span>
-          <span class="dia-stat-val" style="color:${col.text}">${Math.round(totalMts)}</span>
-        </div>
-        <div class="barra-grande">
-          <div class="barra-fill" style="width:${barW}%;background:${col.bar}"></div>
-        </div>
-        <div class="dia-pct" style="color:${col.text}">${pct}% de capacidad · ${estadoTxt}</div>
-        <div class="dia-stat" style="margin-top:8px">
-          <span class="dia-stat-lbl">Órdenes</span>
-          <span style="font-weight:700;color:#374151">${ords.length}</span>
-        </div>
-        ${ordsHtml}
-      </div>
+      <div style="font-size:11px;color:${col}">${pct}% capacidad · ${ords.length} órdenes</div>
     </div>`;
   });
+  html += `</div>`;
+
+  // Tabla detalle por máquina
+  (MAQUINAS_RRC||[]).forEach(m => {
+    const ords = ordsDia.filter(o => o.maquina === m && o.en_impresion !== false);
+    if (ords.length === 0) return;
+    html += `<div style="margin-bottom:14px;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
+      <div style="background:#f9fafb;padding:8px 12px;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;border-bottom:1px solid #e5e7eb">
+        ${m} — ${ords.length} órdenes
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr style="background:#f9fafb;border-bottom:1px solid #e5e7eb">
+          <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280;width:70px">OP</th>
+          <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Cliente</th>
+          <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Referencia</th>
+          <th style="padding:7px 10px;text-align:right;font-size:10px;font-weight:700;color:#6b7280;width:85px">Mts</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:90px">Estatus</th>
+        </tr></thead>
+        <tbody>`;
+    ords.forEach(o => {
+      html += `<tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:7px 10px;font-weight:700;font-size:11px">${o.op}</td>
+        <td style="padding:7px 10px;font-size:11px">${o.cliente}</td>
+        <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${o.referencia||''}">${(o.referencia||'—').substring(0,55)}</td>
+        <td style="padding:7px 10px;text-align:right;font-weight:600">${Math.round(o.mts||0).toLocaleString('es-CO')}</td>
+        <td style="padding:7px 10px;text-align:center;font-size:11px;color:#6b7280">${o.etapa||'—'}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div>`;
+  });
+
+  if (ordsDia.filter(o => (MAQUINAS_RRC||[]).includes(o.maquina)).length === 0) {
+    html += `<div style="padding:20px;text-align:center;color:#9ca3af;font-size:12px">Sin órdenes RRC para esta fecha</div>`;
+  }
+
   document.getElementById('dia-grid').innerHTML = html;
 }
 
 // Inicializar
-setRangoSem('esta', document.querySelector('.rango-sem-btn.active'));
-cambiarFecha();
+window.addEventListener('load', function() {
+  setRangoSem('esta', document.querySelector('.rango-sem-btn.active'));
+  const sel = document.getElementById('selector-fecha');
+  if (sel && sel.options.length > 0) { sel.selectedIndex = 0; cambiarFecha(); }
+});
 </script>
 </body>
 </html>
