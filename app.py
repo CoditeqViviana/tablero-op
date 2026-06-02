@@ -549,6 +549,88 @@ def upload_wip():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/capacidad2')
+def capacidad2_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    lib_data = None
+    LIB_FILE = os.path.join(UPLOAD_FOLDER, 'liberacion.json')
+    if os.path.exists(LIB_FILE):
+        with open(LIB_FILE, encoding='utf-8') as f:
+            lib_data = json.load(f)
+    return render_template('capacidad2.html', data=data, lib=lib_data)
+
+@app.route('/upload_liberacion', methods=['POST'])
+def upload_liberacion():
+    if 'file' not in request.files:
+        return jsonify({'error': 'No se recibio archivo'}), 400
+    file = request.files['file']
+    if not file.filename.endswith(('.xlsx','.xls','.xlsm')):
+        return jsonify({'error': 'Solo Excel'}), 400
+    try:
+        from datetime import timedelta
+        import pytz
+        df = pd.read_excel(file, header=0)
+        df.columns = ['op','fecha_lib','cliente','descripcion','fecha_entrega','mts','centro_proceso','proceso']
+        df['fecha_lib'] = pd.to_datetime(df['fecha_lib'], dayfirst=True, errors='coerce')
+        df['mts'] = pd.to_numeric(df['mts'], errors='coerce').fillna(0)
+
+        def sumar_dias_hab(fecha, dias):
+            if pd.isna(fecha): return None
+            f = fecha
+            d = 0
+            while d < dias:
+                f += timedelta(days=1)
+                if f.weekday() != 6: d += 1
+            return f
+
+        df['fecha_objetivo'] = df['fecha_lib'].apply(lambda x: sumar_dias_hab(x, 2))
+        df['maquina'] = df['centro_proceso'].astype(str).str.split(',').str[0].str.strip()
+
+        MAQUINAS_RRC = ['Nilpeter 1', 'Nilpeter 2', 'Kromia']
+        ordenes = []
+        for _, row in df.iterrows():
+            fo = row['fecha_objetivo']
+            ordenes.append({
+                'op': str(row['op']),
+                'cliente': str(row['cliente']),
+                'maquina': str(row['maquina']),
+                'mts': float(row['mts']),
+                'fecha_lib': row['fecha_lib'].strftime('%Y-%m-%d') if pd.notna(row['fecha_lib']) else '',
+                'fecha_objetivo': fo.strftime('%Y-%m-%d') if fo else '',
+                'proceso': str(row['centro_proceso']),
+            })
+
+        # Metros por maquina por fecha_objetivo
+        cap_data = {}
+        for m in MAQUINAS_RRC:
+            grp = [o for o in ordenes if o['maquina'] == m]
+            por_fecha = {}
+            for o in grp:
+                f = o['fecha_objetivo']
+                if f:
+                    por_fecha[f] = por_fecha.get(f, 0) + o['mts']
+            cap_data[m] = {k: round(v, 1) for k, v in por_fecha.items()}
+
+        fechas_rrc = sorted(set(f for m in MAQUINAS_RRC for f in cap_data[m].keys()))
+
+        now = datetime.now(pytz.timezone('America/Bogota'))
+        lib_result = {
+            'updated_at': now.strftime('%d/%m/%Y %H:%M'),
+            'ordenes': ordenes,
+            'cap_data': cap_data,
+            'fechas_rrc': fechas_rrc,
+            'maquinas_rrc': MAQUINAS_RRC,
+        }
+        LIB_FILE = os.path.join(UPLOAD_FOLDER, 'liberacion.json')
+        with open(LIB_FILE, 'w', encoding='utf-8') as f:
+            json.dump(lib_result, f, ensure_ascii=False)
+        return jsonify({'ok': True, 'updated_at': lib_result['updated_at']})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/upload', methods=['POST'])
 def upload():
     if 'file' not in request.files:
