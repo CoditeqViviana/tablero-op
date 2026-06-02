@@ -65,7 +65,8 @@ def get_color_toc(fecha_creacion, fecha_entrega, today):
     duracion = (fecha_entrega - fecha_creacion).days
     if duracion <= 0:
         return 'negro'
-    if today > fecha_entrega:
+    # Negro solo si YA PASÓ la fecha (día siguiente en adelante), no el mismo día
+    if today.date() > fecha_entrega.date():
         return 'negro'
     consumido = (today - fecha_creacion).days
     pct = consumido / duracion
