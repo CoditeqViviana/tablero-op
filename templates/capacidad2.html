@@ -457,124 +457,7 @@ function cambiarFecha() {
   document.getElementById('dia-grid').innerHTML = html;
 }
 
-// ============ DIAGNÓSTICO DE ATRASO ============
-const HOY_ATRASO = '{{ data.hoy if data else "" }}';
 
-function fmtFO(s) {
-  if (!s) return '—';
-  return s.slice(8,10)+'/'+s.slice(5,7);
-}
-
-function calcularAtraso(diasRecuperacion) {
-  const el = document.getElementById('atraso-content');
-  const todayStr = HOY_ATRASO || new Date().toISOString().slice(0,10);
-  const today = new Date(todayStr + 'T00:00:00');
-  const lib = TODAS_LIB || [];
-
-  if (lib.length === 0) {
-    el.innerHTML = '<div style="padding:20px;text-align:center;color:#9ca3af;font-size:13px">Sube el archivo <strong>Fecha_Recomendada_liberacion.xlsx</strong></div>';
-    return;
-  }
-
-  const horas = parseFloat(document.getElementById('p-horas').value) || 22.75;
-  const eficNom = parseFloat(document.getElementById('p-efic').value) / 100 || 0.5;
-  const velNom = parseFloat(document.getElementById('p-vel-imp').value) || 35;
-  const minsTurno = horas * 60 / 3;
-  const minsProdTurno = minsTurno * eficNom;
-  const capTurnoNom = Math.round(minsProdTurno * velNom);
-  const turnosDisp = diasRecuperacion * 3;
-
-  const MAQUINAS_IMP = ['Nilpeter 1', 'Nilpeter 2', 'Kromia'];
-  let rows = '';
-
-  MAQUINAS_IMP.forEach(function(m) {
-    var atrasadas = lib.filter(function(o) {
-      return o.maquina === m && o.fecha_objetivo && new Date(o.fecha_objetivo+'T00:00:00') < today;
-    });
-    var pendientes = lib.filter(function(o) {
-      return o.maquina === m && o.fecha_objetivo && new Date(o.fecha_objetivo+'T00:00:00') >= today;
-    });
-    var mtsAtras = Math.round(atrasadas.reduce(function(s,o){return s+(o.mts||0);}, 0));
-    var mtsPend  = Math.round(pendientes.reduce(function(s,o){return s+(o.mts||0);}, 0));
-    var mtsTotal = mtsAtras + mtsPend;
-    var turnosAtras = capTurnoNom > 0 ? Math.round(mtsAtras / capTurnoNom * 10) / 10 : 0;
-    var diasAtras   = Math.round(turnosAtras / 3 * 10) / 10;
-
-    var mtsPorTurno = turnosDisp > 0 ? mtsTotal / turnosDisp : 0;
-    var velReq  = Math.round(minsProdTurno > 0 ? mtsPorTurno / minsProdTurno * 10 : 0) / 10;
-    var eficReq = Math.round(velNom * minsTurno > 0 ? mtsPorTurno / (velNom * minsTurno) * 1000 : 0) / 10;
-    var velComb = Math.round(Math.min(velNom * 1.2, velReq) * 10) / 10;
-    var eficComb= Math.round(velComb * minsTurno > 0 ? mtsPorTurno / (velComb * minsTurno) * 1000 : 0) / 10;
-
-    var semaforo = turnosAtras <= 0 ? '🟢' : turnosAtras <= 3 ? '🟡' : '🔴';
-    var colAtras = turnosAtras <= 0 ? '#15803d' : turnosAtras <= 3 ? '#ca8a04' : '#dc2626';
-    var estadoTxt = turnosAtras > 0 ? (turnosAtras + ' turnos atrasados (' + diasAtras + ' días)') : '✅ Al día';
-
-    var colV = velReq > velNom*1.5 ? '#dc2626' : velReq > velNom ? '#ca8a04' : '#15803d';
-    var colE = eficReq > 100 ? '#dc2626' : eficReq > eficNom*100 ? '#ca8a04' : '#15803d';
-    var txtV = velReq > velNom ? ('+' + Math.round((velReq/velNom-1)*100) + '% vs nominal') : 'Ya lo cumple';
-    var txtE = eficReq > 100 ? '⚠️ Imposible (>100%)' : (eficReq > eficNom*100 ? ('+' + Math.round((eficReq/(eficNom*100)-1)*100) + '% vs nominal') : 'Ya lo cumple');
-    var txtC = eficComb > 100 ? '⚠️ Aumentar más velocidad' : '✅ Factible';
-    var colC = eficComb > 100 ? '#dc2626' : '#1d4ed8';
-
-    // Tabla órdenes atrasadas
-    var tablaAtras = '';
-    if (atrasadas.length > 0) {
-      var filas = atrasadas.sort(function(a,b){return (a.fecha_objetivo||'').localeCompare(b.fecha_objetivo||'');}).map(function(o){
-        return '<tr style="border-bottom:1px solid #f3f4f6">'
-          + '<td style="padding:5px 8px;font-weight:700">' + o.op + '</td>'
-          + '<td style="padding:5px 8px">' + o.cliente + '</td>'
-          + '<td style="padding:5px 8px;text-align:right;font-weight:600">' + Math.round(o.mts||0).toLocaleString('es-CO') + '</td>'
-          + '<td style="padding:5px 8px;text-align:center;color:#dc2626;font-weight:700">' + fmtFO(o.fecha_objetivo) + '</td>'
-          + '<td style="padding:5px 8px;text-align:center">' + (o.fecha_entrega||'—') + '</td>'
-          + '</tr>';
-      }).join('');
-      tablaAtras = '<details style="margin-top:8px">'
-        + '<summary style="font-size:11px;font-weight:700;color:#dc2626;cursor:pointer">🔴 Ver ' + atrasadas.length + ' órdenes atrasadas</summary>'
-        + '<div style="overflow-x:auto;margin-top:6px">'
-        + '<table style="width:100%;border-collapse:collapse;font-size:11px">'
-        + '<thead><tr style="background:#fef2f2">'
-        + '<th style="padding:5px 8px;text-align:left;font-size:10px;color:#6b7280;border-bottom:1px solid #fca5a5">OP</th>'
-        + '<th style="padding:5px 8px;text-align:left;font-size:10px;color:#6b7280;border-bottom:1px solid #fca5a5">Cliente</th>'
-        + '<th style="padding:5px 8px;text-align:right;font-size:10px;color:#6b7280;border-bottom:1px solid #fca5a5">Mts</th>'
-        + '<th style="padding:5px 8px;text-align:center;font-size:10px;color:#6b7280;border-bottom:1px solid #fca5a5">F.Obj</th>'
-        + '<th style="padding:5px 8px;text-align:center;font-size:10px;color:#6b7280;border-bottom:1px solid #fca5a5">F.Entrega</th>'
-        + '</tr></thead><tbody>' + filas + '</tbody></table></div></details>';
-    }
-
-    rows += '<div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-bottom:12px">'
-      // Header
-      + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #f0f0f0">'
-      + '<div style="font-size:14px;font-weight:700;color:#374151">' + semaforo + ' ' + m + '</div>'
-      + '<div style="font-size:12px;color:' + colAtras + ';font-weight:700">' + estadoTxt + '</div>'
-      + '</div>'
-      // Métricas
-      + '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">'
-      + '<div style="background:#fef2f2;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#6b7280;margin-bottom:3px">Mts atrasados</div><div style="font-size:18px;font-weight:700;color:#dc2626">' + mtsAtras.toLocaleString('es-CO') + '</div><div style="font-size:10px;color:#9ca3af">' + atrasadas.length + ' órdenes</div></div>'
-      + '<div style="background:#eff6ff;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#6b7280;margin-bottom:3px">Mts pendientes</div><div style="font-size:18px;font-weight:700;color:#1d4ed8">' + mtsPend.toLocaleString('es-CO') + '</div><div style="font-size:10px;color:#9ca3af">' + pendientes.length + ' órdenes</div></div>'
-      + '<div style="background:#f9fafb;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#6b7280;margin-bottom:3px">Total a producir</div><div style="font-size:18px;font-weight:700;color:#374151">' + mtsTotal.toLocaleString('es-CO') + '</div><div style="font-size:10px;color:#9ca3af">' + (atrasadas.length+pendientes.length) + ' órdenes</div></div>'
-      + '<div style="background:#f9fafb;border-radius:8px;padding:10px;text-align:center"><div style="font-size:10px;color:#6b7280;margin-bottom:3px">Cap. nominal/turno</div><div style="font-size:18px;font-weight:700;color:#374151">' + capTurnoNom.toLocaleString('es-CO') + '</div><div style="font-size:10px;color:#9ca3af">mts</div></div>'
-      + '</div>'
-      // Plan recuperación
-      + '<div style="background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:12px;margin-bottom:10px">'
-      + '<div style="font-size:11px;font-weight:700;color:#92400e;margin-bottom:8px">Plan para recuperarse en ' + diasRecuperacion + ' días (' + turnosDisp + ' turnos) — Necesita ' + Math.round(mtsPorTurno).toLocaleString('es-CO') + ' mts/turno</div>'
-      + '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">'
-      + '<div style="background:#fff;border-radius:6px;padding:10px;border:1px solid #fde68a"><div style="font-size:10px;font-weight:700;color:#374151;margin-bottom:6px">🚀 Solo velocidad</div><div style="font-size:20px;font-weight:700;color:' + colV + '">' + velReq + ' m/min</div><div style="font-size:10px;color:#6b7280;margin-top:2px">Eficiencia: ' + (eficNom*100).toFixed(0) + '% (sin cambio)</div><div style="font-size:10px;color:' + colV + ';font-weight:600;margin-top:4px">' + txtV + '</div></div>'
-      + '<div style="background:#fff;border-radius:6px;padding:10px;border:1px solid #fde68a"><div style="font-size:10px;font-weight:700;color:#374151;margin-bottom:6px">⚡ Solo eficiencia</div><div style="font-size:20px;font-weight:700;color:' + colE + '">' + eficReq + '%</div><div style="font-size:10px;color:#6b7280;margin-top:2px">Velocidad: ' + velNom + ' m/min (sin cambio)</div><div style="font-size:10px;color:' + colE + ';font-weight:600;margin-top:4px">' + txtE + '</div></div>'
-      + '<div style="background:#dbeafe;border-radius:6px;padding:10px;border:1px solid #93c5fd"><div style="font-size:10px;font-weight:700;color:#1d4ed8;margin-bottom:6px">✅ Combinada (recomendada)</div><div style="font-size:16px;font-weight:700;color:#1d4ed8">' + velComb + ' m/min · ' + eficComb + '%</div><div style="font-size:10px;color:#3b82f6;margin-top:2px">Vel +20% + ajuste eficiencia</div><div style="font-size:10px;color:' + colC + ';font-weight:600;margin-top:4px">' + txtC + '</div></div>'
-      + '</div></div>'
-      + tablaAtras
-      + '</div>';
-  });
-
-  el.innerHTML = rows || '<div style="padding:16px;background:#fef9c3;border-radius:8px;font-size:12px;color:#854d0e">Máquinas en datos: ' + [...new Set(lib.map(function(o){return o.maquina;}))].join(', ') + '</div>';
-}
-
-function setRecuperacion(dias, btn) {
-  document.querySelectorAll('#panel-atraso .rango-sem-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  calcularAtraso(dias);
-}
 
 // KPIs dinámicos
 function renderKpisLib() {
@@ -603,24 +486,110 @@ window.addEventListener('load', function() {
     sel.selectedIndex = 0;
     cambiarFecha();
   }
-  calcularAtraso(3);
 
 });
 </script>
-<!-- Panel de Diagnóstico de Atraso -->
-<div class="panel" id="panel-atraso" style="margin-bottom:14px">
+<!-- Panel de Diagnóstico — server rendered -->
+{% if lib %}
+<div class="panel" style="margin-bottom:14px">
   <div class="panel-hdr">
     <h2>⏱️ Diagnóstico de atraso y plan de recuperación</h2>
-    <div style="display:flex;align-items:center;gap:8px">
-      <span style="font-size:12px;color:#6b7280">Recuperar en:</span>
-      <button class="rango-sem-btn active" id="rec-3" onclick="setRecuperacion(3,this)">3 días</button>
-      <button class="rango-sem-btn" id="rec-5" onclick="setRecuperacion(5,this)">5 días</button>
-      <button class="rango-sem-btn" id="rec-7" onclick="setRecuperacion(7,this)">7 días</button>
-      <button class="rango-sem-btn" id="rec-10" onclick="setRecuperacion(10,this)">10 días</button>
-    </div>
+    <div style="font-size:12px;color:#6b7280">Parámetros: 35 m/min · 50% eficiencia · 22.75 h/día</div>
   </div>
-  <div id="atraso-content" style="padding:16px"></div>
+  <div style="padding:16px">
+    {% set horas = 22.75 %}
+    {% set efic = 0.50 %}
+    {% set vel = 35 %}
+    {% set mins_turno = horas * 60 / 3 %}
+    {% set mins_prod = mins_turno * efic %}
+    {% set cap_turno = (mins_prod * vel)|round(0)|int %}
+    {% set maquinas = ['Nilpeter 1','Nilpeter 2','Kromia'] %}
+    {% set hoy = data.hoy %}
+
+    {% for m in maquinas %}
+    {% set ns = namespace(mts_atras=0, n_atras=0, mts_pend=0, n_pend=0) %}
+    {% for o in lib.ordenes %}
+      {% if o.maquina == m %}
+        {% if o.fecha_objetivo < hoy %}
+          {% set ns.mts_atras = ns.mts_atras + o.mts %}
+          {% set ns.n_atras = ns.n_atras + 1 %}
+        {% else %}
+          {% set ns.mts_pend = ns.mts_pend + o.mts %}
+          {% set ns.n_pend = ns.n_pend + 1 %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% set mts_total = ns.mts_atras + ns.mts_pend %}
+    {% set turnos_atras = (ns.mts_atras / cap_turno)|round(1) if cap_turno > 0 else 0 %}
+    {% set dias_atras = (turnos_atras / 3)|round(1) %}
+    {% set col = '#dc2626' if turnos_atras > 3 else '#ca8a04' if turnos_atras > 0 else '#15803d' %}
+    {% set semaforo = '🔴' if turnos_atras > 3 else '🟡' if turnos_atras > 0 else '🟢' %}
+
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-bottom:12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid #f0f0f0">
+        <div style="font-size:14px;font-weight:700;color:#374151">{{ semaforo }} {{ m }}</div>
+        <div style="font-size:13px;font-weight:700;color:{{ col }}">
+          {% if turnos_atras > 0 %}{{ turnos_atras }} turnos atrasados ({{ dias_atras }} días){% else %}✅ Al día{% endif %}
+        </div>
+      </div>
+
+      <!-- Métricas -->
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+        <div style="background:#fef2f2;border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:10px;color:#6b7280;margin-bottom:3px">Mts atrasados</div>
+          <div style="font-size:20px;font-weight:700;color:#dc2626">{{ ns.mts_atras|round(0)|int|format_number }}</div>
+          <div style="font-size:10px;color:#9ca3af">{{ ns.n_atras }} órdenes</div>
+        </div>
+        <div style="background:#eff6ff;border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:10px;color:#6b7280;margin-bottom:3px">Mts pendientes</div>
+          <div style="font-size:20px;font-weight:700;color:#1d4ed8">{{ ns.mts_pend|round(0)|int|format_number }}</div>
+          <div style="font-size:10px;color:#9ca3af">{{ ns.n_pend }} órdenes</div>
+        </div>
+        <div style="background:#f9fafb;border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:10px;color:#6b7280;margin-bottom:3px">Total a producir</div>
+          <div style="font-size:20px;font-weight:700;color:#374151">{{ mts_total|round(0)|int|format_number }}</div>
+          <div style="font-size:10px;color:#9ca3af">{{ ns.n_atras + ns.n_pend }} órdenes</div>
+        </div>
+        <div style="background:#f9fafb;border-radius:8px;padding:10px;text-align:center">
+          <div style="font-size:10px;color:#6b7280;margin-bottom:3px">Cap. nominal/turno</div>
+          <div style="font-size:20px;font-weight:700;color:#374151">{{ cap_turno|format_number }}</div>
+          <div style="font-size:10px;color:#9ca3af">mts a 35 m/min · 50%</div>
+        </div>
+      </div>
+
+      <!-- Planes de recuperación -->
+      <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:10px">📋 Planes de recuperación</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+        {% for dias_rec in [3,5,7,10] %}
+        {% set t_disp = dias_rec * 3 %}
+        {% set mts_por_turno = (mts_total / t_disp)|round(0)|int if t_disp > 0 else 0 %}
+        {% set vel_req = (mts_por_turno / mins_prod)|round(1) if mins_prod > 0 else vel %}
+        {% set efic_req = (mts_por_turno / (vel * mins_turno) * 100)|round(1) if vel * mins_turno > 0 else 0 %}
+        {% set col_rec = '#dc2626' if vel_req > vel * 1.5 else '#ca8a04' if vel_req > vel else '#15803d' %}
+        <div style="background:#fff;border-radius:8px;padding:12px;border:2px solid {% if dias_rec == 5 %}#1d4ed8{% else %}#e5e7eb{% endif %}">
+          <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:8px">
+            {{ dias_rec }} días ({{ t_disp }} turnos)
+            {% if dias_rec == 5 %}<span style="background:#1d4ed8;color:#fff;padding:1px 6px;border-radius:4px;font-size:9px;margin-left:4px">RECOMENDADO</span>{% endif %}
+          </div>
+          <div style="margin-bottom:6px">
+            <div style="font-size:10px;color:#6b7280">🚀 Velocidad necesaria</div>
+            <div style="font-size:18px;font-weight:700;color:{{ col_rec }}">{{ vel_req }} m/min</div>
+          </div>
+          <div style="margin-bottom:6px">
+            <div style="font-size:10px;color:#6b7280">⚡ Eficiencia necesaria</div>
+            <div style="font-size:16px;font-weight:700;color:{% if efic_req > 100 %}#dc2626{% elif efic_req > 60 %}#ca8a04{% else %}#15803d{% endif %}">{{ efic_req }}%</div>
+          </div>
+          <div style="font-size:10px;color:#6b7280">Mts/turno requerido</div>
+          <div style="font-size:13px;font-weight:700;color:#374151">{{ mts_por_turno|format_number }}</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
+{% endif %}
 
 <!-- Modal subir liberacion -->
 <div id="modal-lib" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center">
