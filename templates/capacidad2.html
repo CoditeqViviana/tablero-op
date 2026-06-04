@@ -461,13 +461,21 @@ function cambiarFecha() {
 const HOY_ATRASO = '{{ data.hoy if data else "" }}';
 
 function calcularAtraso(diasRecuperacion) {
-  const today = new Date(HOY_ATRASO + 'T00:00:00');
+  const todayStr = HOY_ATRASO || new Date().toISOString().slice(0,10);
+  const today = new Date(todayStr + 'T00:00:00');
   const horas = parseFloat(document.getElementById('p-horas').value) || 22.75;
   const eficNom = parseFloat(document.getElementById('p-efic').value) / 100 || 0.5;
   const velNom = parseFloat(document.getElementById('p-vel-imp').value) || 35;
   const minsTurno = horas * 60 / 3;
   const minsProdTurno = minsTurno * eficNom;
   const capTurnoNom = minsProdTurno * velNom;
+
+  const lib = TODAS_LIB || [];
+  if (lib.length === 0) {
+    document.getElementById('atraso-content').innerHTML =
+      '<div style="padding:20px;text-align:center;color:#9ca3af;font-size:13px">⚠️ No hay datos de liberación. Sube el archivo <strong>Fecha_Recomendada_liberacion.xlsx</strong> con el botón "↑ Subir Liberación".</div>';
+    return;
+  }
 
   const MAQUINAS_IMP = ['Nilpeter 1', 'Nilpeter 2', 'Kromia'];
   const ETAPAS_IMP = new Set(['Preparacion','En cola impresión NP1','Impresion','En cola impresion NP1','En cola impresión NP2','En cola impresión Kromia']);
@@ -598,7 +606,15 @@ function calcularAtraso(diasRecuperacion) {
     </div>`;
   });
 
-  if (!html) html = '<div style="padding:20px;text-align:center;color:#9ca3af">No hay datos de liberación cargados. Sube el Excel de liberación primero.</div>';
+  if (!html) {
+    // Debug: show what machines are in the data
+    const maqsEnDatos = [...new Set(lib.map(o=>o.maquina))].join(', ');
+    html = `<div style="padding:16px;background:#fef9c3;border-radius:8px;font-size:12px;color:#854d0e">
+      ⚠️ No se encontraron órdenes para NP1/NP2/Kromia en los datos de liberación.<br>
+      Máquinas encontradas en el archivo: <strong>${maqsEnDatos}</strong><br>
+      Total órdenes cargadas: <strong>${lib.length}</strong>
+    </div>`;
+  }
   document.getElementById('atraso-content').innerHTML = html;
 }
 
