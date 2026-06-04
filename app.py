@@ -6,6 +6,7 @@ from datetime import datetime
 import pytz
 
 app = Flask(__name__)
+app.jinja_env.filters['format_number'] = lambda v: f'{int(v):,}'.replace(',', '.')
 UPLOAD_FOLDER = 'data'
 DATA_FILE = os.path.join(UPLOAD_FOLDER, 'latest.json')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
