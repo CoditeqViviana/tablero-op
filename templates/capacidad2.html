@@ -652,6 +652,20 @@ window.addEventListener('load', function() {
     cambiarFecha();
   }
   calcularAtraso(3);
+  // Debug temporal
+  setTimeout(() => {
+    const el = document.getElementById('atraso-content');
+    if (!el.innerHTML.trim()) {
+      const maqsLib = [...new Set((TODAS_LIB||[]).map(o=>o.maquina))].join(', ') || 'vacío';
+      const maqsMaq = (MAQUINAS_RRC||[]).join(', ') || 'vacío';
+      el.innerHTML = `<div style="padding:14px;background:#fef9c3;border-radius:8px;font-size:12px;color:#854d0e">
+        DEBUG: TODAS_LIB tiene ${(TODAS_LIB||[]).length} órdenes<br>
+        Máquinas en TODAS_LIB: <strong>${maqsLib}</strong><br>
+        MAQUINAS_RRC: <strong>${maqsMaq}</strong><br>
+        HOY_ATRASO: <strong>${HOY_ATRASO}</strong>
+      </div>`;
+    }
+  }, 500);
 });
 </script>
 <!-- Panel de Diagnóstico de Atraso -->
