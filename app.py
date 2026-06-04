@@ -375,6 +375,41 @@ def process_excel(file):
         if pd.notna(fe) and fe <= today + pd.Timedelta(days=7):
             urgentes.append(ord_data)
 
+    # === DIAGNÓSTICO DE ATRASO ===
+    ETAPAS_IMP_SET = {'Preparacion','En cola impresión NP1','Impresion','En cola impresion NP1',
+                      'En cola impresión NP2','En cola impresión Kromia'}
+    horas_nom = 22.75; efic_nom = 0.50; vel_nom = 35
+    mins_turno_nom = horas_nom * 60 / 3
+    mins_prod_nom  = mins_turno_nom * efic_nom
+    cap_turno_nom  = round(mins_prod_nom * vel_nom)
+
+    diagnostico = {}
+    for mq in ['Nilpeter 1','Nilpeter 2','Kromia']:
+        grp = df[(df['maquina']==mq) & (df['etapa'].isin(ETAPAS_IMP_SET))]
+        atras = grp[grp['fecha_entrega'] < today]
+        pend  = grp[grp['fecha_entrega'] >= today]
+        mts_a = round(float(atras['mts'].sum()))
+        mts_p = round(float(pend['mts'].sum()))
+        mts_t = mts_a + mts_p
+        turnos_atras = round(mts_a / cap_turno_nom, 1) if cap_turno_nom > 0 else 0
+        planes = []
+        for dias_rec in [3, 5, 7, 10]:
+            t_disp = dias_rec * 3
+            mpt = round(mts_t / t_disp) if t_disp > 0 else 0
+            vr  = round(mpt / mins_prod_nom, 1) if mins_prod_nom > 0 else vel_nom
+            er  = round(mpt / (vel_nom * mins_turno_nom) * 100, 1) if vel_nom * mins_turno_nom > 0 else 0
+            vc  = round(min(vel_nom * 1.2, vr), 1)
+            ec  = round(mpt / (vc * mins_turno_nom) * 100, 1) if vc * mins_turno_nom > 0 else 0
+            planes.append({'dias': dias_rec, 'turnos': t_disp, 'mts_por_turno': mpt,
+                           'vel_req': vr, 'efic_req': er, 'vel_comb': vc, 'efic_comb': ec})
+        diagnostico[mq] = {
+            'mts_atrasados': mts_a, 'n_atrasadas': len(atras),
+            'mts_pendientes': mts_p, 'n_pendientes': len(pend),
+            'mts_total': mts_t, 'turnos_atrasados': turnos_atras,
+            'dias_atrasados': round(turnos_atras / 3, 1),
+            'cap_turno': cap_turno_nom, 'planes': planes,
+        }
+
     result = {
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
         'hoy': today.strftime('%Y-%m-%d'),
@@ -409,6 +444,7 @@ def process_excel(file):
         'fechas_disponibles': fechas_disponibles,
         'todas_ordenes': todas_ordenes,
         'maquinas_rrc': maquinas_rrc,
+        'diagnostico': diagnostico,
         'cuellos': cuellos,
         'capacidad_data': capacidad_data,
         'fechas_rrc': fechas_rrc,
