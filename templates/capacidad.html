@@ -207,8 +207,76 @@ tr:hover td{background:#fafafa}
       {% endfor %}
     </select>
   </div>
-  <div class="dia-grid" id="dia-grid"></div>
+  <div id="dia-grid" style="padding:14px 16px"></div>
 </div>
+
+<!-- Panel Diagnóstico de Atraso -->
+{% if data.diagnostico %}
+<div style="background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden">
+  <div style="padding:11px 16px;border-bottom:1px solid #f0f0f0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+    <h2 style="font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px">⏱️ Diagnóstico de atraso y plan de recuperación</h2>
+    <span style="font-size:11px;color:#6b7280">Base: 35 m/min · 50% eficiencia · 22.75 h/día · 3 turnos</span>
+  </div>
+  <div style="padding:16px">
+  {% for mq, d in data.diagnostico.items() %}
+  {% set col = '#dc2626' if d.turnos_atrasados > 3 else '#ca8a04' if d.turnos_atrasados > 0 else '#15803d' %}
+  {% set semaf = '🔴' if d.turnos_atrasados > 3 else '🟡' if d.turnos_atrasados > 0 else '🟢' %}
+  <div style="background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:16px;margin-bottom:12px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid #f0f0f0">
+      <span style="font-size:15px;font-weight:700;color:#374151">{{ semaf }} {{ mq }}</span>
+      <span style="font-size:13px;font-weight:700;color:{{ col }}">
+        {% if d.turnos_atrasados > 0 %}{{ d.turnos_atrasados }} turnos atrasados ({{ d.dias_atrasados }} días){% else %}✅ Al día{% endif %}
+      </span>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px">
+      <div style="background:#fef2f2;border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:10px;color:#6b7280;margin-bottom:3px">Mts atrasados</div>
+        <div style="font-size:20px;font-weight:700;color:#dc2626">{{ "{:,}".format(d.mts_atrasados).replace(",",".") }}</div>
+        <div style="font-size:10px;color:#9ca3af">{{ d.n_atrasadas }} órdenes</div>
+      </div>
+      <div style="background:#eff6ff;border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:10px;color:#6b7280;margin-bottom:3px">Mts pendientes</div>
+        <div style="font-size:20px;font-weight:700;color:#1d4ed8">{{ "{:,}".format(d.mts_pendientes).replace(",",".") }}</div>
+        <div style="font-size:10px;color:#9ca3af">{{ d.n_pendientes }} órdenes</div>
+      </div>
+      <div style="background:#f9fafb;border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:10px;color:#6b7280;margin-bottom:3px">Total a producir</div>
+        <div style="font-size:20px;font-weight:700;color:#374151">{{ "{:,}".format(d.mts_total).replace(",",".") }}</div>
+        <div style="font-size:10px;color:#9ca3af">{{ d.n_atrasadas + d.n_pendientes }} órdenes</div>
+      </div>
+      <div style="background:#f9fafb;border-radius:8px;padding:10px;text-align:center">
+        <div style="font-size:10px;color:#6b7280;margin-bottom:3px">Cap. nominal/turno</div>
+        <div style="font-size:20px;font-weight:700;color:#374151">{{ "{:,}".format(d.cap_turno).replace(",",".") }}</div>
+        <div style="font-size:10px;color:#9ca3af">mts/turno</div>
+      </div>
+    </div>
+    <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:10px">📋 ¿Qué necesito para ponerme al día?</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+      {% for p in d.planes %}
+      {% set cvr = '#dc2626' if p.vel_req > 52 else '#ca8a04' if p.vel_req > 35 else '#15803d' %}
+      {% set cer = '#dc2626' if p.efic_req > 100 else '#ca8a04' if p.efic_req > 70 else '#15803d' %}
+      <div style="border-radius:8px;padding:12px;border:2px solid {% if p.dias==5 %}#1d4ed8{% else %}#e5e7eb{% endif %};background:{% if p.dias==5 %}#eff6ff{% else %}#fff{% endif %}">
+        <div style="font-size:12px;font-weight:700;color:{% if p.dias==5 %}#1d4ed8{% else %}#374151{% endif %};margin-bottom:8px">
+          {{ p.dias }} días · {{ p.turnos }} turnos{% if p.dias==5 %} ⭐{% endif %}
+        </div>
+        <div style="margin-bottom:8px">
+          <div style="font-size:10px;color:#6b7280">🚀 Velocidad requerida</div>
+          <div style="font-size:19px;font-weight:700;color:{{ cvr }}">{{ p.vel_req }} m/min</div>
+        </div>
+        <div style="margin-bottom:8px">
+          <div style="font-size:10px;color:#6b7280">⚡ Eficiencia requerida</div>
+          <div style="font-size:17px;font-weight:700;color:{{ cer }}">{{ p.efic_req }}%{% if p.efic_req > 100 %} ⚠️{% endif %}</div>
+        </div>
+        <div style="font-size:10px;color:#6b7280">Mts/turno necesarios</div>
+        <div style="font-size:12px;font-weight:700;color:#374151">{{ "{:,}".format(p.mts_por_turno).replace(",",".") }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  {% endfor %}
+  </div>
+</div>
+{% endif %}
 
 {% else %}
 <div class="panel"><div class="empty"><p>No hay datos cargados aún.</p><small>Ve al resumen semanal y sube el Excel primero.</small></div></div>
@@ -381,25 +449,25 @@ function cambiarFecha() {
   const fecha = document.getElementById('selector-fecha').value;
   if (!fecha) { document.getElementById('dia-grid').innerHTML = ''; return; }
 
-  const ordsDia = (TODAS||[]).filter(o => o.fecha === fecha);
+  const ordsDia = (TODAS||[]).filter(o => o.fecha === fecha && (MAQUINAS_RRC||[]).includes(o.maquina) && o.en_impresion !== false);
 
   let html = `<div style="margin-bottom:10px;font-size:12px;color:#6b7280">
     Fecha: <strong>${fecha.slice(8,10)}/${fecha.slice(5,7)}/${fecha.slice(0,4)}</strong>
-    — <strong>${ordsDia.length}</strong> órdenes totales
+    — <strong>${ordsDia.length}</strong> órdenes totales en impresoras RRC
   </div>`;
 
-  // Resumen por máquina
+  // Resumen por máquina — 3 tarjetas
   html += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">`;
   (MAQUINAS_RRC||[]).forEach(m => {
-    const ords = ordsDia.filter(o => o.maquina === m && o.en_impresion !== false);
+    const ords = ordsDia.filter(o => o.maquina === m);
     const totalMts = ords.reduce((s,o) => s+(o.mts||0), 0);
     const pct = CAP_DIA_ACTUAL > 0 ? Math.round(totalMts/CAP_DIA_ACTUAL*1000)/10 : 0;
     const col = pct>100?'#dc2626':pct>80?'#ca8a04':'#16a34a';
     const barW = Math.min(pct,100);
-    html += `<div style="background:#fff;border-radius:8px;border:1px solid #e5e7eb;padding:12px 14px">
-      <div style="font-size:12px;font-weight:700;color:#374151;margin-bottom:6px">${m}</div>
-      <div style="font-size:20px;font-weight:700;color:${col}">${Math.round(totalMts).toLocaleString('es-CO')} mts</div>
-      <div style="height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden;margin:6px 0">
+    html += `<div style="background:#fff;border-radius:8px;border:1px solid #e5e7eb;padding:14px 16px">
+      <div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:8px">${m}</div>
+      <div style="font-size:22px;font-weight:700;color:${col};margin-bottom:4px">${Math.round(totalMts).toLocaleString('es-CO')} mts</div>
+      <div style="height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden;margin-bottom:6px">
         <div style="height:100%;width:${barW}%;background:${col};border-radius:4px"></div>
       </div>
       <div style="font-size:11px;color:${col}">${pct}% capacidad · ${ords.length} órdenes</div>
@@ -409,37 +477,36 @@ function cambiarFecha() {
 
   // Tabla detalle por máquina
   (MAQUINAS_RRC||[]).forEach(m => {
-    const ords = ordsDia.filter(o => o.maquina === m && o.en_impresion !== false);
+    const ords = ordsDia.filter(o => o.maquina === m);
     if (ords.length === 0) return;
     html += `<div style="margin-bottom:14px;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
-      <div style="background:#f9fafb;padding:8px 12px;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;border-bottom:1px solid #e5e7eb">
+      <div style="background:#f9fafb;padding:8px 12px;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #e5e7eb">
         ${m} — ${ords.length} órdenes
       </div>
       <table style="width:100%;border-collapse:collapse;font-size:12px">
         <thead><tr style="background:#f9fafb;border-bottom:1px solid #e5e7eb">
           <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280;width:70px">OP</th>
-          <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Cliente</th>
+          <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280;width:160px">Cliente</th>
           <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Referencia</th>
-          <th style="padding:7px 10px;text-align:right;font-size:10px;font-weight:700;color:#6b7280;width:85px">Mts</th>
-          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:90px">F. Entrega</th>
-          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:90px">Estatus</th>
+          <th style="padding:7px 10px;text-align:right;font-size:10px;font-weight:700;color:#6b7280;width:80px">Mts</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:95px">F. Entrega</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:100px">Estatus</th>
         </tr></thead>
         <tbody>`;
     ords.forEach(o => {
-      const fe = o.fecha_entrega || '—';
       html += `<tr style="border-bottom:1px solid #f3f4f6">
         <td style="padding:7px 10px;font-weight:700;font-size:11px">${o.op}</td>
         <td style="padding:7px 10px;font-size:11px">${o.cliente}</td>
-        <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${o.referencia||''}">${(o.referencia||'—').substring(0,55)}</td>
+        <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${o.referencia||''}">${(o.referencia||'—').substring(0,60)}</td>
         <td style="padding:7px 10px;text-align:right;font-weight:600">${Math.round(o.mts||0).toLocaleString('es-CO')}</td>
-        <td style="padding:7px 10px;text-align:center;font-weight:700;color:#dc2626">${fe}</td>
+        <td style="padding:7px 10px;text-align:center;font-weight:700;color:#dc2626">${o.fecha_entrega||'—'}</td>
         <td style="padding:7px 10px;text-align:center;font-size:11px;color:#6b7280">${o.etapa||'—'}</td>
       </tr>`;
     });
     html += `</tbody></table></div>`;
   });
 
-  if (ordsDia.filter(o => (MAQUINAS_RRC||[]).includes(o.maquina)).length === 0) {
+  if (ordsDia.length === 0) {
     html += `<div style="padding:20px;text-align:center;color:#9ca3af;font-size:12px">Sin órdenes RRC para esta fecha</div>`;
   }
 
