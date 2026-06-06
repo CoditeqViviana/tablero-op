@@ -423,19 +423,29 @@ function cambiarFecha() {
           <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280;width:160px">Cliente</th>
           <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Referencia</th>
           <th style="padding:7px 10px;text-align:right;font-size:10px;font-weight:700;color:#6b7280;width:80px">Mts</th>
-          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:95px">F. Entrega</th>
-          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:100px">Estatus</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:60px">Familia</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:65px">Promesa</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:90px">F. Creación</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:90px">F. Entrega</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#1d4ed8;width:90px">F.E. Simulada</th>
         </tr></thead>
         <tbody>`;
     ords.forEach(o => {
+      // F.E. Simulada = fecha_std formateada
+      const feSim = o.fecha_std ? o.fecha_std.slice(8,10)+'/'+o.fecha_std.slice(5,7)+'/'+o.fecha_std.slice(0,4) : '—';
+      // Comparar con fecha_entrega para resaltar diferencias
+      const simDiff = o.fecha_std && o.fecha ? (o.fecha_std < o.fecha ? 'adelantada' : o.fecha_std > o.fecha ? 'retrasada' : 'igual') : '';
+      const colSim = simDiff === 'adelantada' ? '#15803d' : simDiff === 'retrasada' ? '#dc2626' : '#1d4ed8';
       html += `<tr style="border-bottom:1px solid #f3f4f6">
         <td style="padding:7px 10px;font-weight:700;font-size:11px">${o.op}</td>
         <td style="padding:7px 10px;font-size:11px">${o.cliente}</td>
-        <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${o.referencia||''}">${(o.referencia||'—').substring(0,60)}</td>
+        <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${o.referencia||''}">${(o.referencia||'—').substring(0,55)}</td>
         <td style="padding:7px 10px;text-align:right;font-weight:600">${Math.round(o.mts||0).toLocaleString('es-CO')}</td>
         <td style="padding:7px 10px;text-align:center;font-size:11px;color:#6b7280">${o.familia||'—'}</td>
         <td style="padding:7px 10px;text-align:center;font-size:11px;color:#6b7280">${o.promesa_dias||'—'}d</td>
-        <td style="padding:7px 10px;text-align:center;font-weight:700;color:#dc2626">${o.fecha_entrega||'—'}</td>
+        <td style="padding:7px 10px;text-align:center;font-size:11px;color:#6b7280">${o.fecha_creacion||'—'}</td>
+        <td style="padding:7px 10px;text-align:center;font-weight:600;color:#374151">${o.fecha_entrega||'—'}</td>
+        <td style="padding:7px 10px;text-align:center;font-weight:700;color:${colSim}">${feSim}</td>
       </tr>`;
     });
     html += `</tbody></table></div>`;
