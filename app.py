@@ -226,6 +226,7 @@ def process_excel(file):
             'color_toc': color_toc,
             'fecha_std': fecha_std,
             'promesa_dias': dias_p,
+            'fecha_creacion': fc.strftime('%d/%m/%Y') if pd.notna(fc) else '',
         })
 
     # === CAPACIDAD RRC ===
