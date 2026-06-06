@@ -60,6 +60,12 @@ FAMILIAS_AMORT = {
     'F16':3,'F17':8,'F18':8
 }
 
+FAMILIAS_PROMESA = {
+    'F1':5,'F2':4,'F3':16,'F4':2,'F5':7,'F6':6,'F7':8,'F8':3,
+    'F9':10,'F10':9,'F11':11,'F12':5,'F13':7,'F14':6,'F15':8,
+    'F16':3,'F17':16,'F18':16
+}
+
 def get_color_toc(fecha_creacion, fecha_entrega, today):
     if pd.isna(fecha_entrega):
         return 'gris'
@@ -195,6 +201,17 @@ def process_excel(file):
         if pd.isna(fe): continue
         fc = row['fecha_creacion']
         color_toc = get_color_toc(fc, fe, today)
+        # Fecha estándar = fecha_creacion + promesa_dias de la familia
+        fam_ord = str(row['familia']).strip()
+        dias_p = FAMILIAS_PROMESA.get(fam_ord, 0)
+        fecha_std = ''
+        if pd.notna(fc) and dias_p > 0:
+            from datetime import timedelta as _td
+            _f = fc; _d = 0
+            while _d < dias_p:
+                _f += _td(days=1)
+                if _f.weekday() != 6: _d += 1
+            fecha_std = _f.strftime('%Y-%m-%d')
         todas_ordenes.append({
             'fecha': fe.strftime('%Y-%m-%d'),
             'fecha_entrega': fe.strftime('%d/%m/%Y'),
@@ -205,8 +222,10 @@ def process_excel(file):
             'etapa': str(row.iloc[7]).strip(),
             'tipo': get_tipo(row.iloc[1]),
             'mts': float(row['mts']),
-            'familia': str(row['familia']),
+            'familia': fam_ord,
             'color_toc': color_toc,
+            'fecha_std': fecha_std,
+            'promesa_dias': dias_p,
         })
 
     # === CAPACIDAD RRC ===
@@ -317,6 +336,15 @@ def process_excel(file):
             'fecha_prometida': fecha_prom.strftime('%d/%m/%Y'),
             'carga_por_fecha': carga_por_fecha,
         }
+
+    # Datos simulación tiempos estándar
+    ETAPAS_IMP_STD = {'Preparacion','En cola impresión NP1','Impresion','En cola impresion NP1'}
+    std_data = {m: {} for m in maquinas_rrc}
+    for o in todas_ordenes:
+        if o['maquina'] in maquinas_rrc and o.get('fecha_std') and o['etapa'] in ETAPAS_IMP_STD:
+            f = o['fecha_std']
+            std_data[o['maquina']][f] = std_data[o['maquina']].get(f, 0) + o['mts']
+    fechas_std = sorted(set(f for m in maquinas_rrc for f in std_data[m].keys()))
 
     fechas_rrc = sorted(set(
         f for m in maquinas_rrc
@@ -444,6 +472,8 @@ def process_excel(file):
         'fechas_disponibles': fechas_disponibles,
         'todas_ordenes': todas_ordenes,
         'maquinas_rrc': maquinas_rrc,
+        'std_data': std_data,
+        'fechas_std': fechas_std,
         'diagnostico': diagnostico,
         'cuellos': cuellos,
         'capacidad_data': capacidad_data,
@@ -470,6 +500,14 @@ def dia_view():
         with open(DATA_FILE, encoding='utf-8') as f:
             data = json.load(f)
     return render_template('dia.html', data=data)
+
+@app.route('/simulacion_tiempos')
+def simulacion_tiempos_view():
+    data = None
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, encoding='utf-8') as f:
+            data = json.load(f)
+    return render_template('simulacion_tiempos.html', data=data)
 
 @app.route('/capacidad')
 def capacidad_view():
