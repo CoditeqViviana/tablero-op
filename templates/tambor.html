@@ -289,10 +289,7 @@ function filtrar() {
     const t = TIPO_MAP[r.tipo] || ['#f3f4f6','#9ca3af','—'];
     return `<tr>
       <td>
-        <span class="badge" style="background:${c[0]};color:${c[1]};display:inline-block;text-align:center;min-width:70px">
-          <div style="font-size:10px;font-weight:700">${c[2]}</div>
-          <div style="font-size:11px;font-weight:700">${r.pct_buffer}%</div>
-        </span>
+        <span class="badge" style="background:${c[0]};color:${c[1]};padding:3px 10px;font-size:11px;font-weight:700">${c[2]}</span>
       </td>
       <td class="td-left" style="font-weight:700;font-size:11px">${r.op}</td>
       <td class="td-left" style="font-size:11px">${r.cliente}</td>
@@ -308,10 +305,11 @@ function filtrar() {
 function sortBy(col) {
   if(sortCol===col)sortAsc=!sortAsc; else{sortCol=col;sortAsc=true;}
   const heads={color:'h-color',op:'h-op',cliente:'h-cliente',maquina:'h-maquina',mts:'h-mts',fecha:'h-fecha'};
-  const labels={color:'Color',op:'OP',cliente:'Cliente',maquina:'Máquina',mts:'Mts Lin.',fecha:'F.Entrega'};
-  Object.entries(heads).forEach(([c,id])=>{
+  const labels={color:'Color',op:'OP',cliente:'Cliente',maquina:'Máquina',mts:'Mts Lin.',fecha:'F.Entrega',fecha_creacion:'F.Creación',dias:'Días'};
+  const allHeads={color:'h-color',op:'h-op',cliente:'h-cliente',maquina:'h-maquina',fecha:'h-fecha',fecha_creacion:'h-fcrear',dias:'h-dias'};
+  Object.entries(allHeads).forEach(([c,id])=>{
     const el=document.getElementById(id);
-    if(el)el.textContent=labels[c]+(c===col?(sortAsc?' ↑':' ↓'):'');
+    if(el)el.textContent=(labels[c]||c)+(c===col?(sortAsc?' ↑':' ↓'):'');
   });
   filtrar();
 }
