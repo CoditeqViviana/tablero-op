@@ -395,6 +395,8 @@ def process_excel(file):
             'tipo': get_tipo(row.iloc[1]),
             'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
             'fecha_entrega_raw': fe.strftime('%Y-%m-%d') if pd.notna(fe) else '',
+            'fecha_creacion': fc_ord.strftime('%d/%m/%Y') if pd.notna(fc_ord) else '',
+            'dias_ofrecidos': (fe - fc_ord).days if pd.notna(fe) and pd.notna(fc_ord) else 0,
             'color_toc': color_toc,
             'mts': float(row['mts']),
             'pct_buffer': pct_buf,
