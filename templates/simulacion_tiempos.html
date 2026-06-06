@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Simulación Tiempos Estándar — Tablero OP</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f4f5f7;padding:16px;color:#1a1a1a;font-size:13px}
+.hdr{background:#fff;border-radius:10px;padding:14px 20px;margin-bottom:14px;border:1px solid #e0e0e0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.hdr-left h1{font-size:16px;font-weight:700}
+.hdr-left p{font-size:12px;color:#6b7280;margin-top:2px}
+.hdr-right{display:flex;align-items:center;gap:10px}
+.updated{font-size:11px;color:#6b7280;background:#f9fafb;border:1px solid #e5e7eb;border-radius:6px;padding:5px 10px}
+.updated strong{color:#374151}
+.nav-btn{font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;cursor:pointer;color:#374151;text-decoration:none;display:inline-block}
+.nav-btn:hover{background:#f9fafb}
+/* Info capacidad */
+.params-bar{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:14px 20px;margin-bottom:14px}
+.params-title{font-size:12px;font-weight:700;color:#1d4ed8;margin-bottom:10px}
+.params-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;align-items:end}
+.param-item{display:flex;flex-direction:column;gap:4px}
+.param-lbl{font-size:11px;color:#6b7280;font-weight:600}
+.param-input{font-size:13px;padding:5px 8px;border:1.5px solid #93c5fd;border-radius:6px;background:#fff;color:#1a1a1a;width:100%;font-weight:600}
+.param-input:focus{outline:none;border-color:#1d4ed8}
+.param-resultado{background:#dbeafe;border-radius:8px;padding:6px 10px}
+.param-calc{font-size:16px;font-weight:700;color:#1d4ed8}
+.param-btn{font-size:12px;padding:7px 14px;background:#1d4ed8;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:700;height:34px}
+.param-btn:hover{background:#1e40af}
+/* KPIs maquinas */
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border-radius:8px;padding:14px 16px;border:1px solid #e0e0e0}
+.kpi-maq{font-size:13px;font-weight:700;color:#374151;margin-bottom:8px}
+.kpi-row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px}
+.kpi-lbl{color:#6b7280}
+.kpi-val{font-weight:700;color:#374151}
+.kpi-val.ok{color:#15803d}
+.kpi-val.warn{color:#ca8a04}
+.kpi-val.over{color:#dc2626}
+/* Panel */
+.panel{background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden}
+.panel-hdr{padding:11px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.panel-hdr h2{font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px}
+/* Selector fecha */
+.date-bar{padding:12px 16px;border-bottom:1px solid #f0f0f0;display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:#fafafa}
+.date-bar label{font-size:12px;font-weight:700;color:#374151}
+.date-select{font-size:13px;padding:5px 10px;border:2px solid #1d4ed8;border-radius:8px;background:#fff;color:#1a1a1a;cursor:pointer;font-weight:600}
+/* Botones rango semana */
+.rango-sem-btn{font-size:12px;padding:5px 12px;border-radius:14px;border:1.5px solid #d1d5db;cursor:pointer;font-weight:600;background:#fff;color:#6b7280}
+.rango-sem-btn.active{background:#1d4ed8;color:#fff;border-color:#1d4ed8}
+.rango-sem-btn:hover:not(.active){background:#f9fafb}
+/* Tabla semana */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{padding:9px 14px;text-align:center;font-size:11px;font-weight:700;color:#6b7280;border-bottom:1px solid #e5e7eb;background:#f9fafb;white-space:nowrap;text-transform:uppercase;letter-spacing:.3px}
+th.maq{text-align:left;width:150px}
+td{padding:10px 14px;text-align:center;border-bottom:1px solid #f3f4f6;vertical-align:middle}
+td.maq-cell{text-align:left;font-weight:700;font-size:12px}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#fafafa}
+.cell-wrap{display:flex;flex-direction:column;align-items:center;gap:3px}
+.cell-mts{font-size:13px;font-weight:700}
+.cell-cap{font-size:10px;color:#9ca3af}
+.bar-wrap{width:80px;height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;transition:width .3s}
+.pct-ok{color:#15803d}
+.pct-warn{color:#ca8a04}
+.pct-over{color:#dc2626}
+.fill-ok{background:#16a34a}
+.fill-warn{background:#ca8a04}
+.fill-over{background:#dc2626}
+/* Cards día */
+.dia-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding:16px}
+.dia-card{border-radius:10px;border:1px solid #e5e7eb;overflow:hidden}
+.dia-card-hdr{padding:12px 16px;border-bottom:1px solid #e5e7eb;display:flex;justify-content:space-between;align-items:center;background:#f9fafb}
+.dia-card-maq{font-size:13px;font-weight:700;color:#374151}
+.dia-card-cap{font-size:11px;color:#6b7280}
+.dia-card-body{padding:14px 16px}
+.dia-stat{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.dia-stat-lbl{font-size:12px;color:#6b7280}
+.dia-stat-val{font-size:20px;font-weight:700}
+.barra-grande{height:16px;background:#e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:6px}
+.barra-fill{height:100%;border-radius:8px;transition:width .4s}
+.dia-pct{font-size:12px;font-weight:700;text-align:center}
+.dia-ordenes{margin-top:10px;border-top:1px solid #f3f4f6;padding-top:8px}
+.dia-ord-row{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:1px solid #f9fafb}
+.dia-ord-row:last-child{border-bottom:none}
+.dia-ord-cliente{color:#374151;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dia-ord-mts{color:#6b7280;font-weight:600;flex-shrink:0;margin-left:8px}
+.legend{display:flex;gap:16px;flex-wrap:wrap;align-items:center;padding:10px 16px;background:#fafafa;border-top:1px solid #f0f0f0;font-size:11px;color:#6b7280}
+.leg-item{display:flex;align-items:center;gap:5px}
+.leg-dot{width:10px;height:10px;border-radius:50%}
+.empty{padding:40px;text-align:center;color:#9ca3af}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <div class="hdr-left">
+    <h1>Simulación Tiempos Estándar — NP1 · NP2 · Kromia</h1>
+    <p>Fecha objetivo = Fecha creación + Días promesa por familia (Col G)</p>
+  </div>
+  <div class="hdr-right">
+    {% if data %}<div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>{% endif %}
+    <a href="/capacidad" class="nav-btn">⚙️ Capacidad RRC</a>
+    <a href="/" class="nav-btn">← Resumen semanal</a>
+  </div>
+</div>
+
+{% if data %}
+
+<!-- Info capacidad -->
+<!-- Barra de parámetros editables -->
+<div class="params-bar">
+  <div class="params-title">⚙️ Parámetros de capacidad</div>
+  <div class="params-grid">
+    <div class="param-item">
+      <label class="param-lbl">Horas de trabajo/día</label>
+      <input type="number" class="param-input" id="p-horas" value="22.75" step="0.25" min="1" max="24" onchange="recalcular()">
+    </div>
+    <div class="param-item">
+      <label class="param-lbl">Eficiencia (%)</label>
+      <input type="number" class="param-input" id="p-eficiencia" value="50" step="1" min="1" max="100" onchange="recalcular()">
+    </div>
+    <div class="param-item">
+      <label class="param-lbl">Velocidad (m/min)</label>
+      <input type="number" class="param-input" id="p-velocidad" value="35" step="1" min="1" max="200" onchange="recalcular()">
+    </div>
+    <div class="param-item param-resultado">
+      <label class="param-lbl">Horas reales/día</label>
+      <span class="param-calc" id="r-horas">11.38</span>
+    </div>
+    <div class="param-item param-resultado">
+      <label class="param-lbl">Capacidad/día/máquina</label>
+      <span class="param-calc" id="r-capacidad">23,888 mts</span>
+    </div>
+    <div class="param-item">
+      <button class="param-btn" onclick="recalcular()">↻ Recalcular</button>
+    </div>
+  </div>
+</div>
+
+<!-- KPIs semana actual -->
+<div class="kpis">
+  {% for m in data.maquinas_rrc %}
+  {% set rrc = data.rrc_semana[m] %}
+  <div class="kpi">
+    <div class="kpi-maq">{{ m }}</div>
+    <div class="kpi-row"><span class="kpi-lbl">Capacidad/día</span><span class="kpi-val">{{ rrc.capacidad }} mts</span></div>
+    {% set total_plan = namespace(v=0) %}
+    {% for d, vals in rrc.por_dia.items() %}{% set total_plan.v = total_plan.v + vals.planeado %}{% endfor %}
+    {% set cap_semana = rrc.capacidad * 5 %}
+    {% set pct_sem = (total_plan.v / cap_semana * 100)|round(1) %}
+    <div class="kpi-row"><span class="kpi-lbl">Planeado semana</span>
+      <span class="kpi-val {% if pct_sem > 100 %}over{% elif pct_sem > 80 %}warn{% else %}ok{% endif %}">
+        {{ total_plan.v|round(0)|int }} mts ({{ pct_sem }}%)
+      </span>
+    </div>
+    <div class="kpi-row"><span class="kpi-lbl">Cap. semana (5 días)</span><span class="kpi-val">{{ cap_semana|int }} mts</span></div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Tabla semana dinámica -->
+<div class="panel">
+  <div class="panel-hdr">
+    <h2 id="tabla-titulo">Tiempos estándar — Metros por fecha objetivo</h2>
+  </div>
+  <!-- Selector de rango -->
+  <div style="padding:10px 16px;border-bottom:1px solid #f0f0f0;background:#fafafa;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button class="rango-sem-btn active" onclick="setRangoSem('esta',this)">Esta semana</button>
+      <button class="rango-sem-btn" onclick="setRangoSem('sig',this)">Próxima semana</button>
+      <button class="rango-sem-btn" onclick="setRangoSem('2sem',this)">2 semanas</button>
+      <button class="rango-sem-btn" onclick="setRangoSem('mes',this)">Este mes</button>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#6b7280">
+      <span style="font-weight:600">Desde:</span>
+      <input type="date" id="rango-desde" style="font-size:12px;padding:4px 8px;border:1.5px solid #d1d5db;border-radius:6px;height:30px" onchange="setRangoSem('custom',null)">
+      <span style="font-weight:600">Hasta:</span>
+      <input type="date" id="rango-hasta" style="font-size:12px;padding:4px 8px;border:1.5px solid #d1d5db;border-radius:6px;height:30px" onchange="setRangoSem('custom',null)">
+      <button onclick="aplicarRangoCustom()" style="font-size:12px;padding:4px 12px;background:#1d4ed8;color:#fff;border:none;border-radius:6px;cursor:pointer;height:30px">Ver</button>
+    </div>
+  </div>
+  <div style="overflow-x:auto">
+  <table id="tabla-semana">
+    <thead id="tabla-thead"></thead>
+    <tbody id="tabla-tbody"></tbody>
+  </table>
+  </div>
+  <div class="legend">
+    <div class="leg-item"><div class="leg-dot" style="background:#16a34a"></div>≤ 80% capacidad — OK</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#ca8a04"></div>80–100% — Advertencia</div>
+    <div class="leg-item"><div class="leg-dot" style="background:#dc2626"></div>> 100% — Sobrecarga</div>
+  </div>
+</div>
+
+<!-- Detalle por día con selector -->
+<div class="panel">
+  <div class="panel-hdr"><h2>Detalle por día — metros planeados por orden</h2></div>
+  <div class="date-bar">
+    <label>📅 Seleccionar fecha:</label>
+    <select class="date-select" id="selector-fecha" onchange="cambiarFecha()">
+      {% for f in data.fechas_std %}
+      <option value="{{ f }}">
+        {{ f[8:10] }}/{{ f[5:7] }}/{{ f[0:4] }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+  <div id="dia-grid" style="padding:14px 16px"></div>
+</div>
+
+{% else %}
+<div class="panel"><div class="empty"><p>No hay datos cargados aún.</p><small>Ve al resumen semanal y sube el Excel primero.</small></div></div>
+{% endif %}
+
+<script>
+const TODAS = {{ data.todas_ordenes | tojson }};
+
+let CAP_DIA_ACTUAL = 23888;
+
+function recalcular() {
+  const horas = parseFloat(document.getElementById('p-horas').value) || 22.75;
+  const efic = parseFloat(document.getElementById('p-eficiencia').value) / 100 || 0.5;
+  const vel = parseFloat(document.getElementById('p-velocidad').value) || 35;
+
+  const horasReales = horas * efic;
+  const capacidad = Math.round(horasReales * 60 * vel);
+  CAP_DIA_ACTUAL = capacidad;
+
+  document.getElementById('r-horas').textContent = horasReales.toFixed(2);
+  document.getElementById('r-capacidad').textContent = capacidad.toLocaleString('es-CO') + ' mts';
+
+  // Actualizar tabla semanal
+  actualizarTablaSemana();
+
+  // Actualizar vista del dia si hay fecha seleccionada
+  const sel = document.getElementById('selector-fecha');
+  if (sel) cambiarFecha();
+}
+
+const NOMBRES_DIA_CORTO = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+const HOY_CAP = '{{ data.hoy }}';
+
+function getLunesDe(dateStr) {
+  const d = new Date(dateStr + 'T12:00:00');
+  const day = d.getDay();
+  const diff = day === 0 ? -6 : 1 - day;
+  d.setDate(d.getDate() + diff);
+  return d;
+}
+
+function addDias(date, n) {
+  const d = new Date(date);
+  d.setDate(d.getDate() + n);
+  return d;
+}
+
+function fmtISO(d) { return d.toISOString().slice(0,10); }
+function fmtLabel(d) { return `${String(d.getDate()).padStart(2,'0')}/${String(d.getMonth()+1).padStart(2,'0')}`; }
+
+function getDiasLaboralesEnRango(desde, hasta) {
+  const dias = [];
+  let d = new Date(desde + 'T12:00:00');
+  const fin = new Date(hasta + 'T12:00:00');
+  while (d <= fin) {
+    if (d.getDay() !== 0) dias.push(fmtISO(d)); // excluir domingos
+    d.setDate(d.getDate() + 1);
+  }
+  return dias;
+}
+
+function getOrdenesEnFecha(maq, fecha) {
+  // Use fecha_std (tiempo estándar) instead of fecha_entrega
+  return TODAS.filter(o => o.maquina === maq && o.fecha_std === fecha &&
+    ['Preparacion','En cola impresión NP1','Impresion','En cola impresion NP1'].includes(o.etapa));
+}
+
+function getMtsPorFecha(maq, fecha) {
+  return getOrdenesEnFecha(maq, fecha).reduce((s,o) => s + (o.mts||0), 0);
+}
+
+function renderTablaSemana(desde, hasta) {
+  const dias = getDiasLaboralesEnRango(desde, hasta);
+  if (dias.length === 0) return;
+
+  const d1 = new Date(desde+'T12:00:00'), d2 = new Date(hasta+'T12:00:00');
+  document.getElementById('tabla-titulo').textContent =
+    `Semana ${fmtLabel(d1)} — ${fmtLabel(d2)} · Metros planeados vs capacidad`;
+
+  // Thead
+  let thead = '<tr><th class="maq">Máquina</th>';
+  dias.forEach(d => {
+    const dt = new Date(d+'T12:00:00');
+    thead += `<th><div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+      <span style="font-size:11px;font-weight:700">${NOMBRES_DIA_CORTO[dt.getDay()]}</span>
+      <span style="font-size:10px;color:#9ca3af">${fmtLabel(dt)}</span>
+    </div></th>`;
+  });
+  thead += '<th>Total</th></tr>';
+  document.getElementById('tabla-thead').innerHTML = thead;
+
+  // Tbody
+  let tbody = '';
+  MAQUINAS_RRC.forEach(m => {
+    let totalMts = 0;
+    let celdas = '';
+    dias.forEach(d => {
+      const ords = getOrdenesEnFecha(m, d);
+      const mts = ords.reduce((s,o) => s + (o.mts||0), 0);
+      totalMts += mts;
+      const pct = CAP_DIA_ACTUAL > 0 ? Math.round(mts / CAP_DIA_ACTUAL * 1000)/10 : 0;
+      const barW = Math.min(pct, 100);
+      const col = pct>100?'#dc2626':pct>80?'#ca8a04':'#16a34a';
+      const nOp = ords.length;
+      celdas += `<td><div class="cell-wrap">
+        <span class="cell-mts" style="color:${col}">${mts>0?Math.round(mts).toLocaleString('es-CO'):'0'}${nOp>0?` <span style="font-size:10px;font-weight:400;color:#6b7280">(${nOp} OP)</span>`:''}</span>
+        <div class="bar-wrap"><div class="bar-fill" style="width:${barW}%;background:${col}"></div></div>
+        <span class="cell-cap" style="color:${col}">${pct}%</span>
+      </div></td>`;
+    });
+    const pctTot = CAP_DIA_ACTUAL>0?Math.round(totalMts/(CAP_DIA_ACTUAL*dias.length)*1000)/10:0;
+    const colTot = pctTot>100?'#dc2626':pctTot>80?'#ca8a04':'#16a34a';
+    tbody += `<tr><td class="maq-cell">${m}</td>${celdas}
+      <td><span style="font-weight:700;color:${colTot}">${Math.round(totalMts).toLocaleString('es-CO')}<br>
+      <span style="font-size:10px">${pctTot}%</span></span></td></tr>`;
+  });
+  // Fila capacidad
+  tbody += `<tr style="background:#f9fafb"><td class="maq-cell" style="color:#6b7280">Cap/día</td>`;
+  dias.forEach(() => { tbody += `<td style="color:#6b7280;font-size:11px">${CAP_DIA_ACTUAL.toLocaleString('es-CO')}</td>`; });
+  tbody += `<td style="color:#6b7280;font-size:11px">${(CAP_DIA_ACTUAL*dias.length).toLocaleString('es-CO')}</td></tr>`;
+  document.getElementById('tabla-tbody').innerHTML = tbody;
+}
+
+function setRangoSem(tipo, btn) {
+  document.querySelectorAll('.rango-sem-btn').forEach(b=>b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  const hoy = new Date(HOY_CAP+'T12:00:00');
+  let desde, hasta;
+  if (tipo==='esta') {
+    const lun = getLunesDe(HOY_CAP);
+    desde = fmtISO(lun); hasta = fmtISO(addDias(lun,4));
+  } else if (tipo==='sig') {
+    const lun = getLunesDe(HOY_CAP);
+    const sigLun = addDias(lun,7);
+    desde = fmtISO(sigLun); hasta = fmtISO(addDias(sigLun,4));
+  } else if (tipo==='2sem') {
+    const lun = getLunesDe(HOY_CAP);
+    desde = fmtISO(lun); hasta = fmtISO(addDias(lun,11));
+  } else if (tipo==='mes') {
+    const y=hoy.getFullYear(), m=hoy.getMonth();
+    desde = fmtISO(new Date(y,m,1));
+    hasta = fmtISO(new Date(y,m+1,0));
+  } else { return; }
+  document.getElementById('rango-desde').value = desde;
+  document.getElementById('rango-hasta').value = hasta;
+  renderTablaSemana(desde, hasta);
+}
+
+function aplicarRangoCustom() {
+  const desde = document.getElementById('rango-desde').value;
+  const hasta = document.getElementById('rango-hasta').value;
+  if (!desde || !hasta) return;
+  document.querySelectorAll('.rango-sem-btn').forEach(b=>b.classList.remove('active'));
+  renderTablaSemana(desde, hasta);
+}
+
+function actualizarTablaSemana() {
+  const desde = document.getElementById('rango-desde').value;
+  const hasta = document.getElementById('rango-hasta').value;
+  if (desde && hasta) renderTablaSemana(desde, hasta);
+}
+const MAQUINAS_RRC = {{ data.maquinas_rrc | tojson }};
+// CAP_DIA se calcula dinámicamente
+function barColor(pct) {
+  if (pct > 100) return {bar:'#dc2626', text:'#dc2626'};
+  if (pct > 80)  return {bar:'#ca8a04', text:'#ca8a04'};
+  return {bar:'#16a34a', text:'#15803d'};
+}
+
+function cambiarFecha() {
+  const fecha = document.getElementById('selector-fecha').value;
+  if (!fecha) { document.getElementById('dia-grid').innerHTML = ''; return; }
+
+  const ETAPAS_STD = new Set(['Preparacion','En cola impresión NP1','Impresion','En cola impresion NP1']);
+  const ordsDia = (TODAS||[]).filter(o => o.fecha_std === fecha && (MAQUINAS_RRC||[]).includes(o.maquina) && ETAPAS_STD.has(o.etapa));
+
+  let html = `<div style="margin-bottom:10px;font-size:12px;color:#6b7280">
+    Fecha objetivo estándar: <strong>${fecha.slice(8,10)}/${fecha.slice(5,7)}/${fecha.slice(0,4)}</strong>
+    — <strong>${ordsDia.length}</strong> órdenes (fecha creación + promesa familia)
+  </div>`;
+
+  // Resumen por máquina — 3 tarjetas
+  html += `<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px">`;
+  (MAQUINAS_RRC||[]).forEach(m => {
+    const ords = ordsDia.filter(o => o.maquina === m);
+    const totalMts = ords.reduce((s,o) => s+(o.mts||0), 0);
+    const pct = CAP_DIA_ACTUAL > 0 ? Math.round(totalMts/CAP_DIA_ACTUAL*1000)/10 : 0;
+    const col = pct>100?'#dc2626':pct>80?'#ca8a04':'#16a34a';
+    const barW = Math.min(pct,100);
+    html += `<div style="background:#fff;border-radius:8px;border:1px solid #e5e7eb;padding:14px 16px">
+      <div style="font-size:13px;font-weight:700;color:#374151;margin-bottom:8px">${m}</div>
+      <div style="font-size:22px;font-weight:700;color:${col};margin-bottom:4px">${Math.round(totalMts).toLocaleString('es-CO')} mts</div>
+      <div style="height:8px;background:#e5e7eb;border-radius:4px;overflow:hidden;margin-bottom:6px">
+        <div style="height:100%;width:${barW}%;background:${col};border-radius:4px"></div>
+      </div>
+      <div style="font-size:11px;color:${col}">${pct}% capacidad · ${ords.length} órdenes</div>
+    </div>`;
+  });
+  html += `</div>`;
+
+  // Tabla detalle por máquina
+  (MAQUINAS_RRC||[]).forEach(m => {
+    const ords = ordsDia.filter(o => o.maquina === m);
+    if (ords.length === 0) return;
+    html += `<div style="margin-bottom:14px;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden">
+      <div style="background:#f9fafb;padding:8px 12px;font-size:11px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid #e5e7eb">
+        ${m} — ${ords.length} órdenes
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px">
+        <thead><tr style="background:#f9fafb;border-bottom:1px solid #e5e7eb">
+          <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280;width:70px">OP</th>
+          <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280;width:160px">Cliente</th>
+          <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Referencia</th>
+          <th style="padding:7px 10px;text-align:right;font-size:10px;font-weight:700;color:#6b7280;width:80px">Mts</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:95px">F. Entrega</th>
+          <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:100px">Estatus</th>
+        </tr></thead>
+        <tbody>`;
+    ords.forEach(o => {
+      html += `<tr style="border-bottom:1px solid #f3f4f6">
+        <td style="padding:7px 10px;font-weight:700;font-size:11px">${o.op}</td>
+        <td style="padding:7px 10px;font-size:11px">${o.cliente}</td>
+        <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${o.referencia||''}">${(o.referencia||'—').substring(0,60)}</td>
+        <td style="padding:7px 10px;text-align:right;font-weight:600">${Math.round(o.mts||0).toLocaleString('es-CO')}</td>
+        <td style="padding:7px 10px;text-align:center;font-size:11px;color:#6b7280">${o.familia||'—'}</td>
+        <td style="padding:7px 10px;text-align:center;font-size:11px;color:#6b7280">${o.promesa_dias||'—'}d</td>
+        <td style="padding:7px 10px;text-align:center;font-weight:700;color:#dc2626">${o.fecha_entrega||'—'}</td>
+      </tr>`;
+    });
+    html += `</tbody></table></div>`;
+  });
+
+  if (ordsDia.length === 0) {
+    html += `<div style="padding:20px;text-align:center;color:#9ca3af;font-size:12px">Sin órdenes RRC para esta fecha</div>`;
+  }
+
+  document.getElementById('dia-grid').innerHTML = html;
+}
+
+// Inicializar
+function renderKpisStd() {
+  const maquis = MAQUINAS_RRC || [];
+  let html = '';
+  maquis.forEach(m => {
+    const cap = CAP_DIA_ACTUAL;
+    const total = TODAS.filter(o=>o.maquina===m&&o.fecha_std&&
+      ['Preparacion','En cola impresión NP1','Impresion','En cola impresion NP1'].includes(o.etapa))
+      .reduce((s,o)=>s+(o.mts||0),0);
+    const cls = 'ok';
+    html += '<div class="kpi"><div class="kpi-maq">'+m+'</div>'
+      +'<div class="kpi-row"><span class="kpi-lbl">Capacidad/día</span><span class="kpi-val">'+cap.toLocaleString('es-CO')+' mts</span></div>'
+      +'<div class="kpi-row"><span class="kpi-lbl">Total con fecha std</span><span class="kpi-val">'+Math.round(total).toLocaleString('es-CO')+' mts</span></div>'
+      +'</div>';
+  });
+  document.getElementById('kpis-std').innerHTML = html;
+}
+
+window.addEventListener('load', function() {
+  renderKpisStd();
+  setRangoSem('esta', document.querySelector('.rango-sem-btn.active'));
+  const sel = document.getElementById('selector-fecha');
+  if (sel && sel.options.length > 0) { sel.selectedIndex = 0; cambiarFecha(); }
+});
+</script>
+</body>
+</html>
