@@ -208,12 +208,14 @@ tr:hover td{background:#fafafa}
       <tr>
         <th style="width:80px" onclick="sortBy('color')"><span id="h-color">Color ↑</span></th>
         <th class="th-left" style="width:70px" onclick="sortBy('op')"><span id="h-op">OP</span></th>
-        <th class="th-left" style="width:200px" onclick="sortBy('cliente')"><span id="h-cliente">Cliente</span></th>
+        <th class="th-left" style="width:180px" onclick="sortBy('cliente')"><span id="h-cliente">Cliente</span></th>
         <th style="width:55px">Tipo</th>
-        <th class="th-left" style="width:140px" onclick="sortBy('maquina')"><span id="h-maquina">Máquina</span></th>
-        <th style="width:90px" onclick="sortBy('mts')"><span id="h-mts">Mts Lin.</span></th>
-        <th style="width:100px" onclick="sortBy('fecha')"><span id="h-fecha">F. Entrega</span></th>
-        <th style="width:110px">Estatus</th>
+        <th class="th-left" style="width:130px" onclick="sortBy('maquina')"><span id="h-maquina">Máquina</span></th>
+        <th style="width:75px" onclick="sortBy('mts')"><span id="h-mts">Mts Lin.</span></th>
+        <th style="width:90px">F. Creación</th>
+        <th style="width:90px" onclick="sortBy('fecha')"><span id="h-fecha">F. Entrega ↑</span></th>
+        <th style="width:55px;cursor:pointer" onclick="sortBy('dias')">Días</th>
+        <th style="width:100px">Estatus</th>
       </tr>
     </thead>
     <tbody id="tbl-body"></tbody>
@@ -291,6 +293,7 @@ function filtrar() {
       return (b.pct_buffer||0) - (a.pct_buffer||0);
     }
     if (sortCol==='mts') { va=a.mts||0; vb=b.mts||0; return sortAsc?va-vb:vb-va; }
+    if (sortCol==='dias') { va=a.dias_ofrecidos||0; vb=b.dias_ofrecidos||0; return sortAsc?va-vb:vb-va; }
     va=({op:a.op,cliente:a.cliente,maquina:a.maquina,fecha:a.fecha_entrega_raw})[sortCol]||'';
     vb=({op:b.op,cliente:b.cliente,maquina:b.maquina,fecha:b.fecha_entrega_raw})[sortCol]||'';
     return sortAsc?va.localeCompare(vb):vb.localeCompare(va);
