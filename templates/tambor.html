@@ -121,19 +121,29 @@ tr:hover td{background:#fafafa}
   </div>
 </div>
 
-<!-- KPIs por color -->
-<div class="kpis">
-  {% for col, bg, fg, nombre, rango in [('negro','#1f2937','#f3f4f6','Negro','Vencidas'),('rojo','#fee2e2','#b91c1c','Rojo','83–100%'),('amarillo','#fef9c3','#854d0e','Amarillo','67–83%'),('verde','#dcfce7','#15803d','Verde','50–67%'),('azul','#dbeafe','#1d4ed8','Azul','< 50%')] %}
-  <div class="kpi">
-    <span class="kpi-badge" style="background:{{ bg }};color:{{ fg }}">{{ nombre }}</span>
-    <div>
-      <div class="kpi-lbl">Buffer {{ rango }}</div>
-      <div class="kpi-val" style="color:{{ fg }}" id="kpi-{{ col }}">—</div>
-    </div>
+<!-- Promedio dias por tipo -->
+<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">
+  <div style="background:#f1f5f9;border-radius:8px;padding:14px;border:1px solid #e0e0e0;text-align:center">
+    <div style="font-size:11px;font-weight:700;color:#475569;margin-bottom:6px">Blanca</div>
+    <div style="font-size:28px;font-weight:700;color:#475569" id="avg-blanca">—</div>
+    <div style="font-size:10px;color:#9ca3af" id="cnt-blanca">días promedio</div>
   </div>
-  {% endfor %}
+  <div style="background:#dbeafe;border-radius:8px;padding:14px;border:1px solid #bfdbfe;text-align:center">
+    <div style="font-size:11px;font-weight:700;color:#1d4ed8;margin-bottom:6px">Impresa</div>
+    <div style="font-size:28px;font-weight:700;color:#1d4ed8" id="avg-impresa">—</div>
+    <div style="font-size:10px;color:#6b7280" id="cnt-impresa">días promedio</div>
+  </div>
+  <div style="background:#dcfce7;border-radius:8px;padding:14px;border:1px solid #bbf7d0;text-align:center">
+    <div style="font-size:11px;font-weight:700;color:#15803d;margin-bottom:6px">Fondo</div>
+    <div style="font-size:28px;font-weight:700;color:#15803d" id="avg-fondo">—</div>
+    <div style="font-size:10px;color:#6b7280" id="cnt-fondo">días promedio</div>
+  </div>
+  <div style="background:#f9fafb;border-radius:8px;padding:14px;border:1px solid #e5e7eb;text-align:center">
+    <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:6px">Todas</div>
+    <div style="font-size:28px;font-weight:700;color:#374151" id="avg-total">—</div>
+    <div style="font-size:10px;color:#9ca3af" id="cnt-total">días promedio general</div>
+  </div>
 </div>
-
 <!-- Tabla principal -->
 <div class="panel">
   <div class="panel-hdr">
@@ -276,10 +286,18 @@ function filtrar() {
     return sortAsc?va.localeCompare(vb):vb.localeCompare(va);
   });
 
-  // Actualizar KPIs
-  ['negro','rojo','amarillo','verde','azul'].forEach(c => {
-    const el = document.getElementById('kpi-'+c);
-    if (el) el.textContent = filtrados.filter(r=>r.color_toc===c).length;
+  // Actualizar promedio dias por tipo
+  function avgDias(arr, tipo) {
+    var ords = arr.filter(function(r){ return (!tipo||r.tipo===tipo) && (r.dias_ofrecidos||0)>0; });
+    if (!ords.length) return {v:'—', n:'0 órdenes'};
+    var s = ords.reduce(function(a,r){return a+(r.dias_ofrecidos||0);},0);
+    return {v: Math.round(s/ords.length), n: ords.length+' órdenes'};
+  }
+  var b=avgDias(filtrados,'Blanca'), im=avgDias(filtrados,'Impresa'), f=avgDias(filtrados,'Fondo'), tot=avgDias(filtrados,null);
+  ['blanca','impresa','fondo','total'].forEach(function(k,i){
+    var d = [b,im,f,tot][i];
+    var av=document.getElementById('avg-'+k), cn=document.getElementById('cnt-'+k);
+    if(av) av.textContent=d.v; if(cn) cn.textContent=d.n;
   });
   document.getElementById('badge-total').textContent = filtrados.length + ' órdenes';
   document.getElementById('conteo').innerHTML = 'Mostrando <strong>'+filtrados.length+'</strong> de '+DATOS.length+' órdenes';
@@ -296,8 +314,10 @@ function filtrar() {
       <td><span class="badge" style="background:${t[0]};color:${t[1]}">${t[2]}</span></td>
       <td class="td-left" style="font-size:11px;color:#6b7280">${r.maquina}</td>
       <td style="font-weight:600">${Math.round(r.mts||0).toLocaleString('es-CO')}</td>
+      <td style="font-size:11px;color:#6b7280;text-align:center">${r.fecha_creacion||'—'}</td>
       <td style="font-weight:700;color:${r.fecha_entrega_raw<HOY?'#dc2626':'#374151'}">${r.fecha_entrega}</td>
-      <td><span class="badge" style="background:#f3f4f6;color:#374151">${r.etapa}</span></td>
+      <td style="text-align:center;font-weight:700;font-size:13px;color:${(r.dias_ofrecidos||0)<15?'#dc2626':(r.dias_ofrecidos||0)<30?'#ca8a04':'#15803d'}">${r.dias_ofrecidos||'—'}</td>
+      <td><span class="badge" style="background:#f3f4f6;color:#374151;font-size:10px">${r.etapa}</span></td>
     </tr>`;
   }).join('');
 }
