@@ -121,27 +121,37 @@ tr:hover td{background:#fafafa}
   </div>
 </div>
 
-<!-- Promedio dias por tipo -->
-<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px">
-  <div style="background:#f1f5f9;border-radius:8px;padding:14px;border:1px solid #e0e0e0;text-align:center">
-    <div style="font-size:11px;font-weight:700;color:#475569;margin-bottom:6px">Blanca</div>
-    <div style="font-size:28px;font-weight:700;color:#475569" id="avg-blanca">—</div>
-    <div style="font-size:10px;color:#9ca3af" id="cnt-blanca">días promedio</div>
+<!-- Análisis de días ofrecidos por tipo -->
+<div style="background:#fff;border-radius:10px;border:1px solid #e0e0e0;margin-bottom:14px;overflow:hidden">
+  <div style="padding:10px 16px;border-bottom:1px solid #f0f0f0;background:#f9fafb">
+    <span style="font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px">⏱️ Días ofrecidos por tipo de etiqueta — (Fecha entrega − Fecha creación)</span>
   </div>
-  <div style="background:#dbeafe;border-radius:8px;padding:14px;border:1px solid #bfdbfe;text-align:center">
-    <div style="font-size:11px;font-weight:700;color:#1d4ed8;margin-bottom:6px">Impresa</div>
-    <div style="font-size:28px;font-weight:700;color:#1d4ed8" id="avg-impresa">—</div>
-    <div style="font-size:10px;color:#6b7280" id="cnt-impresa">días promedio</div>
-  </div>
-  <div style="background:#dcfce7;border-radius:8px;padding:14px;border:1px solid #bbf7d0;text-align:center">
-    <div style="font-size:11px;font-weight:700;color:#15803d;margin-bottom:6px">Fondo</div>
-    <div style="font-size:28px;font-weight:700;color:#15803d" id="avg-fondo">—</div>
-    <div style="font-size:10px;color:#6b7280" id="cnt-fondo">días promedio</div>
-  </div>
-  <div style="background:#f9fafb;border-radius:8px;padding:14px;border:1px solid #e5e7eb;text-align:center">
-    <div style="font-size:11px;font-weight:700;color:#374151;margin-bottom:6px">Todas</div>
-    <div style="font-size:28px;font-weight:700;color:#374151" id="avg-total">—</div>
-    <div style="font-size:10px;color:#9ca3af" id="cnt-total">días promedio general</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:0">
+    {% for tipo, bg, fg, border in [('Blanca','#f8fafc','#475569','#e2e8f0'),('Impresa','#eff6ff','#1d4ed8','#bfdbfe'),('Fondo','#f0fdf4','#15803d','#bbf7d0'),('Todas','#fafafa','#374151','#e5e7eb')] %}
+    <div style="padding:16px;border-right:1px solid #f0f0f0;{% if loop.last %}border-right:none;{% endif %}">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
+        <span style="background:{{ bg }};color:{{ fg }};border:1px solid {{ border }};padding:2px 10px;border-radius:8px;font-size:11px;font-weight:700">{{ tipo }}</span>
+        <span style="font-size:10px;color:#9ca3af" id="cnt-{{ tipo|lower }}">— órdenes</span>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center">
+        <div>
+          <div style="font-size:10px;color:#9ca3af;margin-bottom:2px">Mínimo</div>
+          <div style="font-size:20px;font-weight:700;color:{{ fg }}" id="min-{{ tipo|lower }}">—</div>
+          <div style="font-size:9px;color:#9ca3af">días</div>
+        </div>
+        <div style="border-left:1px solid #f0f0f0;border-right:1px solid #f0f0f0">
+          <div style="font-size:10px;color:#9ca3af;margin-bottom:2px">Promedio</div>
+          <div style="font-size:20px;font-weight:700;color:{{ fg }}" id="avg-{{ tipo|lower }}">—</div>
+          <div style="font-size:9px;color:#9ca3af">días</div>
+        </div>
+        <div>
+          <div style="font-size:10px;color:#9ca3af;margin-bottom:2px">Máximo</div>
+          <div style="font-size:20px;font-weight:700;color:{{ fg }}" id="max-{{ tipo|lower }}">—</div>
+          <div style="font-size:9px;color:#9ca3af">días</div>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
   </div>
 </div>
 <!-- Tabla principal -->
@@ -287,17 +297,18 @@ function filtrar() {
   });
 
   // Actualizar promedio dias por tipo
-  function avgDias(arr, tipo) {
+  function calcTipo(arr, tipo) {
     var ords = arr.filter(function(r){ return (!tipo||r.tipo===tipo) && (r.dias_ofrecidos||0)>0; });
-    if (!ords.length) return {v:'—', n:'0 órdenes'};
-    var s = ords.reduce(function(a,r){return a+(r.dias_ofrecidos||0);},0);
-    return {v: Math.round(s/ords.length), n: ords.length+' órdenes'};
+    if (!ords.length) return {avg:'—', min:'—', max:'—', n:'0 órdenes'};
+    var vals = ords.map(function(r){return r.dias_ofrecidos||0;});
+    var s = vals.reduce(function(a,v){return a+v;},0);
+    return {avg: Math.round(s/vals.length), min: Math.min.apply(null,vals), max: Math.max.apply(null,vals), n: ords.length+' órdenes'};
   }
-  var b=avgDias(filtrados,'Blanca'), im=avgDias(filtrados,'Impresa'), f=avgDias(filtrados,'Fondo'), tot=avgDias(filtrados,null);
-  ['blanca','impresa','fondo','total'].forEach(function(k,i){
-    var d = [b,im,f,tot][i];
-    var av=document.getElementById('avg-'+k), cn=document.getElementById('cnt-'+k);
-    if(av) av.textContent=d.v; if(cn) cn.textContent=d.n;
+  var b=calcTipo(filtrados,'Blanca'), im=calcTipo(filtrados,'Impresa'), f=calcTipo(filtrados,'Fondo'), tot=calcTipo(filtrados,null);
+  [['blanca',b],['impresa',im],['fondo',f],['todas',tot]].forEach(function(pair){
+    var k=pair[0], d=pair[1];
+    var av=document.getElementById('avg-'+k), mn=document.getElementById('min-'+k), mx=document.getElementById('max-'+k), cn=document.getElementById('cnt-'+k);
+    if(av) av.textContent=d.avg; if(mn) mn.textContent=d.min; if(mx) mx.textContent=d.max; if(cn) cn.textContent=d.n;
   });
   document.getElementById('badge-total').textContent = filtrados.length + ' órdenes';
   document.getElementById('conteo').innerHTML = 'Mostrando <strong>'+filtrados.length+'</strong> de '+DATOS.length+' órdenes';
