@@ -126,33 +126,7 @@ tr:hover td{background:#fafafa}
   <div style="padding:10px 16px;border-bottom:1px solid #f0f0f0;background:#f9fafb">
     <span style="font-size:12px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:.4px">⏱️ Días ofrecidos por tipo de etiqueta — (Fecha entrega − Fecha creación)</span>
   </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;padding:0">
-    {% for tipo, bg, fg, border in [('Blanca','#f8fafc','#475569','#e2e8f0'),('Impresa','#eff6ff','#1d4ed8','#bfdbfe'),('Fondo','#f0fdf4','#15803d','#bbf7d0'),('Todas','#fafafa','#374151','#e5e7eb')] %}
-    <div style="padding:16px;border-right:1px solid #f0f0f0;{% if loop.last %}border-right:none;{% endif %}">
-      <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
-        <span style="background:{{ bg }};color:{{ fg }};border:1px solid {{ border }};padding:2px 10px;border-radius:8px;font-size:11px;font-weight:700">{{ tipo }}</span>
-        <span style="font-size:10px;color:#9ca3af" id="cnt-{{ tipo|lower }}">— órdenes</span>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center">
-        <div>
-          <div style="font-size:10px;color:#9ca3af;margin-bottom:2px">Mínimo</div>
-          <div style="font-size:20px;font-weight:700;color:{{ fg }}" id="min-{{ tipo|lower }}">—</div>
-          <div style="font-size:9px;color:#9ca3af">días</div>
-        </div>
-        <div style="border-left:1px solid #f0f0f0;border-right:1px solid #f0f0f0">
-          <div style="font-size:10px;color:#9ca3af;margin-bottom:2px">Promedio</div>
-          <div style="font-size:20px;font-weight:700;color:{{ fg }}" id="avg-{{ tipo|lower }}">—</div>
-          <div style="font-size:9px;color:#9ca3af">días</div>
-        </div>
-        <div>
-          <div style="font-size:10px;color:#9ca3af;margin-bottom:2px">Máximo</div>
-          <div style="font-size:20px;font-weight:700;color:{{ fg }}" id="max-{{ tipo|lower }}">—</div>
-          <div style="font-size:9px;color:#9ca3af">días</div>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+  <div id="stats-tipos" style="overflow-x:auto"></div>
 </div>
 <!-- Tabla principal -->
 <div class="panel">
@@ -215,6 +189,7 @@ tr:hover td{background:#fafafa}
         <th style="width:90px">F. Creación</th>
         <th style="width:90px" onclick="sortBy('fecha')"><span id="h-fecha">F. Entrega ↑</span></th>
         <th style="width:55px;cursor:pointer" onclick="sortBy('dias')">Días</th>
+        <th style="width:110px">T. Producción</th>
         <th style="width:100px">Estatus</th>
       </tr>
     </thead>
@@ -300,19 +275,63 @@ function filtrar() {
   });
 
   // Actualizar promedio dias por tipo
-  function calcTipo(arr, tipo) {
-    var ords = arr.filter(function(r){ return (!tipo||r.tipo===tipo) && (r.dias_ofrecidos||0)>0; });
-    if (!ords.length) return {avg:'—', min:'—', max:'—', n:'0 órdenes'};
+  function calcStats(arr) {
+    var ords = arr.filter(function(r){ return (r.dias_ofrecidos||0)>0; });
+    if (!ords.length) return {avg:'—', min:'—', max:'—', n:0};
     var vals = ords.map(function(r){return r.dias_ofrecidos||0;});
     var s = vals.reduce(function(a,v){return a+v;},0);
-    return {avg: Math.round(s/vals.length), min: Math.min.apply(null,vals), max: Math.max.apply(null,vals), n: ords.length+' órdenes'};
+    return {avg:Math.round(s/vals.length), min:Math.min.apply(null,vals), max:Math.max.apply(null,vals), n:ords.length};
   }
-  var b=calcTipo(filtrados,'Blanca'), im=calcTipo(filtrados,'Impresa'), f=calcTipo(filtrados,'Fondo'), tot=calcTipo(filtrados,null);
-  [['blanca',b],['impresa',im],['fondo',f],['todas',tot]].forEach(function(pair){
-    var k=pair[0], d=pair[1];
-    var av=document.getElementById('avg-'+k), mn=document.getElementById('min-'+k), mx=document.getElementById('max-'+k), cn=document.getElementById('cnt-'+k);
-    if(av) av.textContent=d.avg; if(mn) mn.textContent=d.min; if(mx) mx.textContent=d.max; if(cn) cn.textContent=d.n;
+
+  function statCell(d, fg) {
+    return '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;text-align:center;margin-top:8px">'
+      +'<div><div style="font-size:9px;color:#9ca3af">Mín</div><div style="font-size:17px;font-weight:700;color:'+fg+'">'+d.min+'</div><div style="font-size:9px;color:#9ca3af">días</div></div>'
+      +'<div style="border-left:1px solid #f0f0f0;border-right:1px solid #f0f0f0"><div style="font-size:9px;color:#9ca3af">Prom</div><div style="font-size:17px;font-weight:700;color:'+fg+'">'+d.avg+'</div><div style="font-size:9px;color:#9ca3af">días</div></div>'
+      +'<div><div style="font-size:9px;color:#9ca3af">Máx</div><div style="font-size:17px;font-weight:700;color:'+fg+'">'+d.max+'</div><div style="font-size:9px;color:#9ca3af">días</div></div>'
+      +'</div>';
+  }
+
+  // Tipos de etiqueta
+  var TIPOS_ET = [{t:'Blanca',bg:'#f8fafc',fg:'#475569'},{t:'Impresa',bg:'#eff6ff',fg:'#1d4ed8'},{t:'Fondo',bg:'#f0fdf4',fg:'#15803d'},{t:'Todas',bg:'#fafafa',fg:'#374151'}];
+  // Tipos de producción
+  var tiempos_prod = [...new Set(filtrados.map(function(r){return r.tiempo_produccion||'—';}).filter(function(v){return v!=='—'&&v!=='nan';}))].sort();
+
+  var html = '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:12px">'
+    + '<thead><tr style="background:#f9fafb">'
+    + '<th style="padding:10px 14px;text-align:left;font-size:10px;font-weight:700;color:#6b7280;border-bottom:1px solid #e5e7eb;width:130px">Tipo Etiqueta</th>';
+
+  tiempos_prod.forEach(function(tp) {
+    html += '<th style="padding:10px 14px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;border-bottom:1px solid #e5e7eb;border-left:1px solid #e5e7eb">'+tp+'</th>';
   });
+  html += '<th style="padding:10px 14px;text-align:center;font-size:10px;font-weight:700;color:#374151;border-bottom:1px solid #e5e7eb;border-left:2px solid #d1d5db">TOTAL</th>';
+  html += '</tr></thead><tbody>';
+
+  TIPOS_ET.forEach(function(item) {
+    var ords_tipo = filtrados.filter(function(r){ return item.t==='Todas' || r.tipo===item.t; });
+    html += '<tr style="border-bottom:1px solid #f3f4f6">'
+      + '<td style="padding:10px 14px;border-right:1px solid #f0f0f0">'
+      + '<span style="background:'+item.bg+';color:'+item.fg+';border:1px solid #e0e0e0;padding:2px 10px;border-radius:8px;font-size:11px;font-weight:700">'+item.t+'</span>'
+      + '<div style="font-size:10px;color:#9ca3af;margin-top:3px">'+ords_tipo.filter(function(r){return (r.dias_ofrecidos||0)>0;}).length+' órdenes</div>'
+      + '</td>';
+
+    tiempos_prod.forEach(function(tp) {
+      var sub = ords_tipo.filter(function(r){ return r.tiempo_produccion===tp; });
+      var d = calcStats(sub);
+      html += '<td style="padding:8px 12px;text-align:center;border-left:1px solid #f0f0f0;vertical-align:top">'
+        + (d.n > 0 ? '<div style="font-size:10px;color:#9ca3af">'+d.n+' OP</div>'+statCell(d,item.fg) : '<div style="color:#d1d5db;font-size:12px;padding:12px 0">—</div>')
+        + '</td>';
+    });
+
+    var dtot = calcStats(ords_tipo);
+    html += '<td style="padding:8px 12px;text-align:center;border-left:2px solid #d1d5db;vertical-align:top;background:#fafafa">'
+      + (dtot.n > 0 ? '<div style="font-size:10px;color:#9ca3af">'+dtot.n+' OP</div>'+statCell(dtot,item.fg) : '<div style="color:#d1d5db;font-size:12px;padding:12px 0">—</div>')
+      + '</td>';
+    html += '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+  var el = document.getElementById('stats-tipos');
+  if(el) el.innerHTML = html;
   document.getElementById('badge-total').textContent = filtrados.length + ' órdenes';
   document.getElementById('conteo').innerHTML = 'Mostrando <strong>'+filtrados.length+'</strong> de '+DATOS.length+' órdenes';
 
@@ -331,6 +350,7 @@ function filtrar() {
       <td style="font-size:11px;color:#6b7280;text-align:center">${r.fecha_creacion||'—'}</td>
       <td style="font-weight:700;color:${r.fecha_entrega_raw<HOY?'#dc2626':'#374151'}">${r.fecha_entrega}</td>
       <td style="text-align:center;font-weight:700;font-size:13px;color:${(r.dias_ofrecidos||0)<15?'#dc2626':(r.dias_ofrecidos||0)<30?'#ca8a04':'#15803d'}">${r.dias_ofrecidos||'—'}</td>
+      <td style="text-align:center"><span class="badge" style="background:#f0fdf4;color:#15803d;font-size:10px">${r.tiempo_produccion||'—'}</span></td>
       <td><span class="badge" style="background:#f3f4f6;color:#374151;font-size:10px">${r.etapa}</span></td>
     </tr>`;
   }).join('');
