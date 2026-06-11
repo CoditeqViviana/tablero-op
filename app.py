@@ -658,10 +658,20 @@ def upload_liberacion():
         from datetime import timedelta
         import pytz
         df = pd.read_excel(file, header=0)
-        df.columns = ['op','fecha_lib','cliente','descripcion','fecha_entrega','mts','centro_proceso','proceso']
+        df.columns = ['op','fecha_lib','cliente','descripcion','fecha_entrega','mts','centro_proceso','proceso','prioridad'][:len(df.columns)]
         df['fecha_lib'] = pd.to_datetime(df['fecha_lib'], dayfirst=True, errors='coerce')
         df['fecha_entrega'] = pd.to_datetime(df['fecha_entrega'], dayfirst=True, errors='coerce')
         df['mts'] = pd.to_numeric(df['mts'], errors='coerce').fillna(0)
+
+        def color_from_prioridad(pct_str):
+            try:
+                pct = float(str(pct_str).replace('%','').replace(',',''))
+                if pct <= 0: return 'negro'
+                elif pct <= 17: return 'rojo'
+                elif pct <= 34: return 'amarillo'
+                elif pct <= 50: return 'verde'
+                else: return 'azul'
+            except: return 'gris'
 
         def sumar_dias_hab(fecha, dias):
             if pd.isna(fecha): return None
@@ -689,6 +699,8 @@ def upload_liberacion():
                 'fecha_entrega': row['fecha_entrega'].strftime('%d/%m/%Y') if pd.notna(row['fecha_entrega']) else '',
                 'referencia': str(row['descripcion']).strip()[:80],
                 'proceso': str(row['centro_proceso']),
+                'prioridad': str(row.get('prioridad', '')) if 'prioridad' in df.columns else '',
+                'color_prio': color_from_prioridad(row.get('prioridad', '')) if 'prioridad' in df.columns else 'gris',
             })
 
         # Metros por maquina por fecha_objetivo
