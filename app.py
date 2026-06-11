@@ -403,6 +403,7 @@ def process_excel(file):
             'en_impresion': etapa_str in {'Preparacion','En cola impresión NP1','Impresion','En cola impresion NP1'},
             'fecha_creacion': fc_ord.strftime('%d/%m/%Y') if pd.notna(fc_ord) else '',
             'dias_ofrecidos': int((fe - fc_ord).days) if pd.notna(fe) and pd.notna(fc_ord) else 0,
+            'tiempo_produccion': str(row.iloc[21]).strip() if len(row) > 21 and pd.notna(row.iloc[21]) else '—',
         }
         todas_tambor.append(ord_data)
         if pd.notna(fe) and fe <= today + pd.Timedelta(days=7):
