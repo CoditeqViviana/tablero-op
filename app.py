@@ -121,6 +121,16 @@ def process_excel(file):
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
 
+    # Cargar mapa de prioridades del archivo de liberación si existe
+    LIB_FILE = os.path.join(UPLOAD_FOLDER, 'liberacion.json')
+    prioridad_map = {}
+    if os.path.exists(LIB_FILE):
+        try:
+            with open(LIB_FILE, encoding='utf-8') as _f:
+                _lib = json.load(_f)
+                prioridad_map = _lib.get('prioridad_map', {})
+        except: pass
+
     if today.weekday() < 5:
         lun = today - pd.Timedelta(days=today.weekday())
     else:
@@ -386,6 +396,10 @@ def process_excel(file):
             pct_buf = round((today - fc_ord).days / dur * 100, 1) if dur > 0 else 0
         else:
             pct_buf = 0
+        op_key = str(row.iloc[3]).strip().rstrip('.0')
+        prio_info = prioridad_map.get(op_key, {})
+        pct_prio = prio_info.get('pct', '') if prio_info else ''
+
         ord_data = {
             'op': str(row.iloc[3]),
             'cliente': str(row.iloc[0]),
@@ -396,13 +410,12 @@ def process_excel(file):
             'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
             'fecha_entrega_raw': fe.strftime('%Y-%m-%d') if pd.notna(fe) else '',
             'fecha_creacion': fc_ord.strftime('%d/%m/%Y') if pd.notna(fc_ord) else '',
-            'dias_ofrecidos': (fe - fc_ord).days if pd.notna(fe) and pd.notna(fc_ord) else 0,
+            'dias_ofrecidos': int((fe - fc_ord).days) if pd.notna(fe) and pd.notna(fc_ord) else 0,
             'color_toc': color_toc,
+            'pct_prioridad': pct_prio,
             'mts': float(row['mts']),
             'pct_buffer': pct_buf,
             'en_impresion': etapa_str in {'Preparacion','En cola impresión NP1','Impresion','En cola impresion NP1'},
-            'fecha_creacion': fc_ord.strftime('%d/%m/%Y') if pd.notna(fc_ord) else '',
-            'dias_ofrecidos': int((fe - fc_ord).days) if pd.notna(fe) and pd.notna(fc_ord) else 0,
             'tiempo_produccion': str(row.iloc[21]).strip() if len(row) > 21 and pd.notna(row.iloc[21]) else '—',
         }
         todas_tambor.append(ord_data)
@@ -666,11 +679,11 @@ def upload_liberacion():
         def color_from_prioridad(pct_str):
             try:
                 pct = float(str(pct_str).replace('%','').replace(',',''))
-                if pct <= 0: return 'negro'
-                elif pct <= 17: return 'rojo'
-                elif pct <= 34: return 'amarillo'
-                elif pct <= 50: return 'verde'
-                else: return 'azul'
+                if pct < 0 or pct > 100: return 'negro'
+                elif pct <= 50: return 'azul'
+                elif pct <= 66.67: return 'verde'
+                elif pct <= 83.33: return 'amarillo'
+                else: return 'rojo'
             except: return 'gris'
 
         def sumar_dias_hab(fecha, dias):
@@ -717,12 +730,22 @@ def upload_liberacion():
         fechas_rrc = sorted(set(f for m in MAQUINAS_RRC for f in cap_data[m].keys()))
 
         now = datetime.now(pytz.timezone('America/Bogota'))
+        # Mapa OP -> {color, prioridad} para uso en tablero de órdenes
+        prioridad_map = {}
+        for o in ordenes:
+            op_key = str(o['op']).strip().rstrip('.0')
+            prioridad_map[op_key] = {
+                'color': o.get('color_prio', 'gris'),
+                'pct': o.get('prioridad', ''),
+            }
+
         lib_result = {
             'updated_at': now.strftime('%d/%m/%Y %H:%M'),
             'ordenes': ordenes,
             'cap_data': cap_data,
             'fechas_rrc': fechas_rrc,
             'maquinas_rrc': MAQUINAS_RRC,
+            'prioridad_map': prioridad_map,
         }
         LIB_FILE = os.path.join(UPLOAD_FOLDER, 'liberacion.json')
         with open(LIB_FILE, 'w', encoding='utf-8') as f:
