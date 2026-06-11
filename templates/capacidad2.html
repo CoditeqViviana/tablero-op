@@ -442,6 +442,9 @@ function cambiarFecha() {
         <td style="padding:7px 10px;font-size:11px">${o.cliente}</td>
         <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${o.referencia||''}">${ref}</td>
         <td style="padding:7px 10px;text-align:right;font-weight:600">${Math.round(o.mts||0).toLocaleString('es-CO')}</td>
+        <td style="padding:7px 10px;text-align:center">
+          ${o.prioridad ? '<span style="background:'+c[0]+';color:'+c[1]+';padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700">'+c[2]+' '+o.prioridad+'</span>' : '—'}
+        </td>
         <td style="padding:7px 10px;text-align:center;color:#6b7280">${fLib}</td>
         <td style="padding:7px 10px;text-align:center;font-weight:700;color:#dc2626">${fEnt}</td>
       </tr>`;
