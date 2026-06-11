@@ -317,8 +317,12 @@ function filtrar() {
     tiempos_prod.forEach(function(tp) {
       var sub = ords_tipo.filter(function(r){ return r.tiempo_produccion===tp; });
       var d = calcStats(sub);
+      var total_con_dias = ords_tipo.filter(function(r){return (r.dias_ofrecidos||0)>0;}).length;
+      var pct_col = total_con_dias > 0 && d.n > 0 ? Math.round(d.n / total_con_dias * 100) : 0;
       html += '<td style="padding:8px 12px;text-align:center;border-left:1px solid #f0f0f0;vertical-align:top">'
-        + (d.n > 0 ? '<div style="font-size:10px;color:#9ca3af">'+d.n+' OP</div>'+statCell(d,item.fg) : '<div style="color:#d1d5db;font-size:12px;padding:12px 0">—</div>')
+        + (d.n > 0
+          ? '<div style="font-size:10px;font-weight:700;color:'+item.fg+'">'+d.n+' OP <span style="color:#9ca3af;font-weight:400">('+pct_col+'%)</span></div>'+statCell(d,item.fg)
+          : '<div style="color:#d1d5db;font-size:12px;padding:12px 0">—</div>')
         + '</td>';
     });
 
