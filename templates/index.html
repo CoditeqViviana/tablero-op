@@ -104,11 +104,8 @@ tr:hover:not(.total-row) td{background:#fafafa}
     {% if data %}<div class="updated">Actualizado: <strong>{{ data.updated_at }}</strong></div>{% endif %}
     <a href="/dia" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">📅 Detalle del día</a>
     <a href="/tambor" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">⚠️ Tambor General</a>
-    <a href="/wip" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">📋 WIP</a>
-    <a href="/pareto" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">📊 Pareto</a>
     <a href="/cuellos" style="font-size:12px;padding:6px 14px;border:1px solid #fca5a5;border-radius:7px;background:#fff;color:#b91c1c;text-decoration:none">🔴 Cuellos de Botella</a>
     <a href="/capacidad" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">⚙️ Capacidad RRC</a>
-    <a href="/simulacion_tiempos" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">📐 Tiempos Estándar</a>
     <a href="/capacidad2" style="font-size:12px;padding:6px 14px;border:1px solid #d1d5db;border-radius:7px;background:#fff;color:#374151;text-decoration:none">⚙️ Capacidad RRC (2)</a>
     <button class="upload-btn" onclick="openModal()">&#8593; Subir Excel</button>
   </div>
@@ -140,30 +137,6 @@ tr:hover:not(.total-row) td{background:#fafafa}
 </div>
 
 <!-- Panorama semanal -->
-<!-- Resumen TOC — orden: negro, rojo, amarillo, verde, azul -->
-<div style="display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px">
-  <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px">
-    <span style="background:#1f2937;color:#f3f4f6;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700">Negro</span>
-    <div><div style="font-size:11px;color:#6b7280">Vencidas</div><div style="font-size:22px;font-weight:700;color:#1f2937">{{ data.colores_resumen.negro }}</div></div>
-  </div>
-  <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px">
-    <span style="background:#fee2e2;color:#b91c1c;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700">Rojo</span>
-    <div><div style="font-size:11px;color:#6b7280">83–100%</div><div style="font-size:22px;font-weight:700;color:#b91c1c">{{ data.colores_resumen.rojo }}</div></div>
-  </div>
-  <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px">
-    <span style="background:#fef9c3;color:#854d0e;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700">Amarillo</span>
-    <div><div style="font-size:11px;color:#6b7280">67–83%</div><div style="font-size:22px;font-weight:700;color:#854d0e">{{ data.colores_resumen.amarillo }}</div></div>
-  </div>
-  <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px">
-    <span style="background:#dcfce7;color:#15803d;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700">Verde</span>
-    <div><div style="font-size:11px;color:#6b7280">50–67%</div><div style="font-size:22px;font-weight:700;color:#15803d">{{ data.colores_resumen.verde }}</div></div>
-  </div>
-  <div style="background:#fff;border-radius:8px;padding:12px 14px;border:1px solid #e0e0e0;display:flex;align-items:center;gap:10px">
-    <span style="background:#dbeafe;color:#1d4ed8;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:700">Azul</span>
-    <div><div style="font-size:11px;color:#6b7280">Buffer &lt; 50%</div><div style="font-size:22px;font-weight:700;color:#1d4ed8">{{ data.colores_resumen.azul }}</div></div>
-  </div>
-</div>
-
 
 <div class="panel">
   <div class="panel-hdr"><h2>Panorama semanal — órdenes a entregar por máquina</h2></div>
