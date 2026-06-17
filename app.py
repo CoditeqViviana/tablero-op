@@ -7,9 +7,92 @@ import pytz
 
 app = Flask(__name__)
 app.jinja_env.filters['format_number'] = lambda v: f'{int(v):,}'.replace(',', '.')
-UPLOAD_FOLDER = 'data'
+UPLOAD_FOLDER = os.environ.get('DATA_DIR', 'data')
 DATA_FILE = os.path.join(UPLOAD_FOLDER, 'latest.json')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+# ============ PERSISTENCIA EN GITHUB ============
+import base64
+import requests
+
+GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN', '')
+GITHUB_REPO = os.environ.get('GITHUB_REPO', 'CoditeqViviana/tablero-op')
+GITHUB_DATA_PATH = 'data_store'  # carpeta dentro del repo donde se guardan los JSON
+
+def _gh_headers():
+    return {
+        'Authorization': f'Bearer {GITHUB_TOKEN}',
+        'Accept': 'application/vnd.github+json',
+    }
+
+def github_save_json(filename, data):
+    """Guarda un JSON en el repo de GitHub y también en disco local (cache)."""
+    local_path = os.path.join(UPLOAD_FOLDER, filename)
+    try:
+        with open(local_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False)
+    except Exception as e:
+        print(f'Error guardando local {filename}: {e}')
+
+    if not GITHUB_TOKEN:
+        return False
+
+    try:
+        content_str = json.dumps(data, ensure_ascii=False)
+        content_b64 = base64.b64encode(content_str.encode('utf-8')).decode('utf-8')
+        api_url = f'https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_DATA_PATH}/{filename}'
+
+        # Obtener sha actual si el archivo ya existe (requerido para actualizar)
+        sha = None
+        r = requests.get(api_url, headers=_gh_headers(), timeout=10)
+        if r.status_code == 200:
+            sha = r.json().get('sha')
+
+        payload = {
+            'message': f'Actualizar {filename} desde tablero',
+            'content': content_b64,
+        }
+        if sha:
+            payload['sha'] = sha
+
+        r = requests.put(api_url, headers=_gh_headers(), json=payload, timeout=15)
+        if r.status_code not in (200, 201):
+            print(f'Error guardando en GitHub {filename}: {r.status_code} {r.text[:200]}')
+            return False
+        return True
+    except Exception as e:
+        print(f'Excepción guardando en GitHub {filename}: {e}')
+        return False
+
+def github_load_json(filename):
+    """Lee un JSON: primero intenta GitHub, si falla usa el cache local."""
+    local_path = os.path.join(UPLOAD_FOLDER, filename)
+
+    if GITHUB_TOKEN:
+        try:
+            api_url = f'https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_DATA_PATH}/{filename}'
+            r = requests.get(api_url, headers=_gh_headers(), timeout=10)
+            if r.status_code == 200:
+                content_b64 = r.json().get('content', '')
+                content_str = base64.b64decode(content_b64).decode('utf-8')
+                data = json.loads(content_str)
+                # Refrescar cache local
+                try:
+                    with open(local_path, 'w', encoding='utf-8') as f:
+                        json.dump(data, f, ensure_ascii=False)
+                except: pass
+                return data
+        except Exception as e:
+            print(f'Excepción leyendo de GitHub {filename}: {e}')
+
+    # Fallback: cache local
+    if os.path.exists(local_path):
+        try:
+            with open(local_path, encoding='utf-8') as f:
+                return json.load(f)
+        except: pass
+    return None
+# ============ FIN PERSISTENCIA GITHUB ============
 BOGOTA = pytz.timezone('America/Bogota')
 
 # Capacidad: 22.75h * 50% eficiencia * 60min * 35m/min = 23,888 mts/dia
@@ -122,14 +205,12 @@ def process_excel(file):
     today = pd.Timestamp(now_bogota.date())
 
     # Cargar mapa de prioridades del archivo de liberación si existe
-    LIB_FILE = os.path.join(UPLOAD_FOLDER, 'liberacion.json')
     prioridad_map = {}
-    if os.path.exists(LIB_FILE):
-        try:
-            with open(LIB_FILE, encoding='utf-8') as _f:
-                _lib = json.load(_f)
-                prioridad_map = _lib.get('prioridad_map', {})
-        except: pass
+    try:
+        _lib = github_load_json('liberacion.json')
+        if _lib:
+            prioridad_map = _lib.get('prioridad_map', {})
+    except: pass
 
     if today.weekday() < 5:
         lun = today - pd.Timedelta(days=today.weekday())
@@ -507,71 +588,49 @@ def process_excel(file):
 @app.route('/')
 def index():
     data = None
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, encoding='utf-8') as f:
-            data = json.load(f)
+    data = github_load_json('latest.json')
     return render_template('index.html', data=data)
 
 @app.route('/dia')
 def dia_view():
     data = None
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, encoding='utf-8') as f:
-            data = json.load(f)
+    data = github_load_json('latest.json')
     return render_template('dia.html', data=data)
 
 @app.route('/simulacion_tiempos')
 def simulacion_tiempos_view():
     data = None
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, encoding='utf-8') as f:
-            data = json.load(f)
+    data = github_load_json('latest.json')
     return render_template('simulacion_tiempos.html', data=data)
 
 @app.route('/capacidad')
 def capacidad_view():
     data = None
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, encoding='utf-8') as f:
-            data = json.load(f)
+    data = github_load_json('latest.json')
     return render_template('capacidad.html', data=data)
 
 @app.route('/tambor')
 def tambor_view():
     data = None
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, encoding='utf-8') as f:
-            data = json.load(f)
+    data = github_load_json('latest.json')
     return render_template('tambor.html', data=data)
 
 @app.route('/cuellos')
 def cuellos_view():
     data = None
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, encoding='utf-8') as f:
-            data = json.load(f)
+    data = github_load_json('latest.json')
     return render_template('cuellos.html', data=data)
 
 @app.route('/wip')
 def wip_view():
     data = None
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, encoding='utf-8') as f:
-            data = json.load(f)
-    wip_data = None
-    WIP_FILE = os.path.join(UPLOAD_FOLDER, 'wip.json')
-    if os.path.exists(WIP_FILE):
-        with open(WIP_FILE, encoding='utf-8') as f:
-            wip_data = json.load(f)
+    data = github_load_json('latest.json')
+    wip_data = github_load_json('wip.json')
     return render_template('wip.html', data=data, wip=wip_data)
 
 @app.route('/pareto')
 def pareto_view():
-    wip_data = None
-    WIP_FILE = os.path.join(UPLOAD_FOLDER, 'wip.json')
-    if os.path.exists(WIP_FILE):
-        with open(WIP_FILE, encoding='utf-8') as f:
-            wip_data = json.load(f)
+    wip_data = github_load_json('wip.json')
     return render_template('pareto.html', wip=wip_data)
 
 @app.route('/upload_wip', methods=['POST'])
@@ -640,24 +699,15 @@ def upload_wip():
             'pareto_ordenes': pareto_ordenes,
             'pareto_total': len(pareto_ordenes),
         }
-        WIP_FILE = os.path.join(UPLOAD_FOLDER, 'wip.json')
-        with open(WIP_FILE, 'w', encoding='utf-8') as f:
-            json.dump(wip_result, f, ensure_ascii=False)
+        github_save_json('wip.json', wip_result)
         return jsonify({'ok': True, 'updated_at': wip_result['updated_at']})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 @app.route('/capacidad2')
 def capacidad2_view():
-    data = None
-    if os.path.exists(DATA_FILE):
-        with open(DATA_FILE, encoding='utf-8') as f:
-            data = json.load(f)
-    lib_data = None
-    LIB_FILE = os.path.join(UPLOAD_FOLDER, 'liberacion.json')
-    if os.path.exists(LIB_FILE):
-        with open(LIB_FILE, encoding='utf-8') as f:
-            lib_data = json.load(f)
+    data = github_load_json('latest.json')
+    lib_data = github_load_json('liberacion.json')
     return render_template('capacidad2.html', data=data, lib=lib_data)
 
 @app.route('/upload_liberacion', methods=['POST'])
@@ -747,9 +797,7 @@ def upload_liberacion():
             'maquinas_rrc': MAQUINAS_RRC,
             'prioridad_map': prioridad_map,
         }
-        LIB_FILE = os.path.join(UPLOAD_FOLDER, 'liberacion.json')
-        with open(LIB_FILE, 'w', encoding='utf-8') as f:
-            json.dump(lib_result, f, ensure_ascii=False)
+        github_save_json('liberacion.json', lib_result)
         return jsonify({'ok': True, 'updated_at': lib_result['updated_at']})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -763,8 +811,7 @@ def upload():
         return jsonify({'error': 'Solo se aceptan archivos Excel'}), 400
     try:
         result = process_excel(file)
-        with open(DATA_FILE, 'w', encoding='utf-8') as f:
-            json.dump(result, f, ensure_ascii=False)
+        github_save_json('latest.json', result)
         return jsonify({'ok': True, 'updated_at': result['updated_at']})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
