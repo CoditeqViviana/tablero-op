@@ -1,6 +1,6 @@
 """
 sync_script.py — Consulta Vtiger y genera latest.json para el tablero.
-Se ejecuta via GitHub Actions cada hora.
+Se ejecuta via GitHub Actions cada 2 horas.
 """
 import os
 import json
@@ -8,6 +8,8 @@ import requests
 import pandas as pd
 from datetime import datetime
 import pytz
+import warnings
+warnings.filterwarnings('ignore')
 
 VTIGER_URL = 'https://coditeq.od2.vtiger.com'
 VTIGER_USER = os.environ.get('VTIGER_USER', '')
@@ -41,28 +43,6 @@ def vtiger_query(query_str, page_size=100):
             break
         offset += page_size
     return all_records
-
-PROD_SELECT = (
-    "id,fld_vtcmproduccionname,cf_vtcmproduccion_organizacion,"
-    "cf_vtcmproduccion_coodigosiigo,cf_vtcmproduccion_produccintipo,"
-    "cf_vtcmproduccion_fechaentregaprometida,"
-    "cf_vtcmproduccion_fechaconfirmacindeentregademateriaprima,"
-    "cf_vtcmproduccion_nodeetiquetasporrollo,"
-    "cf_vtcmproduccion_fecharealdeliberacin,createdtime,"
-    "cf_vtcmproduccion_tiempoproduccin,cf_vtcmproduccion_observacionesocop,"
-    "cf_vtcmproduccion_estado"
-)
-
-OP_SELECT = (
-    "id,vtcmordendeproduccionnumber,cf_vtcmordendeproduccion_totaletiquetas,"
-    "cf_vtcmordendeproduccion_familia,cf_vtcmordendeproduccion_procesodeetiquetas,"
-    "cf_vtcmordendeproduccion_totalmtslineales,cf_vtcmordendeproduccion_fechadeentrega,"
-    "cf_vtcmordendeproduccion_material,cf_vtcmordendeproduccion_adhesivo,"
-    "cf_vtcmordendeproduccion_ancho,cf_vtcmordendeproduccion_centrodeproceso,"
-    "cf_vtcmordendeproduccion_totalm2,cf_vtcmordendeproduccion_tipodeorden,"
-    "cf_vtcmordendeproduccion_z,cf_vtcmordendeproduccion_referenciadeproduccin,"
-    "cf_vtcmordendeproduccion_estadoop"
-)
 
 PROD = {
     'referencia': 'fld_vtcmproduccionname',
@@ -115,24 +95,10 @@ def _format_createdtime(vtiger_datetime):
         return str(vtiger_datetime)
 
 def fetch_and_process():
-    import warnings
-    warnings.filterwarnings('ignore')
-
-    # 1. Consultar Producciones activas
-    print("[sync] Consultando producciones activas...")
-    producciones = vtiger_query(
-        f"SELECT {PROD_SELECT} FROM vtcmproduccion "
-        f"WHERE cf_vtcmproduccion_tiempoproduccin = 'Programada'"
-    )
-    print(f"[sync] Producciones: {len(producciones)}")
-
-    if not producciones:
-        print("[sync] Fallback: no entregadas...")
-        producciones = vtiger_query(
-            f"SELECT {PROD_SELECT} FROM vtcmproduccion "
-            f"WHERE cf_vtcmproduccion_estado != 'Entregado'"
-        )
-        print(f"[sync] Producciones fallback: {len(producciones)}")
+    # 1. Consultar Producciones
+    print("[sync] Consultando producciones...")
+    producciones = vtiger_query("SELECT * FROM vtcmproduccion")
+    print(f"[sync] Producciones totales: {len(producciones)}")
 
     if not producciones:
         print("[sync] ERROR: No se obtuvieron producciones")
@@ -140,21 +106,25 @@ def fetch_and_process():
 
     prod_by_id = {p.get('id', ''): p for p in producciones}
 
-    # 2. Consultar Ordenes
+    # 2. Consultar Ordenes (sin filtro WHERE para evitar error de sintaxis)
     print("[sync] Consultando ordenes...")
-    ordenes = vtiger_query(
-        f"SELECT {OP_SELECT} FROM vtcmordendeproduccion "
-        f"WHERE cf_vtcmordendeproduccion_procesodeetiquetas != ''"
-    )
-    print(f"[sync] Ordenes: {len(ordenes)}")
+    ordenes = vtiger_query("SELECT * FROM vtcmordendeproduccion")
+    print(f"[sync] Ordenes totales: {len(ordenes)}")
 
     if not ordenes:
         print("[sync] ERROR: No se obtuvieron ordenes")
         return False
 
-    # 3. Unir datos
+    # 3. Unir datos - filtrar en Python
     rows = []
+    sin_prod = 0
     for op in ordenes:
+        # Filtrar: solo OPs con proceso de etiquetas definido
+        proceso = op.get(OP['proceso'], '')
+        if not proceso or proceso.strip() in ('', '-'):
+            continue
+
+        # Buscar Produccion relacionada
         prod = None
         ref_id = op.get(OP['ref_produccion'], '')
         if ref_id and ref_id in prod_by_id:
@@ -165,10 +135,7 @@ def fetch_and_process():
                     prod = prod_by_id[val]
                     break
         if not prod:
-            continue
-
-        proceso = op.get(OP['proceso'], '')
-        if not proceso or proceso.strip() in ('', '-'):
+            sin_prod += 1
             continue
 
         rows.append({
@@ -198,7 +165,7 @@ def fetch_and_process():
             'obs_ocop': prod.get(PROD['obs_ocop'], ''),
         })
 
-    print(f"[sync] Filas construidas: {len(rows)}")
+    print(f"[sync] {sin_prod} OPs sin Produccion, {len(rows)} filas OK")
     if not rows:
         return False
 
@@ -225,7 +192,7 @@ def fetch_and_process():
     dias = pd.date_range(lun, vie, freq='B')
     dias_str = [d.strftime('%Y-%m-%d') for d in dias]
     dias_label = [d.strftime('%d/%m') for d in dias]
-    dias_nombre = ['Lunes', 'Martes', u'Mi\u00e9rcoles', 'Jueves', 'Viernes']
+    dias_nombre = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
 
     pivot = {}
     totales_dia = {d: 0 for d in dias_str}
