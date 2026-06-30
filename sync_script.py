@@ -1,7 +1,7 @@
 """
 sync_script.py — Consulta Vtiger y genera latest.json para el tablero.
-Se ejecuta via GitHub Actions cada 2 horas.
-Con filtros para traer solo registros relevantes.
+Se ejecuta via GitHub Actions.
+Filtros aplicados en Python (Vtiger query syntax es limitada).
 """
 import os
 import json
@@ -40,6 +40,7 @@ def vtiger_query(query_str, page_size=100):
             break
         records = data.get('result', [])
         all_records.extend(records)
+        print(f"[vtiger] ... {len(all_records)} registros obtenidos")
         if len(records) < page_size:
             break
         offset += page_size
@@ -58,6 +59,7 @@ PROD = {
     'tiempo_prod': 'cf_vtcmproduccion_tiempoproduccin',
     'obs_ocop': 'cf_vtcmproduccion_observacionesocop',
     'estado': 'cf_vtcmproduccion_estado',
+    'entrega_prod': 'cf_vtcmproduccion_entregadeproduccin',
 }
 
 OP = {
@@ -96,33 +98,34 @@ def _format_createdtime(vtiger_datetime):
         return str(vtiger_datetime)
 
 def fetch_and_process():
-    # 1. Consultar Producciones CON FILTROS
-    # Filtro 1: Fecha Entrega Prometida >= 2025-01-01
-    # Filtro 2: Entrega de Produccion <> Habilitado
-    print("[sync] Consultando producciones (con filtros)...")
-    producciones = vtiger_query(
-        "SELECT * FROM vtcmproduccion "
-        "WHERE cf_vtcmproduccion_fechaentregaprometida >= '2025-01-01' "
-        "AND cf_vtcmproduccion_entregadeproduccin <> 'Habilitado'"
-    )
-    print(f"[sync] Producciones filtradas: {len(producciones)}")
-
-    # Si falla el filtro, intentar solo con fecha
-    if not producciones:
-        print("[sync] Reintentando solo con filtro de fecha...")
-        producciones = vtiger_query(
-            "SELECT * FROM vtcmproduccion "
-            "WHERE cf_vtcmproduccion_fechaentregaprometida >= '2025-01-01'"
-        )
-        print(f"[sync] Producciones con fecha: {len(producciones)}")
+    # 1. Consultar TODAS las Producciones
+    print("[sync] Consultando producciones...")
+    producciones = vtiger_query("SELECT * FROM vtcmproduccion")
+    print(f"[sync] Producciones totales: {len(producciones)}")
 
     if not producciones:
         print("[sync] ERROR: No se obtuvieron producciones")
         return False
 
+    # FILTRAR EN PYTHON:
+    # - Fecha Entrega Prometida >= 2025-01-01
+    # - Entrega de Produccion != Habilitado
+    filtered = []
+    for p in producciones:
+        fecha = p.get(PROD['fecha_prometida'], '')
+        entrega = p.get(PROD['entrega_prod'], '')
+        if fecha and fecha >= '2025-01-01' and entrega != 'Habilitado':
+            filtered.append(p)
+    print(f"[sync] Producciones filtradas: {len(filtered)}")
+    producciones = filtered
+
+    if not producciones:
+        print("[sync] ERROR: No quedaron producciones despues de filtrar")
+        return False
+
     prod_by_id = {p.get('id', ''): p for p in producciones}
 
-    # 2. Consultar Ordenes de Produccion
+    # 2. Consultar Ordenes
     print("[sync] Consultando ordenes...")
     ordenes = vtiger_query("SELECT * FROM vtcmordendeproduccion")
     print(f"[sync] Ordenes totales: {len(ordenes)}")
@@ -131,7 +134,7 @@ def fetch_and_process():
         print("[sync] ERROR: No se obtuvieron ordenes")
         return False
 
-    # 3. Unir datos - filtrar en Python
+    # 3. Unir datos
     rows = []
     sin_prod = 0
     for op in ordenes:
