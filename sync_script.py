@@ -1,6 +1,7 @@
 """
 sync_script.py — Consulta Vtiger y genera latest.json para el tablero.
 Se ejecuta via GitHub Actions cada 2 horas.
+Con filtros para traer solo registros relevantes.
 """
 import os
 import json
@@ -95,10 +96,25 @@ def _format_createdtime(vtiger_datetime):
         return str(vtiger_datetime)
 
 def fetch_and_process():
-    # 1. Consultar Producciones
-    print("[sync] Consultando producciones...")
-    producciones = vtiger_query("SELECT * FROM vtcmproduccion")
-    print(f"[sync] Producciones totales: {len(producciones)}")
+    # 1. Consultar Producciones CON FILTROS
+    # Filtro 1: Fecha Entrega Prometida >= 2025-01-01
+    # Filtro 2: Entrega de Produccion <> Habilitado
+    print("[sync] Consultando producciones (con filtros)...")
+    producciones = vtiger_query(
+        "SELECT * FROM vtcmproduccion "
+        "WHERE cf_vtcmproduccion_fechaentregaprometida >= '2025-01-01' "
+        "AND cf_vtcmproduccion_entregadeproduccin <> 'Habilitado'"
+    )
+    print(f"[sync] Producciones filtradas: {len(producciones)}")
+
+    # Si falla el filtro, intentar solo con fecha
+    if not producciones:
+        print("[sync] Reintentando solo con filtro de fecha...")
+        producciones = vtiger_query(
+            "SELECT * FROM vtcmproduccion "
+            "WHERE cf_vtcmproduccion_fechaentregaprometida >= '2025-01-01'"
+        )
+        print(f"[sync] Producciones con fecha: {len(producciones)}")
 
     if not producciones:
         print("[sync] ERROR: No se obtuvieron producciones")
@@ -106,7 +122,7 @@ def fetch_and_process():
 
     prod_by_id = {p.get('id', ''): p for p in producciones}
 
-    # 2. Consultar Ordenes (sin filtro WHERE para evitar error de sintaxis)
+    # 2. Consultar Ordenes de Produccion
     print("[sync] Consultando ordenes...")
     ordenes = vtiger_query("SELECT * FROM vtcmordendeproduccion")
     print(f"[sync] Ordenes totales: {len(ordenes)}")
@@ -119,12 +135,10 @@ def fetch_and_process():
     rows = []
     sin_prod = 0
     for op in ordenes:
-        # Filtrar: solo OPs con proceso de etiquetas definido
         proceso = op.get(OP['proceso'], '')
         if not proceso or proceso.strip() in ('', '-'):
             continue
 
-        # Buscar Produccion relacionada
         prod = None
         ref_id = op.get(OP['ref_produccion'], '')
         if ref_id and ref_id in prod_by_id:
