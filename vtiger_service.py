@@ -1,5 +1,5 @@
 """
-vtiger_service.py — Vtiger Cloud REST API v1
+vtiger_service.py — Vtiger Cloud REST API v1 (optimizado para Render Free)
 """
 import os
 import requests
@@ -23,14 +23,15 @@ def vtiger_query(query_str, page_size=100):
         url = f"{API_BASE}/query"
         params = {'query': paged}
         try:
-            r = requests.get(url, auth=_auth(), params=params, timeout=30, verify=False)
+            r = requests.get(url, auth=_auth(), params=params, timeout=60, verify=False)
             r.raise_for_status()
             data = r.json()
         except Exception as e:
             print(f"[vtiger] Error query offset={offset}: {e}")
             break
         if not data.get('success'):
-            print(f"[vtiger] Query fallo: {data.get('error',{}).get('message','?')}")
+            msg = data.get('error',{}).get('message','?')
+            print(f"[vtiger] Query fallo: {msg}")
             break
         records = data.get('result', [])
         all_records.extend(records)
@@ -51,6 +52,29 @@ def vtiger_describe(module_name):
     except Exception as e:
         print(f"[vtiger] Error describe {module_name}: {e}")
     return None
+
+# Campos que necesitamos de cada modulo (solo los necesarios, no todos)
+PROD_SELECT = (
+    "id,fld_vtcmproduccionname,cf_vtcmproduccion_organizacion,"
+    "cf_vtcmproduccion_coodigosiigo,cf_vtcmproduccion_produccintipo,"
+    "cf_vtcmproduccion_fechaentregaprometida,"
+    "cf_vtcmproduccion_fechaconfirmacindeentregademateriaprima,"
+    "cf_vtcmproduccion_nodeetiquetasporrollo,"
+    "cf_vtcmproduccion_fecharealdeliberacin,createdtime,"
+    "cf_vtcmproduccion_tiempoproduccin,cf_vtcmproduccion_observacionesocop,"
+    "cf_vtcmproduccion_estado"
+)
+
+OP_SELECT = (
+    "id,vtcmordendeproduccionnumber,cf_vtcmordendeproduccion_totaletiquetas,"
+    "cf_vtcmordendeproduccion_familia,cf_vtcmordendeproduccion_procesodeetiquetas,"
+    "cf_vtcmordendeproduccion_totalmtslineales,cf_vtcmordendeproduccion_fechadeentrega,"
+    "cf_vtcmordendeproduccion_material,cf_vtcmordendeproduccion_adhesivo,"
+    "cf_vtcmordendeproduccion_ancho,cf_vtcmordendeproduccion_centrodeproceso,"
+    "cf_vtcmordendeproduccion_totalm2,cf_vtcmordendeproduccion_tipodeorden,"
+    "cf_vtcmordendeproduccion_z,cf_vtcmordendeproduccion_referenciadeproduccin,"
+    "cf_vtcmordendeproduccion_estadoop"
+)
 
 PROD = {
     'referencia': 'fld_vtcmproduccionname',
@@ -88,27 +112,40 @@ OP = {
 def fetch_produccion_data():
     import warnings
     warnings.filterwarnings('ignore')
-    
-    print("[vtiger] Consultando vtcmproduccion (activas)...")
+
+    # Solo traer producciones activas (Programada)
+    print("[vtiger] Consultando producciones activas...")
     producciones = vtiger_query(
-        "SELECT * FROM vtcmproduccion WHERE cf_vtcmproduccion_tiempoproduccin = 'Programada'"
+        f"SELECT {PROD_SELECT} FROM vtcmproduccion "
+        f"WHERE cf_vtcmproduccion_tiempoproduccin = 'Programada'"
     )
-    print(f"[vtiger] Producciones activas: {len(producciones)}")
+    print(f"[vtiger] Producciones: {len(producciones)}")
+
     if not producciones:
-        print("[vtiger] Intentando sin filtro...")
+        # Fallback: no entregadas
+        print("[vtiger] Fallback: no entregadas...")
         producciones = vtiger_query(
-            "SELECT * FROM vtcmproduccion WHERE cf_vtcmproduccion_estado != 'Entregado'"
+            f"SELECT {PROD_SELECT} FROM vtcmproduccion "
+            f"WHERE cf_vtcmproduccion_estado != 'Entregado'"
         )
-        print(f"[vtiger] Producciones (no entregadas): {len(producciones)}")
+        print(f"[vtiger] Producciones fallback: {len(producciones)}")
 
     if not producciones:
         return None
 
     prod_by_id = {p.get('id', ''): p for p in producciones}
+    print(f"[vtiger] IDs de produccion: {len(prod_by_id)}")
 
-    print("[vtiger] Consultando vtcmordendeproduccion...")
-    ordenes = vtiger_query("SELECT * FROM vtcmordendeproduccion")
-    print(f"[vtiger] Ordenes totales: {len(ordenes)}")
+    # Solo traer OPs con proceso activo
+    print("[vtiger] Consultando ordenes de produccion...")
+    ordenes = vtiger_query(
+        f"SELECT {OP_SELECT} FROM vtcmordendeproduccion "
+        f"WHERE cf_vtcmordendeproduccion_procesodeetiquetas != ''"
+    )
+    print(f"[vtiger] Ordenes: {len(ordenes)}")
+
+    if not ordenes:
+        return None
 
     rows = []
     sin_prod = 0
@@ -127,7 +164,7 @@ def fetch_produccion_data():
             continue
 
         proceso = op.get(OP['proceso'], '')
-        if not proceso or proceso.strip() == '' or proceso.strip() == '-':
+        if not proceso or proceso.strip() in ('', '-'):
             continue
 
         row = [
@@ -158,7 +195,7 @@ def fetch_produccion_data():
         ]
         rows.append(row)
 
-    print(f"[vtiger] {sin_prod} OPs sin Produccion, {len(rows)} filas construidas")
+    print(f"[vtiger] {sin_prod} OPs sin Produccion, {len(rows)} filas OK")
     if not rows:
         return None
 
@@ -177,7 +214,7 @@ def fetch_produccion_data():
         'Orden de Produccion Z=','Produccion Observaciones OC OP',
     ]
     df = pd.DataFrame(rows, columns=columns)
-    print(f"[vtiger] DataFrame: {len(df)} filas x {len(df.columns)} cols")
+    print(f"[vtiger] DataFrame: {len(df)} filas")
     return df
 
 def dataframe_to_excel_bytes(df):
