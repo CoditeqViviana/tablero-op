@@ -816,5 +816,100 @@ def upload():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+# ============ SINCRONIZACIÓN VTIGER ============
+from vtiger_service import fetch_produccion_data, dataframe_to_excel_bytes, list_module_fields
+
+@app.route('/sync_vtiger', methods=['POST'])
+def sync_vtiger():
+    """
+    Sincroniza datos desde Vtiger Cloud directamente.
+    Reemplaza la subida manual del Excel.
+    """
+    try:
+        df = fetch_produccion_data()
+        if df is None or df.empty:
+            return jsonify({'error': 'No se obtuvieron datos de Vtiger. Verifica credenciales y mapeo de campos.'}), 500
+
+        # Convertir DataFrame a Excel en memoria y procesar
+        excel_buffer = dataframe_to_excel_bytes(df)
+        result = process_excel(excel_buffer)
+        result['source'] = 'vtiger_api'
+        github_save_json('latest.json', result)
+
+        return jsonify({
+            'ok': True,
+            'updated_at': result['updated_at'],
+            'source': 'vtiger_api',
+            'registros': len(df),
+        })
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/sync_vtiger', methods=['GET'])
+def sync_vtiger_page():
+    """Página simple para disparar la sincronización manualmente."""
+    return '''
+    <!DOCTYPE html>
+    <html>
+    <head><title>Sync Vtiger</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: 40px auto; padding: 20px; }
+        button { padding: 15px 30px; font-size: 18px; cursor: pointer; background: #2563eb; color: white; border: none; border-radius: 8px; }
+        button:hover { background: #1d4ed8; }
+        #result { margin-top: 20px; padding: 15px; border-radius: 8px; display: none; }
+        .ok { background: #d1fae5; color: #065f46; }
+        .err { background: #fee2e2; color: #991b1b; }
+    </style>
+    </head>
+    <body>
+        <h1>🔄 Sincronizar Vtiger → Tablero</h1>
+        <p>Haz clic para actualizar el tablero con datos en vivo de Vtiger.</p>
+        <button onclick="doSync()">Sincronizar Ahora</button>
+        <div id="result"></div>
+        <script>
+        async function doSync() {
+            const btn = document.querySelector('button');
+            const res = document.getElementById('result');
+            btn.disabled = true;
+            btn.textContent = 'Sincronizando...';
+            res.style.display = 'none';
+            try {
+                const r = await fetch('/sync_vtiger', {method: 'POST'});
+                const data = await r.json();
+                res.style.display = 'block';
+                if (data.ok) {
+                    res.className = 'ok';
+                    res.innerHTML = '✅ Sincronizado: ' + data.registros + ' registros<br>Actualizado: ' + data.updated_at;
+                } else {
+                    res.className = 'err';
+                    res.innerHTML = '❌ Error: ' + (data.error || 'desconocido');
+                }
+            } catch(e) {
+                res.style.display = 'block';
+                res.className = 'err';
+                res.innerHTML = '❌ Error de conexión: ' + e.message;
+            }
+            btn.disabled = false;
+            btn.textContent = 'Sincronizar Ahora';
+        }
+        </script>
+    </body>
+    </html>
+    '''
+
+@app.route('/debug_fields')
+def debug_fields():
+    """Muestra los campos de los módulos de Vtiger para verificar el mapeo."""
+    prod_fields = list_module_fields('vtcmproduccion')
+    op_fields = list_module_fields('vtcmordendeproduccion')
+    return jsonify({
+        'vtcmproduccion': prod_fields,
+        'vtcmordendeproduccion': op_fields,
+    })
+
+# ============ FIN SINCRONIZACIÓN VTIGER ============
+
 if __name__ == '__main__':
     app.run(debug=False)
