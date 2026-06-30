@@ -1,0 +1,34 @@
+name: Sync Vtiger Data
+
+on:
+  schedule:
+    - cron: '0 */2 * * *'  # Cada 2 horas
+  workflow_dispatch:  # Permite ejecucion manual
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests pandas pytz openpyxl
+
+      - name: Run sync script
+        env:
+          VTIGER_USER: ${{ secrets.VTIGER_USER }}
+          VTIGER_KEY: ${{ secrets.VTIGER_KEY }}
+        run: python sync_script.py
+
+      - name: Commit and push
+        run: |
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add data_store/latest.json
+          git diff --staged --quiet || git commit -m "Auto-sync Vtiger $(date +'%Y-%m-%d %H:%M')"
+          git push
