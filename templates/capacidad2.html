@@ -222,6 +222,17 @@ tr:hover td{background:#fafafa}
 const TODAS_LIB = {{ lib.ordenes | tojson if lib else [] }};
 const TODAS = {{ data.todas_ordenes | tojson if data else [] }};
 
+// Mapa de colores TOC para el badge de prioridad (mismo esquema que tambor.html).
+// [color de fondo, color de texto, etiqueta]
+const COLOR_MAP = {
+  negro:   ['#1f2937','#f3f4f6','Negro'],
+  rojo:    ['#fee2e2','#b91c1c','Rojo'],
+  amarillo:['#fef9c3','#854d0e','Amarillo'],
+  verde:   ['#dcfce7','#15803d','Verde'],
+  azul:    ['#dbeafe','#1d4ed8','Azul'],
+  gris:    ['#f3f4f6','#9ca3af','—'],
+};
+
 let CAP_DIA_ACTUAL = 23888;
 
 function recalcular() {
@@ -427,6 +438,7 @@ function cambiarFecha() {
             <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Cliente</th>
             <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Referencia</th>
             <th style="padding:7px 10px;text-align:right;font-size:10px;font-weight:700;color:#6b7280;width:80px">Mts</th>
+            <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:95px">Prioridad</th>
             <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:85px">F. Lib.</th>
             <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:90px">F. Entrega</th>
           </tr>
@@ -437,6 +449,9 @@ function cambiarFecha() {
       const fLib = o.fecha_lib ? `${o.fecha_lib.slice(8,10)}/${o.fecha_lib.slice(5,7)}` : '—';
       const fEnt = o.fecha_entrega || '—';
       const ref = (o.referencia || o.proceso || '—').substring(0, 55);
+      // Color del badge de prioridad: usa el color TOC ya calculado en la orden
+      // (sin recalcular). Si la orden no trae color, cae a gris sin romper el render.
+      const c = COLOR_MAP[o.color_toc] || COLOR_MAP[o.color] || COLOR_MAP.gris;
       html += `<tr style="border-bottom:1px solid #f3f4f6">
         <td style="padding:7px 10px;font-weight:700;font-size:11px">${o.op}</td>
         <td style="padding:7px 10px;font-size:11px">${o.cliente}</td>
