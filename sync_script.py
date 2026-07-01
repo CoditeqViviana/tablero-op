@@ -1,15 +1,10 @@
 """
-sync_script.py — Consulta Vtiger y genera latest.json para el tablero.
-Se ejecuta via GitHub Actions.
-Filtros aplicados en Python (Vtiger query syntax es limitada).
+sync_script.py — Consulta Vtiger y genera latest.json.
+GitHub Actions cada 8 horas. Optimizado con filtros en Vtiger.
 """
-import os
-import json
-import requests
-import pandas as pd
+import os, json, requests, pandas as pd
 from datetime import datetime
-import pytz
-import warnings
+import pytz, warnings
 warnings.filterwarnings('ignore')
 
 VTIGER_URL = 'https://coditeq.od2.vtiger.com'
@@ -33,14 +28,14 @@ def vtiger_query(query_str, page_size=100):
             r.raise_for_status()
             data = r.json()
         except Exception as e:
-            print(f"[vtiger] Error query offset={offset}: {e}")
+            print(f"[vtiger] Error offset={offset}: {e}")
             break
         if not data.get('success'):
-            print(f"[vtiger] Query fallo: {data.get('error',{}).get('message','?')}")
+            print(f"[vtiger] Fallo: {data.get('error',{}).get('message','?')}")
             break
         records = data.get('result', [])
         all_records.extend(records)
-        print(f"[vtiger] ... {len(all_records)} registros obtenidos")
+        print(f"[vtiger] ... {len(all_records)} registros")
         if len(records) < page_size:
             break
         offset += page_size
@@ -77,61 +72,59 @@ OP = {
     'tipo_orden': 'cf_vtcmordendeproduccion_tipodeorden',
     'z': 'cf_vtcmordendeproduccion_z',
     'ref_produccion': 'cf_vtcmordendeproduccion_referenciadeproduccin',
-    'estado_op': 'cf_vtcmordendeproduccion_estadoop',
 }
 
 def _safe_num(val):
     try:
-        if val is None or str(val).strip() == '':
-            return 0
+        if val is None or str(val).strip() == '': return 0
         return float(val)
-    except (ValueError, TypeError):
-        return 0
+    except: return 0
 
-def _format_createdtime(vtiger_datetime):
-    if not vtiger_datetime or str(vtiger_datetime).strip() == '':
-        return ''
+def _format_dt(v):
+    if not v or str(v).strip() == '': return ''
     try:
-        dt = datetime.strptime(str(vtiger_datetime).strip()[:19], '%Y-%m-%d %H:%M:%S')
+        dt = datetime.strptime(str(v).strip()[:19], '%Y-%m-%d %H:%M:%S')
         return dt.strftime('%d-%m-%Y %I:%M %p')
-    except (ValueError, TypeError):
-        return str(vtiger_datetime)
+    except: return str(v)
 
 def fetch_and_process():
-    # 1. Consultar TODAS las Producciones
-    print("[sync] Consultando producciones...")
-    producciones = vtiger_query("SELECT * FROM vtcmproduccion")
-    print(f"[sync] Producciones totales: {len(producciones)}")
+    # 1. Producciones con filtro de fecha (> reduce de 16000 a pocos cientos)
+    print("[sync] Consultando producciones (fecha > 2024-12-31)...")
+    producciones = vtiger_query(
+        "SELECT * FROM vtcmproduccion WHERE cf_vtcmproduccion_fechaentregaprometida > '2024-12-31'"
+    )
+    print(f"[sync] Producciones: {len(producciones)}")
 
     if not producciones:
-        print("[sync] ERROR: No se obtuvieron producciones")
-        return False
-
-    # FILTRAR EN PYTHON:
-    # - Fecha Entrega Prometida >= 2025-01-01
-    # - Entrega de Produccion != Habilitado
-    filtered = []
-    for p in producciones:
-        fecha = p.get(PROD['fecha_prometida'], '')
-        entrega = p.get(PROD['entrega_prod'], '')
-        if fecha and fecha >= '2025-01-01' and entrega != 'Habilitado':
-            filtered.append(p)
-    print(f"[sync] Producciones filtradas: {len(filtered)}")
-    producciones = filtered
+        # Fallback sin filtro
+        print("[sync] Filtro fallo, consultando todas...")
+        producciones = vtiger_query("SELECT * FROM vtcmproduccion")
+        print(f"[sync] Todas: {len(producciones)}")
 
     if not producciones:
-        print("[sync] ERROR: No quedaron producciones despues de filtrar")
+        print("[sync] ERROR: Sin producciones")
         return False
+
+    # Filtro adicional en Python: Entrega de Produccion != Habilitado
+    producciones = [p for p in producciones if p.get(PROD['entrega_prod'], '') != 'Habilitado']
+    print(f"[sync] Despues de filtro Python: {len(producciones)}")
 
     prod_by_id = {p.get('id', ''): p for p in producciones}
 
-    # 2. Consultar Ordenes
-    print("[sync] Consultando ordenes...")
-    ordenes = vtiger_query("SELECT * FROM vtcmordendeproduccion")
-    print(f"[sync] Ordenes totales: {len(ordenes)}")
+    # 2. Ordenes - tambien filtrar por fecha para reducir
+    print("[sync] Consultando ordenes (fecha > 2024-12-31)...")
+    ordenes = vtiger_query(
+        "SELECT * FROM vtcmordendeproduccion WHERE cf_vtcmordendeproduccion_fechadeentrega > '2024-12-31'"
+    )
+    print(f"[sync] Ordenes: {len(ordenes)}")
 
     if not ordenes:
-        print("[sync] ERROR: No se obtuvieron ordenes")
+        print("[sync] Filtro fallo, consultando todas las ordenes...")
+        ordenes = vtiger_query("SELECT * FROM vtcmordendeproduccion")
+        print(f"[sync] Todas: {len(ordenes)}")
+
+    if not ordenes:
+        print("[sync] ERROR: Sin ordenes")
         return False
 
     # 3. Unir datos
@@ -141,7 +134,6 @@ def fetch_and_process():
         proceso = op.get(OP['proceso'], '')
         if not proceso or proceso.strip() in ('', '-'):
             continue
-
         prod = None
         ref_id = op.get(OP['ref_produccion'], '')
         if ref_id and ref_id in prod_by_id:
@@ -154,10 +146,9 @@ def fetch_and_process():
         if not prod:
             sin_prod += 1
             continue
-
         rows.append({
             'fecha_entrega_raw': op.get(OP['fecha_entrega'], ''),
-            'fecha_creacion_raw': _format_createdtime(prod.get(PROD['fecha_creacion'], '')),
+            'fecha_creacion_raw': _format_dt(prod.get(PROD['fecha_creacion'], '')),
             'maquina_raw': op.get(OP['centro_proceso'], ''),
             'etapa': proceso,
             'organizacion': prod.get(PROD['organizacion'], ''),
@@ -186,7 +177,7 @@ def fetch_and_process():
     if not rows:
         return False
 
-    # 4. Procesar como process_excel
+    # 4. Procesar
     df = pd.DataFrame(rows)
     df['fecha_entrega'] = pd.to_datetime(df['fecha_entrega_raw'], errors='coerce')
     df['fecha_creacion'] = pd.to_datetime(df['fecha_creacion_raw'], format='%d-%m-%Y %I:%M %p', errors='coerce')
@@ -194,17 +185,13 @@ def fetch_and_process():
 
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
-
     days_until_monday = (7 - today.weekday()) % 7
-    if days_until_monday == 0:
-        days_until_monday = 7
+    if days_until_monday == 0: days_until_monday = 7
     lun = today + pd.Timedelta(days=days_until_monday)
     if today.weekday() < 5:
         lun = today - pd.Timedelta(days=today.weekday())
     vie = lun + pd.Timedelta(days=4)
-
     incumplidas = df[df['fecha_entrega'] < today]
-
     maquinas = sorted(df['maquina'].dropna().unique().tolist())
     dias = pd.date_range(lun, vie, freq='B')
     dias_str = [d.strftime('%Y-%m-%d') for d in dias]
@@ -222,7 +209,6 @@ def fetch_and_process():
 
     total_semana = sum(totales_dia.values())
     inc_maq = incumplidas['maquina'].value_counts().to_dict()
-
     if totales_dia:
         dia_max_key = max(totales_dia, key=totales_dia.get)
         dia_max_idx = dias_str.index(dia_max_key) if dia_max_key in dias_str else 0
@@ -236,33 +222,23 @@ def fetch_and_process():
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
         'source': 'vtiger_api_github_actions',
         'today': today.strftime('%Y-%m-%d'),
-        'lun': lun.strftime('%d/%m'),
-        'vie': vie.strftime('%d/%m'),
-        'maquinas': maquinas,
-        'dias_str': dias_str,
-        'dias_label': dias_label,
-        'dias_nombre': dias_nombre,
-        'pivot': pivot,
-        'totales_dia': totales_dia,
-        'total_semana': total_semana,
-        'total_ordenes': len(df),
-        'inc_total': len(incumplidas),
-        'inc_maq': inc_maq,
+        'lun': lun.strftime('%d/%m'), 'vie': vie.strftime('%d/%m'),
+        'maquinas': maquinas, 'dias_str': dias_str,
+        'dias_label': dias_label, 'dias_nombre': dias_nombre,
+        'pivot': pivot, 'totales_dia': totales_dia,
+        'total_semana': total_semana, 'total_ordenes': len(df),
+        'inc_total': len(incumplidas), 'inc_maq': inc_maq,
         'dia_max_nombre': dia_max_nombre,
-        'dia_max_val': dia_max_val,
-        'dia_max_fecha': dia_max_fecha,
+        'dia_max_val': dia_max_val, 'dia_max_fecha': dia_max_fecha,
     }
 
-    # 5. Guardar JSON
     os.makedirs('data_store', exist_ok=True)
     with open('data_store/latest.json', 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
-    print(f"[sync] JSON guardado: {len(df)} registros, actualizado {result['updated_at']}")
+    print(f"[sync] OK: {len(df)} registros, {result['updated_at']}")
     return True
 
 if __name__ == '__main__':
-    success = fetch_and_process()
-    if not success:
-        print("[sync] FALLO la sincronizacion")
-        exit(1)
-    print("[sync] Sincronizacion exitosa")
+    if not fetch_and_process():
+        print("[sync] FALLO"); exit(1)
+    print("[sync] EXITO")
