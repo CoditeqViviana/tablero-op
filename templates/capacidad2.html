@@ -233,6 +233,19 @@ const COLOR_MAP = {
   gris:    ['#f3f4f6','#9ca3af','—'],
 };
 
+// Mapa OP -> estatus. El estatus proviene de la columna H ("Proceso de Etiquetas")
+// del informe TABLERO_ESTATUS, que ya viene cargado en data.todas_ordenes como
+// el campo "etapa". Se cruza por número de OP con las órdenes de liberación.
+const ESTATUS_POR_OP = {};
+(TODAS || []).forEach(function(o) {
+  const op = String(o.op == null ? '' : o.op).trim();
+  const est = o.etapa || o.estatus || o.proceso || '';
+  if (op && est) ESTATUS_POR_OP[op] = est;
+});
+function getEstatus(op) {
+  return ESTATUS_POR_OP[String(op == null ? '' : op).trim()] || '—';
+}
+
 let CAP_DIA_ACTUAL = 23888;
 
 function recalcular() {
@@ -437,6 +450,7 @@ function cambiarFecha() {
             <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280;width:70px">OP</th>
             <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Cliente</th>
             <th style="padding:7px 10px;text-align:left;font-size:10px;font-weight:700;color:#6b7280">Referencia</th>
+            <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:110px">Estatus</th>
             <th style="padding:7px 10px;text-align:right;font-size:10px;font-weight:700;color:#6b7280;width:80px">Mts</th>
             <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:95px">Prioridad</th>
             <th style="padding:7px 10px;text-align:center;font-size:10px;font-weight:700;color:#6b7280;width:85px">F. Lib.</th>
@@ -452,10 +466,15 @@ function cambiarFecha() {
       // Color del badge de prioridad: usa el color TOC ya calculado en la orden
       // (sin recalcular). Si la orden no trae color, cae a gris sin romper el render.
       const c = COLOR_MAP[o.color_toc] || COLOR_MAP[o.color] || COLOR_MAP.gris;
+      // Estatus de la orden (columna H "Proceso de Etiquetas" del informe TABLERO_ESTATUS)
+      const est = getEstatus(o.op);
       html += `<tr style="border-bottom:1px solid #f3f4f6">
         <td style="padding:7px 10px;font-weight:700;font-size:11px">${o.op}</td>
         <td style="padding:7px 10px;font-size:11px">${o.cliente}</td>
         <td style="padding:7px 10px;font-size:11px;color:#6b7280" title="${o.referencia||''}">${ref}</td>
+        <td style="padding:7px 10px;text-align:center">
+          ${est !== '—' ? '<span style="background:#fef9c3;color:#854d0e;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700;white-space:nowrap">'+est+'</span>' : '<span style="color:#9ca3af">—</span>'}
+        </td>
         <td style="padding:7px 10px;text-align:right;font-weight:600">${Math.round(o.mts||0).toLocaleString('es-CO')}</td>
         <td style="padding:7px 10px;text-align:center">
           ${o.prioridad ? '<span style="background:'+c[0]+';color:'+c[1]+';padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700">'+c[2]+' '+o.prioridad+'</span>' : '—'}
