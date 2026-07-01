@@ -1,6 +1,6 @@
 """
 sync_script.py — Consulta Vtiger y genera latest.json.
-GitHub Actions cada 8 horas. Optimizado con filtros en Vtiger.
+Union por nombre de referencia (muchos a muchos).
 """
 import os, json, requests, pandas as pd
 from datetime import datetime
@@ -17,14 +17,12 @@ def _auth():
     return (VTIGER_USER, VTIGER_KEY)
 
 def vtiger_query(query_str, page_size=100):
-    all_records = []
-    offset = 0
+    all_records, offset = [], 0
     while True:
         paged = f"{query_str} LIMIT {offset}, {page_size};"
-        url = f"{API_BASE}/query"
-        params = {'query': paged}
         try:
-            r = requests.get(url, auth=_auth(), params=params, timeout=60, verify=False)
+            r = requests.get(f"{API_BASE}/query", auth=_auth(),
+                           params={'query': paged}, timeout=60, verify=False)
             r.raise_for_status()
             data = r.json()
         except Exception as e:
@@ -55,9 +53,11 @@ PROD = {
     'obs_ocop': 'cf_vtcmproduccion_observacionesocop',
     'estado': 'cf_vtcmproduccion_estado',
     'entrega_prod': 'cf_vtcmproduccion_entregadeproduccin',
+    'asignado': 'assigned_user_id',
 }
 
 OP = {
+    'referencia': 'fld_vtcmordendeproduccionname',
     'number': 'vtcmordendeproduccionnumber',
     'total_etiquetas': 'cf_vtcmordendeproduccion_totaletiquetas',
     'familia': 'cf_vtcmordendeproduccion_familia',
@@ -71,7 +71,6 @@ OP = {
     'total_m2': 'cf_vtcmordendeproduccion_totalm2',
     'tipo_orden': 'cf_vtcmordendeproduccion_tipodeorden',
     'z': 'cf_vtcmordendeproduccion_z',
-    'ref_produccion': 'cf_vtcmordendeproduccion_referenciadeproduccin',
 }
 
 def _safe_num(val):
@@ -88,30 +87,37 @@ def _format_dt(v):
     except: return str(v)
 
 def fetch_and_process():
-    # 1. Producciones con filtro de fecha (> reduce de 16000 a pocos cientos)
+    # 1. Producciones con filtro fecha
     print("[sync] Consultando producciones (fecha > 2024-12-31)...")
     producciones = vtiger_query(
         "SELECT * FROM vtcmproduccion WHERE cf_vtcmproduccion_fechaentregaprometida > '2024-12-31'"
     )
-    print(f"[sync] Producciones: {len(producciones)}")
-
-    if not producciones:
-        # Fallback sin filtro
-        print("[sync] Filtro fallo, consultando todas...")
-        producciones = vtiger_query("SELECT * FROM vtcmproduccion")
-        print(f"[sync] Todas: {len(producciones)}")
+    print(f"[sync] Producciones brutas: {len(producciones)}")
 
     if not producciones:
         print("[sync] ERROR: Sin producciones")
         return False
 
-    # Filtro adicional en Python: Entrega de Produccion != Habilitado
-    producciones = [p for p in producciones if p.get(PROD['entrega_prod'], '') != 'Habilitado']
-    print(f"[sync] Despues de filtro Python: {len(producciones)}")
+    # Filtros Python:
+    # - Entrega de Produccion != 'Habilitado' y != '1' (excluir habilitados)
+    # - Asignado a Plataforma de Produccion (20x5)
+    producciones = [p for p in producciones
+                    if p.get(PROD['entrega_prod'], '') not in ('Habilitado', '1')
+                    or p.get(PROD['asignado'], '') == '20x5']
+    print(f"[sync] Producciones filtradas: {len(producciones)}")
 
-    prod_by_id = {p.get('id', ''): p for p in producciones}
+    # Indexar por REFERENCIA (nombre) para la union
+    prod_by_ref = {}
+    for p in producciones:
+        ref = p.get(PROD['referencia'], '').strip()
+        if ref:
+            # Si hay duplicados, quedarse con el de Plataforma (20x5)
+            existing = prod_by_ref.get(ref)
+            if not existing or p.get(PROD['asignado'], '') == '20x5':
+                prod_by_ref[ref] = p
+    print(f"[sync] Referencias unicas: {len(prod_by_ref)}")
 
-    # 2. Ordenes - tambien filtrar por fecha para reducir
+    # 2. Ordenes con filtro fecha
     print("[sync] Consultando ordenes (fecha > 2024-12-31)...")
     ordenes = vtiger_query(
         "SELECT * FROM vtcmordendeproduccion WHERE cf_vtcmordendeproduccion_fechadeentrega > '2024-12-31'"
@@ -119,33 +125,25 @@ def fetch_and_process():
     print(f"[sync] Ordenes: {len(ordenes)}")
 
     if not ordenes:
-        print("[sync] Filtro fallo, consultando todas las ordenes...")
-        ordenes = vtiger_query("SELECT * FROM vtcmordendeproduccion")
-        print(f"[sync] Todas: {len(ordenes)}")
-
-    if not ordenes:
         print("[sync] ERROR: Sin ordenes")
         return False
 
-    # 3. Unir datos
+    # 3. Unir por REFERENCIA
     rows = []
     sin_prod = 0
     for op in ordenes:
         proceso = op.get(OP['proceso'], '')
         if not proceso or proceso.strip() in ('', '-'):
             continue
-        prod = None
-        ref_id = op.get(OP['ref_produccion'], '')
-        if ref_id and ref_id in prod_by_id:
-            prod = prod_by_id[ref_id]
-        if not prod:
-            for key, val in op.items():
-                if isinstance(val, str) and val.startswith('50x') and val in prod_by_id:
-                    prod = prod_by_id[val]
-                    break
+
+        # Buscar produccion por nombre de referencia
+        op_ref = op.get(OP['referencia'], '').strip()
+        prod = prod_by_ref.get(op_ref)
+
         if not prod:
             sin_prod += 1
             continue
+
         rows.append({
             'fecha_entrega_raw': op.get(OP['fecha_entrega'], ''),
             'fecha_creacion_raw': _format_dt(prod.get(PROD['fecha_creacion'], '')),
@@ -173,8 +171,9 @@ def fetch_and_process():
             'obs_ocop': prod.get(PROD['obs_ocop'], ''),
         })
 
-    print(f"[sync] {sin_prod} OPs sin Produccion, {len(rows)} filas OK")
+    print(f"[sync] {sin_prod} OPs sin match, {len(rows)} filas OK")
     if not rows:
+        print("[sync] ERROR: 0 filas construidas")
         return False
 
     # 4. Procesar
@@ -198,8 +197,7 @@ def fetch_and_process():
     dias_label = [d.strftime('%d/%m') for d in dias]
     dias_nombre = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes']
 
-    pivot = {}
-    totales_dia = {d: 0 for d in dias_str}
+    pivot, totales_dia = {}, {d: 0 for d in dias_str}
     for m in maquinas:
         pivot[m] = {}
         for d in dias_str:
