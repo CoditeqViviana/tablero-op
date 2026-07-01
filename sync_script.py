@@ -191,6 +191,32 @@ def fetch_and_process():
         lun = today - pd.Timedelta(days=today.weekday())
     vie = lun + pd.Timedelta(days=4)
     incumplidas = df[df['fecha_entrega'] < today]
+
+    # Agrupar incumplidas por etapa (estatus) con clientes y tipo
+    inc_etapas = {}
+    for etapa, grupo in incumplidas.groupby('etapa'):
+        inc_etapas[etapa] = {
+            'total': len(grupo),
+            'ordenes': [
+                {'cliente': row['organizacion'], 'tipo': row['tipo']}
+                for _, row in grupo.iterrows()
+            ]
+        }
+
+    etapas_unicas = sorted(incumplidas['etapa'].dropna().unique().tolist())
+
+    inc_detalle = [
+        {
+            'cliente': row['organizacion'],
+            'referencia': row['referencia'],
+            'op': row['op_number'],
+            'tipo': row['tipo'],
+            'etapa': row['etapa'],
+            'fecha_entrega': row['fecha_entrega'].strftime('%d/%m/%Y') if pd.notna(row['fecha_entrega']) else '',
+        }
+        for _, row in incumplidas.iterrows()
+    ]
+
     maquinas = sorted(df['maquina'].dropna().unique().tolist())
     dias = pd.date_range(lun, vie, freq='B')
     dias_str = [d.strftime('%Y-%m-%d') for d in dias]
@@ -227,6 +253,8 @@ def fetch_and_process():
         'pivot': pivot, 'totales_dia': totales_dia,
         'total_semana': total_semana, 'total_ordenes': len(df),
         'inc_total': len(incumplidas), 'inc_maq': inc_maq,
+        'inc_etapas': inc_etapas, 'etapas_unicas': etapas_unicas,
+        'inc_detalle': inc_detalle,
         'dia_max_nombre': dia_max_nombre,
         'dia_max_val': dia_max_val, 'dia_max_fecha': dia_max_fecha,
     }
