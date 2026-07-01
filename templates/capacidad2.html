@@ -543,16 +543,33 @@ window.addEventListener('load', function() {
     {% set maquinas = ['Nilpeter 1','Nilpeter 2','Kromia'] %}
     {% set hoy = data.hoy %}
 
+    {# Mapa OP -> estatus. El estatus viene de la columna H ("Proceso de Etiquetas")
+       del informe TABLERO_ESTATUS, ya cargado en data.todas_ordenes (campo etapa).
+       Se normaliza a minúsculas para comparar de forma confiable. #}
+    {% set estatus_map = {} %}
+    {% if data and data.todas_ordenes %}
+      {% for do in data.todas_ordenes %}
+        {% set _ = estatus_map.update({ (do.op|string|trim): ((do.etapa or do.estatus or do.proceso or '')|string|lower|trim) }) %}
+      {% endfor %}
+    {% endif %}
+    {# Solo se cuentan las órdenes que siguen en el proceso de impresión (atrasadas
+       y pendientes). Las que ya pasaron (Impresión, Reboninado, etc.) NO suman al
+       plan de recuperación. #}
+    {% set ESTATUS_IMPRESION_OK = ['preparacion','preparación','cola de impresion','cola de impresión'] %}
+
     {% for m in maquinas %}
     {% set ns = namespace(mts_atras=0, n_atras=0, mts_pend=0, n_pend=0) %}
     {% for o in lib.ordenes %}
       {% if o.maquina == m %}
-        {% if o.fecha_objetivo < hoy %}
-          {% set ns.mts_atras = ns.mts_atras + o.mts %}
-          {% set ns.n_atras = ns.n_atras + 1 %}
-        {% else %}
-          {% set ns.mts_pend = ns.mts_pend + o.mts %}
-          {% set ns.n_pend = ns.n_pend + 1 %}
+        {% set est = estatus_map.get(o.op|string|trim, '') %}
+        {% if est in ESTATUS_IMPRESION_OK %}
+          {% if o.fecha_objetivo < hoy %}
+            {% set ns.mts_atras = ns.mts_atras + o.mts %}
+            {% set ns.n_atras = ns.n_atras + 1 %}
+          {% else %}
+            {% set ns.mts_pend = ns.mts_pend + o.mts %}
+            {% set ns.n_pend = ns.n_pend + 1 %}
+          {% endif %}
         {% endif %}
       {% endif %}
     {% endfor %}
