@@ -220,6 +220,7 @@ def fetch_and_process():
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
         'source': 'vtiger_api_github_actions',
         'today': today.strftime('%Y-%m-%d'),
+        'hoy': today.strftime('%Y-%m-%d'),
         'lun': lun.strftime('%d/%m'), 'vie': vie.strftime('%d/%m'),
         'maquinas': maquinas, 'dias_str': dias_str,
         'dias_label': dias_label, 'dias_nombre': dias_nombre,
