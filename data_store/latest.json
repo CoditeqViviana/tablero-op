@@ -1,5 +1,5 @@
 {
-  "updated_at": "02/07/2026 13:43",
+  "updated_at": "02/07/2026 17:20",
   "source": "vtiger_api_github_actions",
   "today": "2026-07-02",
   "hoy": "2026-07-02",
@@ -10,7 +10,6 @@
     "Nilpeter 1",
     "Nilpeter 2",
     "Rebobinadora",
-    "Rebobinadora Motex",
     "Troqueladora Plana",
     "Troqueladora Rotativa 1"
   ],
@@ -47,7 +46,7 @@
       "2026-06-29": 0,
       "2026-06-30": 0,
       "2026-07-01": 0,
-      "2026-07-02": 0,
+      "2026-07-02": 1,
       "2026-07-03": 2
     },
     "Nilpeter 2": {
@@ -62,13 +61,6 @@
       "2026-06-30": 0,
       "2026-07-01": 0,
       "2026-07-02": 0,
-      "2026-07-03": 0
-    },
-    "Rebobinadora Motex": {
-      "2026-06-29": 0,
-      "2026-06-30": 0,
-      "2026-07-01": 0,
-      "2026-07-02": 1,
       "2026-07-03": 0
     },
     "Troqueladora Plana": {
@@ -94,14 +86,14 @@
     "2026-07-03": 3
   },
   "total_semana": 4,
-  "total_ordenes": 201,
-  "inc_total": 152,
+  "total_ordenes": 211,
+  "inc_total": 160,
   "inc_maq": {
     "Nilpeter 1": 42,
-    "Nilpeter 2": 41,
+    "Nilpeter 2": 40,
+    "Troqueladora Rotativa 1": 36,
     "Kromia": 30,
-    "Troqueladora Rotativa 1": 29,
-    "Troqueladora Plana": 8,
+    "Troqueladora Plana": 10,
     "Rebobinadora": 2
   },
   "inc_etapas": {
@@ -136,7 +128,7 @@
       ]
     },
     "Preparacion": {
-      "total": 44,
+      "total": 52,
       "ordenes": [
         {
           "cliente": "3x261487",
@@ -219,6 +211,10 @@
           "tipo": "Bajo Pedido"
         },
         {
+          "cliente": "3x7119",
+          "tipo": ""
+        },
+        {
           "cliente": "3x6462",
           "tipo": "Bajo Pedido"
         },
@@ -243,11 +239,39 @@
           "tipo": ""
         },
         {
+          "cliente": "3x1456019",
+          "tipo": "Bajo Pedido"
+        },
+        {
+          "cliente": "3x1456019",
+          "tipo": "Bajo Pedido"
+        },
+        {
           "cliente": "3x6125",
           "tipo": ""
         },
         {
+          "cliente": "3x372457",
+          "tipo": ""
+        },
+        {
+          "cliente": "3x178830",
+          "tipo": "Bajo Pedido"
+        },
+        {
+          "cliente": "3x8237",
+          "tipo": ""
+        },
+        {
+          "cliente": "3x8237",
+          "tipo": ""
+        },
+        {
           "cliente": "3x6648",
+          "tipo": "Bajo Pedido"
+        },
+        {
+          "cliente": "3x261647",
           "tipo": "Bajo Pedido"
         },
         {
@@ -368,10 +392,6 @@
           "tipo": "Bajo Pedido"
         },
         {
-          "cliente": "3x6120",
-          "tipo": "Bajo Pedido"
-        },
-        {
           "cliente": "3x232928",
           "tipo": ""
         },
@@ -485,6 +505,10 @@
         },
         {
           "cliente": "3x6125",
+          "tipo": ""
+        },
+        {
+          "cliente": "3x372457",
           "tipo": ""
         },
         {
@@ -884,14 +908,6 @@
       "fecha_entrega": "30/07/2025"
     },
     {
-      "cliente": "3x6120",
-      "referencia": "IC-PPB-194X153-R1000-M-1F-C15-SUAV-LAVANDA-ALKOSTO-4L",
-      "op": "103776",
-      "tipo": "Bajo Pedido",
-      "etapa": "RM4 - Reboninado",
-      "fecha_entrega": "17/06/2026"
-    },
-    {
       "cliente": "3x232928",
       "referencia": "FD-TTT-100X150-R950-M-1F-C30-COLGAT-AZUL",
       "op": "95036",
@@ -1140,6 +1156,14 @@
       "fecha_entrega": "06/10/2025"
     },
     {
+      "cliente": "3x7119",
+      "referencia": "BL-TTT-32X25-R14000-M-3F-C30-SCALPI",
+      "op": "95916",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "21/07/2025"
+    },
+    {
       "cliente": "3x6462",
       "referencia": "BL-TTT-100X080-R00590-M-01F-C10-BMC-C1",
       "op": "91348",
@@ -1316,6 +1340,22 @@
       "fecha_entrega": "26/03/2025"
     },
     {
+      "cliente": "3x1456019",
+      "referencia": "BL-TTT-100X50-R4000-M-1F-C30",
+      "op": "102921",
+      "tipo": "Bajo Pedido",
+      "etapa": "Preparacion",
+      "fecha_entrega": "06/05/2026"
+    },
+    {
+      "cliente": "3x1456019",
+      "referencia": "BL-TTT-30X40-R4000-M-3F-C30",
+      "op": "102513",
+      "tipo": "Bajo Pedido",
+      "etapa": "Preparacion",
+      "fecha_entrega": "20/04/2026"
+    },
+    {
       "cliente": "3x6125",
       "referencia": "BL-PPB-32X15-R5000-M-3F-C10-PHAREX",
       "op": "91386",
@@ -1332,12 +1372,60 @@
       "fecha_entrega": "09/01/2025"
     },
     {
+      "cliente": "3x372457",
+      "referencia": "BL-TTT-50X45-R5000-M-2F-C30",
+      "op": "98890",
+      "tipo": "",
+      "etapa": "RM4 - Reboninado",
+      "fecha_entrega": "18/11/2025"
+    },
+    {
+      "cliente": "3x372457",
+      "referencia": "BL-TTT-32X30-R10000-M-3F-C30",
+      "op": "98888",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "18/11/2025"
+    },
+    {
+      "cliente": "3x178830",
+      "referencia": "BL-TTT-050X025-R10700-M-02F-C30-BMC",
+      "op": "91507",
+      "tipo": "Bajo Pedido",
+      "etapa": "Preparacion",
+      "fecha_entrega": "16/01/2025"
+    },
+    {
+      "cliente": "3x8237",
+      "referencia": "BL-TTT-100X30-R3000-P-1F-C30-Proenfar",
+      "op": "91511",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "17/01/2025"
+    },
+    {
+      "cliente": "3x8237",
+      "referencia": "BL-TTT-97X127-R1500-P-1F-C30-Proenfar",
+      "op": "91506",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "17/01/2025"
+    },
+    {
       "cliente": "3x6648",
       "referencia": "BL-TDR-050X100-R00500-F-01F-C10-DATA",
       "op": "91763",
       "tipo": "Bajo Pedido",
       "etapa": "Preparacion",
       "fecha_entrega": "27/01/2025"
+    },
+    {
+      "cliente": "3x261647",
+      "referencia": "BL-TTT-032X025-R14000-M-03F-C30-QUALA. - I9000188",
+      "op": "103838",
+      "tipo": "Bajo Pedido",
+      "etapa": "Preparacion",
+      "fecha_entrega": "12/06/2026"
     },
     {
       "cliente": "3x6648",
