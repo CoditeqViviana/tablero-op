@@ -107,16 +107,18 @@ def fetch_and_process():
                     and p.get(PROD['entrega_prod'], '') not in ('Habilitado', '1')]
     print(f"[sync] Producciones filtradas: {len(producciones)}")
 
-    # Indexar por REFERENCIA (nombre) para la union
-    prod_by_ref = {}
+    # Indexar por REFERENCIA (nombre): agrupamos TODAS las producciones que comparten
+    # una misma referencia (ej. reordenes del mismo diseno de etiqueta), sin descartar
+    # ninguna. Cada grupo se ordena por fecha de creacion para poder emparejar 1 a 1.
+    from collections import defaultdict
+    prod_groups = defaultdict(list)
     for p in producciones:
         ref = p.get(PROD['referencia'], '').strip()
         if ref:
-            # Si hay duplicados, quedarse con el de Plataforma (20x5)
-            existing = prod_by_ref.get(ref)
-            if not existing or p.get(PROD['asignado'], '') == '20x5':
-                prod_by_ref[ref] = p
-    print(f"[sync] Referencias unicas: {len(prod_by_ref)}")
+            prod_groups[ref].append(p)
+    for ref in prod_groups:
+        prod_groups[ref].sort(key=lambda p: str(p.get(PROD['fecha_creacion'], '')))
+    print(f"[sync] Referencias unicas: {len(prod_groups)}")
 
     # 2. Ordenes con filtro fecha
     print("[sync] Consultando ordenes (fecha > 2024-12-31)...")
@@ -129,50 +131,67 @@ def fetch_and_process():
         print("[sync] ERROR: Sin ordenes")
         return False
 
-    # 3. Unir por REFERENCIA
-    rows = []
-    sin_prod = 0
+    def _op_num(o):
+        try:
+            return int(str(o.get(OP['number'], 0)).strip() or 0)
+        except (ValueError, TypeError):
+            return 0
+
+    # Agrupamos las OPs por referencia (mismo criterio que arriba), ordenadas por
+    # numero de OP (proxy de orden cronologico), para emparejar 1 a 1 con producciones.
+    op_groups = defaultdict(list)
     for op in ordenes:
         proceso = op.get(OP['proceso'], '')
         if not proceso or proceso.strip() in ('', '-'):
             continue
+        ref = op.get(OP['referencia'], '').strip()
+        if ref:
+            op_groups[ref].append(op)
+    for ref in op_groups:
+        op_groups[ref].sort(key=_op_num)
 
-        # Buscar produccion por nombre de referencia
-        op_ref = op.get(OP['referencia'], '').strip()
-        prod = prod_by_ref.get(op_ref)
+    # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
+    # 1:1, no muchos a muchos). Cuando una referencia se repite (reordenes), se
+    # emparejan en el mismo orden cronologico en que fueron creadas ambos lados.
+    rows = []
+    sin_op = 0
+    for ref, prods in prod_groups.items():
+        ops_for_ref = op_groups.get(ref, [])
+        for i, prod in enumerate(prods):
+            if i >= len(ops_for_ref):
+                sin_op += 1
+                continue
+            op = ops_for_ref[i]
+            proceso = op.get(OP['proceso'], '')
 
-        if not prod:
-            sin_prod += 1
-            continue
+            rows.append({
+                'fecha_entrega_raw': op.get(OP['fecha_entrega'], ''),
+                'fecha_creacion_raw': _format_dt(prod.get(PROD['fecha_creacion'], '')),
+                'maquina_raw': op.get(OP['centro_proceso'], ''),
+                'etapa': proceso,
+                'organizacion': prod.get(PROD['organizacion'], ''),
+                'referencia': prod.get(PROD['referencia'], ''),
+                'codigo_siigo': prod.get(PROD['codigo_siigo'], ''),
+                'op_number': op.get(OP['number'], ''),
+                'total_etiquetas': _safe_num(op.get(OP['total_etiquetas'], 0)),
+                'tipo': prod.get(PROD['tipo'], ''),
+                'familia': op.get(OP['familia'], ''),
+                'mts_lineales': _safe_num(op.get(OP['mts_lineales'], 0)),
+                'fecha_prometida': prod.get(PROD['fecha_prometida'], ''),
+                'fecha_confirm_mp': prod.get(PROD['fecha_confirm_mp'], ''),
+                'material': op.get(OP['material'], ''),
+                'adhesivo': op.get(OP['adhesivo'], ''),
+                'ancho': _safe_num(op.get(OP['ancho'], 0)),
+                'etiquetas_rollo': _safe_num(prod.get(PROD['etiquetas_rollo'], 0)),
+                'fecha_liberacion': prod.get(PROD['fecha_liberacion'], ''),
+                'total_m2': _safe_num(op.get(OP['total_m2'], 0)),
+                'tipo_orden': op.get(OP['tipo_orden'], ''),
+                'tiempo_prod': prod.get(PROD['tiempo_prod'], ''),
+                'z': op.get(OP['z'], ''),
+                'obs_ocop': prod.get(PROD['obs_ocop'], ''),
+            })
 
-        rows.append({
-            'fecha_entrega_raw': op.get(OP['fecha_entrega'], ''),
-            'fecha_creacion_raw': _format_dt(prod.get(PROD['fecha_creacion'], '')),
-            'maquina_raw': op.get(OP['centro_proceso'], ''),
-            'etapa': proceso,
-            'organizacion': prod.get(PROD['organizacion'], ''),
-            'referencia': prod.get(PROD['referencia'], ''),
-            'codigo_siigo': prod.get(PROD['codigo_siigo'], ''),
-            'op_number': op.get(OP['number'], ''),
-            'total_etiquetas': _safe_num(op.get(OP['total_etiquetas'], 0)),
-            'tipo': prod.get(PROD['tipo'], ''),
-            'familia': op.get(OP['familia'], ''),
-            'mts_lineales': _safe_num(op.get(OP['mts_lineales'], 0)),
-            'fecha_prometida': prod.get(PROD['fecha_prometida'], ''),
-            'fecha_confirm_mp': prod.get(PROD['fecha_confirm_mp'], ''),
-            'material': op.get(OP['material'], ''),
-            'adhesivo': op.get(OP['adhesivo'], ''),
-            'ancho': _safe_num(op.get(OP['ancho'], 0)),
-            'etiquetas_rollo': _safe_num(prod.get(PROD['etiquetas_rollo'], 0)),
-            'fecha_liberacion': prod.get(PROD['fecha_liberacion'], ''),
-            'total_m2': _safe_num(op.get(OP['total_m2'], 0)),
-            'tipo_orden': op.get(OP['tipo_orden'], ''),
-            'tiempo_prod': prod.get(PROD['tiempo_prod'], ''),
-            'z': op.get(OP['z'], ''),
-            'obs_ocop': prod.get(PROD['obs_ocop'], ''),
-        })
-
-    print(f"[sync] {sin_prod} OPs sin match, {len(rows)} filas OK")
+    print(f"[sync] {sin_op} Producciones sin OP, {len(rows)} filas OK")
     if not rows:
         print("[sync] ERROR: 0 filas construidas")
         return False
