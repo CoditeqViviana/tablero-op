@@ -87,10 +87,11 @@ def _format_dt(v):
     except: return str(v)
 
 def fetch_and_process():
-    # 1. Producciones con filtro fecha
-    print("[sync] Consultando producciones (fecha > 2024-12-31)...")
+    # 1. Producciones con filtro fecha (01-01-2025 a 31-12-2026, segun informe original)
+    print("[sync] Consultando producciones (fecha entre 2025-01-01 y 2026-12-31)...")
     producciones = vtiger_query(
-        "SELECT * FROM vtcmproduccion WHERE cf_vtcmproduccion_fechaentregaprometida > '2024-12-31'"
+        "SELECT * FROM vtcmproduccion WHERE cf_vtcmproduccion_fechaentregaprometida > '2024-12-31' "
+        "AND cf_vtcmproduccion_fechaentregaprometida < '2027-01-01'"
     )
     print(f"[sync] Producciones brutas: {len(producciones)}")
 
@@ -98,12 +99,12 @@ def fetch_and_process():
         print("[sync] ERROR: Sin producciones")
         return False
 
-    # Filtros Python:
-    # - Entrega de Produccion != 'Habilitado' y != '1' (excluir habilitados)
+    # Filtros Python (deben cumplirse AMBAS condiciones - AND, no OR):
     # - Asignado a Plataforma de Produccion (20x5)
+    # - Entrega de Produccion != 'Habilitado' y != '1' (excluir habilitados)
     producciones = [p for p in producciones
-                    if p.get(PROD['entrega_prod'], '') not in ('Habilitado', '1')
-                    or p.get(PROD['asignado'], '') == '20x5']
+                    if p.get(PROD['asignado'], '') == '20x5'
+                    and p.get(PROD['entrega_prod'], '') not in ('Habilitado', '1')]
     print(f"[sync] Producciones filtradas: {len(producciones)}")
 
     # Indexar por REFERENCIA (nombre) para la union
@@ -180,7 +181,8 @@ def fetch_and_process():
     df = pd.DataFrame(rows)
     df['fecha_entrega'] = pd.to_datetime(df['fecha_entrega_raw'], errors='coerce')
     df['fecha_creacion'] = pd.to_datetime(df['fecha_creacion_raw'], format='%d-%m-%Y %I:%M %p', errors='coerce')
-    df['maquina'] = df['maquina_raw'].astype(str).str.split(',').str[0].str.strip()
+    # Vtiger API devuelve multi-picklist con separador '|##|' (no coma como en el Excel exportado)
+    df['maquina'] = df['maquina_raw'].astype(str).str.split(r'\|##\|').str[0].str.strip()
 
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
