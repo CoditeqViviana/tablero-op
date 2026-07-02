@@ -65,23 +65,27 @@ def github_save_json(filename, data):
         return False
 
 def github_load_json(filename):
-    """Lee un JSON: primero intenta GitHub, si falla usa el cache local."""
+    """Lee un JSON desde raw.githubusercontent.com (sin límite de 1MB de la Contents API).
+    Si falla, usa el cache local."""
     local_path = os.path.join(UPLOAD_FOLDER, filename)
 
     if GITHUB_TOKEN:
         try:
-            api_url = f'https://api.github.com/repos/{GITHUB_REPO}/contents/{GITHUB_DATA_PATH}/{filename}'
-            r = requests.get(api_url, headers=_gh_headers(), timeout=10)
+            # La Contents API de GitHub (/repos/.../contents/...) solo devuelve el campo
+            # 'content' para archivos <= 1MB. Para archivos mas grandes, usamos el raw
+            # endpoint directamente, que no tiene ese limite (hasta 100MB).
+            raw_url = f'https://raw.githubusercontent.com/{GITHUB_REPO}/main/{GITHUB_DATA_PATH}/{filename}'
+            r = requests.get(raw_url, headers={'Authorization': f'Bearer {GITHUB_TOKEN}'}, timeout=20)
             if r.status_code == 200:
-                content_b64 = r.json().get('content', '')
-                content_str = base64.b64decode(content_b64).decode('utf-8')
-                data = json.loads(content_str)
+                data = json.loads(r.text)
                 # Refrescar cache local
                 try:
                     with open(local_path, 'w', encoding='utf-8') as f:
                         json.dump(data, f, ensure_ascii=False)
                 except: pass
                 return data
+            else:
+                print(f'Error leyendo raw de GitHub {filename}: {r.status_code}')
         except Exception as e:
             print(f'Excepción leyendo de GitHub {filename}: {e}')
 
