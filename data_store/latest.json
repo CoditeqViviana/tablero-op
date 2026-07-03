@@ -1,5 +1,5 @@
 {
-  "updated_at": "03/07/2026 09:33",
+  "updated_at": "03/07/2026 13:26",
   "source": "vtiger_api_github_actions",
   "today": "2026-07-03",
   "hoy": "2026-07-03",
@@ -86,28 +86,19 @@
     "2026-07-03": 3
   },
   "total_semana": 3,
-  "total_ordenes": 190,
-  "inc_total": 141,
+  "total_ordenes": 191,
+  "inc_total": 142,
   "inc_maq": {
     "Nilpeter 1": 40,
-    "Nilpeter 2": 34,
-    "Kromia": 28,
-    "Troqueladora Rotativa 1": 28,
-    "Troqueladora Plana": 9,
+    "Nilpeter 2": 36,
+    "Troqueladora Rotativa 1": 29,
+    "Kromia": 27,
+    "Troqueladora Plana": 8,
     "Rebobinadora": 2
   },
   "inc_etapas": {
-    "En cola Rebobinadora 2": {
-      "total": 1,
-      "ordenes": [
-        {
-          "cliente": "3x178752",
-          "tipo": ""
-        }
-      ]
-    },
     "Impresion": {
-      "total": 4,
+      "total": 5,
       "ordenes": [
         {
           "cliente": "3x611978",
@@ -124,16 +115,16 @@
         {
           "cliente": "3x160458",
           "tipo": ""
+        },
+        {
+          "cliente": "3x261487",
+          "tipo": ""
         }
       ]
     },
     "Preparacion": {
-      "total": 41,
+      "total": 40,
       "ordenes": [
-        {
-          "cliente": "3x1364547",
-          "tipo": "Bajo Pedido"
-        },
         {
           "cliente": "3x6158",
           "tipo": "Bajo Pedido"
@@ -143,15 +134,7 @@
           "tipo": "Bajo Pedido"
         },
         {
-          "cliente": "3x336431",
-          "tipo": "Bajo Pedido"
-        },
-        {
           "cliente": "3x215575",
-          "tipo": "Bajo Pedido"
-        },
-        {
-          "cliente": "3x6648",
           "tipo": "Bajo Pedido"
         },
         {
@@ -167,12 +150,12 @@
           "tipo": "Bajo Pedido"
         },
         {
-          "cliente": "3x7119",
+          "cliente": "3x354866",
           "tipo": ""
         },
         {
-          "cliente": "3x6462",
-          "tipo": "Bajo Pedido"
+          "cliente": "3x7119",
+          "tipo": ""
         },
         {
           "cliente": "3x8021",
@@ -191,7 +174,7 @@
           "tipo": "Bajo Pedido"
         },
         {
-          "cliente": "3x8025",
+          "cliente": "3x6648",
           "tipo": ""
         },
         {
@@ -243,11 +226,19 @@
           "tipo": ""
         },
         {
+          "cliente": "3x356733",
+          "tipo": ""
+        },
+        {
           "cliente": "3x6436",
           "tipo": "Bajo Pedido"
         },
         {
           "cliente": "3x822548",
+          "tipo": "Bajo Pedido"
+        },
+        {
+          "cliente": "3x336431",
           "tipo": "Bajo Pedido"
         },
         {
@@ -297,7 +288,7 @@
       ]
     },
     "RM4 - Reboninado": {
-      "total": 86,
+      "total": 88,
       "ordenes": [
         {
           "cliente": "3x338823",
@@ -305,10 +296,6 @@
         },
         {
           "cliente": "3x7188",
-          "tipo": "Bajo Pedido"
-        },
-        {
-          "cliente": "3x224920",
           "tipo": "Bajo Pedido"
         },
         {
@@ -428,6 +415,10 @@
           "tipo": "Bajo Pedido"
         },
         {
+          "cliente": "3x6648",
+          "tipo": ""
+        },
+        {
           "cliente": "3x6125",
           "tipo": ""
         },
@@ -477,6 +468,10 @@
         },
         {
           "cliente": "3x611978",
+          "tipo": ""
+        },
+        {
+          "cliente": "3x354866",
           "tipo": ""
         },
         {
@@ -577,6 +572,10 @@
         },
         {
           "cliente": "3x196207",
+          "tipo": ""
+        },
+        {
+          "cliente": "3x235822",
           "tipo": ""
         },
         {
@@ -688,7 +687,6 @@
     }
   },
   "etapas_unicas": [
-    "En cola Rebobinadora 2",
     "Impresion",
     "Preparacion",
     "RM4 - Reboninado",
@@ -710,14 +708,6 @@
       "tipo": "Bajo Pedido",
       "etapa": "RM4 - Reboninado",
       "fecha_entrega": "18/09/2025"
-    },
-    {
-      "cliente": "3x224920",
-      "referencia": "FD-TTT-034X082-R6000-M-3F-C3-VERDE-344C-QUALA. - I9000276",
-      "op": "103854",
-      "tipo": "Bajo Pedido",
-      "etapa": "RM4 - Reboninado",
-      "fecha_entrega": "18/06/2026"
     },
     {
       "cliente": "3x261487",
@@ -744,28 +734,12 @@
       "fecha_entrega": "23/04/2025"
     },
     {
-      "cliente": "3x178752",
-      "referencia": "IC-TTT-105X50-R2000-R-1F-C30- DELUXE-MARK-6D-AMARILLO",
-      "op": "103110",
-      "tipo": "",
-      "etapa": "En cola Rebobinadora 2",
-      "fecha_entrega": "26/05/2026"
-    },
-    {
       "cliente": "3x6097",
       "referencia": "IC-ESM-100X75-R1000-S-1F-C30-EQP-ADMIN-SOLUC-PAREN-BOMB-INFUS",
       "op": "102489",
       "tipo": "Bajo Pedido",
       "etapa": "RM4 - Reboninado",
       "fecha_entrega": "24/04/2026"
-    },
-    {
-      "cliente": "3x1364547",
-      "referencia": "BL-PTM-50X85-R1000-F-2F-C10",
-      "op": "96087",
-      "tipo": "Bajo Pedido",
-      "etapa": "Preparacion",
-      "fecha_entrega": "30/07/2025"
     },
     {
       "cliente": "3x232928",
@@ -806,14 +780,6 @@
       "tipo": "Bajo Pedido",
       "etapa": "Preparacion",
       "fecha_entrega": "07/01/2025"
-    },
-    {
-      "cliente": "3x336431",
-      "referencia": "BL-PPB-100X80-R1000-M-1F-C30",
-      "op": "91581",
-      "tipo": "Bajo Pedido",
-      "etapa": "Preparacion",
-      "fecha_entrega": "20/01/2025"
     },
     {
       "cliente": "3x215575",
@@ -889,14 +855,6 @@
     },
     {
       "cliente": "3x6648",
-      "referencia": "BL-TTT-101X132-R00350-M-01F-C10-DATA",
-      "op": "94516",
-      "tipo": "Bajo Pedido",
-      "etapa": "Preparacion",
-      "fecha_entrega": "27/05/2025"
-    },
-    {
-      "cliente": "3x6648",
       "referencia": "BL-PPBBCAV-100X135-R1000-M-1F-C30-DATASCAN",
       "op": "95691",
       "tipo": "",
@@ -928,20 +886,20 @@
       "fecha_entrega": "06/10/2025"
     },
     {
+      "cliente": "3x354866",
+      "referencia": "BL-PPB-100X50-R1000-M-1F-C10",
+      "op": "98918",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "18/11/2025"
+    },
+    {
       "cliente": "3x7119",
       "referencia": "BL-TTT-32X25-R14000-M-3F-C30-SCALPI",
       "op": "95916",
       "tipo": "",
       "etapa": "Preparacion",
       "fecha_entrega": "21/07/2025"
-    },
-    {
-      "cliente": "3x6462",
-      "referencia": "BL-TTT-100X080-R00590-M-01F-C10-BMC-C1",
-      "op": "91348",
-      "tipo": "Bajo Pedido",
-      "etapa": "Preparacion",
-      "fecha_entrega": "08/01/2025"
     },
     {
       "cliente": "3x6584",
@@ -1096,7 +1054,7 @@
       "fecha_entrega": "04/03/2025"
     },
     {
-      "cliente": "3x8025",
+      "cliente": "3x6648",
       "referencia": "FD-TTT-100X100-R500-M-1F-C10-VERDE 374C",
       "op": "93257",
       "tipo": "",
@@ -1110,6 +1068,14 @@
       "tipo": "Bajo Pedido",
       "etapa": "RM4 - Reboninado",
       "fecha_entrega": "26/03/2025"
+    },
+    {
+      "cliente": "3x6648",
+      "referencia": "BL-PPBBCAV-80X43-R3000-M-1F-C30-DATASCAN",
+      "op": "95687",
+      "tipo": "",
+      "etapa": "RM4 - Reboninado",
+      "fecha_entrega": "11/07/2025"
     },
     {
       "cliente": "3x1456019",
@@ -1304,6 +1270,14 @@
       "fecha_entrega": "31/01/2025"
     },
     {
+      "cliente": "3x356733",
+      "referencia": "BL-PPB-60X30-R1800-M-1F-C10",
+      "op": "100048",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "07/01/2026"
+    },
+    {
       "cliente": "3x261637",
       "referencia": "BL-TTT-30X40-R10000-M-3F-C30-OTP-317",
       "op": "93042",
@@ -1360,6 +1334,14 @@
       "fecha_entrega": "03/04/2025"
     },
     {
+      "cliente": "3x336431",
+      "referencia": "BL-PPB-100X80-R1000-M-1F-C30",
+      "op": "91581",
+      "tipo": "Bajo Pedido",
+      "etapa": "Preparacion",
+      "fecha_entrega": "20/01/2025"
+    },
+    {
       "cliente": "3x6760",
       "referencia": "IC-PPB-137X83-R1000-M-1F-C30-CARA-BONAROPA-ECOPL-1 LT",
       "op": "103191",
@@ -1374,6 +1356,14 @@
       "tipo": "",
       "etapa": "Preparacion",
       "fecha_entrega": "26/05/2026"
+    },
+    {
+      "cliente": "3x354866",
+      "referencia": "BL-PPB-100X200-R350-M-1F-C10",
+      "op": "95637",
+      "tipo": "",
+      "etapa": "RM4 - Reboninado",
+      "fecha_entrega": "10/07/2025"
     },
     {
       "cliente": "3x8079",
@@ -1538,10 +1528,10 @@
     {
       "cliente": "3x6120",
       "referencia": "IC-PPB-95X90-R1000-M-1F-C15-ALKOSTO-DESENG-CITRUS-1000ML",
-      "op": "95182",
+      "op": "95653",
       "tipo": "Stock",
       "etapa": "RM4 - Reboninado",
-      "fecha_entrega": "26/06/2025"
+      "fecha_entrega": "16/07/2025"
     },
     {
       "cliente": "3x6120",
@@ -1662,6 +1652,22 @@
       "tipo": "",
       "etapa": "Preparacion",
       "fecha_entrega": "25/03/2025"
+    },
+    {
+      "cliente": "3x235822",
+      "referencia": "IC-PPB-135X95-R2000-M-1F-C30-ENC-LAVANDA-AZUL-KLEAN-980ml",
+      "op": "93148",
+      "tipo": "",
+      "etapa": "RM4 - Reboninado",
+      "fecha_entrega": "28/03/2025"
+    },
+    {
+      "cliente": "3x261487",
+      "referencia": "IC-PPB-123X61-R4000-M-1F-C30-LAVAL-LIQ-ANTIBA-ENZIMA-BRILLAKING-750ml",
+      "op": "99240",
+      "tipo": "",
+      "etapa": "Impresion",
+      "fecha_entrega": "09/12/2025"
     },
     {
       "cliente": "3x196207",
