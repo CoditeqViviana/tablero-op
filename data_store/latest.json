@@ -1,5 +1,5 @@
 {
-  "updated_at": "03/07/2026 13:26",
+  "updated_at": "03/07/2026 17:15",
   "source": "vtiger_api_github_actions",
   "today": "2026-07-03",
   "hoy": "2026-07-03",
@@ -47,7 +47,7 @@
       "2026-06-30": 0,
       "2026-07-01": 0,
       "2026-07-02": 0,
-      "2026-07-03": 2
+      "2026-07-03": 1
     },
     "Nilpeter 2": {
       "2026-06-29": 0,
@@ -83,17 +83,17 @@
     "2026-06-30": 0,
     "2026-07-01": 0,
     "2026-07-02": 0,
-    "2026-07-03": 3
+    "2026-07-03": 2
   },
-  "total_semana": 3,
-  "total_ordenes": 191,
-  "inc_total": 142,
+  "total_semana": 2,
+  "total_ordenes": 200,
+  "inc_total": 150,
   "inc_maq": {
-    "Nilpeter 1": 40,
-    "Nilpeter 2": 36,
-    "Troqueladora Rotativa 1": 29,
-    "Kromia": 27,
-    "Troqueladora Plana": 8,
+    "Nilpeter 1": 43,
+    "Nilpeter 2": 38,
+    "Kromia": 30,
+    "Troqueladora Rotativa 1": 30,
+    "Troqueladora Plana": 7,
     "Rebobinadora": 2
   },
   "inc_etapas": {
@@ -123,35 +123,15 @@
       ]
     },
     "Preparacion": {
-      "total": 40,
+      "total": 43,
       "ordenes": [
         {
           "cliente": "3x6158",
           "tipo": "Bajo Pedido"
         },
         {
-          "cliente": "3x6648",
-          "tipo": "Bajo Pedido"
-        },
-        {
           "cliente": "3x215575",
           "tipo": "Bajo Pedido"
-        },
-        {
-          "cliente": "3x6648",
-          "tipo": ""
-        },
-        {
-          "cliente": "3x6648",
-          "tipo": ""
-        },
-        {
-          "cliente": "3x7798",
-          "tipo": "Bajo Pedido"
-        },
-        {
-          "cliente": "3x354866",
-          "tipo": ""
         },
         {
           "cliente": "3x7119",
@@ -226,8 +206,20 @@
           "tipo": ""
         },
         {
+          "cliente": "3x253880",
+          "tipo": "Bajo Pedido"
+        },
+        {
+          "cliente": "3x354866",
+          "tipo": ""
+        },
+        {
           "cliente": "3x356733",
           "tipo": ""
+        },
+        {
+          "cliente": "3x6108",
+          "tipo": "Bajo Pedido"
         },
         {
           "cliente": "3x6436",
@@ -258,7 +250,27 @@
           "tipo": ""
         },
         {
+          "cliente": "3x354234",
+          "tipo": ""
+        },
+        {
+          "cliente": "3x7560",
+          "tipo": ""
+        },
+        {
+          "cliente": "3x7560",
+          "tipo": "Bajo Pedido"
+        },
+        {
           "cliente": "3x235830",
+          "tipo": ""
+        },
+        {
+          "cliente": "3x354234",
+          "tipo": ""
+        },
+        {
+          "cliente": "3x1122543",
           "tipo": ""
         },
         {
@@ -288,7 +300,7 @@
       ]
     },
     "RM4 - Reboninado": {
-      "total": 88,
+      "total": 93,
       "ordenes": [
         {
           "cliente": "3x338823",
@@ -451,6 +463,10 @@
           "tipo": "Bajo Pedido"
         },
         {
+          "cliente": "3x253880",
+          "tipo": "Bajo Pedido"
+        },
+        {
           "cliente": "3x261637",
           "tipo": "Bajo Pedido"
         },
@@ -541,6 +557,22 @@
         {
           "cliente": "3x6120",
           "tipo": "Stock"
+        },
+        {
+          "cliente": "3x6018",
+          "tipo": "Bajo Pedido"
+        },
+        {
+          "cliente": "3x160832",
+          "tipo": "Bajo Pedido"
+        },
+        {
+          "cliente": "3x6120",
+          "tipo": "Bajo Pedido"
+        },
+        {
+          "cliente": "3x6120",
+          "tipo": "Bajo Pedido"
         },
         {
           "cliente": "3x349098",
@@ -648,10 +680,6 @@
       "total": 9,
       "ordenes": [
         {
-          "cliente": "3x7798",
-          "tipo": "Bajo Pedido"
-        },
-        {
           "cliente": "3x6648",
           "tipo": "Bajo Pedido"
         },
@@ -661,6 +689,10 @@
         },
         {
           "cliente": "3x6648",
+          "tipo": "Bajo Pedido"
+        },
+        {
+          "cliente": "3x7798",
           "tipo": "Bajo Pedido"
         },
         {
@@ -774,14 +806,6 @@
       "fecha_entrega": "13/06/2025"
     },
     {
-      "cliente": "3x6648",
-      "referencia": "BL-TTT-076X127-R01100-M-01F-C30-DATA-BMC-PREP",
-      "op": "91319",
-      "tipo": "Bajo Pedido",
-      "etapa": "Preparacion",
-      "fecha_entrega": "07/01/2025"
-    },
-    {
       "cliente": "3x215575",
       "referencia": "IC-PPT-165X168-R1000-M-1F-C30-TRATAM-JALEA-REAL-USA-400ML",
       "op": "102470",
@@ -852,46 +876,6 @@
       "tipo": "Bajo Pedido",
       "etapa": "RM4 - Reboninado",
       "fecha_entrega": "19/06/2026"
-    },
-    {
-      "cliente": "3x6648",
-      "referencia": "BL-PPBBCAV-100X135-R1000-M-1F-C30-DATASCAN",
-      "op": "95691",
-      "tipo": "",
-      "etapa": "Preparacion",
-      "fecha_entrega": "11/07/2025"
-    },
-    {
-      "cliente": "3x6648",
-      "referencia": "BL-PPBBCAV-100X135-R500-M-1F-C10-DATASCAN",
-      "op": "95690",
-      "tipo": "",
-      "etapa": "Preparacion",
-      "fecha_entrega": "11/07/2025"
-    },
-    {
-      "cliente": "3x7798",
-      "referencia": "BL-PPB-100X50-R1000-M-1F-C10",
-      "op": "97738",
-      "tipo": "Bajo Pedido",
-      "etapa": "Troquelado",
-      "fecha_entrega": "25/09/2025"
-    },
-    {
-      "cliente": "3x7798",
-      "referencia": "BL-PPB-100X50-R1000-M-1F-C10",
-      "op": "97942",
-      "tipo": "Bajo Pedido",
-      "etapa": "Preparacion",
-      "fecha_entrega": "06/10/2025"
-    },
-    {
-      "cliente": "3x354866",
-      "referencia": "BL-PPB-100X50-R1000-M-1F-C10",
-      "op": "98918",
-      "tipo": "",
-      "etapa": "Preparacion",
-      "fecha_entrega": "18/11/2025"
     },
     {
       "cliente": "3x7119",
@@ -1270,12 +1254,52 @@
       "fecha_entrega": "31/01/2025"
     },
     {
+      "cliente": "3x253880",
+      "referencia": "BL-TTT-75X50-R1000-M-1F-C15",
+      "op": "92459",
+      "tipo": "Bajo Pedido",
+      "etapa": "Preparacion",
+      "fecha_entrega": "21/02/2025"
+    },
+    {
+      "cliente": "3x253880",
+      "referencia": "BL-TTT-100X152-R500-M-1F-C15",
+      "op": "94581",
+      "tipo": "Bajo Pedido",
+      "etapa": "RM4 - Reboninado",
+      "fecha_entrega": "29/05/2025"
+    },
+    {
+      "cliente": "3x7798",
+      "referencia": "BL-PPB-100X50-R1000-M-1F-C10",
+      "op": "97738",
+      "tipo": "Bajo Pedido",
+      "etapa": "Troquelado",
+      "fecha_entrega": "25/09/2025"
+    },
+    {
+      "cliente": "3x354866",
+      "referencia": "BL-PPB-100X50-R1000-M-1F-C10",
+      "op": "97942",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "06/10/2025"
+    },
+    {
       "cliente": "3x356733",
       "referencia": "BL-PPB-60X30-R1800-M-1F-C10",
       "op": "100048",
       "tipo": "",
       "etapa": "Preparacion",
       "fecha_entrega": "07/01/2026"
+    },
+    {
+      "cliente": "3x6108",
+      "referencia": "BL-TTT-030X040-R10450-M-03F-C30-BMC",
+      "op": "92377",
+      "tipo": "Bajo Pedido",
+      "etapa": "Preparacion",
+      "fecha_entrega": "20/02/2025"
     },
     {
       "cliente": "3x261637",
@@ -1470,6 +1494,14 @@
       "fecha_entrega": "30/09/2025"
     },
     {
+      "cliente": "3x354234",
+      "referencia": "BL-TTT-100X50-R3000-M-1F-C30-PINTUCO",
+      "op": "103300",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "21/05/2026"
+    },
+    {
       "cliente": "3x160458",
       "referencia": "IC-PSP-30X70-R1500-S-1F-C30-SELLO-SEGURIDAD",
       "op": "92222",
@@ -1528,10 +1560,10 @@
     {
       "cliente": "3x6120",
       "referencia": "IC-PPB-95X90-R1000-M-1F-C15-ALKOSTO-DESENG-CITRUS-1000ML",
-      "op": "95653",
+      "op": "95182",
       "tipo": "Stock",
       "etapa": "RM4 - Reboninado",
-      "fecha_entrega": "16/07/2025"
+      "fecha_entrega": "26/06/2025"
     },
     {
       "cliente": "3x6120",
@@ -1542,12 +1574,76 @@
       "fecha_entrega": "03/03/2026"
     },
     {
+      "cliente": "3x7560",
+      "referencia": "IC-PPBBCAV-40X40-R5000-M-2F-C30-RAQUEL-RUBOR-LUJO",
+      "op": "92121",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "13/02/2025"
+    },
+    {
+      "cliente": "3x7560",
+      "referencia": "IS-PPB-040X040-R05000-M-01F-C30-RAQUEL-SOMBRA-INDV",
+      "op": "92120",
+      "tipo": "Bajo Pedido",
+      "etapa": "Preparacion",
+      "fecha_entrega": "13/02/2025"
+    },
+    {
+      "cliente": "3x6018",
+      "referencia": "IC-PPB-117.8X73-R2000-M-1F-C30-Et Jab Liq cremoso Flor De Lychee  500ml Delantera  Be Beauty",
+      "op": "94232",
+      "tipo": "Bajo Pedido",
+      "etapa": "RM4 - Reboninado",
+      "fecha_entrega": "19/05/2025"
+    },
+    {
+      "cliente": "3x160832",
+      "referencia": "IC-PPB-117.8X73-R2000-M-1F-C30-Et  Jab Liq cremoso Flor De Lychee  500ml trasera  Be Beauty",
+      "op": "94233",
+      "tipo": "Bajo Pedido",
+      "etapa": "RM4 - Reboninado",
+      "fecha_entrega": "19/05/2025"
+    },
+    {
       "cliente": "3x235830",
       "referencia": "IC-P60-194X153-R1000-P-1F-C15-ETQ-DETER-LIQ-CON-SUAVIZ-FLOR-ALKS-4 L",
       "op": "91986",
       "tipo": "",
       "etapa": "Preparacion",
       "fecha_entrega": "14/02/2025"
+    },
+    {
+      "cliente": "3x6120",
+      "referencia": "IC-PPBBCAV-94X203-R500-M-1F-C15-ETQ-LIMPIA HORNOS EN GEL LPS X 350g",
+      "op": "93831",
+      "tipo": "Bajo Pedido",
+      "etapa": "RM4 - Reboninado",
+      "fecha_entrega": "30/04/2025"
+    },
+    {
+      "cliente": "3x6120",
+      "referencia": "IC-PPBBCAV-94X203-R500-M-1F-C15-ETQ-LIMPIA HORNOS EN GEL LPS X 350g",
+      "op": "94992",
+      "tipo": "Bajo Pedido",
+      "etapa": "RM4 - Reboninado",
+      "fecha_entrega": "19/06/2025"
+    },
+    {
+      "cliente": "3x354234",
+      "referencia": "IC-TTT-130X210-R500-P-1F-C30-ROMBOS",
+      "op": "96674",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "29/08/2025"
+    },
+    {
+      "cliente": "3x1122543",
+      "referencia": "IC-PPB-100X150-R1000-S-1F-C30-SGA-ACI-FUMARAT-CAL-TRIHIDRATADO",
+      "op": "91914",
+      "tipo": "",
+      "etapa": "Preparacion",
+      "fecha_entrega": "07/02/2025"
     },
     {
       "cliente": "3x6278",
@@ -1831,6 +1927,6 @@
     }
   ],
   "dia_max_nombre": "Viernes",
-  "dia_max_val": 3,
+  "dia_max_val": 2,
   "dia_max_fecha": "03/07"
 }
