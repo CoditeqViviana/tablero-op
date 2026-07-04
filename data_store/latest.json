@@ -1,5 +1,5 @@
 {
-  "updated_at": "04/07/2026 13:13",
+  "updated_at": "04/07/2026 17:08",
   "source": "vtiger_api_github_actions",
   "today": "2026-07-04",
   "hoy": "2026-07-04",
@@ -86,13 +86,13 @@
     "2026-07-10": 3
   },
   "total_semana": 24,
-  "total_ordenes": 182,
-  "inc_total": 138,
+  "total_ordenes": 179,
+  "inc_total": 135,
   "inc_maq": {
     "Nilpeter 1": 43,
-    "Nilpeter 2": 36,
-    "Troqueladora Rotativa 1": 26,
+    "Nilpeter 2": 35,
     "Kromia": 25,
+    "Troqueladora Rotativa 1": 24,
     "Troqueladora Plana": 6,
     "Rebobinadora": 2
   },
@@ -123,23 +123,15 @@
       ]
     },
     "Preparacion": {
-      "total": 40,
+      "total": 37,
       "ordenes": [
         {
           "cliente": "3x215575",
           "tipo": "Bajo Pedido"
         },
         {
-          "cliente": "3x7119",
-          "tipo": ""
-        },
-        {
           "cliente": "3x8021",
           "tipo": ""
-        },
-        {
-          "cliente": "3x6648",
-          "tipo": "Bajo Pedido"
         },
         {
           "cliente": "3x6648",
@@ -176,10 +168,6 @@
         {
           "cliente": "3x8237",
           "tipo": ""
-        },
-        {
-          "cliente": "3x261647",
-          "tipo": "Bajo Pedido"
         },
         {
           "cliente": "3x6648",
@@ -288,7 +276,7 @@
       ]
     },
     "RM4 - Reboninado": {
-      "total": 84,
+      "total": 83,
       "ordenes": [
         {
           "cliente": "3x261487",
@@ -296,10 +284,6 @@
         },
         {
           "cliente": "3x261487",
-          "tipo": "Bajo Pedido"
-        },
-        {
-          "cliente": "3x787167",
           "tipo": "Bajo Pedido"
         },
         {
@@ -629,8 +613,12 @@
       ]
     },
     "Troquelado": {
-      "total": 9,
+      "total": 10,
       "ordenes": [
+        {
+          "cliente": "3x6648",
+          "tipo": "Bajo Pedido"
+        },
         {
           "cliente": "3x6648",
           "tipo": "Bajo Pedido"
@@ -692,14 +680,6 @@
       "tipo": "Bajo Pedido",
       "etapa": "RM4 - Reboninado",
       "fecha_entrega": "09/12/2025"
-    },
-    {
-      "cliente": "3x787167",
-      "referencia": "IC-PME-125X320-R500-M-1F-C30- LEGE-SIN-SAB-50SERV-600g",
-      "op": "93647",
-      "tipo": "Bajo Pedido",
-      "etapa": "RM4 - Reboninado",
-      "fecha_entrega": "23/04/2025"
     },
     {
       "cliente": "3x6097",
@@ -766,14 +746,6 @@
       "fecha_entrega": "18/03/2025"
     },
     {
-      "cliente": "3x7119",
-      "referencia": "BL-TTT-32X25-R14000-M-3F-C30-SCALPI",
-      "op": "95916",
-      "tipo": "",
-      "etapa": "Preparacion",
-      "fecha_entrega": "21/07/2025"
-    },
-    {
       "cliente": "3x6584",
       "referencia": "IC-TTT-70X32-R10000-M-1F-C30-MACHE-GENER-MAX-RESIST",
       "op": "90925",
@@ -784,10 +756,10 @@
     {
       "cliente": "3x6584",
       "referencia": "IC-TTT-70X32-R10000-M-1F-C30-MACHE-GENER-MAX-RESIST",
-      "op": "92014",
+      "op": "90925",
       "tipo": "Bajo Pedido",
       "etapa": "RM4 - Reboninado",
-      "fecha_entrega": "13/02/2025"
+      "fecha_entrega": "13/01/2025"
     },
     {
       "cliente": "3x6584",
@@ -864,10 +836,10 @@
     {
       "cliente": "3x6648",
       "referencia": "BL-TDR-040X030-R04000-F-02F-C30-2",
-      "op": "91357",
+      "op": "91481",
       "tipo": "Bajo Pedido",
-      "etapa": "Preparacion",
-      "fecha_entrega": "08/01/2025"
+      "etapa": "Troquelado",
+      "fecha_entrega": "15/01/2025"
     },
     {
       "cliente": "3x6648",
@@ -896,10 +868,10 @@
     {
       "cliente": "3x6648",
       "referencia": "FD-TTT-100X100-R00500-M-01F-C10-AMR-PROC",
-      "op": "91333",
+      "op": "91863",
       "tipo": "Bajo Pedido",
       "etapa": "Troquelado",
-      "fecha_entrega": "07/01/2025"
+      "fecha_entrega": "31/01/2025"
     },
     {
       "cliente": "3x6648",
@@ -980,14 +952,6 @@
       "tipo": "",
       "etapa": "Preparacion",
       "fecha_entrega": "17/01/2025"
-    },
-    {
-      "cliente": "3x261647",
-      "referencia": "BL-TTT-032X025-R14000-M-03F-C30-QUALA. - I9000188",
-      "op": "103838",
-      "tipo": "Bajo Pedido",
-      "etapa": "Preparacion",
-      "fecha_entrega": "12/06/2026"
     },
     {
       "cliente": "3x6648",
