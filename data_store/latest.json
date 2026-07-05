@@ -1,8 +1,8 @@
 {
-  "updated_at": "04/07/2026 17:08",
+  "updated_at": "05/07/2026 09:03",
   "source": "vtiger_api_github_actions",
-  "today": "2026-07-04",
-  "hoy": "2026-07-04",
+  "today": "2026-07-05",
+  "hoy": "2026-07-05",
   "lun": "06/07",
   "vie": "10/07",
   "maquinas": [
@@ -86,11 +86,11 @@
     "2026-07-10": 3
   },
   "total_semana": 24,
-  "total_ordenes": 179,
-  "inc_total": 135,
+  "total_ordenes": 178,
+  "inc_total": 134,
   "inc_maq": {
     "Nilpeter 1": 43,
-    "Nilpeter 2": 35,
+    "Nilpeter 2": 34,
     "Kromia": 25,
     "Troqueladora Rotativa 1": 24,
     "Troqueladora Plana": 6,
@@ -276,7 +276,7 @@
       ]
     },
     "RM4 - Reboninado": {
-      "total": 83,
+      "total": 82,
       "ordenes": [
         {
           "cliente": "3x261487",
@@ -337,10 +337,6 @@
         {
           "cliente": "3x6784",
           "tipo": ""
-        },
-        {
-          "cliente": "3x6120",
-          "tipo": "Bajo Pedido"
         },
         {
           "cliente": "3x6120",
@@ -805,14 +801,6 @@
       "cliente": "3x6120",
       "referencia": "IC-PPB-183X145-R1000-4-1F-C15-DET-LÍQ-CON-SUAV-LAVANDA-ALKOSTO-10L",
       "op": "103779",
-      "tipo": "Bajo Pedido",
-      "etapa": "RM4 - Reboninado",
-      "fecha_entrega": "19/06/2026"
-    },
-    {
-      "cliente": "3x6120",
-      "referencia": "IC-PPB-183X145-R1000-4-1F-C15-SUAV-LAVANDA-ALKOSTO-10L",
-      "op": "103778",
       "tipo": "Bajo Pedido",
       "etapa": "RM4 - Reboninado",
       "fecha_entrega": "19/06/2026"
