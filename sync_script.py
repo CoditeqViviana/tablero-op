@@ -13,6 +13,119 @@ VTIGER_KEY = os.environ.get('VTIGER_KEY', '')
 API_BASE = f"{VTIGER_URL}/restapi/v1/vtiger/default"
 BOGOTA = pytz.timezone('America/Bogota')
 
+# ==================== CONSTANTES TOC / CAPACIDAD ====================
+# Capacidad: 22.75h * 50% eficiencia * 60min * 35m/min = 23,888 mts/dia
+CAP_DEFAULT = round(22.75 * 0.50 * 60 * 35)
+CAPACIDAD = {
+    'Nilpeter 1': CAP_DEFAULT,
+    'Nilpeter 2': CAP_DEFAULT,
+    'Kromia':     CAP_DEFAULT,
+}
+
+# Capacidades diarias por maquina (metros/dia)
+MAQUINAS_CAP = {
+    'NP1': 23100, 'NP2': 23100, 'Kromia': 23100,
+    'Rebobinadora 1': 16500, 'Rebobinadora 2': 16500,
+    'Rebobinadora 3': 16500, 'Rebobinadora (T) 4': 16500,
+    'Rebobinadora KM': 16500,
+    'Troqueladora 1': 16500, 'Troqueladora 2': 16500,
+    'Troqueladora 3': 16500, 'Troqueladora Aut 4': 16500,
+    'Troqueladora Plana': 16500, 'Plegadora': 16500,
+}
+TROT_NAMES = ['Troqueladora 1', 'Troqueladora 2', 'Troqueladora 3', 'Troqueladora Aut 4']
+REB_NAMES = ['Rebobinadora 1', 'Rebobinadora 2', 'Rebobinadora 3', 'Rebobinadora (T) 4', 'Rebobinadora KM']
+
+# Amortiguadores y promesas por familia (dias habiles)
+FAMILIAS_AMORT = {
+    'F1': 2, 'F2': 2, 'F3': 8, 'F4': 1, 'F5': 3, 'F6': 3, 'F7': 4, 'F8': 3,
+    'F9': 5, 'F10': 4, 'F11': 5, 'F12': 5, 'F13': 3, 'F14': 3, 'F15': 4,
+    'F16': 3, 'F17': 8, 'F18': 8
+}
+FAMILIAS_PROMESA = {
+    'F1': 5, 'F2': 4, 'F3': 16, 'F4': 2, 'F5': 7, 'F6': 6, 'F7': 8, 'F8': 3,
+    'F9': 10, 'F10': 9, 'F11': 11, 'F12': 5, 'F13': 7, 'F14': 6, 'F15': 8,
+    'F16': 3, 'F17': 16, 'F18': 16
+}
+
+ETAPAS_REBOBINADO = {'RM4 - Reboninado', 'En cola Rebobinadora 1', 'En cola Rebobinadora',
+                     'Rebobinando', 'Cola rebobinado'}
+ETAPAS_TROQUELADO = {'En cola Troqueladora 4', 'En cola Troqueladora', 'Troquelando'}
+ETAPAS_IMPRESION = {'Preparacion', 'En cola impresión NP1', 'Impresion',
+                    'En cola impresion NP1', 'En cola impresión NP2', 'En cola impresión Kromia'}
+ETAPAS_IMP_STD = {'Preparacion', 'En cola impresión NP1', 'Impresion', 'En cola impresion NP1'}
+ETAPAS_IMP_SET = {'Preparacion', 'En cola impresión NP1', 'Impresion', 'En cola impresion NP1',
+                  'En cola impresión NP2', 'En cola impresión Kromia'}
+
+
+def get_maquinas_reales(proceso):
+    """Devuelve lista de maquinas reales para una orden segun su proceso (texto crudo
+    de Centro de Proceso, puede contener varios valores separados por '|##|')."""
+    maquinas = []
+    p = proceso.upper()
+    if 'NILPETER 1' in p: maquinas.append('NP1')
+    if 'NILPETER 2' in p: maquinas.append('NP2')
+    if 'KROMIA' in p: maquinas.append('Kromia')
+    if 'REBOBINADORA' in p and 'MOTEX' not in p:
+        maquinas.append('REBOBINADORA_BALANCEAR')
+    if 'TROQUELADORA PLANA' in p: maquinas.append('Troqueladora Plana')
+    if 'PLEGADORA' in p: maquinas.append('Plegadora')
+    return maquinas
+
+
+def get_tipo(ref):
+    r = str(ref).strip().upper()
+    if r.startswith('BL'): return 'Blanca'
+    if r.startswith('IC') or r.startswith('IS'): return 'Impresa'
+    if r.startswith('FD'): return 'Fondo'
+    return 'Otro'
+
+
+def get_color_toc(fecha_creacion, fecha_entrega, today):
+    if pd.isna(fecha_entrega):
+        return 'gris'
+    if today.date() > fecha_entrega.date():
+        return 'negro'
+    if pd.isna(fecha_creacion):
+        return 'rojo'
+    duracion = (fecha_entrega - fecha_creacion).days
+    if duracion <= 0:
+        return 'rojo'
+    consumido = (today - fecha_creacion).days
+    pct = consumido / duracion
+    if pct <= 0.50:
+        return 'azul'
+    elif pct <= 0.6667:
+        return 'verde'
+    elif pct <= 0.8333:
+        return 'amarillo'
+    else:
+        return 'rojo'
+
+
+def sumar_dias_lab(fecha_ini, dias):
+    from datetime import timedelta
+    f = fecha_ini
+    d = 0
+    while d < int(dias):
+        f += timedelta(days=1)
+        if f.weekday() != 6:
+            d += 1
+    return f
+
+
+def asignar_maquina(row):
+    """Determina la maquina 'display' de una orden: si esta en etapa de rebobinado
+    o troquelado se reasigna a esa estacion; si no, se usa la primera maquina
+    listada en Centro de Proceso (separador '|##|' de la API de Vtiger)."""
+    etapa = str(row['etapa']).strip()
+    proceso = str(row['maquina_raw']).strip()
+    primera = proceso.split('|##|')[0].strip()
+    if etapa in ETAPAS_REBOBINADO or 'RM4' in etapa.upper() or 'REBOB' in etapa.upper():
+        return 'Rebobinadora'
+    if etapa in ETAPAS_TROQUELADO or 'TROQUELAD' in etapa.upper():
+        return 'Troqueladora Rotativa 1'
+    return primera
+
 def _auth():
     return (VTIGER_USER, VTIGER_KEY)
 
@@ -200,8 +313,10 @@ def fetch_and_process():
     df = pd.DataFrame(rows)
     df['fecha_entrega'] = pd.to_datetime(df['fecha_entrega_raw'], errors='coerce')
     df['fecha_creacion'] = pd.to_datetime(df['fecha_creacion_raw'], format='%d-%m-%Y %I:%M %p', errors='coerce')
-    # Vtiger API devuelve multi-picklist con separador '|##|' (no coma como en el Excel exportado)
-    df['maquina'] = df['maquina_raw'].astype(str).str.split(r'\|##\|').str[0].str.strip()
+    df['mts'] = df['mts_lineales']
+    # Asignacion de maquina: usa etapa (rebobinado/troquelado) + primera maquina
+    # listada en Centro de Proceso como fallback (separador '|##|' de la API)
+    df['maquina'] = df.apply(asignar_maquina, axis=1)
 
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
@@ -214,29 +329,32 @@ def fetch_and_process():
     incumplidas = df[df['fecha_entrega'] < today]
 
     # Agrupar incumplidas por etapa (estatus) con clientes y tipo
-    inc_etapas = {}
+    # (tipo se deriva de la referencia, igual que process_excel, para consistencia
+    # entre el flujo manual y el automatico)
+    inc_etapas_raw = {}
     for etapa, grupo in incumplidas.groupby('etapa'):
-        inc_etapas[etapa] = {
+        inc_etapas_raw[etapa] = {
             'total': len(grupo),
             'ordenes': [
-                {'cliente': row['organizacion'], 'tipo': row['tipo']}
+                {'cliente': row['organizacion'], 'tipo': get_tipo(row['referencia']), 'op': row['op_number']}
                 for _, row in grupo.iterrows()
             ]
         }
+    inc_etapas = dict(sorted(inc_etapas_raw.items(), key=lambda x: x[1]['total'], reverse=True))
 
     etapas_unicas = sorted(incumplidas['etapa'].dropna().unique().tolist())
 
-    inc_detalle = [
+    inc_detalle = sorted([
         {
             'cliente': row['organizacion'],
             'referencia': row['referencia'],
             'op': row['op_number'],
-            'tipo': row['tipo'],
+            'tipo': get_tipo(row['referencia']),
             'etapa': row['etapa'],
             'fecha_entrega': row['fecha_entrega'].strftime('%d/%m/%Y') if pd.notna(row['fecha_entrega']) else '',
         }
         for _, row in incumplidas.iterrows()
-    ]
+    ], key=lambda x: x['fecha_entrega'])
 
     maquinas = sorted(df['maquina'].dropna().unique().tolist())
     dias = pd.date_range(lun, vie, freq='B')
@@ -252,6 +370,7 @@ def fetch_and_process():
             pivot[m][d] = n
             totales_dia[d] += n
 
+    dia_max_nombre, dia_max_val, dia_max_fecha = '', 0, ''
     total_semana = sum(totales_dia.values())
     inc_maq = incumplidas['maquina'].value_counts().to_dict()
     if totales_dia:
@@ -260,14 +379,230 @@ def fetch_and_process():
         dia_max_nombre = dias_nombre[dia_max_idx] if dia_max_idx < len(dias_nombre) else ''
         dia_max_val = totales_dia[dia_max_key]
         dia_max_fecha = dias_label[dia_max_idx] if dia_max_idx < len(dias_label) else ''
-    else:
-        dia_max_nombre, dia_max_val, dia_max_fecha = '', 0, ''
+
+    # ==================== LOGICA TOC (Teoria de Restricciones) ====================
+    # Portada desde process_excel() para que /dia, /tambor, /cuellos y /capacidad
+    # funcionen igual con datos de Vtiger que con el Excel manual.
+
+    fechas_disponibles = sorted(df['fecha_entrega'].dropna().dt.strftime('%Y-%m-%d').unique().tolist())
+
+    # --- Todas las ordenes (para selector dinamico de /dia) ---
+    todas_ordenes = []
+    for _, row in df.iterrows():
+        fe = row['fecha_entrega']
+        if pd.isna(fe):
+            continue
+        fc = row['fecha_creacion']
+        color_toc = get_color_toc(fc, fe, today)
+        fam_ord = str(row['familia']).strip()
+        dias_p = FAMILIAS_PROMESA.get(fam_ord, 0)
+        fecha_std = ''
+        if pd.notna(fc) and dias_p > 0:
+            _f, _d = fc, 0
+            while _d < dias_p:
+                _f += pd.Timedelta(days=1)
+                if _f.weekday() != 6: _d += 1
+            fecha_std = _f.strftime('%Y-%m-%d')
+        todas_ordenes.append({
+            'fecha': fe.strftime('%Y-%m-%d'),
+            'fecha_entrega': fe.strftime('%d/%m/%Y'),
+            'op': str(row['op_number']),
+            'cliente': str(row['organizacion']),
+            'referencia': str(row['referencia']),
+            'maquina': str(row['maquina']),
+            'etapa': str(row['etapa']).strip(),
+            'tipo': get_tipo(row['referencia']),
+            'mts': float(row['mts']),
+            'familia': fam_ord,
+            'color_toc': color_toc,
+            'fecha_std': fecha_std,
+            'promesa_dias': dias_p,
+            'fecha_creacion': fc.strftime('%d/%m/%Y') if pd.notna(fc) else '',
+        })
+
+    # --- Capacidad RRC (Nilpeter 1/2, Kromia) ---
+    maquinas_rrc = ['Nilpeter 1', 'Nilpeter 2', 'Kromia']
+    capacidad_data = {}
+    for m in maquinas_rrc:
+        grp = df[df['maquina'] == m]
+        por_fecha = grp.groupby(grp['fecha_entrega'].dt.strftime('%Y-%m-%d'))['mts'].sum()
+        capacidad_data[m] = {
+            'capacidad_dia': CAPACIDAD[m],
+            'por_fecha': {k: round(float(v), 1) for k, v in por_fecha.items()},
+        }
+
+    # --- Cuellos de botella (carga por maquina real, con balanceo) ---
+    carga_maq = {m: {'mts': 0, 'ordenes': []} for m in MAQUINAS_CAP}
+    for _, row in df.iterrows():
+        proceso = str(row['maquina_raw']).strip()
+        etapa_ord = str(row['etapa']).strip()
+        mts_ord = float(row['mts'])
+        fe_ord = row['fecha_entrega']
+        op_ord = str(row['op_number'])
+        cli_ord = str(row['organizacion'])
+        color_ord = get_color_toc(row['fecha_creacion'], fe_ord, today)
+        maquinas_ord = get_maquinas_reales(proceso)
+
+        en_impresora = any(m in ['NP1', 'NP2', 'Kromia'] for m in maquinas_ord)
+        if en_impresora and etapa_ord not in ETAPAS_IMPRESION:
+            maquinas_ord = [m for m in maquinas_ord if m not in ['NP1', 'NP2', 'Kromia']]
+
+        maquinas_final = []
+        for m in maquinas_ord:
+            if m == 'REBOBINADORA_BALANCEAR':
+                min_maq = min(REB_NAMES, key=lambda x: carga_maq[x]['mts'])
+                maquinas_final.append(min_maq)
+            else:
+                maquinas_final.append(m)
+
+        if 'TROQUELADORA ROTATIVA' in proceso.upper():
+            min_trot = min(TROT_NAMES, key=lambda x: carga_maq[x]['mts'])
+            maquinas_final.append(min_trot)
+
+        for m in maquinas_final:
+            if m in carga_maq:
+                carga_maq[m]['mts'] += mts_ord
+                carga_maq[m]['ordenes'].append({
+                    'op': op_ord, 'cliente': cli_ord, 'mts': mts_ord,
+                    'fecha': fe_ord.strftime('%d/%m/%Y') if pd.notna(fe_ord) else '',
+                    'color': color_ord, 'tipo': get_tipo(row['referencia']), 'etapa': etapa_ord,
+                })
+
+    cuellos = {}
+    for m, info in carga_maq.items():
+        cap = MAQUINAS_CAP[m]
+        mts_total = info['mts']
+        dias_trabajo = round(mts_total / cap, 1) if cap > 0 else 0
+        pct_cap = round(mts_total / (cap * 20) * 100, 1)
+        fecha_prom = sumar_dias_lab(today, dias_trabajo)
+        carga_por_fecha = {}
+        ordenes_sorted = sorted(info['ordenes'], key=lambda x: x['fecha'])
+        for o in ordenes_sorted:
+            f = o['fecha']
+            if f not in carga_por_fecha:
+                carga_por_fecha[f] = {'mts': 0, 'ordenes': 0}
+            carga_por_fecha[f]['mts'] += o['mts']
+            carga_por_fecha[f]['ordenes'] += 1
+        cuellos[m] = {
+            'capacidad_dia': cap, 'mts_total': round(mts_total), 'dias_trabajo': dias_trabajo,
+            'pct_cap': pct_cap, 'ordenes': ordenes_sorted, 'es_cuello': dias_trabajo > 10,
+            'fecha_prometida': fecha_prom.strftime('%d/%m/%Y'), 'carga_por_fecha': carga_por_fecha,
+        }
+
+    # --- Datos simulacion tiempos estandar ---
+    std_data = {m: {} for m in maquinas_rrc}
+    for o in todas_ordenes:
+        if o['maquina'] in maquinas_rrc and o.get('fecha_std') and o['etapa'] in ETAPAS_IMP_STD:
+            f = o['fecha_std']
+            std_data[o['maquina']][f] = std_data[o['maquina']].get(f, 0) + o['mts']
+    fechas_std = sorted(set(f for m in maquinas_rrc for f in std_data[m].keys()))
+
+    fechas_rrc = sorted(set(f for m in maquinas_rrc for f in capacidad_data[m]['por_fecha'].keys()))
+
+    rrc_semana = {}
+    for m in maquinas_rrc:
+        rrc_semana[m] = {'capacidad': CAPACIDAD[m], 'por_dia': {}}
+        for d in dias_str:
+            planeado = capacidad_data[m]['por_fecha'].get(d, 0)
+            cap = CAPACIDAD[m]
+            pct = round(planeado / cap * 100, 1) if cap > 0 else 0
+            rrc_semana[m]['por_dia'][d] = {
+                'planeado': planeado, 'capacidad': cap, 'pct': pct,
+                'estado': 'ok' if pct <= 100 else 'sobrecarga',
+            }
+
+    # --- Tambor General / urgentes ---
+    prioridad_map = {}
+    try:
+        with open('data_store/liberacion.json', encoding='utf-8') as f:
+            _lib = json.load(f)
+            prioridad_map = _lib.get('prioridad_map', {})
+    except Exception:
+        pass
+
+    urgentes = []
+    todas_tambor = []
+    for _, row in df.sort_values('fecha_entrega').iterrows():
+        fe = row['fecha_entrega']
+        fc_ord = row['fecha_creacion']
+        color_toc = get_color_toc(fc_ord, fe, today)
+        etapa_str = str(row['etapa']).strip()
+        if pd.notna(fe) and pd.notna(fc_ord):
+            dur = (fe - fc_ord).days
+            pct_buf = round((today - fc_ord).days / dur * 100, 1) if dur > 0 else 0
+        else:
+            pct_buf = 0
+        op_key = str(row['op_number']).strip().rstrip('.0')
+        prio_info = prioridad_map.get(op_key, {})
+        pct_prio = prio_info.get('pct', '') if prio_info else ''
+        tprod = row.get('tiempo_prod', '')
+
+        ord_data = {
+            'op': str(row['op_number']), 'cliente': str(row['organizacion']),
+            'referencia': str(row['referencia']), 'maquina': str(row['maquina']),
+            'etapa': etapa_str, 'tipo': get_tipo(row['referencia']),
+            'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
+            'fecha_entrega_raw': fe.strftime('%Y-%m-%d') if pd.notna(fe) else '',
+            'fecha_creacion': fc_ord.strftime('%d/%m/%Y') if pd.notna(fc_ord) else '',
+            'dias_ofrecidos': int((fe - fc_ord).days) if pd.notna(fe) and pd.notna(fc_ord) else 0,
+            'color_toc': color_toc, 'pct_prioridad': pct_prio, 'mts': float(row['mts']),
+            'pct_buffer': pct_buf,
+            'en_impresion': etapa_str in ETAPAS_IMP_STD,
+            'tiempo_produccion': str(tprod).strip() if tprod and str(tprod).strip() else '—',
+        }
+        todas_tambor.append(ord_data)
+        if pd.notna(fe) and fe <= today + pd.Timedelta(days=7):
+            urgentes.append(ord_data)
+
+    # --- Diagnostico de atraso (Nilpeter 1/2, Kromia) ---
+    horas_nom, efic_nom, vel_nom = 22.75, 0.50, 35
+    mins_turno_nom = horas_nom * 60 / 3
+    mins_prod_nom = mins_turno_nom * efic_nom
+    cap_turno_nom = round(mins_prod_nom * vel_nom)
+
+    diagnostico = {}
+    for mq in ['Nilpeter 1', 'Nilpeter 2', 'Kromia']:
+        grp = df[(df['maquina'] == mq) & (df['etapa'].isin(ETAPAS_IMP_SET))]
+        atras = grp[grp['fecha_entrega'] < today]
+        pend = grp[grp['fecha_entrega'] >= today]
+        mts_a = round(float(atras['mts'].sum()))
+        mts_p = round(float(pend['mts'].sum()))
+        mts_t = mts_a + mts_p
+        turnos_atras = round(mts_a / cap_turno_nom, 1) if cap_turno_nom > 0 else 0
+        planes = []
+        for dias_rec in [3, 5, 7, 10]:
+            t_disp = dias_rec * 3
+            mpt = round(mts_t / t_disp) if t_disp > 0 else 0
+            vr = round(mpt / mins_prod_nom, 1) if mins_prod_nom > 0 else vel_nom
+            er = round(mpt / (vel_nom * mins_turno_nom) * 100, 1) if vel_nom * mins_turno_nom > 0 else 0
+            vc = round(min(vel_nom * 1.2, vr), 1)
+            ec = round(mpt / (vc * mins_turno_nom) * 100, 1) if vc * mins_turno_nom > 0 else 0
+            planes.append({'dias': dias_rec, 'turnos': t_disp, 'mts_por_turno': mpt,
+                           'vel_req': vr, 'efic_req': er, 'vel_comb': vc, 'efic_comb': ec})
+        diagnostico[mq] = {
+            'mts_atrasados': mts_a, 'n_atrasadas': len(atras),
+            'mts_pendientes': mts_p, 'n_pendientes': len(pend),
+            'mts_total': mts_t, 'turnos_atrasados': turnos_atras,
+            'dias_atrasados': round(turnos_atras / 3, 1),
+            'cap_turno': cap_turno_nom, 'planes': planes,
+        }
+
+    colores_resumen = {
+        'azul': sum(1 for o in todas_ordenes if o['color_toc'] == 'azul'),
+        'verde': sum(1 for o in todas_ordenes if o['color_toc'] == 'verde'),
+        'amarillo': sum(1 for o in todas_ordenes if o['color_toc'] == 'amarillo'),
+        'rojo': sum(1 for o in todas_ordenes if o['color_toc'] == 'rojo'),
+        'negro': sum(1 for o in todas_ordenes if o['color_toc'] == 'negro'),
+    }
+    dia_total = len(df[df['fecha_entrega'].dt.date == today.date()])
 
     result = {
         'updated_at': now_bogota.strftime('%d/%m/%Y %H:%M'),
         'source': 'vtiger_api_github_actions',
         'today': today.strftime('%Y-%m-%d'),
         'hoy': today.strftime('%Y-%m-%d'),
+        'hoy_label': today.strftime('%d/%m/%Y'),
+        'hoy_nombre': ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'][today.weekday()],
         'lun': lun.strftime('%d/%m'), 'vie': vie.strftime('%d/%m'),
         'maquinas': maquinas, 'dias_str': dias_str,
         'dias_label': dias_label, 'dias_nombre': dias_nombre,
@@ -278,6 +613,20 @@ def fetch_and_process():
         'inc_detalle': inc_detalle,
         'dia_max_nombre': dia_max_nombre,
         'dia_max_val': dia_max_val, 'dia_max_fecha': dia_max_fecha,
+        # --- campos TOC para /dia, /tambor, /cuellos, /capacidad ---
+        'urgentes': urgentes, 'urgentes_total': len(urgentes),
+        'todas_tambor': todas_tambor,
+        'colores_resumen': colores_resumen,
+        'dia_total': dia_total, 'dia_por_maquina': {},
+        'fechas_disponibles': fechas_disponibles,
+        'todas_ordenes': todas_ordenes,
+        'maquinas_rrc': maquinas_rrc,
+        'std_data': std_data, 'fechas_std': fechas_std,
+        'diagnostico': diagnostico,
+        'cuellos': cuellos,
+        'capacidad_data': capacidad_data,
+        'fechas_rrc': fechas_rrc,
+        'rrc_semana': rrc_semana,
     }
 
     os.makedirs('data_store', exist_ok=True)
