@@ -2,7 +2,7 @@ name: Sync Vtiger Data
 
 on:
   schedule:
-    - cron: '0 */8 * * *'  # Cada 2 horas
+    - cron: '5 12,17,21 * * *'  # Cada 2 horas
   workflow_dispatch:  # Permite ejecucion manual
 
 jobs:
