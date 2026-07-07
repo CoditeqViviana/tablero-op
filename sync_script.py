@@ -268,20 +268,6 @@ def fetch_and_process():
     for ref in op_groups:
         op_groups[ref].sort(key=_op_num)
 
-    # === DIAGNOSTICO TEMPORAL: rastrear por que 'incumplidas' no cuadra ===
-    # Se puede borrar este bloque una vez identificada la causa.
-    _hoy_iso = datetime.now(BOGOTA).date().isoformat()
-    _candidatas = [p for p in producciones if str(p.get(PROD['fecha_prometida'], ''))[:10] < _hoy_iso]
-    print(f"[DEBUG] Producciones filtradas con fecha_prometida < hoy ({_hoy_iso}): {len(_candidatas)}")
-    for p in _candidatas[:40]:
-        ref = p.get(PROD['referencia'], '').strip()
-        ops_ref = op_groups.get(ref, [])
-        print(f"[DEBUG] ref={ref!r} | fecha_prometida={p.get(PROD['fecha_prometida'])!r} "
-              f"| en_op_groups={bool(ops_ref)} | n_ops_con_ese_ref={len(ops_ref)} "
-              f"| op_numbers={[o.get(OP['number'],'') for o in ops_ref]} "
-              f"| procesos_de_esas_ops={[o.get(OP['proceso'],'') for o in ops_ref]}")
-    print(f"[DEBUG] === FIN DIAGNOSTICO ===")
-
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
     # 1:1, no muchos a muchos). Cuando una referencia se repite (reordenes), se
     # emparejan en el mismo orden cronologico en que fueron creadas ambos lados.
