@@ -233,10 +233,13 @@ def fetch_and_process():
         prod_groups[ref].sort(key=lambda p: str(p.get(PROD['fecha_creacion'], '')))
     print(f"[sync] Referencias unicas: {len(prod_groups)}")
 
-    # 2. Ordenes con filtro fecha
-    print("[sync] Consultando ordenes (fecha > 2024-12-31)...")
+    # 2. Ordenes SIN filtro de fecha propia: el campo que gobierna el tablero es
+    # Fecha Entrega Prometida (de la Produccion, ya filtrada arriba), no la fecha
+    # interna de la OP. Filtrar aqui por esa fecha podria excluir injustamente
+    # OPs cuya fecha interna no coincide con el compromiso real al cliente.
+    print("[sync] Consultando ordenes (sin filtro de fecha propia de la OP)...")
     ordenes = vtiger_query(
-        "SELECT * FROM vtcmordendeproduccion WHERE cf_vtcmordendeproduccion_fechadeentrega > '2024-12-31'"
+        "SELECT * FROM vtcmordendeproduccion"
     )
     print(f"[sync] Ordenes: {len(ordenes)}")
 
