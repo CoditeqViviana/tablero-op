@@ -311,7 +311,12 @@ def fetch_and_process():
 
     # 4. Procesar
     df = pd.DataFrame(rows)
-    df['fecha_entrega'] = pd.to_datetime(df['fecha_entrega_raw'], errors='coerce')
+    # 'fecha_entrega' es la fuente unica de verdad para TODO el tablero (panorama
+    # semanal, colores TOC, capacidad RRC, cuellos de botella, tambor, diagnostico
+    # e incumplidas): se toma de Fecha Entrega Prometida (modulo Produccion), NO
+    # de la Fecha de Entrega interna de la OP (que es de planeacion de planta y
+    # puede no reflejar el compromiso real con el cliente).
+    df['fecha_entrega'] = pd.to_datetime(df['fecha_prometida'], errors='coerce')
     df['fecha_creacion'] = pd.to_datetime(df['fecha_creacion_raw'], format='%d-%m-%Y %I:%M %p', errors='coerce')
     df['mts'] = df['mts_lineales']
     # Asignacion de maquina: usa etapa (rebobinado/troquelado) + primera maquina
@@ -344,6 +349,8 @@ def fetch_and_process():
 
     etapas_unicas = sorted(incumplidas['etapa'].dropna().unique().tolist())
 
+    # El campo mostrado como 'fecha_entrega' en el detalle de incumplidas es la
+    # Fecha Entrega Prometida (Produccion) - la fecha que realmente se incumplio
     inc_detalle = sorted([
         {
             'cliente': row['organizacion'],
@@ -563,6 +570,9 @@ def fetch_and_process():
     diagnostico = {}
     for mq in ['Nilpeter 1', 'Nilpeter 2', 'Kromia']:
         grp = df[(df['maquina'] == mq) & (df['etapa'].isin(ETAPAS_IMP_SET))]
+        # Atrasada/pendiente se define contra la Fecha Entrega Prometida
+        # (Produccion), igual que Ordenes Incumplidas - no contra la fecha
+        # de entrega interna de la OP.
         atras = grp[grp['fecha_entrega'] < today]
         pend = grp[grp['fecha_entrega'] >= today]
         mts_a = round(float(atras['mts'].sum()))
