@@ -2,7 +2,7 @@ name: Sync Vtiger Data
 
 on:
   schedule:
-    - cron: '5 12,17,21 * * *'  # Cada 2 horas
+    - cron: '5 11,17,20 * * *'  # 6:05am / 12:05pm / 3:05pm hora Colombia
   workflow_dispatch:  # Permite ejecucion manual
 
 jobs:
@@ -31,4 +31,5 @@ jobs:
           git config user.email "actions@github.com"
           git add data_store/latest.json
           git diff --staged --quiet || git commit -m "Auto-sync Vtiger $(date +'%Y-%m-%d %H:%M')"
+          git pull --rebase -X ours origin main
           git push
