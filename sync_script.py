@@ -152,6 +152,30 @@ def vtiger_query(query_str, page_size=100):
         offset += page_size
     return all_records
 
+_ID_CRUDO_RE = re.compile(r'^\d+x\d+$')
+_account_name_cache = {}
+
+def resolve_account_name(crmid):
+    """La API de Vtiger a veces no resuelve el campo Organizacion (referencia a
+    Cuenta) y devuelve el ID interno crudo (formato 'moduloxid') en vez del
+    nombre. Esta funcion lo resuelve llamando al endpoint retrieve, con cache
+    para no repetir llamadas cuando varias Producciones comparten cliente."""
+    if crmid in _account_name_cache:
+        return _account_name_cache[crmid]
+    name = crmid  # fallback si la resolucion falla
+    try:
+        r = requests.get(f"{API_BASE}/retrieve", auth=_auth(),
+                        params={'id': crmid}, timeout=30, verify=False)
+        data = r.json()
+        if data.get('success'):
+            name = data.get('result', {}).get('accountname', '') or crmid
+        else:
+            print(f"[vtiger] No se pudo resolver cuenta {crmid}: {data.get('error')}")
+    except Exception as e:
+        print(f"[vtiger] Excepcion resolviendo cuenta {crmid}: {e}")
+    _account_name_cache[crmid] = name
+    return name
+
 PROD = {
     'referencia': 'fld_vtcmproduccionname',
     'organizacion': 'cf_vtcmproduccion_organizacion',
@@ -220,6 +244,21 @@ def fetch_and_process():
                     and p.get(PROD['entrega_prod'], '') not in ('Habilitado', '1')]
     print(f"[sync] Producciones filtradas: {len(producciones)}")
 
+    # La API de Vtiger a veces no resuelve el campo Organizacion y devuelve el
+    # ID interno crudo (ej. '3x6090') en vez del nombre de la cuenta. Se
+    # detecta y resuelve aqui mismo, mutando el dict en su lugar para que todo
+    # el resto del pipeline (agrupacion, filas, tambor, etc.) reciba siempre
+    # el nombre ya resuelto sin cambios adicionales.
+    _n_resueltos = 0
+    for p in producciones:
+        raw_org = str(p.get(PROD['organizacion'], ''))
+        if _ID_CRUDO_RE.match(raw_org):
+            p[PROD['organizacion']] = resolve_account_name(raw_org)
+            _n_resueltos += 1
+    if _n_resueltos:
+        print(f"[sync] {_n_resueltos} Organizaciones resueltas manualmente "
+              f"via retrieve ({len(_account_name_cache)} cuentas unicas consultadas)")
+
     # Indexar por REFERENCIA (nombre): agrupamos TODAS las producciones que comparten
     # una misma referencia (ej. reordenes del mismo diseno de etiqueta), sin descartar
     # ninguna. Cada grupo se ordena por fecha de creacion para poder emparejar 1 a 1.
@@ -267,30 +306,6 @@ def fetch_and_process():
             op_groups[ref].append(op)
     for ref in op_groups:
         op_groups[ref].sort(key=_op_num)
-
-    # === DIAGNOSTICO TEMPORAL: resolver un ID crudo via endpoint retrieve ===
-    # Se puede borrar este bloque una vez identificado el campo correcto.
-    _ids_crudos_vistos = set()
-    for ref, prods in prod_groups.items():
-        for p in prods:
-            raw_org = str(p.get(PROD['organizacion'], ''))
-            if re.match(r'^\d+x\d+$', raw_org):
-                _ids_crudos_vistos.add(raw_org)
-    print(f"[DEBUG-RETRIEVE] IDs crudos sin resolver encontrados en esta corrida: {len(_ids_crudos_vistos)}")
-    for crmid in list(_ids_crudos_vistos)[:2]:
-        try:
-            r = requests.get(f"{API_BASE}/retrieve", auth=_auth(), params={'id': crmid}, timeout=30, verify=False)
-            data = r.json()
-            print(f"[DEBUG-RETRIEVE] retrieve({crmid}) -> success={data.get('success')}")
-            if data.get('success'):
-                result = data.get('result', {})
-                print(f"[DEBUG-RETRIEVE] Campos disponibles: {list(result.keys())}")
-                print(f"[DEBUG-RETRIEVE] Registro completo: {result}")
-            else:
-                print(f"[DEBUG-RETRIEVE] Error: {data.get('error')}")
-        except Exception as e:
-            print(f"[DEBUG-RETRIEVE] Excepcion consultando {crmid}: {e}")
-    print(f"[DEBUG-RETRIEVE] === FIN DIAGNOSTICO ===")
 
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
     # 1:1, no muchos a muchos). Cuando una referencia se repite (reordenes), se
