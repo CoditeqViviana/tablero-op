@@ -1,5 +1,5 @@
 {
-  "updated_at": "10/07/2026 07:26",
+  "updated_at": "10/07/2026 08:21",
   "source": "vtiger_api_github_actions",
   "today": "2026-07-10",
   "hoy": "2026-07-10",
@@ -185,24 +185,6 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "96919",
-      "cliente": "3x261680",
-      "referencia": "IC-TTT-144X80-R2500-P-1F-C30-ETQ-GUDY",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "13/07/2026",
-      "fecha_entrega_raw": "2026-07-13",
-      "fecha_creacion": "26/06/2026",
-      "dias_ofrecidos": 16,
-      "color_toc": "amarillo",
-      "pct_prioridad": "",
-      "mts": 27242.0,
-      "pct_buffer": 81.2,
-      "en_impresion": false,
-      "tiempo_produccion": "Mayor al Standar"
-    },
-    {
       "op": "104351",
       "cliente": "3x160156",
       "referencia": "IC-ESM-38X130-R3100-S-1F-C30-BOLDENONA-50mg-50ml-V07",
@@ -275,10 +257,10 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "96087",
-      "cliente": "3x1364547",
-      "referencia": "BL-PTM-50X85-R1000-F-2F-C10",
-      "maquina": "Troqueladora Plana",
+      "op": "102565",
+      "cliente": "3x292274",
+      "referencia": "BL-TTT-050X025-R09940-M-02F-C30-DATA-BMC-C",
+      "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "14/07/2026",
@@ -287,7 +269,7 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 687.0,
+      "mts": 7167.0,
       "pct_buffer": 33.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -365,10 +347,10 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
-      "op": "102565",
-      "cliente": "3x292274",
-      "referencia": "BL-TTT-050X025-R09940-M-02F-C30-DATA-BMC-C",
-      "maquina": "Troqueladora Rotativa 1",
+      "op": "96087",
+      "cliente": "3x1364547",
+      "referencia": "BL-PTM-50X85-R1000-F-2F-C10",
+      "maquina": "Troqueladora Plana",
       "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "14/07/2026",
@@ -377,9 +359,63 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 7167.0,
+      "mts": 687.0,
       "pct_buffer": 33.3,
       "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "86149",
+      "cliente": "3x6648",
+      "referencia": "BL-TTT-070X080-R01747-M-01F-C30",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "01/07/2026",
+      "dias_ofrecidos": 12,
+      "color_toc": "verde",
+      "pct_prioridad": "",
+      "mts": 7100.0,
+      "pct_buffer": 66.7,
+      "en_impresion": true,
+      "tiempo_produccion": "Mayor al Standar"
+    },
+    {
+      "op": "104293",
+      "cliente": "3x6120",
+      "referencia": "IC-PPB-150X200-R500-M-1F-C15--LIMPI-DESINF-LAV-ALKOSTO-5L",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "30/06/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "amarillo",
+      "pct_prioridad": "69.36%",
+      "mts": 4120.0,
+      "pct_buffer": 69.2,
+      "en_impresion": false,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104291",
+      "cliente": "3x6120",
+      "referencia": "IC-PPB-150X200-R500-M-1F-C15-LIMPI-DESINF-F-ROJOS-ALKOSTO-5L",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "30/06/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "amarillo",
+      "pct_prioridad": "69.36%",
+      "mts": 2360.0,
+      "pct_buffer": 69.2,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -396,6 +432,42 @@
       "color_toc": "amarillo",
       "pct_prioridad": "69.36%",
       "mts": 1390.0,
+      "pct_buffer": 69.2,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104319",
+      "cliente": "3x160156",
+      "referencia": "IC-ESM-29X72-R5000-S-1F-C30-MAROPITANT-20mL-V4",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "30/06/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "amarillo",
+      "pct_prioridad": "69.36%",
+      "mts": 488.0,
+      "pct_buffer": 69.2,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104294",
+      "cliente": "3x6120",
+      "referencia": "IC-PPB-100X245-R500-M-1F-C15-LPS-CREOLINA-3000mL",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "30/06/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "amarillo",
+      "pct_prioridad": "69.36%",
+      "mts": 1062.0,
       "pct_buffer": 69.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -437,119 +509,29 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "86149",
-      "cliente": "3x6648",
-      "referencia": "BL-TTT-070X080-R01747-M-01F-C30",
-      "maquina": "Kromia",
+      "op": "104510",
+      "cliente": "3x6617",
+      "referencia": "BL-TTT-100X100-R01500-M-01F-C30",
+      "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
       "tipo": "Blanca",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "01/07/2026",
-      "dias_ofrecidos": 12,
-      "color_toc": "verde",
-      "pct_prioridad": "",
-      "mts": 7100.0,
-      "pct_buffer": 66.7,
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 6,
+      "color_toc": "azul",
+      "pct_prioridad": "-26.60%",
+      "mts": 24821.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
-      "tiempo_produccion": "Mayor al Standar"
+      "tiempo_produccion": "Standar"
     },
     {
-      "op": "104319",
-      "cliente": "3x160156",
-      "referencia": "IC-ESM-29X72-R5000-S-1F-C30-MAROPITANT-20mL-V4",
-      "maquina": "Nilpeter 1",
+      "op": "83885",
+      "cliente": "3x6617",
+      "referencia": "BL-TTT-100X080-R01750-M-01F-C30-BMC",
+      "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "30/06/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
-      "pct_prioridad": "69.36%",
-      "mts": 488.0,
-      "pct_buffer": 69.2,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "85179",
-      "cliente": "3x391893",
-      "referencia": "IC-PTM-50.8X482.6-R200-F-1F-C30-BAG TAG-GENER",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "30/06/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
-      "pct_prioridad": "",
-      "mts": 13708.0,
-      "pct_buffer": 69.2,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104294",
-      "cliente": "3x6120",
-      "referencia": "IC-PPB-100X245-R500-M-1F-C15-LPS-CREOLINA-3000mL",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "30/06/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
-      "pct_prioridad": "69.36%",
-      "mts": 1062.0,
-      "pct_buffer": 69.2,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104291",
-      "cliente": "3x6120",
-      "referencia": "IC-PPB-150X200-R500-M-1F-C15-LIMPI-DESINF-F-ROJOS-ALKOSTO-5L",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "30/06/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
-      "pct_prioridad": "69.36%",
-      "mts": 2360.0,
-      "pct_buffer": 69.2,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104293",
-      "cliente": "3x6120",
-      "referencia": "IC-PPB-150X200-R500-M-1F-C15--LIMPI-DESINF-LAV-ALKOSTO-5L",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "30/06/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
-      "pct_prioridad": "69.36%",
-      "mts": 4120.0,
-      "pct_buffer": 69.2,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "98890",
-      "cliente": "3x6154",
-      "referencia": "BL-TTT-50X45-R5000-M-2F-C30",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
       "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -557,17 +539,35 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 313.0,
+      "mts": 102.0,
+      "pct_buffer": 16.7,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "85497",
+      "cliente": "3x6125",
+      "referencia": "BL-TTT-100X100-R500-M-1F-C10",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Troquelado",
+      "tipo": "Blanca",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 6,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 1061.0,
       "pct_buffer": 16.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "90048",
-      "cliente": "3x6017",
-      "referencia": "BL-PPB-100X70-R2000-M-01F-C15",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
+      "op": "83819",
+      "cliente": "3x6617",
+      "referencia": "BL-TTT-032X025-R16050-M-03F-C30-BMC",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Troquelado",
       "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -575,7 +575,7 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 487.0,
+      "mts": 361.0,
       "pct_buffer": 16.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
@@ -599,29 +599,29 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104544",
-      "cliente": "3x178830",
-      "referencia": "PRUEBA-SUCROAL",
+      "op": "90048",
+      "cliente": "3x6017",
+      "referencia": "BL-PPB-100X70-R2000-M-01F-C15",
       "maquina": "Rebobinadora",
       "etapa": "RM4 - Reboninado",
-      "tipo": "Otro",
+      "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "09/07/2026",
-      "dias_ofrecidos": 5,
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 6,
       "color_toc": "azul",
-      "pct_prioridad": "-26.60%",
-      "mts": 80.0,
-      "pct_buffer": 0.0,
+      "pct_prioridad": "",
+      "mts": 487.0,
+      "pct_buffer": 16.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "83885",
-      "cliente": "3x6617",
-      "referencia": "BL-TTT-100X080-R01750-M-01F-C30-BMC",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
+      "op": "98890",
+      "cliente": "3x6154",
+      "referencia": "BL-TTT-50X45-R5000-M-2F-C30",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -629,43 +629,7 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 102.0,
-      "pct_buffer": 16.7,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104510",
-      "cliente": "3x6617",
-      "referencia": "BL-TTT-100X100-R01500-M-01F-C30",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 6,
-      "color_toc": "azul",
-      "pct_prioridad": "-26.60%",
-      "mts": 24821.0,
-      "pct_buffer": 16.7,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "83819",
-      "cliente": "3x6617",
-      "referencia": "BL-TTT-032X025-R16050-M-03F-C30-BMC",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Troquelado",
-      "tipo": "Blanca",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 6,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 361.0,
+      "mts": 313.0,
       "pct_buffer": 16.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
@@ -725,24 +689,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "84998",
-      "cliente": "3x7948",
-      "referencia": "BL-TTT-070X070-R02000-M-01F-C30-CIR",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Troquelado",
-      "tipo": "Blanca",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 6,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 752.0,
-      "pct_buffer": 16.7,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "83954",
       "cliente": "3x261544",
       "referencia": "BL-TTT-100X50-R12000-M-01F-C30",
@@ -775,6 +721,24 @@
       "pct_prioridad": "",
       "mts": 2839.0,
       "pct_buffer": 16.7,
+      "en_impresion": false,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104544",
+      "cliente": "3x178830",
+      "referencia": "PRUEBA-SUCROAL",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Otro",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 5,
+      "color_toc": "azul",
+      "pct_prioridad": "-26.60%",
+      "mts": 80.0,
+      "pct_buffer": 0.0,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -869,11 +833,11 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "88317",
-      "cliente": "3x7535",
-      "referencia": "BL-TTT-50X40-R3000-R-2F-C30",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "op": "84998",
+      "cliente": "3x7948",
+      "referencia": "BL-TTT-070X070-R02000-M-01F-C30-CIR",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Troquelado",
       "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -881,9 +845,9 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 400.0,
+      "mts": 752.0,
       "pct_buffer": 16.7,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -905,11 +869,11 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "85497",
-      "cliente": "3x6125",
-      "referencia": "BL-TTT-100X100-R500-M-1F-C10",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Troquelado",
+      "op": "88317",
+      "cliente": "3x7535",
+      "referencia": "BL-TTT-50X40-R3000-R-2F-C30",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -917,9 +881,9 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 1061.0,
+      "mts": 400.0,
       "pct_buffer": 16.7,
-      "en_impresion": false,
+      "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
     {
@@ -1031,9 +995,9 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104329",
+      "op": "104330",
       "cliente": "3x261620",
-      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-LABRUSCA-VTINTO",
+      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-LABRUSCA-VTINTO",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
@@ -1085,27 +1049,9 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104347",
-      "cliente": "3x1402001",
-      "referencia": "IC-ESM-55X160-R2000-S-1F-C30-OMEGA-3-GIMED-30CAP",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "01/07/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "verde",
-      "pct_prioridad": "36.70%",
-      "mts": 548.0,
-      "pct_buffer": 61.5,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104330",
+      "op": "104329",
       "cliente": "3x261620",
-      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-LABRUSCA-VTINTO",
+      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-LABRUSCA-VTINTO",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
@@ -1139,24 +1085,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104426",
-      "cliente": "3x178830",
-      "referencia": "MANTENIMIENTO-PLEGADORA JULIO",
-      "maquina": "Plegadora",
-      "etapa": "Preparacion",
-      "tipo": "Otro",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 8,
-      "color_toc": "azul",
-      "pct_prioridad": "-153.19%",
-      "mts": 10000.0,
-      "pct_buffer": 37.5,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "87753",
       "cliente": "3x6120",
       "referencia": "IC-P60-95X90-R1000-P-1F-C15-FRENTE-CONTRA-LIMP-DESINCRUS-1 LT",
@@ -1172,6 +1100,24 @@
       "mts": 2163.0,
       "pct_buffer": 61.5,
       "en_impresion": false,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104426",
+      "cliente": "3x178830",
+      "referencia": "MANTENIMIENTO-PLEGADORA JULIO",
+      "maquina": "Plegadora",
+      "etapa": "Preparacion",
+      "tipo": "Otro",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 8,
+      "color_toc": "azul",
+      "pct_prioridad": "-153.19%",
+      "mts": 10000.0,
+      "pct_buffer": 37.5,
+      "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
     {
@@ -1229,6 +1175,24 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
+      "op": "104347",
+      "cliente": "3x1402001",
+      "referencia": "IC-ESM-55X160-R2000-S-1F-C30-OMEGA-3-GIMED-30CAP",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "01/07/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "verde",
+      "pct_prioridad": "36.70%",
+      "mts": 548.0,
+      "pct_buffer": 61.5,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
       "op": "104391",
       "cliente": "3x1180126",
       "referencia": "IC-ESM-80X120-R500-S-1F-HH-MIEL-NATURAL-LOK500G",
@@ -1265,11 +1229,11 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104558",
-      "cliente": "3x292274",
-      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-NARANJA-1495C-PREP",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
+      "op": "103852",
+      "cliente": "3x224920",
+      "referencia": "FD-TTT-050X130-R02000-M-2F-C30-ROSA-243C-QUALA. - I9000317",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "En cola Troqueladora 1",
       "tipo": "Fondo",
       "fecha_entrega": "16/07/2026",
       "fecha_entrega_raw": "2026-07-16",
@@ -1277,9 +1241,9 @@
       "dias_ofrecidos": 8,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 2460.0,
+      "mts": 613.0,
       "pct_buffer": 25.0,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -1337,9 +1301,9 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "84093",
-      "cliente": "3x6648",
-      "referencia": "BL-TTT-090X065-R02000-M-01F-C30-SIN",
+      "op": "96604",
+      "cliente": "3x379655",
+      "referencia": "BL-TD-100X60-R150-F-1F-C10-PINTUCO",
       "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
       "tipo": "Blanca",
@@ -1349,7 +1313,7 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 11536.0,
+      "mts": 3434.0,
       "pct_buffer": 0.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -1391,9 +1355,9 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "96604",
-      "cliente": "3x379655",
-      "referencia": "BL-TD-100X60-R150-F-1F-C10-PINTUCO",
+      "op": "84093",
+      "cliente": "3x6648",
+      "referencia": "BL-TTT-090X065-R02000-M-01F-C30-SIN",
       "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
       "tipo": "Blanca",
@@ -1403,9 +1367,27 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 3434.0,
+      "mts": 11536.0,
       "pct_buffer": 0.0,
       "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "85215",
+      "cliente": "3x8161",
+      "referencia": "BL-TTT-150X200-R500-M-1F-C30-CROWN",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Blanca",
+      "fecha_entrega": "16/07/2026",
+      "fecha_entrega_raw": "2026-07-16",
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 6,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 2509.0,
+      "pct_buffer": 0.0,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -1427,11 +1409,11 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "103852",
-      "cliente": "3x224920",
-      "referencia": "FD-TTT-050X130-R02000-M-2F-C30-ROSA-243C-QUALA. - I9000317",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "En cola Troqueladora 1",
+      "op": "104558",
+      "cliente": "3x292274",
+      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-NARANJA-1495C-PREP",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
       "tipo": "Fondo",
       "fecha_entrega": "16/07/2026",
       "fecha_entrega_raw": "2026-07-16",
@@ -1439,9 +1421,9 @@
       "dias_ofrecidos": 8,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 613.0,
+      "mts": 2460.0,
       "pct_buffer": 25.0,
-      "en_impresion": false,
+      "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
     {
@@ -1931,7 +1913,7 @@
       "tiempo_produccion": "Standar"
     }
   ],
-  "urgentes_total": 100,
+  "urgentes_total": 99,
   "todas_tambor": [
     {
       "op": "104223",
@@ -1985,24 +1967,6 @@
       "mts": 635.0,
       "pct_buffer": 81.2,
       "en_impresion": true,
-      "tiempo_produccion": "Mayor al Standar"
-    },
-    {
-      "op": "96919",
-      "cliente": "3x261680",
-      "referencia": "IC-TTT-144X80-R2500-P-1F-C30-ETQ-GUDY",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "13/07/2026",
-      "fecha_entrega_raw": "2026-07-13",
-      "fecha_creacion": "26/06/2026",
-      "dias_ofrecidos": 16,
-      "color_toc": "amarillo",
-      "pct_prioridad": "",
-      "mts": 27242.0,
-      "pct_buffer": 81.2,
-      "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
     {
@@ -2078,10 +2042,10 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "96087",
-      "cliente": "3x1364547",
-      "referencia": "BL-PTM-50X85-R1000-F-2F-C10",
-      "maquina": "Troqueladora Plana",
+      "op": "102565",
+      "cliente": "3x292274",
+      "referencia": "BL-TTT-050X025-R09940-M-02F-C30-DATA-BMC-C",
+      "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "14/07/2026",
@@ -2090,7 +2054,7 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 687.0,
+      "mts": 7167.0,
       "pct_buffer": 33.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -2168,10 +2132,10 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
-      "op": "102565",
-      "cliente": "3x292274",
-      "referencia": "BL-TTT-050X025-R09940-M-02F-C30-DATA-BMC-C",
-      "maquina": "Troqueladora Rotativa 1",
+      "op": "96087",
+      "cliente": "3x1364547",
+      "referencia": "BL-PTM-50X85-R1000-F-2F-C10",
+      "maquina": "Troqueladora Plana",
       "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "14/07/2026",
@@ -2180,9 +2144,63 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 7167.0,
+      "mts": 687.0,
       "pct_buffer": 33.3,
       "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "86149",
+      "cliente": "3x6648",
+      "referencia": "BL-TTT-070X080-R01747-M-01F-C30",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "01/07/2026",
+      "dias_ofrecidos": 12,
+      "color_toc": "verde",
+      "pct_prioridad": "",
+      "mts": 7100.0,
+      "pct_buffer": 66.7,
+      "en_impresion": true,
+      "tiempo_produccion": "Mayor al Standar"
+    },
+    {
+      "op": "104293",
+      "cliente": "3x6120",
+      "referencia": "IC-PPB-150X200-R500-M-1F-C15--LIMPI-DESINF-LAV-ALKOSTO-5L",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "30/06/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "amarillo",
+      "pct_prioridad": "69.36%",
+      "mts": 4120.0,
+      "pct_buffer": 69.2,
+      "en_impresion": false,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104291",
+      "cliente": "3x6120",
+      "referencia": "IC-PPB-150X200-R500-M-1F-C15-LIMPI-DESINF-F-ROJOS-ALKOSTO-5L",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "30/06/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "amarillo",
+      "pct_prioridad": "69.36%",
+      "mts": 2360.0,
+      "pct_buffer": 69.2,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -2199,6 +2217,42 @@
       "color_toc": "amarillo",
       "pct_prioridad": "69.36%",
       "mts": 1390.0,
+      "pct_buffer": 69.2,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104319",
+      "cliente": "3x160156",
+      "referencia": "IC-ESM-29X72-R5000-S-1F-C30-MAROPITANT-20mL-V4",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "30/06/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "amarillo",
+      "pct_prioridad": "69.36%",
+      "mts": 488.0,
+      "pct_buffer": 69.2,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104294",
+      "cliente": "3x6120",
+      "referencia": "IC-PPB-100X245-R500-M-1F-C15-LPS-CREOLINA-3000mL",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "30/06/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "amarillo",
+      "pct_prioridad": "69.36%",
+      "mts": 1062.0,
       "pct_buffer": 69.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -2240,119 +2294,29 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "86149",
-      "cliente": "3x6648",
-      "referencia": "BL-TTT-070X080-R01747-M-01F-C30",
-      "maquina": "Kromia",
+      "op": "104510",
+      "cliente": "3x6617",
+      "referencia": "BL-TTT-100X100-R01500-M-01F-C30",
+      "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
       "tipo": "Blanca",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "01/07/2026",
-      "dias_ofrecidos": 12,
-      "color_toc": "verde",
-      "pct_prioridad": "",
-      "mts": 7100.0,
-      "pct_buffer": 66.7,
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 6,
+      "color_toc": "azul",
+      "pct_prioridad": "-26.60%",
+      "mts": 24821.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
-      "tiempo_produccion": "Mayor al Standar"
+      "tiempo_produccion": "Standar"
     },
     {
-      "op": "104319",
-      "cliente": "3x160156",
-      "referencia": "IC-ESM-29X72-R5000-S-1F-C30-MAROPITANT-20mL-V4",
-      "maquina": "Nilpeter 1",
+      "op": "83885",
+      "cliente": "3x6617",
+      "referencia": "BL-TTT-100X080-R01750-M-01F-C30-BMC",
+      "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "30/06/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
-      "pct_prioridad": "69.36%",
-      "mts": 488.0,
-      "pct_buffer": 69.2,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "85179",
-      "cliente": "3x391893",
-      "referencia": "IC-PTM-50.8X482.6-R200-F-1F-C30-BAG TAG-GENER",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "30/06/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
-      "pct_prioridad": "",
-      "mts": 13708.0,
-      "pct_buffer": 69.2,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104294",
-      "cliente": "3x6120",
-      "referencia": "IC-PPB-100X245-R500-M-1F-C15-LPS-CREOLINA-3000mL",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "30/06/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
-      "pct_prioridad": "69.36%",
-      "mts": 1062.0,
-      "pct_buffer": 69.2,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104291",
-      "cliente": "3x6120",
-      "referencia": "IC-PPB-150X200-R500-M-1F-C15-LIMPI-DESINF-F-ROJOS-ALKOSTO-5L",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "30/06/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
-      "pct_prioridad": "69.36%",
-      "mts": 2360.0,
-      "pct_buffer": 69.2,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104293",
-      "cliente": "3x6120",
-      "referencia": "IC-PPB-150X200-R500-M-1F-C15--LIMPI-DESINF-LAV-ALKOSTO-5L",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "30/06/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
-      "pct_prioridad": "69.36%",
-      "mts": 4120.0,
-      "pct_buffer": 69.2,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "98890",
-      "cliente": "3x6154",
-      "referencia": "BL-TTT-50X45-R5000-M-2F-C30",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
       "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -2360,17 +2324,35 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 313.0,
+      "mts": 102.0,
+      "pct_buffer": 16.7,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "85497",
+      "cliente": "3x6125",
+      "referencia": "BL-TTT-100X100-R500-M-1F-C10",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Troquelado",
+      "tipo": "Blanca",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 6,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 1061.0,
       "pct_buffer": 16.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "90048",
-      "cliente": "3x6017",
-      "referencia": "BL-PPB-100X70-R2000-M-01F-C15",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
+      "op": "83819",
+      "cliente": "3x6617",
+      "referencia": "BL-TTT-032X025-R16050-M-03F-C30-BMC",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Troquelado",
       "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -2378,7 +2360,7 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 487.0,
+      "mts": 361.0,
       "pct_buffer": 16.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
@@ -2402,29 +2384,29 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104544",
-      "cliente": "3x178830",
-      "referencia": "PRUEBA-SUCROAL",
+      "op": "90048",
+      "cliente": "3x6017",
+      "referencia": "BL-PPB-100X70-R2000-M-01F-C15",
       "maquina": "Rebobinadora",
       "etapa": "RM4 - Reboninado",
-      "tipo": "Otro",
+      "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "09/07/2026",
-      "dias_ofrecidos": 5,
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 6,
       "color_toc": "azul",
-      "pct_prioridad": "-26.60%",
-      "mts": 80.0,
-      "pct_buffer": 0.0,
+      "pct_prioridad": "",
+      "mts": 487.0,
+      "pct_buffer": 16.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "83885",
-      "cliente": "3x6617",
-      "referencia": "BL-TTT-100X080-R01750-M-01F-C30-BMC",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
+      "op": "98890",
+      "cliente": "3x6154",
+      "referencia": "BL-TTT-50X45-R5000-M-2F-C30",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -2432,43 +2414,7 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 102.0,
-      "pct_buffer": 16.7,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104510",
-      "cliente": "3x6617",
-      "referencia": "BL-TTT-100X100-R01500-M-01F-C30",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 6,
-      "color_toc": "azul",
-      "pct_prioridad": "-26.60%",
-      "mts": 24821.0,
-      "pct_buffer": 16.7,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "83819",
-      "cliente": "3x6617",
-      "referencia": "BL-TTT-032X025-R16050-M-03F-C30-BMC",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Troquelado",
-      "tipo": "Blanca",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 6,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 361.0,
+      "mts": 313.0,
       "pct_buffer": 16.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
@@ -2528,24 +2474,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "84998",
-      "cliente": "3x7948",
-      "referencia": "BL-TTT-070X070-R02000-M-01F-C30-CIR",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Troquelado",
-      "tipo": "Blanca",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 6,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 752.0,
-      "pct_buffer": 16.7,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "83954",
       "cliente": "3x261544",
       "referencia": "BL-TTT-100X50-R12000-M-01F-C30",
@@ -2578,6 +2506,24 @@
       "pct_prioridad": "",
       "mts": 2839.0,
       "pct_buffer": 16.7,
+      "en_impresion": false,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104544",
+      "cliente": "3x178830",
+      "referencia": "PRUEBA-SUCROAL",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Otro",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 5,
+      "color_toc": "azul",
+      "pct_prioridad": "-26.60%",
+      "mts": 80.0,
+      "pct_buffer": 0.0,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -2672,11 +2618,11 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "88317",
-      "cliente": "3x7535",
-      "referencia": "BL-TTT-50X40-R3000-R-2F-C30",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "op": "84998",
+      "cliente": "3x7948",
+      "referencia": "BL-TTT-070X070-R02000-M-01F-C30-CIR",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Troquelado",
       "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -2684,9 +2630,9 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 400.0,
+      "mts": 752.0,
       "pct_buffer": 16.7,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -2708,11 +2654,11 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "85497",
-      "cliente": "3x6125",
-      "referencia": "BL-TTT-100X100-R500-M-1F-C10",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Troquelado",
+      "op": "88317",
+      "cliente": "3x7535",
+      "referencia": "BL-TTT-50X40-R3000-R-2F-C30",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -2720,9 +2666,9 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 1061.0,
+      "mts": 400.0,
       "pct_buffer": 16.7,
-      "en_impresion": false,
+      "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
     {
@@ -2834,9 +2780,9 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104329",
+      "op": "104330",
       "cliente": "3x261620",
-      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-LABRUSCA-VTINTO",
+      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-LABRUSCA-VTINTO",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
@@ -2888,27 +2834,9 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104347",
-      "cliente": "3x1402001",
-      "referencia": "IC-ESM-55X160-R2000-S-1F-C30-OMEGA-3-GIMED-30CAP",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "01/07/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "verde",
-      "pct_prioridad": "36.70%",
-      "mts": 548.0,
-      "pct_buffer": 61.5,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104330",
+      "op": "104329",
       "cliente": "3x261620",
-      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-LABRUSCA-VTINTO",
+      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-LABRUSCA-VTINTO",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
@@ -2942,24 +2870,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104426",
-      "cliente": "3x178830",
-      "referencia": "MANTENIMIENTO-PLEGADORA JULIO",
-      "maquina": "Plegadora",
-      "etapa": "Preparacion",
-      "tipo": "Otro",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 8,
-      "color_toc": "azul",
-      "pct_prioridad": "-153.19%",
-      "mts": 10000.0,
-      "pct_buffer": 37.5,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "87753",
       "cliente": "3x6120",
       "referencia": "IC-P60-95X90-R1000-P-1F-C15-FRENTE-CONTRA-LIMP-DESINCRUS-1 LT",
@@ -2975,6 +2885,24 @@
       "mts": 2163.0,
       "pct_buffer": 61.5,
       "en_impresion": false,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104426",
+      "cliente": "3x178830",
+      "referencia": "MANTENIMIENTO-PLEGADORA JULIO",
+      "maquina": "Plegadora",
+      "etapa": "Preparacion",
+      "tipo": "Otro",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 8,
+      "color_toc": "azul",
+      "pct_prioridad": "-153.19%",
+      "mts": 10000.0,
+      "pct_buffer": 37.5,
+      "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
     {
@@ -3032,6 +2960,24 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
+      "op": "104347",
+      "cliente": "3x1402001",
+      "referencia": "IC-ESM-55X160-R2000-S-1F-C30-OMEGA-3-GIMED-30CAP",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "01/07/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "verde",
+      "pct_prioridad": "36.70%",
+      "mts": 548.0,
+      "pct_buffer": 61.5,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
       "op": "104391",
       "cliente": "3x1180126",
       "referencia": "IC-ESM-80X120-R500-S-1F-HH-MIEL-NATURAL-LOK500G",
@@ -3068,11 +3014,11 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104558",
-      "cliente": "3x292274",
-      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-NARANJA-1495C-PREP",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
+      "op": "103852",
+      "cliente": "3x224920",
+      "referencia": "FD-TTT-050X130-R02000-M-2F-C30-ROSA-243C-QUALA. - I9000317",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "En cola Troqueladora 1",
       "tipo": "Fondo",
       "fecha_entrega": "16/07/2026",
       "fecha_entrega_raw": "2026-07-16",
@@ -3080,9 +3026,9 @@
       "dias_ofrecidos": 8,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 2460.0,
+      "mts": 613.0,
       "pct_buffer": 25.0,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -3140,9 +3086,9 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "84093",
-      "cliente": "3x6648",
-      "referencia": "BL-TTT-090X065-R02000-M-01F-C30-SIN",
+      "op": "96604",
+      "cliente": "3x379655",
+      "referencia": "BL-TD-100X60-R150-F-1F-C10-PINTUCO",
       "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
       "tipo": "Blanca",
@@ -3152,7 +3098,7 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 11536.0,
+      "mts": 3434.0,
       "pct_buffer": 0.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -3194,9 +3140,9 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "96604",
-      "cliente": "3x379655",
-      "referencia": "BL-TD-100X60-R150-F-1F-C10-PINTUCO",
+      "op": "84093",
+      "cliente": "3x6648",
+      "referencia": "BL-TTT-090X065-R02000-M-01F-C30-SIN",
       "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
       "tipo": "Blanca",
@@ -3206,9 +3152,27 @@
       "dias_ofrecidos": 6,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 3434.0,
+      "mts": 11536.0,
       "pct_buffer": 0.0,
       "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "85215",
+      "cliente": "3x8161",
+      "referencia": "BL-TTT-150X200-R500-M-1F-C30-CROWN",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Blanca",
+      "fecha_entrega": "16/07/2026",
+      "fecha_entrega_raw": "2026-07-16",
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 6,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 2509.0,
+      "pct_buffer": 0.0,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -3230,11 +3194,11 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "103852",
-      "cliente": "3x224920",
-      "referencia": "FD-TTT-050X130-R02000-M-2F-C30-ROSA-243C-QUALA. - I9000317",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "En cola Troqueladora 1",
+      "op": "104558",
+      "cliente": "3x292274",
+      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-NARANJA-1495C-PREP",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
       "tipo": "Fondo",
       "fecha_entrega": "16/07/2026",
       "fecha_entrega_raw": "2026-07-16",
@@ -3242,9 +3206,9 @@
       "dias_ofrecidos": 8,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 613.0,
+      "mts": 2460.0,
       "pct_buffer": 25.0,
-      "en_impresion": false,
+      "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
     {
@@ -3878,9 +3842,9 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104428",
+      "op": "104429",
       "cliente": "3x358626",
-      "referencia": "IC-PPB-40X90-R1000-M-1F-C30-FIJADOR-CORPORAL-60ml",
+      "referencia": "IC-PPB-60X140-R1000-M-1F-C30- FIJADOR-CORPORAL-125ml",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
@@ -3890,7 +3854,7 @@
       "dias_ofrecidos": 17,
       "color_toc": "azul",
       "pct_prioridad": "-10.64%",
-      "mts": 378.0,
+      "mts": 543.0,
       "pct_buffer": 35.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -3932,9 +3896,9 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104429",
+      "op": "104428",
       "cliente": "3x358626",
-      "referencia": "IC-PPB-60X140-R1000-M-1F-C30- FIJADOR-CORPORAL-125ml",
+      "referencia": "IC-PPB-40X90-R1000-M-1F-C30-FIJADOR-CORPORAL-60ml",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
@@ -3944,7 +3908,7 @@
       "dias_ofrecidos": 17,
       "color_toc": "azul",
       "pct_prioridad": "-10.64%",
-      "mts": 543.0,
+      "mts": 378.0,
       "pct_buffer": 35.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -4002,6 +3966,24 @@
       "pct_buffer": 7.7,
       "en_impresion": false,
       "tiempo_produccion": "Menor al Standar"
+    },
+    {
+      "op": "102782",
+      "cliente": "3x732039",
+      "referencia": "IC-PPB-65X190-R-M-1F-C30-NAPOLES-HR-X30-IMP-DORSO",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
+      "fecha_entrega": "22/07/2026",
+      "fecha_entrega_raw": "2026-07-22",
+      "fecha_creacion": "07/07/2026",
+      "dias_ofrecidos": 14,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 700.0,
+      "pct_buffer": 14.3,
+      "en_impresion": false,
+      "tiempo_produccion": "Standar"
     },
     {
       "op": "102780",
@@ -4148,42 +4130,6 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
-      "op": "94751",
-      "cliente": "3x1012989",
-      "referencia": "IC-PPB-34.2X92.6-R5000-M-1F-C30- CUELLO SPARKLING TORONJA",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "22/07/2026",
-      "fecha_entrega_raw": "2026-07-22",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 13,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 726.0,
-      "pct_buffer": 7.7,
-      "en_impresion": true,
-      "tiempo_produccion": "Menor al Standar"
-    },
-    {
-      "op": "102782",
-      "cliente": "3x732039",
-      "referencia": "IC-PPB-65X190-R-M-1F-C30-NAPOLES-HR-X30-IMP-DORSO",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "22/07/2026",
-      "fecha_entrega_raw": "2026-07-22",
-      "fecha_creacion": "07/07/2026",
-      "dias_ofrecidos": 14,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 700.0,
-      "pct_buffer": 14.3,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "94384",
       "cliente": "3x1012989",
       "referencia": "IC-PPBBCAV-70X70-R6000-M-1F-C30-SPARKLING TAMARINDO FRENTE",
@@ -4197,6 +4143,24 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 1030.0,
+      "pct_buffer": 7.7,
+      "en_impresion": true,
+      "tiempo_produccion": "Menor al Standar"
+    },
+    {
+      "op": "94751",
+      "cliente": "3x1012989",
+      "referencia": "IC-PPB-34.2X92.6-R5000-M-1F-C30- CUELLO SPARKLING TORONJA",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "22/07/2026",
+      "fecha_entrega_raw": "2026-07-22",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 13,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 726.0,
       "pct_buffer": 7.7,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
@@ -4292,6 +4256,24 @@
       "tiempo_produccion": "Standar"
     },
     {
+      "op": "98199",
+      "cliente": "3x379655",
+      "referencia": "BL-TTT-96X55-R2500-M-1F-C30",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "22/07/2026",
+      "fecha_entrega_raw": "2026-07-22",
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 12,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 3584.0,
+      "pct_buffer": 0.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Mayor al Standar"
+    },
+    {
       "op": "95126",
       "cliente": "3x6648",
       "referencia": "BL-PPB-35X65-R2000-S-3F-C10",
@@ -4346,24 +4328,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "93088",
-      "cliente": "3x8074",
-      "referencia": "IS-TD-100X50-R500-F-1F-C10-ETQ COLOMBIA  AMARILLO",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "22/07/2026",
-      "fecha_entrega_raw": "2026-07-22",
-      "fecha_creacion": "07/07/2026",
-      "dias_ofrecidos": 14,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 1460.0,
-      "pct_buffer": 14.3,
-      "en_impresion": false,
-      "tiempo_produccion": "Mayor al Standar"
-    },
-    {
       "op": "103734",
       "cliente": "3x261647",
       "referencia": "IS-TTT-100X050-R03000-M-01F-C30-REBORDE FUCSIA RODHAMINE-QUALA. - I9000451",
@@ -4380,6 +4344,24 @@
       "pct_buffer": 14.3,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "93088",
+      "cliente": "3x8074",
+      "referencia": "IS-TD-100X50-R500-F-1F-C10-ETQ COLOMBIA  AMARILLO",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
+      "fecha_entrega": "22/07/2026",
+      "fecha_entrega_raw": "2026-07-22",
+      "fecha_creacion": "07/07/2026",
+      "dias_ofrecidos": 14,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 1460.0,
+      "pct_buffer": 14.3,
+      "en_impresion": false,
+      "tiempo_produccion": "Mayor al Standar"
     },
     {
       "op": "93881",
@@ -4706,11 +4688,11 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104568",
-      "cliente": "3x6120",
-      "referencia": "IC-P60-90X65-R3000-P-1F-C15-FRENTE-QUITAMCH-KLEINE-500ML",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "op": "88041",
+      "cliente": "3x787167",
+      "referencia": "IC-PME-140X455-R500-M-1F-C30-BEST-PROTE-VAINIL-GOURM-28-SERV",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "23/07/2026",
       "fecha_entrega_raw": "2026-07-23",
@@ -4718,10 +4700,10 @@
       "dias_ofrecidos": 15,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 370.0,
+      "mts": 1000.0,
       "pct_buffer": 13.3,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
+      "en_impresion": false,
+      "tiempo_produccion": "Mayor al Standar"
     },
     {
       "op": "84020",
@@ -4760,11 +4742,11 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "88041",
-      "cliente": "3x787167",
-      "referencia": "IC-PME-140X455-R500-M-1F-C30-BEST-PROTE-VAINIL-GOURM-28-SERV",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
+      "op": "104568",
+      "cliente": "3x6120",
+      "referencia": "IC-P60-90X65-R3000-P-1F-C15-FRENTE-QUITAMCH-KLEINE-500ML",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
       "tipo": "Impresa",
       "fecha_entrega": "23/07/2026",
       "fecha_entrega_raw": "2026-07-23",
@@ -4772,10 +4754,10 @@
       "dias_ofrecidos": 15,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 1000.0,
+      "mts": 370.0,
       "pct_buffer": 13.3,
-      "en_impresion": false,
-      "tiempo_produccion": "Mayor al Standar"
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
     },
     {
       "op": "103856",
@@ -5715,9 +5697,9 @@
     }
   ],
   "colores_resumen": {
-    "azul": 163,
+    "azul": 165,
     "verde": 34,
-    "amarillo": 10,
+    "amarillo": 8,
     "rojo": 2,
     "negro": 1
   },
@@ -5806,22 +5788,6 @@
     {
       "fecha": "2026-07-13",
       "fecha_entrega": "13/07/2026",
-      "op": "96919",
-      "cliente": "3x261680",
-      "referencia": "IC-TTT-144X80-R2500-P-1F-C30-ETQ-GUDY",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "mts": 27242.0,
-      "familia": "F10",
-      "color_toc": "amarillo",
-      "fecha_std": "2026-07-07",
-      "promesa_dias": 9,
-      "fecha_creacion": "26/06/2026"
-    },
-    {
-      "fecha": "2026-07-13",
-      "fecha_entrega": "13/07/2026",
       "op": "104351",
       "cliente": "3x160156",
       "referencia": "IC-ESM-38X130-R3100-S-1F-C30-BOLDENONA-50mg-50ml-V07",
@@ -5893,22 +5859,6 @@
       "etapa": "Preparacion",
       "tipo": "Impresa",
       "mts": 1390.0,
-      "familia": "F9",
-      "color_toc": "amarillo",
-      "fecha_std": "2026-07-11",
-      "promesa_dias": 10,
-      "fecha_creacion": "30/06/2026"
-    },
-    {
-      "fecha": "2026-07-14",
-      "fecha_entrega": "14/07/2026",
-      "op": "85179",
-      "cliente": "3x391893",
-      "referencia": "IC-PTM-50.8X482.6-R200-F-1F-C30-BAG TAG-GENER",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "mts": 13708.0,
       "familia": "F9",
       "color_toc": "amarillo",
       "fecha_std": "2026-07-11",
@@ -7018,6 +6968,22 @@
       "fecha_std": "2026-07-13",
       "promesa_dias": 4,
       "fecha_creacion": "08/07/2026"
+    },
+    {
+      "fecha": "2026-07-16",
+      "fecha_entrega": "16/07/2026",
+      "op": "85215",
+      "cliente": "3x8161",
+      "referencia": "BL-TTT-150X200-R500-M-1F-C30-CROWN",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Blanca",
+      "mts": 2509.0,
+      "familia": "F2",
+      "color_toc": "azul",
+      "fecha_std": "2026-07-14",
+      "promesa_dias": 4,
+      "fecha_creacion": "09/07/2026"
     },
     {
       "fecha": "2026-07-16",
@@ -8217,6 +8183,22 @@
       "color_toc": "azul",
       "fecha_std": "2026-07-16",
       "promesa_dias": 6,
+      "fecha_creacion": "09/07/2026"
+    },
+    {
+      "fecha": "2026-07-22",
+      "fecha_entrega": "22/07/2026",
+      "op": "98199",
+      "cliente": "3x379655",
+      "referencia": "BL-TTT-96X55-R2500-M-1F-C30",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "mts": 3584.0,
+      "familia": "F2",
+      "color_toc": "azul",
+      "fecha_std": "2026-07-14",
+      "promesa_dias": 4,
       "fecha_creacion": "09/07/2026"
     },
     {
@@ -9887,19 +9869,10 @@
     },
     "Rebobinadora 1": {
       "capacidad_dia": 16500,
-      "mts_total": 96529,
-      "dias_trabajo": 5.9,
-      "pct_cap": 29.3,
+      "mts_total": 86010,
+      "dias_trabajo": 5.2,
+      "pct_cap": 26.1,
       "ordenes": [
-        {
-          "op": "101363",
-          "cliente": "3x261620",
-          "mts": 3669.0,
-          "fecha": "01/10/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
         {
           "op": "90263",
           "cliente": "3x196207",
@@ -9919,368 +9892,11 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "102949",
-          "cliente": "3x349098",
-          "mts": 13107.0,
-          "fecha": "15/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "89548",
-          "cliente": "3x160832",
-          "mts": 2586.0,
-          "fecha": "16/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "103851",
-          "cliente": "3x224920",
-          "mts": 336.0,
-          "fecha": "16/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104334",
-          "cliente": "3x1341852",
-          "mts": 1217.0,
-          "fecha": "17/07/2026",
-          "color": "verde",
-          "tipo": "Fondo",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "96681",
-          "cliente": "3x215575",
-          "mts": 23377.0,
-          "fecha": "17/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Impresion"
-        },
-        {
-          "op": "100282",
-          "cliente": "3x8145",
-          "mts": 624.0,
-          "fecha": "18/09/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "86251",
+          "op": "101015",
           "cliente": "3x6120",
-          "mts": 1231.0,
-          "fecha": "21/07/2026",
+          "mts": 882.0,
+          "fecha": "14/08/2026",
           "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "100818",
-          "cliente": "3x6120",
-          "mts": 450.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104513",
-          "cliente": "3x358626",
-          "mts": 477.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "93881",
-          "cliente": "3x272066",
-          "mts": 500.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "84521",
-          "cliente": "3x6120",
-          "mts": 8382.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "102782",
-          "cliente": "3x732039",
-          "mts": 700.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "102780",
-          "cliente": "3x732039",
-          "mts": 700.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104560",
-          "cliente": "3x6648",
-          "mts": 2463.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "94385",
-          "cliente": "3x1012989",
-          "mts": 787.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "95126",
-          "cliente": "3x6648",
-          "mts": 1401.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104024",
-          "cliente": "3x261647",
-          "mts": 5568.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104568",
-          "cliente": "3x6120",
-          "mts": 370.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "88041",
-          "cliente": "3x787167",
-          "mts": 1000.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "92910",
-          "cliente": "3x787167",
-          "mts": 850.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "103736",
-          "cliente": "3x261647",
-          "mts": 100.0,
-          "fecha": "27/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "103775",
-          "cliente": "3x261647",
-          "mts": 13848.0,
-          "fecha": "27/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "91722",
-          "cliente": "3x161936",
-          "mts": 864.0,
-          "fecha": "31/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        }
-      ],
-      "es_cuello": false,
-      "fecha_prometida": "16/07/2026",
-      "carga_por_fecha": {
-        "01/10/2026": {
-          "mts": 3669.0,
-          "ordenes": 1
-        },
-        "04/08/2026": {
-          "mts": 1570.0,
-          "ordenes": 1
-        },
-        "08/07/2026": {
-          "mts": 10352.0,
-          "ordenes": 1
-        },
-        "15/07/2026": {
-          "mts": 13107.0,
-          "ordenes": 1
-        },
-        "16/07/2026": {
-          "mts": 2922.0,
-          "ordenes": 2
-        },
-        "17/07/2026": {
-          "mts": 24594.0,
-          "ordenes": 2
-        },
-        "18/09/2026": {
-          "mts": 624.0,
-          "ordenes": 1
-        },
-        "21/07/2026": {
-          "mts": 2158.0,
-          "ordenes": 3
-        },
-        "22/07/2026": {
-          "mts": 14933.0,
-          "ordenes": 7
-        },
-        "23/07/2026": {
-          "mts": 7788.0,
-          "ordenes": 4
-        },
-        "27/07/2026": {
-          "mts": 13948.0,
-          "ordenes": 2
-        },
-        "31/08/2026": {
-          "mts": 864.0,
-          "ordenes": 1
-        }
-      }
-    },
-    "Rebobinadora 2": {
-      "capacidad_dia": 16500,
-      "mts_total": 93674,
-      "dias_trabajo": 5.7,
-      "pct_cap": 28.4,
-      "ordenes": [
-        {
-          "op": "98337",
-          "cliente": "3x196207",
-          "mts": 2342.0,
-          "fecha": "04/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "98338",
-          "cliente": "3x196207",
-          "mts": 2342.0,
-          "fecha": "04/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "86453",
-          "cliente": "3x8145",
-          "mts": 1427.0,
-          "fecha": "05/08/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "100404",
-          "cliente": "3x611978",
-          "mts": 1243.0,
-          "fecha": "10/07/2026",
-          "color": "rojo",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104294",
-          "cliente": "3x6120",
-          "mts": 1062.0,
-          "fecha": "14/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104302",
-          "cliente": "3x254593",
-          "mts": 1390.0,
-          "fecha": "14/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104319",
-          "cliente": "3x160156",
-          "mts": 488.0,
-          "fecha": "14/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104318",
-          "cliente": "3x160156",
-          "mts": 1697.0,
-          "fecha": "14/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "86149",
-          "cliente": "3x6648",
-          "mts": 7100.0,
-          "fecha": "14/07/2026",
-          "color": "verde",
-          "tipo": "Blanca",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "98888",
-          "cliente": "3x6583",
-          "mts": 340.0,
-          "fecha": "14/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "92057",
-          "cliente": "3x196207",
-          "mts": 1570.0,
-          "fecha": "15/07/2026",
-          "color": "verde",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -10301,15 +9917,6 @@
           "color": "verde",
           "tipo": "Impresa",
           "etapa": "Preparacion"
-        },
-        {
-          "op": "87753",
-          "cliente": "3x6120",
-          "mts": 2163.0,
-          "fecha": "15/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "95182",
@@ -10339,24 +9946,6 @@
           "etapa": "RM4 - Reboninado"
         },
         {
-          "op": "104328",
-          "cliente": "3x261620",
-          "mts": 815.0,
-          "fecha": "15/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104327",
-          "cliente": "3x261620",
-          "mts": 558.0,
-          "fecha": "15/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
           "op": "99022",
           "cliente": "3x6097",
           "mts": 694.0,
@@ -10375,392 +9964,13 @@
           "etapa": "RM4 - Reboninado"
         },
         {
-          "op": "84998",
-          "cliente": "3x7948",
-          "mts": 752.0,
-          "fecha": "15/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "Troquelado"
-        },
-        {
-          "op": "85125",
-          "cliente": "3x161884",
-          "mts": 541.0,
-          "fecha": "15/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "Troquelado"
-        },
-        {
-          "op": "93831",
-          "cliente": "3x6120",
-          "mts": 2364.0,
-          "fecha": "16/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "89544",
-          "cliente": "3x6018",
-          "mts": 2586.0,
-          "fecha": "16/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "103854",
-          "cliente": "3x224920",
-          "mts": 110.0,
-          "fecha": "16/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104558",
-          "cliente": "3x292274",
-          "mts": 2460.0,
-          "fecha": "16/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "85749",
-          "cliente": "3x8145",
-          "mts": 1427.0,
-          "fecha": "18/09/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "103610",
-          "cliente": "3x261647",
-          "mts": 400.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "101648",
-          "cliente": "3x272066",
-          "mts": 506.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "93087",
-          "cliente": "3x8074",
-          "mts": 1460.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104158",
-          "cliente": "3x261647",
-          "mts": 2830.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "95335",
-          "cliente": "3x1012989",
-          "mts": 1213.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "95347",
-          "cliente": "3x1012989",
-          "mts": 848.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "94751",
-          "cliente": "3x1012989",
-          "mts": 726.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "94744",
-          "cliente": "3x1012989",
-          "mts": 3038.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "84020",
-          "cliente": "3x6648",
-          "mts": 1045.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "Troquelado"
-        },
-        {
-          "op": "98015",
-          "cliente": "3x215575",
-          "mts": 24200.0,
-          "fecha": "27/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104441",
-          "cliente": "3x178830",
-          "mts": 10000.0,
-          "fecha": "29/07/2026",
-          "color": "azul",
-          "tipo": "Otro",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "89318",
-          "cliente": "3x6120",
-          "mts": 5715.0,
-          "fecha": "31/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        }
-      ],
-      "es_cuello": false,
-      "fecha_prometida": "16/07/2026",
-      "carga_por_fecha": {
-        "04/08/2026": {
-          "mts": 4684.0,
-          "ordenes": 2
-        },
-        "05/08/2026": {
-          "mts": 1427.0,
-          "ordenes": 1
-        },
-        "10/07/2026": {
-          "mts": 1243.0,
-          "ordenes": 1
-        },
-        "14/07/2026": {
-          "mts": 12077.0,
-          "ordenes": 6
-        },
-        "15/07/2026": {
-          "mts": 13315.0,
-          "ordenes": 13
-        },
-        "16/07/2026": {
-          "mts": 7520.0,
-          "ordenes": 4
-        },
-        "18/09/2026": {
-          "mts": 1427.0,
-          "ordenes": 1
-        },
-        "21/07/2026": {
-          "mts": 400.0,
-          "ordenes": 1
-        },
-        "22/07/2026": {
-          "mts": 10621.0,
-          "ordenes": 7
-        },
-        "23/07/2026": {
-          "mts": 1045.0,
-          "ordenes": 1
-        },
-        "27/07/2026": {
-          "mts": 24200.0,
-          "ordenes": 1
-        },
-        "29/07/2026": {
-          "mts": 10000.0,
-          "ordenes": 1
-        },
-        "31/07/2026": {
-          "mts": 5715.0,
-          "ordenes": 1
-        }
-      }
-    },
-    "Rebobinadora 3": {
-      "capacidad_dia": 16500,
-      "mts_total": 96250,
-      "dias_trabajo": 5.8,
-      "pct_cap": 29.2,
-      "ordenes": [
-        {
-          "op": "100849",
-          "cliente": "3x6547",
-          "mts": 998.0,
-          "fecha": "01/09/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "84588",
-          "cliente": "3x6584",
-          "mts": 1173.0,
-          "fecha": "03/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "85499",
-          "cliente": "3x6436",
-          "mts": 2215.0,
-          "fecha": "03/08/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "89687",
-          "cliente": "3x196207",
-          "mts": 1570.0,
-          "fecha": "03/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "93148",
-          "cliente": "3x235822",
-          "mts": 4572.0,
-          "fecha": "03/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "89731",
-          "cliente": "3x196207",
-          "mts": 2205.0,
-          "fecha": "05/08/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "96362",
-          "cliente": "3x6120",
-          "mts": 713.0,
-          "fecha": "06/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104266",
-          "cliente": "3x822548",
-          "mts": 635.0,
-          "fecha": "13/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104291",
-          "cliente": "3x6120",
-          "mts": 2360.0,
-          "fecha": "14/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "85179",
-          "cliente": "3x391893",
-          "mts": 13708.0,
-          "fecha": "14/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104329",
-          "cliente": "3x261620",
-          "mts": 766.0,
-          "fecha": "15/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104331",
-          "cliente": "3x261620",
-          "mts": 1231.0,
-          "fecha": "15/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104347",
-          "cliente": "3x1402001",
-          "mts": 548.0,
-          "fecha": "15/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "86241",
-          "cliente": "3x6120",
-          "mts": 7264.0,
-          "fecha": "15/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "95157",
-          "cliente": "3x6097",
-          "mts": 694.0,
-          "fecha": "15/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "Troquelado"
-        },
-        {
-          "op": "90048",
-          "cliente": "3x6017",
-          "mts": 487.0,
-          "fecha": "15/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "88317",
+          "op": "88309",
           "cliente": "3x7535",
-          "mts": 400.0,
+          "mts": 1050.0,
           "fecha": "15/07/2026",
           "color": "azul",
           "tipo": "Blanca",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "84641",
@@ -10779,263 +9989,6 @@
           "color": "verde",
           "tipo": "Impresa",
           "etapa": "Preparacion"
-        },
-        {
-          "op": "97171",
-          "cliente": "3x215575",
-          "mts": 2967.0,
-          "fecha": "16/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "96674",
-          "cliente": "3x354234",
-          "mts": 1380.0,
-          "fecha": "17/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "96677",
-          "cliente": "3x215575",
-          "mts": 29337.0,
-          "fecha": "17/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "87314",
-          "cliente": "3x6125",
-          "mts": 1000.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "87298",
-          "cliente": "3x358626",
-          "mts": 5101.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "95350",
-          "cliente": "3x1012989",
-          "mts": 848.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "95348",
-          "cliente": "3x1012989",
-          "mts": 665.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "94384",
-          "cliente": "3x1012989",
-          "mts": 1030.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "103856",
-          "cliente": "3x261647",
-          "mts": 4930.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "101362",
-          "cliente": "3x261620",
-          "mts": 3833.0,
-          "fecha": "30/09/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "100848",
-          "cliente": "3x6547",
-          "mts": 998.0,
-          "fecha": "31/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "99472",
-          "cliente": "3x161936",
-          "mts": 681.0,
-          "fecha": "31/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        }
-      ],
-      "es_cuello": false,
-      "fecha_prometida": "16/07/2026",
-      "carga_por_fecha": {
-        "01/09/2026": {
-          "mts": 998.0,
-          "ordenes": 1
-        },
-        "03/08/2026": {
-          "mts": 9530.0,
-          "ordenes": 4
-        },
-        "05/08/2026": {
-          "mts": 2205.0,
-          "ordenes": 1
-        },
-        "06/08/2026": {
-          "mts": 713.0,
-          "ordenes": 1
-        },
-        "13/07/2026": {
-          "mts": 635.0,
-          "ordenes": 1
-        },
-        "14/07/2026": {
-          "mts": 16068.0,
-          "ordenes": 2
-        },
-        "15/07/2026": {
-          "mts": 12171.0,
-          "ordenes": 8
-        },
-        "16/07/2026": {
-          "mts": 4127.0,
-          "ordenes": 2
-        },
-        "17/07/2026": {
-          "mts": 30717.0,
-          "ordenes": 2
-        },
-        "22/07/2026": {
-          "mts": 8644.0,
-          "ordenes": 5
-        },
-        "23/07/2026": {
-          "mts": 4930.0,
-          "ordenes": 1
-        },
-        "30/09/2026": {
-          "mts": 3833.0,
-          "ordenes": 1
-        },
-        "31/07/2026": {
-          "mts": 998.0,
-          "ordenes": 1
-        },
-        "31/08/2026": {
-          "mts": 681.0,
-          "ordenes": 1
-        }
-      }
-    },
-    "Rebobinadora (T) 4": {
-      "capacidad_dia": 16500,
-      "mts_total": 116737,
-      "dias_trabajo": 7.1,
-      "pct_cap": 35.4,
-      "ordenes": [
-        {
-          "op": "97296",
-          "cliente": "3x6584",
-          "mts": 1435.0,
-          "fecha": "03/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "89960",
-          "cliente": "3x196207",
-          "mts": 2205.0,
-          "fecha": "03/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "86753",
-          "cliente": "3x235822",
-          "mts": 1836.0,
-          "fecha": "03/08/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "99240",
-          "cliente": "3x261487",
-          "mts": 31433.0,
-          "fecha": "03/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Impresion"
-        },
-        {
-          "op": "96919",
-          "cliente": "3x261680",
-          "mts": 27242.0,
-          "fecha": "13/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "98890",
-          "cliente": "3x6154",
-          "mts": 313.0,
-          "fecha": "15/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "88309",
-          "cliente": "3x7535",
-          "mts": 1050.0,
-          "fecha": "15/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104544",
-          "cliente": "3x178830",
-          "mts": 80.0,
-          "fecha": "15/07/2026",
-          "color": "azul",
-          "tipo": "Otro",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "87083",
-          "cliente": "3x7560",
-          "mts": 690.0,
-          "fecha": "16/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "88524",
@@ -11110,6 +10063,24 @@
           "etapa": "Preparacion"
         },
         {
+          "op": "104585",
+          "cliente": "3x6648",
+          "mts": 237.0,
+          "fecha": "17/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "85749",
+          "cliente": "3x8145",
+          "mts": 1427.0,
+          "fecha": "18/09/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
           "op": "91914",
           "cliente": "3x1122543",
           "mts": 1062.0,
@@ -11137,301 +10108,6 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "86957",
-          "cliente": "3x6120",
-          "mts": 699.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104430",
-          "cliente": "3x178830",
-          "mts": 10000.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Otro",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "103734",
-          "cliente": "3x261647",
-          "mts": 5247.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "94818",
-          "cliente": "3x1012989",
-          "mts": 848.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "94566",
-          "cliente": "3x1012989",
-          "mts": 1213.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104569",
-          "cliente": "3x6018",
-          "mts": 2396.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "99172",
-          "cliente": "3x261647",
-          "mts": 3483.0,
-          "fecha": "24/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "84518",
-          "cliente": "3x6120",
-          "mts": 2840.0,
-          "fecha": "31/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "96351",
-          "cliente": "3x6120",
-          "mts": 645.0,
-          "fecha": "31/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        }
-      ],
-      "es_cuello": false,
-      "fecha_prometida": "18/07/2026",
-      "carga_por_fecha": {
-        "03/08/2026": {
-          "mts": 36909.0,
-          "ordenes": 4
-        },
-        "13/07/2026": {
-          "mts": 27242.0,
-          "ordenes": 1
-        },
-        "15/07/2026": {
-          "mts": 1443.0,
-          "ordenes": 3
-        },
-        "16/07/2026": {
-          "mts": 7954.0,
-          "ordenes": 2
-        },
-        "17/07/2026": {
-          "mts": 13835.0,
-          "ordenes": 7
-        },
-        "21/07/2026": {
-          "mts": 12682.0,
-          "ordenes": 5
-        },
-        "22/07/2026": {
-          "mts": 7308.0,
-          "ordenes": 3
-        },
-        "23/07/2026": {
-          "mts": 2396.0,
-          "ordenes": 1
-        },
-        "24/07/2026": {
-          "mts": 3483.0,
-          "ordenes": 1
-        },
-        "31/07/2026": {
-          "mts": 3485.0,
-          "ordenes": 2
-        }
-      }
-    },
-    "Rebobinadora KM": {
-      "capacidad_dia": 16500,
-      "mts_total": 93755,
-      "dias_trabajo": 5.7,
-      "pct_cap": 28.4,
-      "ordenes": [
-        {
-          "op": "84347",
-          "cliente": "3x6584",
-          "mts": 5231.0,
-          "fecha": "03/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "98026",
-          "cliente": "3x196207",
-          "mts": 2342.0,
-          "fecha": "05/08/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "98025",
-          "cliente": "3x196207",
-          "mts": 2342.0,
-          "fecha": "05/08/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "100207",
-          "cliente": "3x8145",
-          "mts": 638.0,
-          "fecha": "05/08/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "83995",
-          "cliente": "3x8145",
-          "mts": 864.0,
-          "fecha": "05/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "85189",
-          "cliente": "3x8145",
-          "mts": 1991.0,
-          "fecha": "07/09/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104351",
-          "cliente": "3x160156",
-          "mts": 533.0,
-          "fecha": "13/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104293",
-          "cliente": "3x6120",
-          "mts": 4120.0,
-          "fecha": "14/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104128",
-          "cliente": "3x1439424",
-          "mts": 1530.0,
-          "fecha": "14/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "88518",
-          "cliente": "3x160458",
-          "mts": 580.0,
-          "fecha": "14/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "103730",
-          "cliente": "3x261647",
-          "mts": 5568.0,
-          "fecha": "14/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "94992",
-          "cliente": "3x6120",
-          "mts": 820.0,
-          "fecha": "14/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "96087",
-          "cliente": "3x1364547",
-          "mts": 687.0,
-          "fecha": "14/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104546",
-          "cliente": "3x178830",
-          "mts": 17100.0,
-          "fecha": "14/07/2026",
-          "color": "azul",
-          "tipo": "Otro",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "101015",
-          "cliente": "3x6120",
-          "mts": 882.0,
-          "fecha": "14/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "85877",
-          "cliente": "3x160458",
-          "mts": 1541.0,
-          "fecha": "15/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104414",
-          "cliente": "3x6209",
-          "mts": 1480.0,
-          "fecha": "17/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "97051",
-          "cliente": "3x215575",
-          "mts": 18482.0,
-          "fecha": "17/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
           "op": "84025",
           "cliente": "3x6120",
           "mts": 5700.0,
@@ -11439,6 +10115,24 @@
           "color": "azul",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "100818",
+          "cliente": "3x6120",
+          "mts": 450.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "103610",
+          "cliente": "3x261647",
+          "mts": 400.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
         },
         {
           "op": "95100",
@@ -11522,10 +10216,1267 @@
           "etapa": "RM4 - Reboninado"
         },
         {
+          "op": "94818",
+          "cliente": "3x1012989",
+          "mts": 848.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "94744",
+          "cliente": "3x1012989",
+          "mts": 3038.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "92910",
+          "cliente": "3x787167",
+          "mts": 850.0,
+          "fecha": "23/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "103736",
+          "cliente": "3x261647",
+          "mts": 100.0,
+          "fecha": "27/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "103775",
+          "cliente": "3x261647",
+          "mts": 13848.0,
+          "fecha": "27/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "91722",
+          "cliente": "3x161936",
+          "mts": 864.0,
+          "fecha": "31/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        }
+      ],
+      "es_cuello": false,
+      "fecha_prometida": "16/07/2026",
+      "carga_por_fecha": {
+        "04/08/2026": {
+          "mts": 1570.0,
+          "ordenes": 1
+        },
+        "08/07/2026": {
+          "mts": 10352.0,
+          "ordenes": 1
+        },
+        "14/08/2026": {
+          "mts": 882.0,
+          "ordenes": 1
+        },
+        "15/07/2026": {
+          "mts": 8747.0,
+          "ordenes": 9
+        },
+        "16/07/2026": {
+          "mts": 8424.0,
+          "ordenes": 2
+        },
+        "17/07/2026": {
+          "mts": 14072.0,
+          "ordenes": 8
+        },
+        "18/09/2026": {
+          "mts": 1427.0,
+          "ordenes": 1
+        },
+        "21/07/2026": {
+          "mts": 8533.0,
+          "ordenes": 6
+        },
+        "22/07/2026": {
+          "mts": 16341.0,
+          "ordenes": 11
+        },
+        "23/07/2026": {
+          "mts": 850.0,
+          "ordenes": 1
+        },
+        "27/07/2026": {
+          "mts": 13948.0,
+          "ordenes": 2
+        },
+        "31/08/2026": {
+          "mts": 864.0,
+          "ordenes": 1
+        }
+      }
+    },
+    "Rebobinadora 2": {
+      "capacidad_dia": 16500,
+      "mts_total": 88810,
+      "dias_trabajo": 5.4,
+      "pct_cap": 26.9,
+      "ordenes": [
+        {
+          "op": "101363",
+          "cliente": "3x261620",
+          "mts": 3669.0,
+          "fecha": "01/10/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "98337",
+          "cliente": "3x196207",
+          "mts": 2342.0,
+          "fecha": "04/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "98338",
+          "cliente": "3x196207",
+          "mts": 2342.0,
+          "fecha": "04/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "86453",
+          "cliente": "3x8145",
+          "mts": 1427.0,
+          "fecha": "05/08/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "100404",
+          "cliente": "3x611978",
+          "mts": 1243.0,
+          "fecha": "10/07/2026",
+          "color": "rojo",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104302",
+          "cliente": "3x254593",
+          "mts": 1390.0,
+          "fecha": "14/07/2026",
+          "color": "amarillo",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104128",
+          "cliente": "3x1439424",
+          "mts": 1530.0,
+          "fecha": "14/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "103730",
+          "cliente": "3x261647",
+          "mts": 5568.0,
+          "fecha": "14/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "92057",
+          "cliente": "3x196207",
+          "mts": 1570.0,
+          "fecha": "15/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104347",
+          "cliente": "3x1402001",
+          "mts": 548.0,
+          "fecha": "15/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "86241",
+          "cliente": "3x6120",
+          "mts": 7264.0,
+          "fecha": "15/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "89544",
+          "cliente": "3x6018",
+          "mts": 2586.0,
+          "fecha": "16/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "97171",
+          "cliente": "3x215575",
+          "mts": 2967.0,
+          "fecha": "16/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104334",
+          "cliente": "3x1341852",
+          "mts": 1217.0,
+          "fecha": "17/07/2026",
+          "color": "verde",
+          "tipo": "Fondo",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "96681",
+          "cliente": "3x215575",
+          "mts": 23377.0,
+          "fecha": "17/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Impresion"
+        },
+        {
+          "op": "100282",
+          "cliente": "3x8145",
+          "mts": 624.0,
+          "fecha": "18/09/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "86251",
+          "cliente": "3x6120",
+          "mts": 1231.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104513",
+          "cliente": "3x358626",
+          "mts": 477.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "101648",
+          "cliente": "3x272066",
+          "mts": 506.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "87298",
+          "cliente": "3x358626",
+          "mts": 5101.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "95350",
+          "cliente": "3x1012989",
+          "mts": 848.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "95348",
+          "cliente": "3x1012989",
+          "mts": 665.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "94385",
+          "cliente": "3x1012989",
+          "mts": 787.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "95126",
+          "cliente": "3x6648",
+          "mts": 1401.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104568",
+          "cliente": "3x6120",
+          "mts": 370.0,
+          "fecha": "23/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "88041",
+          "cliente": "3x787167",
+          "mts": 1000.0,
+          "fecha": "23/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "84020",
+          "cliente": "3x6648",
+          "mts": 1045.0,
+          "fecha": "23/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Troquelado"
+        },
+        {
+          "op": "104441",
+          "cliente": "3x178830",
+          "mts": 10000.0,
+          "fecha": "29/07/2026",
+          "color": "azul",
+          "tipo": "Otro",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "89318",
+          "cliente": "3x6120",
+          "mts": 5715.0,
+          "fecha": "31/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        }
+      ],
+      "es_cuello": false,
+      "fecha_prometida": "16/07/2026",
+      "carga_por_fecha": {
+        "01/10/2026": {
+          "mts": 3669.0,
+          "ordenes": 1
+        },
+        "04/08/2026": {
+          "mts": 4684.0,
+          "ordenes": 2
+        },
+        "05/08/2026": {
+          "mts": 1427.0,
+          "ordenes": 1
+        },
+        "10/07/2026": {
+          "mts": 1243.0,
+          "ordenes": 1
+        },
+        "14/07/2026": {
+          "mts": 8488.0,
+          "ordenes": 3
+        },
+        "15/07/2026": {
+          "mts": 9382.0,
+          "ordenes": 3
+        },
+        "16/07/2026": {
+          "mts": 5553.0,
+          "ordenes": 2
+        },
+        "17/07/2026": {
+          "mts": 24594.0,
+          "ordenes": 2
+        },
+        "18/09/2026": {
+          "mts": 624.0,
+          "ordenes": 1
+        },
+        "21/07/2026": {
+          "mts": 1708.0,
+          "ordenes": 2
+        },
+        "22/07/2026": {
+          "mts": 9308.0,
+          "ordenes": 6
+        },
+        "23/07/2026": {
+          "mts": 2415.0,
+          "ordenes": 3
+        },
+        "29/07/2026": {
+          "mts": 10000.0,
+          "ordenes": 1
+        },
+        "31/07/2026": {
+          "mts": 5715.0,
+          "ordenes": 1
+        }
+      }
+    },
+    "Rebobinadora 3": {
+      "capacidad_dia": 16500,
+      "mts_total": 86216,
+      "dias_trabajo": 5.2,
+      "pct_cap": 26.1,
+      "ordenes": [
+        {
+          "op": "100849",
+          "cliente": "3x6547",
+          "mts": 998.0,
+          "fecha": "01/09/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "84588",
+          "cliente": "3x6584",
+          "mts": 1173.0,
+          "fecha": "03/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "84347",
+          "cliente": "3x6584",
+          "mts": 5231.0,
+          "fecha": "03/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "98026",
+          "cliente": "3x196207",
+          "mts": 2342.0,
+          "fecha": "05/08/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "98025",
+          "cliente": "3x196207",
+          "mts": 2342.0,
+          "fecha": "05/08/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "100207",
+          "cliente": "3x8145",
+          "mts": 638.0,
+          "fecha": "05/08/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "83995",
+          "cliente": "3x8145",
+          "mts": 864.0,
+          "fecha": "05/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "85189",
+          "cliente": "3x8145",
+          "mts": 1991.0,
+          "fecha": "07/09/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104266",
+          "cliente": "3x822548",
+          "mts": 635.0,
+          "fecha": "13/07/2026",
+          "color": "amarillo",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104294",
+          "cliente": "3x6120",
+          "mts": 1062.0,
+          "fecha": "14/07/2026",
+          "color": "amarillo",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104319",
+          "cliente": "3x160156",
+          "mts": 488.0,
+          "fecha": "14/07/2026",
+          "color": "amarillo",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104318",
+          "cliente": "3x160156",
+          "mts": 1697.0,
+          "fecha": "14/07/2026",
+          "color": "amarillo",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "94992",
+          "cliente": "3x6120",
+          "mts": 820.0,
+          "fecha": "14/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "96087",
+          "cliente": "3x1364547",
+          "mts": 687.0,
+          "fecha": "14/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "98888",
+          "cliente": "3x6583",
+          "mts": 340.0,
+          "fecha": "14/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104546",
+          "cliente": "3x178830",
+          "mts": 17100.0,
+          "fecha": "14/07/2026",
+          "color": "azul",
+          "tipo": "Otro",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "85877",
+          "cliente": "3x160458",
+          "mts": 1541.0,
+          "fecha": "15/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "93831",
+          "cliente": "3x6120",
+          "mts": 2364.0,
+          "fecha": "16/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "93881",
+          "cliente": "3x272066",
+          "mts": 500.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "84521",
+          "cliente": "3x6120",
+          "mts": 8382.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "102782",
+          "cliente": "3x732039",
+          "mts": 700.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "102780",
+          "cliente": "3x732039",
+          "mts": 700.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104560",
+          "cliente": "3x6648",
+          "mts": 2463.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "94384",
+          "cliente": "3x1012989",
+          "mts": 1030.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "103856",
+          "cliente": "3x261647",
+          "mts": 4930.0,
+          "fecha": "23/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "98015",
+          "cliente": "3x215575",
+          "mts": 24200.0,
+          "fecha": "27/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "100848",
+          "cliente": "3x6547",
+          "mts": 998.0,
+          "fecha": "31/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        }
+      ],
+      "es_cuello": false,
+      "fecha_prometida": "16/07/2026",
+      "carga_por_fecha": {
+        "01/09/2026": {
+          "mts": 998.0,
+          "ordenes": 1
+        },
+        "03/08/2026": {
+          "mts": 6404.0,
+          "ordenes": 2
+        },
+        "05/08/2026": {
+          "mts": 6186.0,
+          "ordenes": 4
+        },
+        "07/09/2026": {
+          "mts": 1991.0,
+          "ordenes": 1
+        },
+        "13/07/2026": {
+          "mts": 635.0,
+          "ordenes": 1
+        },
+        "14/07/2026": {
+          "mts": 22194.0,
+          "ordenes": 7
+        },
+        "15/07/2026": {
+          "mts": 1541.0,
+          "ordenes": 1
+        },
+        "16/07/2026": {
+          "mts": 2364.0,
+          "ordenes": 1
+        },
+        "22/07/2026": {
+          "mts": 13775.0,
+          "ordenes": 6
+        },
+        "23/07/2026": {
+          "mts": 4930.0,
+          "ordenes": 1
+        },
+        "27/07/2026": {
+          "mts": 24200.0,
+          "ordenes": 1
+        },
+        "31/07/2026": {
+          "mts": 998.0,
+          "ordenes": 1
+        }
+      }
+    },
+    "Rebobinadora (T) 4": {
+      "capacidad_dia": 16500,
+      "mts_total": 109049,
+      "dias_trabajo": 6.6,
+      "pct_cap": 33.0,
+      "ordenes": [
+        {
+          "op": "97296",
+          "cliente": "3x6584",
+          "mts": 1435.0,
+          "fecha": "03/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "89960",
+          "cliente": "3x196207",
+          "mts": 2205.0,
+          "fecha": "03/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "86753",
+          "cliente": "3x235822",
+          "mts": 1836.0,
+          "fecha": "03/08/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "99240",
+          "cliente": "3x261487",
+          "mts": 31433.0,
+          "fecha": "03/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Impresion"
+        },
+        {
+          "op": "104351",
+          "cliente": "3x160156",
+          "mts": 533.0,
+          "fecha": "13/07/2026",
+          "color": "amarillo",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104291",
+          "cliente": "3x6120",
+          "mts": 2360.0,
+          "fecha": "14/07/2026",
+          "color": "amarillo",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "86149",
+          "cliente": "3x6648",
+          "mts": 7100.0,
+          "fecha": "14/07/2026",
+          "color": "verde",
+          "tipo": "Blanca",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "102949",
+          "cliente": "3x349098",
+          "mts": 13107.0,
+          "fecha": "15/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "85215",
+          "cliente": "3x8161",
+          "mts": 2509.0,
+          "fecha": "16/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "96674",
+          "cliente": "3x354234",
+          "mts": 1380.0,
+          "fecha": "17/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "96677",
+          "cliente": "3x215575",
+          "mts": 29337.0,
+          "fecha": "17/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "87314",
+          "cliente": "3x6125",
+          "mts": 1000.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "93087",
+          "cliente": "3x8074",
+          "mts": 1460.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104158",
+          "cliente": "3x261647",
+          "mts": 2830.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "95335",
+          "cliente": "3x1012989",
+          "mts": 1213.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "95347",
+          "cliente": "3x1012989",
+          "mts": 848.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "94751",
+          "cliente": "3x1012989",
+          "mts": 726.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "94566",
+          "cliente": "3x1012989",
+          "mts": 1213.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104569",
+          "cliente": "3x6018",
+          "mts": 2396.0,
+          "fecha": "23/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "99172",
+          "cliente": "3x261647",
+          "mts": 3483.0,
+          "fecha": "24/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "96351",
+          "cliente": "3x6120",
+          "mts": 645.0,
+          "fecha": "31/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        }
+      ],
+      "es_cuello": false,
+      "fecha_prometida": "17/07/2026",
+      "carga_por_fecha": {
+        "03/08/2026": {
+          "mts": 36909.0,
+          "ordenes": 4
+        },
+        "13/07/2026": {
+          "mts": 533.0,
+          "ordenes": 1
+        },
+        "14/07/2026": {
+          "mts": 9460.0,
+          "ordenes": 2
+        },
+        "15/07/2026": {
+          "mts": 13107.0,
+          "ordenes": 1
+        },
+        "16/07/2026": {
+          "mts": 2509.0,
+          "ordenes": 1
+        },
+        "17/07/2026": {
+          "mts": 30717.0,
+          "ordenes": 2
+        },
+        "22/07/2026": {
+          "mts": 9290.0,
+          "ordenes": 7
+        },
+        "23/07/2026": {
+          "mts": 2396.0,
+          "ordenes": 1
+        },
+        "24/07/2026": {
+          "mts": 3483.0,
+          "ordenes": 1
+        },
+        "31/07/2026": {
+          "mts": 645.0,
+          "ordenes": 1
+        }
+      }
+    },
+    "Rebobinadora KM": {
+      "capacidad_dia": 16500,
+      "mts_total": 88656,
+      "dias_trabajo": 5.4,
+      "pct_cap": 26.9,
+      "ordenes": [
+        {
+          "op": "85499",
+          "cliente": "3x6436",
+          "mts": 2215.0,
+          "fecha": "03/08/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "89687",
+          "cliente": "3x196207",
+          "mts": 1570.0,
+          "fecha": "03/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "93148",
+          "cliente": "3x235822",
+          "mts": 4572.0,
+          "fecha": "03/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "89731",
+          "cliente": "3x196207",
+          "mts": 2205.0,
+          "fecha": "05/08/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "96362",
+          "cliente": "3x6120",
+          "mts": 713.0,
+          "fecha": "06/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104293",
+          "cliente": "3x6120",
+          "mts": 4120.0,
+          "fecha": "14/07/2026",
+          "color": "amarillo",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "88518",
+          "cliente": "3x160458",
+          "mts": 580.0,
+          "fecha": "14/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104329",
+          "cliente": "3x261620",
+          "mts": 766.0,
+          "fecha": "15/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104331",
+          "cliente": "3x261620",
+          "mts": 1231.0,
+          "fecha": "15/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "87753",
+          "cliente": "3x6120",
+          "mts": 2163.0,
+          "fecha": "15/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104328",
+          "cliente": "3x261620",
+          "mts": 815.0,
+          "fecha": "15/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104327",
+          "cliente": "3x261620",
+          "mts": 558.0,
+          "fecha": "15/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "95157",
+          "cliente": "3x6097",
+          "mts": 694.0,
+          "fecha": "15/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
+          "etapa": "Troquelado"
+        },
+        {
+          "op": "90048",
+          "cliente": "3x6017",
+          "mts": 487.0,
+          "fecha": "15/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "98890",
+          "cliente": "3x6154",
+          "mts": 313.0,
+          "fecha": "15/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "88317",
+          "cliente": "3x7535",
+          "mts": 400.0,
+          "fecha": "15/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "84998",
+          "cliente": "3x7948",
+          "mts": 752.0,
+          "fecha": "15/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Troquelado"
+        },
+        {
+          "op": "85125",
+          "cliente": "3x161884",
+          "mts": 541.0,
+          "fecha": "15/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Troquelado"
+        },
+        {
+          "op": "104544",
+          "cliente": "3x178830",
+          "mts": 80.0,
+          "fecha": "15/07/2026",
+          "color": "azul",
+          "tipo": "Otro",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "87083",
+          "cliente": "3x7560",
+          "mts": 690.0,
+          "fecha": "16/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "89548",
+          "cliente": "3x160832",
+          "mts": 2586.0,
+          "fecha": "16/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "103854",
+          "cliente": "3x224920",
+          "mts": 110.0,
+          "fecha": "16/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "103851",
+          "cliente": "3x224920",
+          "mts": 336.0,
+          "fecha": "16/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104558",
+          "cliente": "3x292274",
+          "mts": 2460.0,
+          "fecha": "16/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104414",
+          "cliente": "3x6209",
+          "mts": 1480.0,
+          "fecha": "17/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "97051",
+          "cliente": "3x215575",
+          "mts": 18482.0,
+          "fecha": "17/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "86957",
+          "cliente": "3x6120",
+          "mts": 699.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104430",
+          "cliente": "3x178830",
+          "mts": 10000.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Otro",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "103734",
+          "cliente": "3x261647",
+          "mts": 5247.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
           "op": "98983",
           "cliente": "3x1012989",
           "mts": 1487.0,
           "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104024",
+          "cliente": "3x261647",
+          "mts": 5568.0,
+          "fecha": "23/07/2026",
           "color": "azul",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
@@ -11540,10 +11491,37 @@
           "etapa": "Preparacion"
         },
         {
+          "op": "101362",
+          "cliente": "3x261620",
+          "mts": 3833.0,
+          "fecha": "30/09/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "84518",
+          "cliente": "3x6120",
+          "mts": 2840.0,
+          "fecha": "31/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
           "op": "83875",
           "cliente": "3x261596",
           "mts": 1379.0,
           "fecha": "31/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "99472",
+          "cliente": "3x161936",
+          "mts": 681.0,
+          "fecha": "31/08/2026",
           "color": "azul",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
@@ -11553,88 +11531,65 @@
       "fecha_prometida": "16/07/2026",
       "carga_por_fecha": {
         "03/08/2026": {
-          "mts": 5231.0,
-          "ordenes": 1
+          "mts": 8357.0,
+          "ordenes": 3
         },
         "05/08/2026": {
-          "mts": 6186.0,
-          "ordenes": 4
-        },
-        "07/09/2026": {
-          "mts": 1991.0,
+          "mts": 2205.0,
           "ordenes": 1
         },
-        "13/07/2026": {
-          "mts": 533.0,
+        "06/08/2026": {
+          "mts": 713.0,
           "ordenes": 1
         },
         "14/07/2026": {
-          "mts": 30405.0,
-          "ordenes": 7
-        },
-        "14/08/2026": {
-          "mts": 882.0,
-          "ordenes": 1
+          "mts": 4700.0,
+          "ordenes": 2
         },
         "15/07/2026": {
-          "mts": 1541.0,
-          "ordenes": 1
+          "mts": 8800.0,
+          "ordenes": 12
+        },
+        "16/07/2026": {
+          "mts": 6182.0,
+          "ordenes": 5
         },
         "17/07/2026": {
           "mts": 19962.0,
           "ordenes": 2
         },
         "21/07/2026": {
-          "mts": 5700.0,
-          "ordenes": 1
+          "mts": 10699.0,
+          "ordenes": 2
         },
         "22/07/2026": {
-          "mts": 13942.0,
-          "ordenes": 10
+          "mts": 6734.0,
+          "ordenes": 2
         },
         "23/07/2026": {
-          "mts": 6003.0,
+          "mts": 11571.0,
+          "ordenes": 2
+        },
+        "30/09/2026": {
+          "mts": 3833.0,
           "ordenes": 1
         },
         "31/07/2026": {
-          "mts": 1379.0,
+          "mts": 4219.0,
+          "ordenes": 2
+        },
+        "31/08/2026": {
+          "mts": 681.0,
           "ordenes": 1
         }
       }
     },
     "Troqueladora 1": {
       "capacidad_dia": 16500,
-      "mts_total": 43761,
-      "dias_trabajo": 2.7,
-      "pct_cap": 13.3,
+      "mts_total": 41907,
+      "dias_trabajo": 2.5,
+      "pct_cap": 12.7,
       "ordenes": [
-        {
-          "op": "85464",
-          "cliente": "3x6436",
-          "mts": 1717.0,
-          "fecha": "01/08/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "97039",
-          "cliente": "3x379655",
-          "mts": 8000.0,
-          "fecha": "11/09/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "Troquelado"
-        },
-        {
-          "op": "96565",
-          "cliente": "3x8145",
-          "mts": 2137.0,
-          "fecha": "12/08/2026",
-          "color": "verde",
-          "tipo": "Blanca",
-          "etapa": "Troquelado"
-        },
         {
           "op": "83840",
           "cliente": "3x292274",
@@ -11697,23 +11652,20 @@
           "color": "azul",
           "tipo": "Fondo",
           "etapa": "Preparacion"
+        },
+        {
+          "op": "104439",
+          "cliente": "3x178830",
+          "mts": 10000.0,
+          "fecha": "28/07/2026",
+          "color": "azul",
+          "tipo": "Otro",
+          "etapa": "Preparacion"
         }
       ],
       "es_cuello": false,
       "fecha_prometida": "13/07/2026",
       "carga_por_fecha": {
-        "01/08/2026": {
-          "mts": 1717.0,
-          "ordenes": 1
-        },
-        "11/09/2026": {
-          "mts": 8000.0,
-          "ordenes": 1
-        },
-        "12/08/2026": {
-          "mts": 2137.0,
-          "ordenes": 1
-        },
         "14/07/2026": {
           "mts": 5979.0,
           "ordenes": 1
@@ -11728,6 +11680,10 @@
         },
         "21/07/2026": {
           "mts": 7518.0,
+          "ordenes": 1
+        },
+        "28/07/2026": {
+          "mts": 10000.0,
           "ordenes": 1
         }
       }
@@ -11825,9 +11781,9 @@
     },
     "Troqueladora 3": {
       "capacidad_dia": 16500,
-      "mts_total": 40857,
-      "dias_trabajo": 2.5,
-      "pct_cap": 12.4,
+      "mts_total": 40102,
+      "dias_trabajo": 2.4,
+      "pct_cap": 12.2,
       "ordenes": [
         {
           "op": "84886",
@@ -11875,28 +11831,19 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "84971",
-          "cliente": "3x6648",
-          "mts": 940.0,
-          "fecha": "23/07/2026",
+          "op": "98199",
+          "cliente": "3x379655",
+          "mts": 3584.0,
+          "fecha": "22/07/2026",
           "color": "azul",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
         {
-          "op": "84713",
-          "cliente": "3x6648",
-          "mts": 3399.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "Troquelado"
-        },
-        {
-          "op": "104439",
+          "op": "104436",
           "cliente": "3x178830",
           "mts": 10000.0,
-          "fecha": "28/07/2026",
+          "fecha": "24/07/2026",
           "color": "azul",
           "tipo": "Otro",
           "etapa": "Preparacion"
@@ -11914,14 +11861,10 @@
           "ordenes": 2
         },
         "22/07/2026": {
-          "mts": 1292.0,
-          "ordenes": 2
+          "mts": 4876.0,
+          "ordenes": 3
         },
-        "23/07/2026": {
-          "mts": 4339.0,
-          "ordenes": 2
-        },
-        "28/07/2026": {
+        "24/07/2026": {
           "mts": 10000.0,
           "ordenes": 1
         }
@@ -11929,10 +11872,37 @@
     },
     "Troqueladora Aut 4": {
       "capacidad_dia": 16500,
-      "mts_total": 37635,
-      "dias_trabajo": 2.3,
-      "pct_cap": 11.4,
+      "mts_total": 43828,
+      "dias_trabajo": 2.7,
+      "pct_cap": 13.3,
       "ordenes": [
+        {
+          "op": "85464",
+          "cliente": "3x6436",
+          "mts": 1717.0,
+          "fecha": "01/08/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "97039",
+          "cliente": "3x379655",
+          "mts": 8000.0,
+          "fecha": "11/09/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Troquelado"
+        },
+        {
+          "op": "96565",
+          "cliente": "3x8145",
+          "mts": 2137.0,
+          "fecha": "12/08/2026",
+          "color": "verde",
+          "tipo": "Blanca",
+          "etapa": "Troquelado"
+        },
         {
           "op": "84391",
           "cliente": "3x6278",
@@ -12060,18 +12030,39 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104436",
-          "cliente": "3x178830",
-          "mts": 10000.0,
-          "fecha": "24/07/2026",
+          "op": "84971",
+          "cliente": "3x6648",
+          "mts": 940.0,
+          "fecha": "23/07/2026",
           "color": "azul",
-          "tipo": "Otro",
+          "tipo": "Blanca",
           "etapa": "Preparacion"
+        },
+        {
+          "op": "84713",
+          "cliente": "3x6648",
+          "mts": 3399.0,
+          "fecha": "23/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Troquelado"
         }
       ],
       "es_cuello": false,
       "fecha_prometida": "13/07/2026",
       "carga_por_fecha": {
+        "01/08/2026": {
+          "mts": 1717.0,
+          "ordenes": 1
+        },
+        "11/09/2026": {
+          "mts": 8000.0,
+          "ordenes": 1
+        },
+        "12/08/2026": {
+          "mts": 2137.0,
+          "ordenes": 1
+        },
         "15/07/2026": {
           "mts": 11056.0,
           "ordenes": 6
@@ -12092,17 +12083,17 @@
           "mts": 5212.0,
           "ordenes": 2
         },
-        "24/07/2026": {
-          "mts": 10000.0,
-          "ordenes": 1
+        "23/07/2026": {
+          "mts": 4339.0,
+          "ordenes": 2
         }
       }
     },
     "Troqueladora Plana": {
       "capacidad_dia": 16500,
-      "mts_total": 32690,
-      "dias_trabajo": 2.0,
-      "pct_cap": 9.9,
+      "mts_total": 35199,
+      "dias_trabajo": 2.1,
+      "pct_cap": 10.7,
       "ordenes": [
         {
           "op": "100849",
@@ -12240,6 +12231,15 @@
           "etapa": "RM4 - Reboninado"
         },
         {
+          "op": "85215",
+          "cliente": "3x8161",
+          "mts": 2509.0,
+          "fecha": "16/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
           "op": "104334",
           "cliente": "3x1341852",
           "mts": 1217.0,
@@ -12343,6 +12343,10 @@
         "15/07/2026": {
           "mts": 8722.0,
           "ordenes": 10
+        },
+        "16/07/2026": {
+          "mts": 2509.0,
+          "ordenes": 1
         },
         "17/07/2026": {
           "mts": 4912.0,
