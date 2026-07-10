@@ -268,6 +268,21 @@ def fetch_and_process():
     for ref in op_groups:
         op_groups[ref].sort(key=_op_num)
 
+    # === DIAGNOSTICO TEMPORAL: revisar valor crudo del campo Organizacion ===
+    # Se puede borrar este bloque una vez identificada la causa.
+    _op_targets = {'104223', '84391', '104266', '04266'}
+    print(f"[DEBUG-ORG] Buscando OPs: {_op_targets}")
+    for op in ordenes:
+        onum = str(op.get(OP['number'], '')).strip()
+        if onum in _op_targets:
+            ref = op.get(OP['referencia'], '').strip()
+            prods_match = prod_groups.get(ref, [])
+            print(f"[DEBUG-ORG] OP {onum} | referencia={ref!r} | producciones_encontradas={len(prods_match)}")
+            for p in prods_match:
+                raw_org = p.get(PROD['organizacion'])
+                print(f"[DEBUG-ORG]   -> organizacion RAW = {raw_org!r} (tipo Python: {type(raw_org).__name__})")
+    print(f"[DEBUG-ORG] === FIN DIAGNOSTICO ===")
+
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
     # 1:1, no muchos a muchos). Cuando una referencia se repite (reordenes), se
     # emparejan en el mismo orden cronologico en que fueron creadas ambos lados.
