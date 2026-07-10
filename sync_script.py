@@ -2,7 +2,7 @@
 sync_script.py — Consulta Vtiger y genera latest.json.
 Union por nombre de referencia (muchos a muchos).
 """
-import os, json, requests, pandas as pd
+import os, json, re, requests, pandas as pd
 from datetime import datetime
 import pytz, warnings
 warnings.filterwarnings('ignore')
@@ -268,20 +268,29 @@ def fetch_and_process():
     for ref in op_groups:
         op_groups[ref].sort(key=_op_num)
 
-    # === DIAGNOSTICO TEMPORAL: revisar valor crudo del campo Organizacion ===
-    # Se puede borrar este bloque una vez identificada la causa.
-    _op_targets = {'104223', '84391', '104266', '04266'}
-    print(f"[DEBUG-ORG] Buscando OPs: {_op_targets}")
-    for op in ordenes:
-        onum = str(op.get(OP['number'], '')).strip()
-        if onum in _op_targets:
-            ref = op.get(OP['referencia'], '').strip()
-            prods_match = prod_groups.get(ref, [])
-            print(f"[DEBUG-ORG] OP {onum} | referencia={ref!r} | producciones_encontradas={len(prods_match)}")
-            for p in prods_match:
-                raw_org = p.get(PROD['organizacion'])
-                print(f"[DEBUG-ORG]   -> organizacion RAW = {raw_org!r} (tipo Python: {type(raw_org).__name__})")
-    print(f"[DEBUG-ORG] === FIN DIAGNOSTICO ===")
+    # === DIAGNOSTICO TEMPORAL: resolver un ID crudo via endpoint retrieve ===
+    # Se puede borrar este bloque una vez identificado el campo correcto.
+    _ids_crudos_vistos = set()
+    for ref, prods in prod_groups.items():
+        for p in prods:
+            raw_org = str(p.get(PROD['organizacion'], ''))
+            if re.match(r'^\d+x\d+$', raw_org):
+                _ids_crudos_vistos.add(raw_org)
+    print(f"[DEBUG-RETRIEVE] IDs crudos sin resolver encontrados en esta corrida: {len(_ids_crudos_vistos)}")
+    for crmid in list(_ids_crudos_vistos)[:2]:
+        try:
+            r = requests.get(f"{API_BASE}/retrieve", auth=_auth(), params={'id': crmid}, timeout=30, verify=False)
+            data = r.json()
+            print(f"[DEBUG-RETRIEVE] retrieve({crmid}) -> success={data.get('success')}")
+            if data.get('success'):
+                result = data.get('result', {})
+                print(f"[DEBUG-RETRIEVE] Campos disponibles: {list(result.keys())}")
+                print(f"[DEBUG-RETRIEVE] Registro completo: {result}")
+            else:
+                print(f"[DEBUG-RETRIEVE] Error: {data.get('error')}")
+        except Exception as e:
+            print(f"[DEBUG-RETRIEVE] Excepcion consultando {crmid}: {e}")
+    print(f"[DEBUG-RETRIEVE] === FIN DIAGNOSTICO ===")
 
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
     # 1:1, no muchos a muchos). Cuando una referencia se repite (reordenes), se
