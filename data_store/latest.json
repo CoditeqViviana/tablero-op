@@ -1,5 +1,5 @@
 {
-  "updated_at": "13/07/2026 13:50",
+  "updated_at": "13/07/2026 16:10",
   "source": "vtiger_api_github_actions",
   "today": "2026-07-13",
   "hoy": "2026-07-13",
@@ -48,7 +48,7 @@
     "Nilpeter 1": {
       "2026-07-13": 0,
       "2026-07-14": 0,
-      "2026-07-15": 7,
+      "2026-07-15": 5,
       "2026-07-16": 1,
       "2026-07-17": 0
     },
@@ -69,7 +69,7 @@
     "Rebobinadora": {
       "2026-07-13": 0,
       "2026-07-14": 1,
-      "2026-07-15": 6,
+      "2026-07-15": 8,
       "2026-07-16": 7,
       "2026-07-17": 5
     },
@@ -458,8 +458,8 @@
       "op": "104329",
       "cliente": "PDC VINOS Y LICORES SAS",
       "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-LABRUSCA-VTINTO",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -469,15 +469,15 @@
       "pct_prioridad": "55.51%",
       "mts": 766.0,
       "pct_buffer": 84.6,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
       "op": "104330",
       "cliente": "PDC VINOS Y LICORES SAS",
       "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-LABRUSCA-VTINTO",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -487,7 +487,7 @@
       "pct_prioridad": "55.51%",
       "mts": 766.0,
       "pct_buffer": 84.6,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -1649,8 +1649,8 @@
       "op": "104329",
       "cliente": "PDC VINOS Y LICORES SAS",
       "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-LABRUSCA-VTINTO",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -1660,15 +1660,15 @@
       "pct_prioridad": "55.51%",
       "mts": 766.0,
       "pct_buffer": 84.6,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
       "op": "104330",
       "cliente": "PDC VINOS Y LICORES SAS",
       "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-LABRUSCA-VTINTO",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
@@ -1678,7 +1678,7 @@
       "pct_prioridad": "55.51%",
       "mts": 766.0,
       "pct_buffer": 84.6,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -2820,7 +2820,7 @@
       "cliente": "CARVAJAL SOLUCIONES DE COMUNICACION S.A.S. BIC",
       "referencia": "IC-PTER-101.6X279.4-R90-N-1F-19mm-ENEL-FEST-CODEN-AGOSTO-2026",
       "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
+      "etapa": "Impresion",
       "tipo": "Impresa",
       "fecha_entrega": "21/07/2026",
       "fecha_entrega_raw": "2026-07-21",
@@ -5605,8 +5605,8 @@
       "op": "104329",
       "cliente": "PDC VINOS Y LICORES SAS",
       "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-LABRUSCA-VTINTO",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "mts": 766.0,
       "familia": "F9",
@@ -5621,8 +5621,8 @@
       "op": "104330",
       "cliente": "PDC VINOS Y LICORES SAS",
       "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-LABRUSCA-VTINTO",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "mts": 766.0,
       "familia": "F9",
@@ -6742,7 +6742,7 @@
       "cliente": "CARVAJAL SOLUCIONES DE COMUNICACION S.A.S. BIC",
       "referencia": "IC-PTER-101.6X279.4-R90-N-1F-19mm-ENEL-FEST-CODEN-AGOSTO-2026",
       "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
+      "etapa": "Impresion",
       "tipo": "Impresa",
       "mts": 76030.0,
       "familia": "F17",
@@ -9224,7 +9224,7 @@
   "std_data": {
     "Nilpeter 1": {
       "2026-07-06": 10352.0,
-      "2026-07-13": 4394.0,
+      "2026-07-13": 2862.0,
       "2026-07-10": 3572.0,
       "2026-07-17": 1203.0,
       "2026-07-08": 15000.0,
@@ -9274,9 +9274,9 @@
     "Nilpeter 1": {
       "mts_atrasados": 10352,
       "n_atrasadas": 1,
-      "mts_pendientes": 35105,
-      "n_pendientes": 21,
-      "mts_total": 45457,
+      "mts_pendientes": 33573,
+      "n_pendientes": 19,
+      "mts_total": 43925,
       "turnos_atrasados": 1.3,
       "dias_atrasados": 0.4,
       "cap_turno": 7962,
@@ -9284,38 +9284,38 @@
         {
           "dias": 3,
           "turnos": 9,
-          "mts_por_turno": 5051,
-          "vel_req": 22.2,
-          "efic_req": 31.7,
-          "vel_comb": 22.2,
-          "efic_comb": 50.0
+          "mts_por_turno": 4881,
+          "vel_req": 21.5,
+          "efic_req": 30.6,
+          "vel_comb": 21.5,
+          "efic_comb": 49.9
         },
         {
           "dias": 5,
           "turnos": 15,
-          "mts_por_turno": 3030,
-          "vel_req": 13.3,
-          "efic_req": 19.0,
-          "vel_comb": 13.3,
-          "efic_comb": 50.1
+          "mts_por_turno": 2928,
+          "vel_req": 12.9,
+          "efic_req": 18.4,
+          "vel_comb": 12.9,
+          "efic_comb": 49.9
         },
         {
           "dias": 7,
           "turnos": 21,
-          "mts_por_turno": 2165,
-          "vel_req": 9.5,
-          "efic_req": 13.6,
-          "vel_comb": 9.5,
-          "efic_comb": 50.1
+          "mts_por_turno": 2092,
+          "vel_req": 9.2,
+          "efic_req": 13.1,
+          "vel_comb": 9.2,
+          "efic_comb": 50.0
         },
         {
           "dias": 10,
           "turnos": 30,
-          "mts_por_turno": 1515,
-          "vel_req": 6.7,
-          "efic_req": 9.5,
-          "vel_comb": 6.7,
-          "efic_comb": 49.7
+          "mts_por_turno": 1464,
+          "vel_req": 6.4,
+          "efic_req": 9.2,
+          "vel_comb": 6.4,
+          "efic_comb": 50.3
         }
       ]
     },
@@ -9419,9 +9419,9 @@
   "cuellos": {
     "NP1": {
       "capacidad_dia": 23100,
-      "mts_total": 45457,
-      "dias_trabajo": 2.0,
-      "pct_cap": 9.8,
+      "mts_total": 43925,
+      "dias_trabajo": 1.9,
+      "pct_cap": 9.5,
       "ordenes": [
         {
           "op": "104223",
@@ -9429,24 +9429,6 @@
           "mts": 10352.0,
           "fecha": "08/07/2026",
           "color": "negro",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104329",
-          "cliente": "PDC VINOS Y LICORES SAS",
-          "mts": 766.0,
-          "fecha": "15/07/2026",
-          "color": "rojo",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104330",
-          "cliente": "PDC VINOS Y LICORES SAS",
-          "mts": 766.0,
-          "fecha": "15/07/2026",
-          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -9623,15 +9605,15 @@
         }
       ],
       "es_cuello": false,
-      "fecha_prometida": "15/07/2026",
+      "fecha_prometida": "14/07/2026",
       "carga_por_fecha": {
         "08/07/2026": {
           "mts": 10352.0,
           "ordenes": 1
         },
         "15/07/2026": {
-          "mts": 8524.0,
-          "ordenes": 7
+          "mts": 6992.0,
+          "ordenes": 5
         },
         "16/07/2026": {
           "mts": 15000.0,
@@ -9712,7 +9694,7 @@
           "fecha": "21/07/2026",
           "color": "verde",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
+          "etapa": "Impresion"
         },
         {
           "op": "92910",
@@ -10911,7 +10893,7 @@
           "fecha": "15/07/2026",
           "color": "rojo",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104331",
@@ -11294,7 +11276,7 @@
           "fecha": "15/07/2026",
           "color": "rojo",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104332",
@@ -12974,7 +12956,7 @@
       "capacidad_dia": 23888,
       "por_fecha": {
         "2026-07-08": 10352.0,
-        "2026-07-15": 8524.0,
+        "2026-07-15": 6992.0,
         "2026-07-16": 15000.0,
         "2026-07-21": 1398.0,
         "2026-07-22": 2604.0,
@@ -13039,9 +13021,9 @@
           "estado": "ok"
         },
         "2026-07-15": {
-          "planeado": 8524.0,
+          "planeado": 6992.0,
           "capacidad": 23888,
-          "pct": 35.7,
+          "pct": 29.3,
           "estado": "ok"
         },
         "2026-07-16": {
