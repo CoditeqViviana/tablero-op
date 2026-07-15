@@ -431,7 +431,7 @@ def fetch_and_process():
         return False
 
     # --- DEBUG TEMPORAL: OPs problematicas y todas las Producciones de sus refs ---
-    _ops_debug = {'104100', '103549', '103525', '104402', '104096', '103641', '103461'}
+    _ops_debug = {'103483', '103482', '101362', '101363'}
     _refs_debug = set()
     for r in rows:
         op_str = str(r.get('op_number', '')).strip()
@@ -447,11 +447,13 @@ def fetch_and_process():
                   f"ref={r['referencia']}")
 
     # Mostrar TODAS las Producciones Y TODAS las OPs de las referencias problematicas
+    # incluyendo el NUMERO VISIBLE (NP...) para poder cruzar contra lo que se ve en Vtiger
     for ref in sorted(_refs_debug):
         prods_ref = [p for p in producciones if p.get(PROD['referencia'], '').strip() == ref]
         print(f"[DEBUG-REF-PROD] '{ref}': {len(prods_ref)} Producciones:")
         for p in sorted(prods_ref, key=lambda x: str(x.get(PROD['fecha_creacion'], ''))):
-            print(f"[DEBUG-REF-PROD]   id={p.get('id')} | created={str(p.get(PROD['fecha_creacion'],''))[:10]} | "
+            print(f"[DEBUG-REF-PROD]   NUMERO={p.get('vtcmproduccionnumber')} | id={p.get('id')} | "
+                  f"created={str(p.get(PROD['fecha_creacion'],''))[:10]} | "
                   f"entrega_prod={repr(p.get(PROD['entrega_prod'],''))} | "
                   f"hab={_es_habilitado(p.get(PROD['entrega_prod'],''))}")
         ops_ref = op_groups.get(ref, [])
@@ -460,6 +462,18 @@ def fetch_and_process():
             print(f"[DEBUG-REF-OP]   id={o.get('id')} | number={o.get(OP['number'])} | "
                   f"created={str(o.get('createdtime',''))[:10]} | "
                   f"fecha_entrega={o.get(OP['fecha_entrega'],'')}")
+
+    # Busqueda DIRECTA por numero visible NP106592, ANTES de cualquier filtro
+    # (asignado a plataforma, habilitado, etc.) para ver su estado real crudo
+    _np_buscar = {'NP106592'}
+    for p in producciones:
+        if p.get('vtcmproduccionnumber') in _np_buscar:
+            print(f"[DEBUG-NP] {p.get('vtcmproduccionnumber')} | id={p.get('id')} | "
+                  f"referencia={repr(p.get(PROD['referencia'], ''))} | "
+                  f"entrega_prod={repr(p.get(PROD['entrega_prod'], ''))} | "
+                  f"hab={_es_habilitado(p.get(PROD['entrega_prod'], ''))} | "
+                  f"asignado={p.get(PROD['asignado'])} | "
+                  f"created={str(p.get(PROD['fecha_creacion'], ''))[:10]}")
 
     # --- FILTRO 1: excluir habilitadas (post-match) ---
     rows_pre = len(rows)
