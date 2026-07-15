@@ -272,15 +272,12 @@ def fetch_and_process():
         prod_groups[ref].sort(key=lambda p: str(p.get(PROD['fecha_creacion'], '')))
     print(f"[sync] Referencias unicas: {len(prod_groups)}")
 
-    # 2. Ordenes: NO se filtra por su fecha de entrega propia (ya no es el campo
-    # que gobierna el tablero), pero SI se acota por fecha de CREACION de la OP
-    # con margen amplio, solo por rendimiento (el universo completo sin filtro
-    # son decenas de miles de registros historicos). Una OP ligada a una
-    # Produccion con entrega prometida en 2025-2026 casi nunca se crea antes
-    # de 2024, asi que este margen no deberia excluir datos legitimos.
-    print("[sync] Consultando ordenes (creadas desde 2024-01-01)...")
+    # 2. Ordenes: se filtra por su propia Fecha de Entrega (vuelve a ser el
+    # campo canonico que gobierna todo el tablero). Igual que con Produccion,
+    # solo el limite inferior funciona en la API ('>=' no esta soportado).
+    print("[sync] Consultando ordenes (fecha de entrega > 2024-12-31)...")
     ordenes = vtiger_query(
-        "SELECT * FROM vtcmordendeproduccion WHERE createdtime > '2024-01-01'"
+        "SELECT * FROM vtcmordendeproduccion WHERE cf_vtcmordendeproduccion_fechadeentrega > '2024-12-31'"
     )
     print(f"[sync] Ordenes: {len(ordenes)}")
 
@@ -357,10 +354,11 @@ def fetch_and_process():
     df = pd.DataFrame(rows)
     # 'fecha_entrega' es la fuente unica de verdad para TODO el tablero (panorama
     # semanal, colores TOC, capacidad RRC, cuellos de botella, tambor, diagnostico
-    # e incumplidas): se toma de Fecha Entrega Prometida (modulo Produccion), NO
-    # de la Fecha de Entrega interna de la OP (que es de planeacion de planta y
-    # puede no reflejar el compromiso real con el cliente).
-    df['fecha_entrega'] = pd.to_datetime(df['fecha_prometida'], errors='coerce')
+    # e incumplidas): se toma de Fecha de Entrega (modulo Orden de Produccion),
+    # que es la fecha operativa real de planta. Fecha Entrega Prometida (modulo
+    # Produccion) se guarda en 'fecha_prometida' para referencia pero ya no
+    # gobierna el tablero.
+    df['fecha_entrega'] = pd.to_datetime(df['fecha_entrega_raw'], errors='coerce')
     df['fecha_creacion'] = pd.to_datetime(df['fecha_creacion_raw'], format='%d-%m-%Y %I:%M %p', errors='coerce')
     df['mts'] = df['mts_lineales']
     # Asignacion de maquina: usa etapa (rebobinado/troquelado) + primera maquina
