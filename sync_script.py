@@ -304,32 +304,25 @@ def fetch_and_process():
     for ref in op_groups:
         op_groups[ref].sort(key=_op_num)
 
-    # === DIAGNOSTICO TEMPORAL: comparar Fecha de Entrega cruda vs Excel ===
-    # Se puede borrar este bloque una vez identificada la causa.
-    _op_targets_debug = {
-        '104331': 'VENCIDA(Excel)=2026-07-14', '104332': 'VENCIDA(Excel)=2026-07-14',
-        '104456': 'VENCIDA(Excel)=2026-07-14', '104625': 'VENCIDA(Excel)=2026-07-14',
-        '104642': 'VENCIDA(Excel)=2026-07-14',
-        '101366': 'FUTURA(Excel)=2026-09-29', '101372': 'FUTURA(Excel)=2026-09-30',
-        '103460': 'FUTURA(Excel)=2026-08-04', '103481': 'FUTURA(Excel)=2026-08-04',
-        '103480': 'FUTURA(Excel)=2026-08-04',
-    }
-    print(f"[DEBUG-FECHA] Comparando {len(_op_targets_debug)} OPs contra el Excel...")
-    for op in ordenes:
-        onum = str(op.get(OP['number'], '')).strip()
-        if onum in _op_targets_debug:
-            raw_fecha = op.get(OP['fecha_entrega'], '')
-            print(f"[DEBUG-FECHA] OP {onum} | {_op_targets_debug[onum]} | "
-                  f"API RAW cf_vtcmordendeproduccion_fechadeentrega = {raw_fecha!r}")
-    print(f"[DEBUG-FECHA] === FIN DIAGNOSTICO ===")
-
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
     # 1:1, no muchos a muchos). Cuando una referencia se repite (reordenes), se
     # emparejan en el mismo orden cronologico en que fueron creadas ambos lados.
+    #
+    # IMPORTANTE: op_groups puede traer OPs de reordenes HISTORICOS ya cerrados
+    # (su Produccion original ya no pasa el filtro de Asignado/Entrega, pero su
+    # propia Fecha de Entrega aun cae dentro del rango de la query). Si sobran
+    # OPs frente a Producciones vigentes para una referencia, nos quedamos con
+    # las OPs MAS RECIENTES (mayor numero) -- las antiguas casi siempre
+    # pertenecen a esos pedidos ya cerrados y no deben emparejarse con la
+    # Produccion actual.
     rows = []
     sin_op = 0
+    _n_ajustados = 0
     for ref, prods in prod_groups.items():
         ops_for_ref = op_groups.get(ref, [])
+        if len(ops_for_ref) > len(prods):
+            ops_for_ref = ops_for_ref[-len(prods):]
+            _n_ajustados += 1
         for i, prod in enumerate(prods):
             if i >= len(ops_for_ref):
                 sin_op += 1
@@ -364,7 +357,8 @@ def fetch_and_process():
                 'obs_ocop': prod.get(PROD['obs_ocop'], ''),
             })
 
-    print(f"[sync] {sin_op} Producciones sin OP, {len(rows)} filas OK")
+    print(f"[sync] {sin_op} Producciones sin OP, {len(rows)} filas OK "
+          f"({_n_ajustados} referencias con reordenes historicos ajustadas)")
     if not rows:
         print("[sync] ERROR: 0 filas construidas")
         return False
