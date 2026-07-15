@@ -1,5 +1,5 @@
 {
-  "updated_at": "15/07/2026 06:03",
+  "updated_at": "15/07/2026 06:47",
   "source": "vtiger_api_github_actions",
   "today": "2026-07-15",
   "hoy": "2026-07-15",
@@ -49,7 +49,7 @@
       "2026-07-14": 2,
       "2026-07-15": 1,
       "2026-07-16": 0,
-      "2026-07-17": 4
+      "2026-07-17": 3
     },
     "Nilpeter 2": {
       "2026-07-13": 0,
@@ -60,10 +60,10 @@
     },
     "Rebobinadora": {
       "2026-07-13": 0,
-      "2026-07-14": 5,
+      "2026-07-14": 4,
       "2026-07-15": 4,
       "2026-07-16": 3,
-      "2026-07-17": 5
+      "2026-07-17": 6
     },
     "Troqueladora Plana": {
       "2026-07-13": 0,
@@ -82,16 +82,16 @@
   },
   "totales_dia": {
     "2026-07-13": 0,
-    "2026-07-14": 11,
+    "2026-07-14": 10,
     "2026-07-15": 11,
     "2026-07-16": 20,
     "2026-07-17": 40
   },
-  "total_semana": 82,
-  "total_ordenes": 246,
-  "inc_total": 20,
+  "total_semana": 81,
+  "total_ordenes": 245,
+  "inc_total": 19,
   "inc_maq": {
-    "Rebobinadora": 12,
+    "Rebobinadora": 11,
     "Kromia": 3,
     "Nilpeter 1": 2,
     "Troqueladora Rotativa 1": 2,
@@ -99,7 +99,7 @@
   },
   "inc_etapas": {
     "RM4 - Reboninado": {
-      "total": 12,
+      "total": 11,
       "ordenes": [
         {
           "cliente": "PDC VINOS Y LICORES SAS",
@@ -115,11 +115,6 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "tipo": "Fondo",
           "op": "104643"
-        },
-        {
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "tipo": "Fondo",
-          "op": "104645"
         },
         {
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
@@ -320,14 +315,6 @@
     },
     {
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-AZUL-277C-PREP",
-      "op": "104645",
-      "tipo": "Fondo",
-      "etapa": "RM4 - Reboninado",
-      "fecha_entrega": "14/07/2026"
-    },
-    {
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "FD-TTT-76X127-R1100-M-1F-C30-AMARILLO-100C-PREP",
       "op": "104625",
       "tipo": "Fondo",
@@ -434,9 +421,9 @@
       "tiempo_produccion": "Programada"
     },
     {
-      "op": "103482",
+      "op": "103483",
       "cliente": "HADA INTERNATIONAL SAS",
-      "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-FRENTE-SHAM-LITT-ANG",
+      "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-CONTRA-SHAM-LITTLE-ANG",
       "maquina": "Rebobinadora",
       "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
@@ -452,9 +439,9 @@
       "tiempo_produccion": "Programada"
     },
     {
-      "op": "103483",
+      "op": "103482",
       "cliente": "HADA INTERNATIONAL SAS",
-      "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-CONTRA-SHAM-LITTLE-ANG",
+      "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-FRENTE-SHAM-LITT-ANG",
       "maquina": "Rebobinadora",
       "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
@@ -542,24 +529,6 @@
       "tiempo_produccion": "Programada"
     },
     {
-      "op": "104645",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-AZUL-277C-PREP",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Fondo",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 5,
-      "color_toc": "negro",
-      "pct_prioridad": "82.27%",
-      "mts": 888.0,
-      "pct_buffer": 120.0,
-      "en_impresion": false,
-      "tiempo_produccion": "Mayor al Standar"
-    },
-    {
       "op": "104625",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "FD-TTT-76X127-R1100-M-1F-C30-AMARILLO-100C-PREP",
@@ -614,27 +583,27 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104642",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-SALMON-162C",
-      "maquina": "Kromia",
+      "op": "104331",
+      "cliente": "PDC VINOS Y LICORES SAS",
+      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-DEMISEC-VBLANCO",
+      "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
-      "tipo": "Fondo",
+      "tipo": "Impresa",
       "fecha_entrega": "14/07/2026",
       "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "10/07/2026",
-      "dias_ofrecidos": 3,
+      "fecha_creacion": "01/07/2026",
+      "dias_ofrecidos": 12,
       "color_toc": "negro",
-      "pct_prioridad": "82.27%",
-      "mts": 888.0,
-      "pct_buffer": 133.3,
+      "pct_prioridad": "89.36%",
+      "mts": 1231.0,
+      "pct_buffer": 108.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104331",
+      "op": "104332",
       "cliente": "PDC VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-DEMISEC-VBLANCO",
+      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-DEMISEC-VBLANCO",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
@@ -686,42 +655,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104456",
-      "cliente": "PDC VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-31.2X100-R5000-M-1F-C30-COLLARIN-V.TINTO-LABRUSCA",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 7,
-      "color_toc": "negro",
-      "pct_prioridad": "89.36%",
-      "mts": 558.0,
-      "pct_buffer": 114.3,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104332",
-      "cliente": "PDC VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-DEMISEC-VBLANCO",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "01/07/2026",
-      "dias_ofrecidos": 12,
-      "color_toc": "negro",
-      "pct_prioridad": "89.36%",
-      "mts": 1231.0,
-      "pct_buffer": 108.3,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "104640",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "FD-TTT-76X127-R1100-M-1F-C30-VERDE-331C",
@@ -737,6 +670,42 @@
       "mts": 888.0,
       "pct_buffer": 133.3,
       "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104642",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-SALMON-162C",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Fondo",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "10/07/2026",
+      "dias_ofrecidos": 3,
+      "color_toc": "negro",
+      "pct_prioridad": "82.27%",
+      "mts": 888.0,
+      "pct_buffer": 133.3,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104456",
+      "cliente": "PDC VINOS Y LICORES SAS",
+      "referencia": "IC-PPB-31.2X100-R5000-M-1F-C30-COLLARIN-V.TINTO-LABRUSCA",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 7,
+      "color_toc": "negro",
+      "pct_prioridad": "89.36%",
+      "mts": 558.0,
+      "pct_buffer": 114.3,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -756,6 +725,24 @@
       "pct_buffer": 100.0,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104652",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "BL-TD-057X060-R00500-F-01F-C15",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "10/07/2026",
+      "dias_ofrecidos": 4,
+      "color_toc": "rojo",
+      "pct_prioridad": "23.40%",
+      "mts": 206.0,
+      "pct_buffer": 100.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Menor al Standar"
     },
     {
       "op": "104656",
@@ -794,21 +781,21 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104652",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "BL-TD-057X060-R00500-F-01F-C15",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
+      "op": "104403",
+      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
+      "referencia": "IC-PPBBCAV-94X203-R500-M-1F-C15-ETQ-LIMPIA HORNOS EN GEL LPS X 350g",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "10/07/2026",
-      "dias_ofrecidos": 4,
+      "fecha_creacion": "03/07/2026",
+      "dias_ofrecidos": 11,
       "color_toc": "rojo",
-      "pct_prioridad": "23.40%",
-      "mts": 206.0,
+      "pct_prioridad": "61.70%",
+      "mts": 2880.0,
       "pct_buffer": 100.0,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Menor al Standar"
     },
     {
@@ -848,22 +835,22 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104587",
-      "cliente": "CROWN COLOMBIANA SA",
-      "referencia": "BL-TTT-150X200-R500-M-1F-C30-CROWN",
-      "maquina": "Troqueladora Plana",
+      "op": "104427",
+      "cliente": "CODITEQ",
+      "referencia": "MANTENIMIENTO- NP1 JULIO",
+      "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
-      "tipo": "Blanca",
+      "tipo": "Otro",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "09/07/2026",
-      "dias_ofrecidos": 5,
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 8,
       "color_toc": "rojo",
-      "pct_prioridad": "23.40%",
-      "mts": 2509.0,
+      "pct_prioridad": "-53.19%",
+      "mts": 15000.0,
       "pct_buffer": 100.0,
       "en_impresion": true,
-      "tiempo_produccion": "Standar"
+      "tiempo_produccion": "Menor al Standar"
     },
     {
       "op": "104465",
@@ -884,42 +871,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104427",
-      "cliente": "CODITEQ",
-      "referencia": "MANTENIMIENTO- NP1 JULIO",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Otro",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 8,
-      "color_toc": "rojo",
-      "pct_prioridad": "-53.19%",
-      "mts": 15000.0,
-      "pct_buffer": 100.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Menor al Standar"
-    },
-    {
-      "op": "104403",
-      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-      "referencia": "IC-PPBBCAV-94X203-R500-M-1F-C15-ETQ-LIMPIA HORNOS EN GEL LPS X 350g",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "03/07/2026",
-      "dias_ofrecidos": 11,
-      "color_toc": "rojo",
-      "pct_prioridad": "61.70%",
-      "mts": 2880.0,
-      "pct_buffer": 100.0,
-      "en_impresion": false,
-      "tiempo_produccion": "Menor al Standar"
-    },
-    {
       "op": "104571",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "BL-TTT-076X127-R01100-M-01F-C30-DATA-BMC-PREP",
@@ -938,38 +889,20 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104603",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "BL-PPB-070X032-R00500-M-01F-C10",
+      "op": "104587",
+      "cliente": "CROWN COLOMBIANA SA",
+      "referencia": "BL-TTT-150X200-R500-M-1F-C30-CROWN",
       "maquina": "Troqueladora Plana",
       "etapa": "Preparacion",
       "tipo": "Blanca",
-      "fecha_entrega": "16/07/2026",
-      "fecha_entrega_raw": "2026-07-16",
-      "fecha_creacion": "10/07/2026",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-26.60%",
-      "mts": 478.0,
-      "pct_buffer": 80.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104659",
-      "cliente": "AGRICOLA HIMALAYA S A",
-      "referencia": "BL-TTT-067X070-R02000-M-01F-C30",
-      "maquina": "Troqueladora Plana",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "16/07/2026",
-      "fecha_entrega_raw": "2026-07-16",
-      "fecha_creacion": "10/07/2026",
-      "dias_ofrecidos": 5,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-26.60%",
-      "mts": 2632.0,
-      "pct_buffer": 80.0,
+      "color_toc": "rojo",
+      "pct_prioridad": "23.40%",
+      "mts": 2509.0,
+      "pct_buffer": 100.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1046,6 +979,24 @@
       "tiempo_produccion": "Standar"
     },
     {
+      "op": "104603",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "BL-PPB-070X032-R00500-M-01F-C10",
+      "maquina": "Troqueladora Plana",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "16/07/2026",
+      "fecha_entrega_raw": "2026-07-16",
+      "fecha_creacion": "10/07/2026",
+      "dias_ofrecidos": 5,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-26.60%",
+      "mts": 478.0,
+      "pct_buffer": 80.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
       "op": "104626",
       "cliente": "Inversiones Montanel SAS",
       "referencia": "BL-TTT-50X25-R10000-M-2F-C30",
@@ -1060,42 +1011,6 @@
       "pct_prioridad": "-26.60%",
       "mts": 288.0,
       "pct_buffer": 80.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104633",
-      "cliente": "INDUSTRIA CHICS FASHION SAS",
-      "referencia": "BL-PPBBCAV-26X34-R5000-M-3F-C30-CONTRA-ETQ-UÑAS-TITANIO",
-      "maquina": "Troqueladora Plana",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "16/07/2026",
-      "fecha_entrega_raw": "2026-07-16",
-      "fecha_creacion": "10/07/2026",
-      "dias_ofrecidos": 5,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-26.60%",
-      "mts": 381.0,
-      "pct_buffer": 80.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104589",
-      "cliente": "FABRIASEO SAS  - SOGAMOSO",
-      "referencia": "BL-PPBBDIG-100X50000-R1-M-1F-C10-CONTINUO",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "16/07/2026",
-      "fecha_entrega_raw": "2026-07-16",
-      "fecha_creacion": "09/07/2026",
-      "dias_ofrecidos": 6,
-      "color_toc": "rojo",
-      "pct_prioridad": "-26.60%",
-      "mts": 206.0,
-      "pct_buffer": 83.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1118,6 +1033,42 @@
       "tiempo_produccion": "Standar"
     },
     {
+      "op": "104659",
+      "cliente": "AGRICOLA HIMALAYA S A",
+      "referencia": "BL-TTT-067X070-R02000-M-01F-C30",
+      "maquina": "Troqueladora Plana",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "16/07/2026",
+      "fecha_entrega_raw": "2026-07-16",
+      "fecha_creacion": "10/07/2026",
+      "dias_ofrecidos": 5,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-26.60%",
+      "mts": 2632.0,
+      "pct_buffer": 80.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104541",
+      "cliente": "GAMA DIGITAL SAS",
+      "referencia": "BL-TTT-70X150-R500-M-1F-C10",
+      "maquina": "Troqueladora Plana",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "16/07/2026",
+      "fecha_entrega_raw": "2026-07-16",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 7,
+      "color_toc": "rojo",
+      "pct_prioridad": "-26.60%",
+      "mts": 473.0,
+      "pct_buffer": 85.7,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
       "op": "104334",
       "cliente": "COMPAÑIA ENVASADORA DEL ATLANTICO S.A.S",
       "referencia": "FD-PSM-150X200-R1000-F-1F-C30-ROJO-179C",
@@ -1134,6 +1085,24 @@
       "pct_buffer": 92.9,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
+    },
+    {
+      "op": "104589",
+      "cliente": "FABRIASEO SAS  - SOGAMOSO",
+      "referencia": "BL-PPBBDIG-100X50000-R1-M-1F-C10-CONTINUO",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "16/07/2026",
+      "fecha_entrega_raw": "2026-07-16",
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 6,
+      "color_toc": "rojo",
+      "pct_prioridad": "-26.60%",
+      "mts": 206.0,
+      "pct_buffer": 83.3,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
     },
     {
       "op": "104414",
@@ -1190,20 +1159,20 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
-      "op": "104624",
-      "cliente": "BEST FARMS SAS",
-      "referencia": "FD-TTT-025X040-R10000-M-04F-C30-OVA-ROSA-1767C",
-      "maquina": "Kromia",
+      "op": "104633",
+      "cliente": "INDUSTRIA CHICS FASHION SAS",
+      "referencia": "BL-PPBBCAV-26X34-R5000-M-3F-C30-CONTRA-ETQ-UÑAS-TITANIO",
+      "maquina": "Troqueladora Plana",
       "etapa": "Preparacion",
-      "tipo": "Fondo",
+      "tipo": "Blanca",
       "fecha_entrega": "16/07/2026",
       "fecha_entrega_raw": "2026-07-16",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 7,
-      "color_toc": "rojo",
-      "pct_prioridad": "15.60%",
-      "mts": 337.0,
-      "pct_buffer": 85.7,
+      "fecha_creacion": "10/07/2026",
+      "dias_ofrecidos": 5,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-26.60%",
+      "mts": 381.0,
+      "pct_buffer": 80.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1262,19 +1231,19 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104541",
-      "cliente": "GAMA DIGITAL SAS",
-      "referencia": "BL-TTT-70X150-R500-M-1F-C10",
-      "maquina": "Troqueladora Plana",
+      "op": "104624",
+      "cliente": "BEST FARMS SAS",
+      "referencia": "FD-TTT-025X040-R10000-M-04F-C30-OVA-ROSA-1767C",
+      "maquina": "Kromia",
       "etapa": "Preparacion",
-      "tipo": "Blanca",
+      "tipo": "Fondo",
       "fecha_entrega": "16/07/2026",
       "fecha_entrega_raw": "2026-07-16",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 7,
       "color_toc": "rojo",
-      "pct_prioridad": "-26.60%",
-      "mts": 473.0,
+      "pct_prioridad": "15.60%",
+      "mts": 337.0,
       "pct_buffer": 85.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -1296,24 +1265,6 @@
       "pct_buffer": 87.5,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104556",
-      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-      "referencia": "IC-PPBBCAV-65X70-R6000-M-1F-C30-TABLA-JENGI-LIMON-FILLING",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 8,
-      "color_toc": "amarillo",
-      "pct_prioridad": "11.70%",
-      "mts": 1030.0,
-      "pct_buffer": 75.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Menor al Standar"
     },
     {
       "op": "104607",
@@ -1460,24 +1411,6 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104654",
-      "cliente": "CODITEQ",
-      "referencia": "PRUEBA-CARVAJAL  SOLUCIONES",
-      "maquina": "Troqueladora Plana",
-      "etapa": "Preparacion",
-      "tipo": "Otro",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "14/07/2026",
-      "dias_ofrecidos": 2,
-      "color_toc": "azul",
-      "pct_prioridad": "-76.60%",
-      "mts": 103.0,
-      "pct_buffer": 0.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "104675",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "BL-TTT-075X050-R01300-M-01F-C10-DATA",
@@ -1491,6 +1424,24 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 1065.0,
+      "pct_buffer": 0.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104654",
+      "cliente": "CODITEQ",
+      "referencia": "PRUEBA-CARVAJAL  SOLUCIONES",
+      "maquina": "Troqueladora Plana",
+      "etapa": "Preparacion",
+      "tipo": "Otro",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "14/07/2026",
+      "dias_ofrecidos": 2,
+      "color_toc": "azul",
+      "pct_prioridad": "-76.60%",
+      "mts": 103.0,
       "pct_buffer": 0.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -1514,7 +1465,25 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104676",
+      "op": "104705",
+      "cliente": "QUALA S A",
+      "referencia": "BL-TTT-100X050-R00920-M-01F-C10-MILLARES",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "14/07/2026",
+      "dias_ofrecidos": 2,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 168.0,
+      "pct_buffer": 0.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104677",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "BL-TTT-100X025-R02500-M-01F-C10-DATA",
       "maquina": "Troqueladora Rotativa 1",
@@ -1604,24 +1573,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104705",
-      "cliente": "QUALA S A",
-      "referencia": "BL-TTT-100X050-R00920-M-01F-C10-MILLARES",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "14/07/2026",
-      "dias_ofrecidos": 2,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 168.0,
-      "pct_buffer": 0.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "104682",
       "cliente": "PRODUCTOS DIFFER S.A.S.",
       "referencia": "BL-TTT-100X80-R2000-M-1F-C30",
@@ -1640,7 +1591,7 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104677",
+      "op": "104676",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "BL-TTT-100X025-R02500-M-01F-C10-DATA",
       "maquina": "Troqueladora Rotativa 1",
@@ -1694,24 +1645,6 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104595",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-GRIS-428C-PREP",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
-      "tipo": "Fondo",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 8,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-17.73%",
-      "mts": 2306.0,
-      "pct_buffer": 75.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Mayor al Standar"
-    },
-    {
       "op": "104631",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "BL-TTT-076X127-R01100-M-01F-C30-DATA-BMC-PREP",
@@ -1728,6 +1661,24 @@
       "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104595",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-GRIS-428C-PREP",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Fondo",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 8,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-17.73%",
+      "mts": 2306.0,
+      "pct_buffer": 75.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Mayor al Standar"
     },
     {
       "op": "104378",
@@ -1748,20 +1699,20 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104510",
-      "cliente": "CODITEQ PRODUCCION",
-      "referencia": "BL-TTT-100X100-R01500-M-01F-C30",
-      "maquina": "Troqueladora Rotativa 1",
+      "op": "104379",
+      "cliente": "LABORATORIOS LPS",
+      "referencia": "IC-P60-194X153-R1000-P-1F-C15-ETQ-DETER-LIQ-CON-SUAVIZ-FLOR-ALKS-4 L",
+      "maquina": "Nilpeter 2",
       "etapa": "Preparacion",
-      "tipo": "Blanca",
+      "tipo": "Impresa",
       "fecha_entrega": "17/07/2026",
       "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 8,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-76.60%",
-      "mts": 24821.0,
-      "pct_buffer": 75.0,
+      "fecha_creacion": "02/07/2026",
+      "dias_ofrecidos": 14,
+      "color_toc": "rojo",
+      "pct_prioridad": "11.70%",
+      "mts": 3715.0,
+      "pct_buffer": 85.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1838,6 +1789,24 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
+      "op": "104510",
+      "cliente": "CODITEQ PRODUCCION",
+      "referencia": "BL-TTT-100X100-R01500-M-01F-C30",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 8,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-76.60%",
+      "mts": 24821.0,
+      "pct_buffer": 75.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
       "op": "104411",
       "cliente": "CARVAJAL SOLUCIONES DE COMUNICACION S.A.S. BIC",
       "referencia": "IC-PTER-101.6X279.4-R90-N-1F-19mm-ENEL-FEST-CODEN-AGOSTO-2026",
@@ -1856,40 +1825,22 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104379",
-      "cliente": "LABORATORIOS LPS",
-      "referencia": "IC-P60-194X153-R1000-P-1F-C15-ETQ-DETER-LIQ-CON-SUAVIZ-FLOR-ALKS-4 L",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "02/07/2026",
-      "dias_ofrecidos": 14,
-      "color_toc": "rojo",
-      "pct_prioridad": "11.70%",
-      "mts": 3715.0,
-      "pct_buffer": 85.7,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104513",
-      "cliente": "DROGUERIAS JULIAO S.A",
-      "referencia": "IC-PPB-110X165-R1000-M-1F-C30-ACE-ALMEND-ARGAN-270ml",
+      "op": "104556",
+      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+      "referencia": "IC-PPBBCAV-65X70-R6000-M-1F-C30-TABLA-JENGI-LIMON-FILLING",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
       "fecha_entrega": "17/07/2026",
       "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "07/07/2026",
-      "dias_ofrecidos": 9,
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 8,
       "color_toc": "amarillo",
-      "pct_prioridad": "29.36%",
-      "mts": 477.0,
-      "pct_buffer": 77.8,
+      "pct_prioridad": "11.70%",
+      "mts": 1030.0,
+      "pct_buffer": 75.0,
       "en_impresion": true,
-      "tiempo_produccion": "Standar"
+      "tiempo_produccion": "Menor al Standar"
     },
     {
       "op": "104434",
@@ -1906,96 +1857,6 @@
       "pct_prioridad": "11.70%",
       "mts": 2840.0,
       "pct_buffer": 84.6,
-      "en_impresion": true,
-      "tiempo_produccion": "Programada"
-    },
-    {
-      "op": "104485",
-      "cliente": "QUALA S A",
-      "referencia": "FD-TTT-050X130-R02000-M-2F-C30-AMARILLO-102C-QUALA. - I9000367",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
-      "tipo": "Fondo",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "07/07/2026",
-      "dias_ofrecidos": 9,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-17.73%",
-      "mts": 7518.0,
-      "pct_buffer": 77.8,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104453",
-      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-      "referencia": "IC-PPB-90X65-R1000-M-1F-C15-LAV-ANT- LIMÓN-MI DÍA-500ML-IMP-ADH",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 10,
-      "color_toc": "amarillo",
-      "pct_prioridad": "11.70%",
-      "mts": 649.0,
-      "pct_buffer": 80.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Programada"
-    },
-    {
-      "op": "104438",
-      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-      "referencia": "IC-PPB-85X90-R1000-M-1F-C15-LPS-JUEGO-FRENTE-CONTRA-DETER-LIQ-CON-SUAVIZANTEX2 L",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 10,
-      "color_toc": "amarillo",
-      "pct_prioridad": "11.70%",
-      "mts": 766.0,
-      "pct_buffer": 80.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104484",
-      "cliente": "QUALA S A",
-      "referencia": "IS-TTT-050X132-R02000-M-02F-C30-REBORDE-FUCSIA-ROD-QUALA. - I9000450",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "07/07/2026",
-      "dias_ofrecidos": 9,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-17.73%",
-      "mts": 6980.0,
-      "pct_buffer": 77.8,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104430",
-      "cliente": "CODITEQ",
-      "referencia": "MANTENIMIENTO-REBOBINADORA-2 JULIO",
-      "maquina": "Rebobinadora",
-      "etapa": "Preparacion",
-      "tipo": "Otro",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 10,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-253.19%",
-      "mts": 10000.0,
-      "pct_buffer": 80.0,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -2018,38 +1879,110 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104554",
-      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-34.2X92.6-R5000-M-1F-C30- CUELLO  JENGIBRE LIMON",
-      "maquina": "Nilpeter 1",
+      "op": "104430",
+      "cliente": "CODITEQ",
+      "referencia": "MANTENIMIENTO-REBOBINADORA-2 JULIO",
+      "maquina": "Rebobinadora",
       "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "21/07/2026",
-      "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 12,
-      "color_toc": "azul",
-      "pct_prioridad": "-13.30%",
-      "mts": 787.0,
-      "pct_buffer": 50.0,
+      "tipo": "Otro",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 10,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-253.19%",
+      "mts": 10000.0,
+      "pct_buffer": 80.0,
       "en_impresion": true,
-      "tiempo_produccion": "Menor al Standar"
+      "tiempo_produccion": "Programada"
     },
     {
-      "op": "104549",
-      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-      "referencia": "IC-PPBBCAV-65X70-R6000-M-1F-C30-TABLA-OCEAN-FILLING",
+      "op": "104438",
+      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
+      "referencia": "IC-PPB-85X90-R1000-M-1F-C15-LPS-JUEGO-FRENTE-CONTRA-DETER-LIQ-CON-SUAVIZANTEX2 L",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 10,
+      "color_toc": "amarillo",
+      "pct_prioridad": "11.70%",
+      "mts": 766.0,
+      "pct_buffer": 80.0,
+      "en_impresion": false,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104453",
+      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
+      "referencia": "IC-PPB-90X65-R1000-M-1F-C15-LAV-ANT- LIMÓN-MI DÍA-500ML-IMP-ADH",
+      "maquina": "Nilpeter 2",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 10,
+      "color_toc": "amarillo",
+      "pct_prioridad": "11.70%",
+      "mts": 649.0,
+      "pct_buffer": 80.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Programada"
+    },
+    {
+      "op": "104513",
+      "cliente": "DROGUERIAS JULIAO S.A",
+      "referencia": "IC-PPB-110X165-R1000-M-1F-C30-ACE-ALMEND-ARGAN-270ml",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
-      "fecha_entrega": "21/07/2026",
-      "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 12,
-      "color_toc": "azul",
-      "pct_prioridad": "-13.30%",
-      "mts": 3697.0,
-      "pct_buffer": 50.0,
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "07/07/2026",
+      "dias_ofrecidos": 9,
+      "color_toc": "amarillo",
+      "pct_prioridad": "29.36%",
+      "mts": 477.0,
+      "pct_buffer": 77.8,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104485",
+      "cliente": "QUALA S A",
+      "referencia": "FD-TTT-050X130-R02000-M-2F-C30-AMARILLO-102C-QUALA. - I9000367",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Fondo",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "07/07/2026",
+      "dias_ofrecidos": 9,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-17.73%",
+      "mts": 7518.0,
+      "pct_buffer": 77.8,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104484",
+      "cliente": "QUALA S A",
+      "referencia": "IS-TTT-050X132-R02000-M-02F-C30-REBORDE-FUCSIA-ROD-QUALA. - I9000450",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "07/07/2026",
+      "dias_ofrecidos": 9,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-17.73%",
+      "mts": 6980.0,
+      "pct_buffer": 77.8,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2072,6 +2005,24 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
+      "op": "104548",
+      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+      "referencia": "IC-PPB-70X70-R6000-M-1F-C30- FRENTE TONICA OCEAN",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "21/07/2026",
+      "fecha_entrega_raw": "2026-07-21",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 12,
+      "color_toc": "azul",
+      "pct_prioridad": "-13.30%",
+      "mts": 3697.0,
+      "pct_buffer": 50.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Menor al Standar"
+    },
+    {
       "op": "104552",
       "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
       "referencia": "IC-PPB-34.2X92.6-R5000-M-1F-C30- CUELLO SPARKLING TORONJA",
@@ -2088,24 +2039,6 @@
       "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
-    },
-    {
-      "op": "104684",
-      "cliente": "HOKO COLOMBIA S.A.S",
-      "referencia": "BL-PPBBDGT-64X180-R550-M-1F-C30",
-      "maquina": "Troqueladora Plana",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "21/07/2026",
-      "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "13/07/2026",
-      "dias_ofrecidos": 7,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 898.0,
-      "pct_buffer": 14.3,
-      "en_impresion": true,
-      "tiempo_produccion": "Mayor al Standar"
     },
     {
       "op": "104551",
@@ -2144,6 +2077,42 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
+      "op": "104549",
+      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+      "referencia": "IC-PPBBCAV-65X70-R6000-M-1F-C30-TABLA-OCEAN-FILLING",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "21/07/2026",
+      "fecha_entrega_raw": "2026-07-21",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 12,
+      "color_toc": "azul",
+      "pct_prioridad": "-13.30%",
+      "mts": 3697.0,
+      "pct_buffer": 50.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104554",
+      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+      "referencia": "IC-PPB-34.2X92.6-R5000-M-1F-C30- CUELLO  JENGIBRE LIMON",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "21/07/2026",
+      "fecha_entrega_raw": "2026-07-21",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 12,
+      "color_toc": "azul",
+      "pct_prioridad": "-13.30%",
+      "mts": 787.0,
+      "pct_buffer": 50.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Menor al Standar"
+    },
+    {
       "op": "104555",
       "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
       "referencia": "IC-PPB-70X70-R6000-M-1F-C30-JENGIBRE LIMON FRENTE",
@@ -2162,10 +2131,10 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
-      "op": "104655",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "BL-PPB-035X065-R02000-S-03F-C30",
-      "maquina": "Troqueladora Plana",
+      "op": "104680",
+      "cliente": "COLCAFE SAS",
+      "referencia": "BL-TTT-100X50-R6000-M-1F-C30-COLCAFE",
+      "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "21/07/2026",
@@ -2173,45 +2142,9 @@
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
       "color_toc": "azul",
-      "pct_prioridad": "-126.60%",
-      "mts": 1401.0,
+      "pct_prioridad": "",
+      "mts": 913.0,
       "pct_buffer": 0.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104586",
-      "cliente": "COMPAÑÍA GLOBAL DE PINTURAS S.A.",
-      "referencia": "BL-TTT-96X55-R2500-M-1F-C30",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "21/07/2026",
-      "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "09/07/2026",
-      "dias_ofrecidos": 11,
-      "color_toc": "azul",
-      "pct_prioridad": "-126.60%",
-      "mts": 6145.0,
-      "pct_buffer": 45.5,
-      "en_impresion": true,
-      "tiempo_produccion": "Mayor al Standar"
-    },
-    {
-      "op": "104600",
-      "cliente": "FLOW CHEM SAS",
-      "referencia": "FD-TTT-40X33-R4000-M-2F-C10-VERDE-354C",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
-      "tipo": "Fondo",
-      "fecha_entrega": "21/07/2026",
-      "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "09/07/2026",
-      "dias_ofrecidos": 11,
-      "color_toc": "azul",
-      "pct_prioridad": "-51.06%",
-      "mts": 249.0,
-      "pct_buffer": 45.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2229,6 +2162,24 @@
       "color_toc": "azul",
       "pct_prioridad": "-126.60%",
       "mts": 872.0,
+      "pct_buffer": 45.5,
+      "en_impresion": true,
+      "tiempo_produccion": "Mayor al Standar"
+    },
+    {
+      "op": "104586",
+      "cliente": "COMPAÑÍA GLOBAL DE PINTURAS S.A.",
+      "referencia": "BL-TTT-96X55-R2500-M-1F-C30",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "21/07/2026",
+      "fecha_entrega_raw": "2026-07-21",
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 11,
+      "color_toc": "azul",
+      "pct_prioridad": "-126.60%",
+      "mts": 6145.0,
       "pct_buffer": 45.5,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
@@ -2270,22 +2221,22 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104709",
-      "cliente": "SCHOTT ENVASES FARMACEUTICOS SAS",
-      "referencia": "BL-PPMATDIG-29X140-R1500-M-3F-C10",
-      "maquina": "Kromia",
+      "op": "104684",
+      "cliente": "HOKO COLOMBIA S.A.S",
+      "referencia": "BL-PPBBDGT-64X180-R550-M-1F-C30",
+      "maquina": "Troqueladora Plana",
       "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "21/07/2026",
       "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "14/07/2026",
-      "dias_ofrecidos": 6,
+      "fecha_creacion": "13/07/2026",
+      "dias_ofrecidos": 7,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 3108.0,
-      "pct_buffer": 0.0,
+      "mts": 898.0,
+      "pct_buffer": 14.3,
       "en_impresion": true,
-      "tiempo_produccion": "Standar"
+      "tiempo_produccion": "Mayor al Standar"
     },
     {
       "op": "104671",
@@ -2306,10 +2257,10 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104680",
-      "cliente": "COLCAFE SAS",
-      "referencia": "BL-TTT-100X50-R6000-M-1F-C30-COLCAFE",
-      "maquina": "Troqueladora Rotativa 1",
+      "op": "104655",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "BL-PPB-035X065-R02000-S-03F-C30",
+      "maquina": "Troqueladora Plana",
       "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "21/07/2026",
@@ -2317,8 +2268,8 @@
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
       "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 913.0,
+      "pct_prioridad": "-126.60%",
+      "mts": 1401.0,
       "pct_buffer": 0.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -2342,9 +2293,27 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104548",
+      "op": "104709",
+      "cliente": "SCHOTT ENVASES FARMACEUTICOS SAS",
+      "referencia": "BL-PPMATDIG-29X140-R1500-M-3F-C10",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "21/07/2026",
+      "fecha_entrega_raw": "2026-07-21",
+      "fecha_creacion": "14/07/2026",
+      "dias_ofrecidos": 6,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 3108.0,
+      "pct_buffer": 0.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104547",
       "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-70X70-R6000-M-1F-C30- FRENTE TONICA OCEAN",
+      "referencia": "IC-PPB-65X70-R6000-M-1F-C30-TABLA-GING-BEER",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
@@ -2354,7 +2323,7 @@
       "dias_ofrecidos": 12,
       "color_toc": "azul",
       "pct_prioridad": "-13.30%",
-      "mts": 3697.0,
+      "mts": 2491.0,
       "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
@@ -2378,22 +2347,22 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104547",
-      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-65X70-R6000-M-1F-C30-TABLA-GING-BEER",
-      "maquina": "Nilpeter 1",
+      "op": "104600",
+      "cliente": "FLOW CHEM SAS",
+      "referencia": "FD-TTT-40X33-R4000-M-2F-C10-VERDE-354C",
+      "maquina": "Kromia",
       "etapa": "Preparacion",
-      "tipo": "Impresa",
+      "tipo": "Fondo",
       "fecha_entrega": "21/07/2026",
       "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 12,
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 11,
       "color_toc": "azul",
-      "pct_prioridad": "-13.30%",
-      "mts": 2491.0,
-      "pct_buffer": 50.0,
+      "pct_prioridad": "-51.06%",
+      "mts": 249.0,
+      "pct_buffer": 45.5,
       "en_impresion": true,
-      "tiempo_produccion": "Menor al Standar"
+      "tiempo_produccion": "Standar"
     },
     {
       "op": "104521",
@@ -2584,14 +2553,14 @@
       "tipo": "Fondo",
       "fecha_entrega": "21/07/2026",
       "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "10/07/2026",
-      "dias_ofrecidos": 10,
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 12,
       "color_toc": "azul",
       "pct_prioridad": "-51.06%",
       "mts": 888.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 50.0,
       "en_impresion": false,
-      "tiempo_produccion": "Standar"
+      "tiempo_produccion": "Mayor al Standar"
     },
     {
       "op": "104435",
@@ -3278,7 +3247,7 @@
       "tiempo_produccion": "Mayor al Standar"
     }
   ],
-  "urgentes_total": 161,
+  "urgentes_total": 160,
   "todas_tambor": [
     {
       "op": "102950",
@@ -3335,9 +3304,9 @@
       "tiempo_produccion": "Programada"
     },
     {
-      "op": "103482",
+      "op": "103483",
       "cliente": "HADA INTERNATIONAL SAS",
-      "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-FRENTE-SHAM-LITT-ANG",
+      "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-CONTRA-SHAM-LITTLE-ANG",
       "maquina": "Rebobinadora",
       "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
@@ -3353,9 +3322,9 @@
       "tiempo_produccion": "Programada"
     },
     {
-      "op": "103483",
+      "op": "103482",
       "cliente": "HADA INTERNATIONAL SAS",
-      "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-CONTRA-SHAM-LITTLE-ANG",
+      "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-FRENTE-SHAM-LITT-ANG",
       "maquina": "Rebobinadora",
       "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
@@ -3443,24 +3412,6 @@
       "tiempo_produccion": "Programada"
     },
     {
-      "op": "104645",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-AZUL-277C-PREP",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Fondo",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 5,
-      "color_toc": "negro",
-      "pct_prioridad": "82.27%",
-      "mts": 888.0,
-      "pct_buffer": 120.0,
-      "en_impresion": false,
-      "tiempo_produccion": "Mayor al Standar"
-    },
-    {
       "op": "104625",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "FD-TTT-76X127-R1100-M-1F-C30-AMARILLO-100C-PREP",
@@ -3515,27 +3466,27 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104642",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-SALMON-162C",
-      "maquina": "Kromia",
+      "op": "104331",
+      "cliente": "PDC VINOS Y LICORES SAS",
+      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-DEMISEC-VBLANCO",
+      "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
-      "tipo": "Fondo",
+      "tipo": "Impresa",
       "fecha_entrega": "14/07/2026",
       "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "10/07/2026",
-      "dias_ofrecidos": 3,
+      "fecha_creacion": "01/07/2026",
+      "dias_ofrecidos": 12,
       "color_toc": "negro",
-      "pct_prioridad": "82.27%",
-      "mts": 888.0,
-      "pct_buffer": 133.3,
+      "pct_prioridad": "89.36%",
+      "mts": 1231.0,
+      "pct_buffer": 108.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104331",
+      "op": "104332",
       "cliente": "PDC VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-FRENT-DEMISEC-VBLANCO",
+      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-DEMISEC-VBLANCO",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
@@ -3587,42 +3538,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104456",
-      "cliente": "PDC VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-31.2X100-R5000-M-1F-C30-COLLARIN-V.TINTO-LABRUSCA",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 7,
-      "color_toc": "negro",
-      "pct_prioridad": "89.36%",
-      "mts": 558.0,
-      "pct_buffer": 114.3,
-      "en_impresion": false,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104332",
-      "cliente": "PDC VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-90X90-R5000-M-1F-C30-CONTRA-DEMISEC-VBLANCO",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "14/07/2026",
-      "fecha_entrega_raw": "2026-07-14",
-      "fecha_creacion": "01/07/2026",
-      "dias_ofrecidos": 12,
-      "color_toc": "negro",
-      "pct_prioridad": "89.36%",
-      "mts": 1231.0,
-      "pct_buffer": 108.3,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "104640",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "FD-TTT-76X127-R1100-M-1F-C30-VERDE-331C",
@@ -3638,6 +3553,42 @@
       "mts": 888.0,
       "pct_buffer": 133.3,
       "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104642",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-SALMON-162C",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Fondo",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "10/07/2026",
+      "dias_ofrecidos": 3,
+      "color_toc": "negro",
+      "pct_prioridad": "82.27%",
+      "mts": 888.0,
+      "pct_buffer": 133.3,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104456",
+      "cliente": "PDC VINOS Y LICORES SAS",
+      "referencia": "IC-PPB-31.2X100-R5000-M-1F-C30-COLLARIN-V.TINTO-LABRUSCA",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
+      "fecha_entrega": "14/07/2026",
+      "fecha_entrega_raw": "2026-07-14",
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 7,
+      "color_toc": "negro",
+      "pct_prioridad": "89.36%",
+      "mts": 558.0,
+      "pct_buffer": 114.3,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -3657,6 +3608,24 @@
       "pct_buffer": 100.0,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104652",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "BL-TD-057X060-R00500-F-01F-C15",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "10/07/2026",
+      "dias_ofrecidos": 4,
+      "color_toc": "rojo",
+      "pct_prioridad": "23.40%",
+      "mts": 206.0,
+      "pct_buffer": 100.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Menor al Standar"
     },
     {
       "op": "104656",
@@ -3695,21 +3664,21 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104652",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "BL-TD-057X060-R00500-F-01F-C15",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
+      "op": "104403",
+      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
+      "referencia": "IC-PPBBCAV-94X203-R500-M-1F-C15-ETQ-LIMPIA HORNOS EN GEL LPS X 350g",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "10/07/2026",
-      "dias_ofrecidos": 4,
+      "fecha_creacion": "03/07/2026",
+      "dias_ofrecidos": 11,
       "color_toc": "rojo",
-      "pct_prioridad": "23.40%",
-      "mts": 206.0,
+      "pct_prioridad": "61.70%",
+      "mts": 2880.0,
       "pct_buffer": 100.0,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Menor al Standar"
     },
     {
@@ -3749,22 +3718,22 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104587",
-      "cliente": "CROWN COLOMBIANA SA",
-      "referencia": "BL-TTT-150X200-R500-M-1F-C30-CROWN",
-      "maquina": "Troqueladora Plana",
+      "op": "104427",
+      "cliente": "CODITEQ",
+      "referencia": "MANTENIMIENTO- NP1 JULIO",
+      "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
-      "tipo": "Blanca",
+      "tipo": "Otro",
       "fecha_entrega": "15/07/2026",
       "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "09/07/2026",
-      "dias_ofrecidos": 5,
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 8,
       "color_toc": "rojo",
-      "pct_prioridad": "23.40%",
-      "mts": 2509.0,
+      "pct_prioridad": "-53.19%",
+      "mts": 15000.0,
       "pct_buffer": 100.0,
       "en_impresion": true,
-      "tiempo_produccion": "Standar"
+      "tiempo_produccion": "Menor al Standar"
     },
     {
       "op": "104465",
@@ -3785,42 +3754,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104427",
-      "cliente": "CODITEQ",
-      "referencia": "MANTENIMIENTO- NP1 JULIO",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Otro",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 8,
-      "color_toc": "rojo",
-      "pct_prioridad": "-53.19%",
-      "mts": 15000.0,
-      "pct_buffer": 100.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Menor al Standar"
-    },
-    {
-      "op": "104403",
-      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-      "referencia": "IC-PPBBCAV-94X203-R500-M-1F-C15-ETQ-LIMPIA HORNOS EN GEL LPS X 350g",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Impresa",
-      "fecha_entrega": "15/07/2026",
-      "fecha_entrega_raw": "2026-07-15",
-      "fecha_creacion": "03/07/2026",
-      "dias_ofrecidos": 11,
-      "color_toc": "rojo",
-      "pct_prioridad": "61.70%",
-      "mts": 2880.0,
-      "pct_buffer": 100.0,
-      "en_impresion": false,
-      "tiempo_produccion": "Menor al Standar"
-    },
-    {
       "op": "104571",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "BL-TTT-076X127-R01100-M-01F-C30-DATA-BMC-PREP",
@@ -3839,38 +3772,20 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104603",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "BL-PPB-070X032-R00500-M-01F-C10",
+      "op": "104587",
+      "cliente": "CROWN COLOMBIANA SA",
+      "referencia": "BL-TTT-150X200-R500-M-1F-C30-CROWN",
       "maquina": "Troqueladora Plana",
       "etapa": "Preparacion",
       "tipo": "Blanca",
-      "fecha_entrega": "16/07/2026",
-      "fecha_entrega_raw": "2026-07-16",
-      "fecha_creacion": "10/07/2026",
+      "fecha_entrega": "15/07/2026",
+      "fecha_entrega_raw": "2026-07-15",
+      "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-26.60%",
-      "mts": 478.0,
-      "pct_buffer": 80.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104659",
-      "cliente": "AGRICOLA HIMALAYA S A",
-      "referencia": "BL-TTT-067X070-R02000-M-01F-C30",
-      "maquina": "Troqueladora Plana",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "16/07/2026",
-      "fecha_entrega_raw": "2026-07-16",
-      "fecha_creacion": "10/07/2026",
-      "dias_ofrecidos": 5,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-26.60%",
-      "mts": 2632.0,
-      "pct_buffer": 80.0,
+      "color_toc": "rojo",
+      "pct_prioridad": "23.40%",
+      "mts": 2509.0,
+      "pct_buffer": 100.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3947,6 +3862,24 @@
       "tiempo_produccion": "Standar"
     },
     {
+      "op": "104603",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "BL-PPB-070X032-R00500-M-01F-C10",
+      "maquina": "Troqueladora Plana",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "16/07/2026",
+      "fecha_entrega_raw": "2026-07-16",
+      "fecha_creacion": "10/07/2026",
+      "dias_ofrecidos": 5,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-26.60%",
+      "mts": 478.0,
+      "pct_buffer": 80.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
       "op": "104626",
       "cliente": "Inversiones Montanel SAS",
       "referencia": "BL-TTT-50X25-R10000-M-2F-C30",
@@ -3961,42 +3894,6 @@
       "pct_prioridad": "-26.60%",
       "mts": 288.0,
       "pct_buffer": 80.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104633",
-      "cliente": "INDUSTRIA CHICS FASHION SAS",
-      "referencia": "BL-PPBBCAV-26X34-R5000-M-3F-C30-CONTRA-ETQ-UÑAS-TITANIO",
-      "maquina": "Troqueladora Plana",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "16/07/2026",
-      "fecha_entrega_raw": "2026-07-16",
-      "fecha_creacion": "10/07/2026",
-      "dias_ofrecidos": 5,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-26.60%",
-      "mts": 381.0,
-      "pct_buffer": 80.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104589",
-      "cliente": "FABRIASEO SAS  - SOGAMOSO",
-      "referencia": "BL-PPBBDIG-100X50000-R1-M-1F-C10-CONTINUO",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "16/07/2026",
-      "fecha_entrega_raw": "2026-07-16",
-      "fecha_creacion": "09/07/2026",
-      "dias_ofrecidos": 6,
-      "color_toc": "rojo",
-      "pct_prioridad": "-26.60%",
-      "mts": 206.0,
-      "pct_buffer": 83.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4019,6 +3916,42 @@
       "tiempo_produccion": "Standar"
     },
     {
+      "op": "104659",
+      "cliente": "AGRICOLA HIMALAYA S A",
+      "referencia": "BL-TTT-067X070-R02000-M-01F-C30",
+      "maquina": "Troqueladora Plana",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "16/07/2026",
+      "fecha_entrega_raw": "2026-07-16",
+      "fecha_creacion": "10/07/2026",
+      "dias_ofrecidos": 5,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-26.60%",
+      "mts": 2632.0,
+      "pct_buffer": 80.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104541",
+      "cliente": "GAMA DIGITAL SAS",
+      "referencia": "BL-TTT-70X150-R500-M-1F-C10",
+      "maquina": "Troqueladora Plana",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "16/07/2026",
+      "fecha_entrega_raw": "2026-07-16",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 7,
+      "color_toc": "rojo",
+      "pct_prioridad": "-26.60%",
+      "mts": 473.0,
+      "pct_buffer": 85.7,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
       "op": "104334",
       "cliente": "COMPAÑIA ENVASADORA DEL ATLANTICO S.A.S",
       "referencia": "FD-PSM-150X200-R1000-F-1F-C30-ROJO-179C",
@@ -4035,6 +3968,24 @@
       "pct_buffer": 92.9,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
+    },
+    {
+      "op": "104589",
+      "cliente": "FABRIASEO SAS  - SOGAMOSO",
+      "referencia": "BL-PPBBDIG-100X50000-R1-M-1F-C10-CONTINUO",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "16/07/2026",
+      "fecha_entrega_raw": "2026-07-16",
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 6,
+      "color_toc": "rojo",
+      "pct_prioridad": "-26.60%",
+      "mts": 206.0,
+      "pct_buffer": 83.3,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
     },
     {
       "op": "104414",
@@ -4091,20 +4042,20 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
-      "op": "104624",
-      "cliente": "BEST FARMS SAS",
-      "referencia": "FD-TTT-025X040-R10000-M-04F-C30-OVA-ROSA-1767C",
-      "maquina": "Kromia",
+      "op": "104633",
+      "cliente": "INDUSTRIA CHICS FASHION SAS",
+      "referencia": "BL-PPBBCAV-26X34-R5000-M-3F-C30-CONTRA-ETQ-UÑAS-TITANIO",
+      "maquina": "Troqueladora Plana",
       "etapa": "Preparacion",
-      "tipo": "Fondo",
+      "tipo": "Blanca",
       "fecha_entrega": "16/07/2026",
       "fecha_entrega_raw": "2026-07-16",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 7,
-      "color_toc": "rojo",
-      "pct_prioridad": "15.60%",
-      "mts": 337.0,
-      "pct_buffer": 85.7,
+      "fecha_creacion": "10/07/2026",
+      "dias_ofrecidos": 5,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-26.60%",
+      "mts": 381.0,
+      "pct_buffer": 80.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4163,19 +4114,19 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104541",
-      "cliente": "GAMA DIGITAL SAS",
-      "referencia": "BL-TTT-70X150-R500-M-1F-C10",
-      "maquina": "Troqueladora Plana",
+      "op": "104624",
+      "cliente": "BEST FARMS SAS",
+      "referencia": "FD-TTT-025X040-R10000-M-04F-C30-OVA-ROSA-1767C",
+      "maquina": "Kromia",
       "etapa": "Preparacion",
-      "tipo": "Blanca",
+      "tipo": "Fondo",
       "fecha_entrega": "16/07/2026",
       "fecha_entrega_raw": "2026-07-16",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 7,
       "color_toc": "rojo",
-      "pct_prioridad": "-26.60%",
-      "mts": 473.0,
+      "pct_prioridad": "15.60%",
+      "mts": 337.0,
       "pct_buffer": 85.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -4197,24 +4148,6 @@
       "pct_buffer": 87.5,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104556",
-      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-      "referencia": "IC-PPBBCAV-65X70-R6000-M-1F-C30-TABLA-JENGI-LIMON-FILLING",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 8,
-      "color_toc": "amarillo",
-      "pct_prioridad": "11.70%",
-      "mts": 1030.0,
-      "pct_buffer": 75.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Menor al Standar"
     },
     {
       "op": "104607",
@@ -4361,24 +4294,6 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104654",
-      "cliente": "CODITEQ",
-      "referencia": "PRUEBA-CARVAJAL  SOLUCIONES",
-      "maquina": "Troqueladora Plana",
-      "etapa": "Preparacion",
-      "tipo": "Otro",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "14/07/2026",
-      "dias_ofrecidos": 2,
-      "color_toc": "azul",
-      "pct_prioridad": "-76.60%",
-      "mts": 103.0,
-      "pct_buffer": 0.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "104675",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "BL-TTT-075X050-R01300-M-01F-C10-DATA",
@@ -4392,6 +4307,24 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 1065.0,
+      "pct_buffer": 0.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104654",
+      "cliente": "CODITEQ",
+      "referencia": "PRUEBA-CARVAJAL  SOLUCIONES",
+      "maquina": "Troqueladora Plana",
+      "etapa": "Preparacion",
+      "tipo": "Otro",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "14/07/2026",
+      "dias_ofrecidos": 2,
+      "color_toc": "azul",
+      "pct_prioridad": "-76.60%",
+      "mts": 103.0,
       "pct_buffer": 0.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -4415,7 +4348,25 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104676",
+      "op": "104705",
+      "cliente": "QUALA S A",
+      "referencia": "BL-TTT-100X050-R00920-M-01F-C10-MILLARES",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "14/07/2026",
+      "dias_ofrecidos": 2,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 168.0,
+      "pct_buffer": 0.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104677",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "BL-TTT-100X025-R02500-M-01F-C10-DATA",
       "maquina": "Troqueladora Rotativa 1",
@@ -4505,24 +4456,6 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104705",
-      "cliente": "QUALA S A",
-      "referencia": "BL-TTT-100X050-R00920-M-01F-C10-MILLARES",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "14/07/2026",
-      "dias_ofrecidos": 2,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 168.0,
-      "pct_buffer": 0.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "104682",
       "cliente": "PRODUCTOS DIFFER S.A.S.",
       "referencia": "BL-TTT-100X80-R2000-M-1F-C30",
@@ -4541,7 +4474,7 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104677",
+      "op": "104676",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "BL-TTT-100X025-R02500-M-01F-C10-DATA",
       "maquina": "Troqueladora Rotativa 1",
@@ -4595,24 +4528,6 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104595",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-GRIS-428C-PREP",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
-      "tipo": "Fondo",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 8,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-17.73%",
-      "mts": 2306.0,
-      "pct_buffer": 75.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Mayor al Standar"
-    },
-    {
       "op": "104631",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "BL-TTT-076X127-R01100-M-01F-C30-DATA-BMC-PREP",
@@ -4629,6 +4544,24 @@
       "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104595",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-GRIS-428C-PREP",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Fondo",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 8,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-17.73%",
+      "mts": 2306.0,
+      "pct_buffer": 75.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Mayor al Standar"
     },
     {
       "op": "104378",
@@ -4649,20 +4582,20 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104510",
-      "cliente": "CODITEQ PRODUCCION",
-      "referencia": "BL-TTT-100X100-R01500-M-01F-C30",
-      "maquina": "Troqueladora Rotativa 1",
+      "op": "104379",
+      "cliente": "LABORATORIOS LPS",
+      "referencia": "IC-P60-194X153-R1000-P-1F-C15-ETQ-DETER-LIQ-CON-SUAVIZ-FLOR-ALKS-4 L",
+      "maquina": "Nilpeter 2",
       "etapa": "Preparacion",
-      "tipo": "Blanca",
+      "tipo": "Impresa",
       "fecha_entrega": "17/07/2026",
       "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 8,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-76.60%",
-      "mts": 24821.0,
-      "pct_buffer": 75.0,
+      "fecha_creacion": "02/07/2026",
+      "dias_ofrecidos": 14,
+      "color_toc": "rojo",
+      "pct_prioridad": "11.70%",
+      "mts": 3715.0,
+      "pct_buffer": 85.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4739,6 +4672,24 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
+      "op": "104510",
+      "cliente": "CODITEQ PRODUCCION",
+      "referencia": "BL-TTT-100X100-R01500-M-01F-C30",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 8,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-76.60%",
+      "mts": 24821.0,
+      "pct_buffer": 75.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
       "op": "104411",
       "cliente": "CARVAJAL SOLUCIONES DE COMUNICACION S.A.S. BIC",
       "referencia": "IC-PTER-101.6X279.4-R90-N-1F-19mm-ENEL-FEST-CODEN-AGOSTO-2026",
@@ -4757,40 +4708,22 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104379",
-      "cliente": "LABORATORIOS LPS",
-      "referencia": "IC-P60-194X153-R1000-P-1F-C15-ETQ-DETER-LIQ-CON-SUAVIZ-FLOR-ALKS-4 L",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "02/07/2026",
-      "dias_ofrecidos": 14,
-      "color_toc": "rojo",
-      "pct_prioridad": "11.70%",
-      "mts": 3715.0,
-      "pct_buffer": 85.7,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104513",
-      "cliente": "DROGUERIAS JULIAO S.A",
-      "referencia": "IC-PPB-110X165-R1000-M-1F-C30-ACE-ALMEND-ARGAN-270ml",
+      "op": "104556",
+      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+      "referencia": "IC-PPBBCAV-65X70-R6000-M-1F-C30-TABLA-JENGI-LIMON-FILLING",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
       "fecha_entrega": "17/07/2026",
       "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "07/07/2026",
-      "dias_ofrecidos": 9,
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 8,
       "color_toc": "amarillo",
-      "pct_prioridad": "29.36%",
-      "mts": 477.0,
-      "pct_buffer": 77.8,
+      "pct_prioridad": "11.70%",
+      "mts": 1030.0,
+      "pct_buffer": 75.0,
       "en_impresion": true,
-      "tiempo_produccion": "Standar"
+      "tiempo_produccion": "Menor al Standar"
     },
     {
       "op": "104434",
@@ -4807,96 +4740,6 @@
       "pct_prioridad": "11.70%",
       "mts": 2840.0,
       "pct_buffer": 84.6,
-      "en_impresion": true,
-      "tiempo_produccion": "Programada"
-    },
-    {
-      "op": "104485",
-      "cliente": "QUALA S A",
-      "referencia": "FD-TTT-050X130-R02000-M-2F-C30-AMARILLO-102C-QUALA. - I9000367",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
-      "tipo": "Fondo",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "07/07/2026",
-      "dias_ofrecidos": 9,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-17.73%",
-      "mts": 7518.0,
-      "pct_buffer": 77.8,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104453",
-      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-      "referencia": "IC-PPB-90X65-R1000-M-1F-C15-LAV-ANT- LIMÓN-MI DÍA-500ML-IMP-ADH",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 10,
-      "color_toc": "amarillo",
-      "pct_prioridad": "11.70%",
-      "mts": 649.0,
-      "pct_buffer": 80.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Programada"
-    },
-    {
-      "op": "104438",
-      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-      "referencia": "IC-PPB-85X90-R1000-M-1F-C15-LPS-JUEGO-FRENTE-CONTRA-DETER-LIQ-CON-SUAVIZANTEX2 L",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 10,
-      "color_toc": "amarillo",
-      "pct_prioridad": "11.70%",
-      "mts": 766.0,
-      "pct_buffer": 80.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104484",
-      "cliente": "QUALA S A",
-      "referencia": "IS-TTT-050X132-R02000-M-02F-C30-REBORDE-FUCSIA-ROD-QUALA. - I9000450",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "07/07/2026",
-      "dias_ofrecidos": 9,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-17.73%",
-      "mts": 6980.0,
-      "pct_buffer": 77.8,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104430",
-      "cliente": "CODITEQ",
-      "referencia": "MANTENIMIENTO-REBOBINADORA-2 JULIO",
-      "maquina": "Rebobinadora",
-      "etapa": "Preparacion",
-      "tipo": "Otro",
-      "fecha_entrega": "17/07/2026",
-      "fecha_entrega_raw": "2026-07-17",
-      "fecha_creacion": "06/07/2026",
-      "dias_ofrecidos": 10,
-      "color_toc": "amarillo",
-      "pct_prioridad": "-253.19%",
-      "mts": 10000.0,
-      "pct_buffer": 80.0,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -4919,38 +4762,110 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104554",
-      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-34.2X92.6-R5000-M-1F-C30- CUELLO  JENGIBRE LIMON",
-      "maquina": "Nilpeter 1",
+      "op": "104430",
+      "cliente": "CODITEQ",
+      "referencia": "MANTENIMIENTO-REBOBINADORA-2 JULIO",
+      "maquina": "Rebobinadora",
       "etapa": "Preparacion",
-      "tipo": "Impresa",
-      "fecha_entrega": "21/07/2026",
-      "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 12,
-      "color_toc": "azul",
-      "pct_prioridad": "-13.30%",
-      "mts": 787.0,
-      "pct_buffer": 50.0,
+      "tipo": "Otro",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 10,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-253.19%",
+      "mts": 10000.0,
+      "pct_buffer": 80.0,
       "en_impresion": true,
-      "tiempo_produccion": "Menor al Standar"
+      "tiempo_produccion": "Programada"
     },
     {
-      "op": "104549",
-      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-      "referencia": "IC-PPBBCAV-65X70-R6000-M-1F-C30-TABLA-OCEAN-FILLING",
+      "op": "104438",
+      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
+      "referencia": "IC-PPB-85X90-R1000-M-1F-C15-LPS-JUEGO-FRENTE-CONTRA-DETER-LIQ-CON-SUAVIZANTEX2 L",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
+      "tipo": "Impresa",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 10,
+      "color_toc": "amarillo",
+      "pct_prioridad": "11.70%",
+      "mts": 766.0,
+      "pct_buffer": 80.0,
+      "en_impresion": false,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104453",
+      "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
+      "referencia": "IC-PPB-90X65-R1000-M-1F-C15-LAV-ANT- LIMÓN-MI DÍA-500ML-IMP-ADH",
+      "maquina": "Nilpeter 2",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "06/07/2026",
+      "dias_ofrecidos": 10,
+      "color_toc": "amarillo",
+      "pct_prioridad": "11.70%",
+      "mts": 649.0,
+      "pct_buffer": 80.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Programada"
+    },
+    {
+      "op": "104513",
+      "cliente": "DROGUERIAS JULIAO S.A",
+      "referencia": "IC-PPB-110X165-R1000-M-1F-C30-ACE-ALMEND-ARGAN-270ml",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
-      "fecha_entrega": "21/07/2026",
-      "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 12,
-      "color_toc": "azul",
-      "pct_prioridad": "-13.30%",
-      "mts": 3697.0,
-      "pct_buffer": 50.0,
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "07/07/2026",
+      "dias_ofrecidos": 9,
+      "color_toc": "amarillo",
+      "pct_prioridad": "29.36%",
+      "mts": 477.0,
+      "pct_buffer": 77.8,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104485",
+      "cliente": "QUALA S A",
+      "referencia": "FD-TTT-050X130-R02000-M-2F-C30-AMARILLO-102C-QUALA. - I9000367",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Fondo",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "07/07/2026",
+      "dias_ofrecidos": 9,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-17.73%",
+      "mts": 7518.0,
+      "pct_buffer": 77.8,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104484",
+      "cliente": "QUALA S A",
+      "referencia": "IS-TTT-050X132-R02000-M-02F-C30-REBORDE-FUCSIA-ROD-QUALA. - I9000450",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "17/07/2026",
+      "fecha_entrega_raw": "2026-07-17",
+      "fecha_creacion": "07/07/2026",
+      "dias_ofrecidos": 9,
+      "color_toc": "amarillo",
+      "pct_prioridad": "-17.73%",
+      "mts": 6980.0,
+      "pct_buffer": 77.8,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4973,6 +4888,24 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
+      "op": "104548",
+      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+      "referencia": "IC-PPB-70X70-R6000-M-1F-C30- FRENTE TONICA OCEAN",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "21/07/2026",
+      "fecha_entrega_raw": "2026-07-21",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 12,
+      "color_toc": "azul",
+      "pct_prioridad": "-13.30%",
+      "mts": 3697.0,
+      "pct_buffer": 50.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Menor al Standar"
+    },
+    {
       "op": "104552",
       "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
       "referencia": "IC-PPB-34.2X92.6-R5000-M-1F-C30- CUELLO SPARKLING TORONJA",
@@ -4989,24 +4922,6 @@
       "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
-    },
-    {
-      "op": "104684",
-      "cliente": "HOKO COLOMBIA S.A.S",
-      "referencia": "BL-PPBBDGT-64X180-R550-M-1F-C30",
-      "maquina": "Troqueladora Plana",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "21/07/2026",
-      "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "13/07/2026",
-      "dias_ofrecidos": 7,
-      "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 898.0,
-      "pct_buffer": 14.3,
-      "en_impresion": true,
-      "tiempo_produccion": "Mayor al Standar"
     },
     {
       "op": "104551",
@@ -5045,6 +4960,42 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
+      "op": "104549",
+      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+      "referencia": "IC-PPBBCAV-65X70-R6000-M-1F-C30-TABLA-OCEAN-FILLING",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "21/07/2026",
+      "fecha_entrega_raw": "2026-07-21",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 12,
+      "color_toc": "azul",
+      "pct_prioridad": "-13.30%",
+      "mts": 3697.0,
+      "pct_buffer": 50.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104554",
+      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+      "referencia": "IC-PPB-34.2X92.6-R5000-M-1F-C30- CUELLO  JENGIBRE LIMON",
+      "maquina": "Nilpeter 1",
+      "etapa": "Preparacion",
+      "tipo": "Impresa",
+      "fecha_entrega": "21/07/2026",
+      "fecha_entrega_raw": "2026-07-21",
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 12,
+      "color_toc": "azul",
+      "pct_prioridad": "-13.30%",
+      "mts": 787.0,
+      "pct_buffer": 50.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Menor al Standar"
+    },
+    {
       "op": "104555",
       "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
       "referencia": "IC-PPB-70X70-R6000-M-1F-C30-JENGIBRE LIMON FRENTE",
@@ -5063,10 +5014,10 @@
       "tiempo_produccion": "Menor al Standar"
     },
     {
-      "op": "104655",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "BL-PPB-035X065-R02000-S-03F-C30",
-      "maquina": "Troqueladora Plana",
+      "op": "104680",
+      "cliente": "COLCAFE SAS",
+      "referencia": "BL-TTT-100X50-R6000-M-1F-C30-COLCAFE",
+      "maquina": "Troqueladora Rotativa 1",
       "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "21/07/2026",
@@ -5074,45 +5025,9 @@
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
       "color_toc": "azul",
-      "pct_prioridad": "-126.60%",
-      "mts": 1401.0,
+      "pct_prioridad": "",
+      "mts": 913.0,
       "pct_buffer": 0.0,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
-      "op": "104586",
-      "cliente": "COMPAÑÍA GLOBAL DE PINTURAS S.A.",
-      "referencia": "BL-TTT-96X55-R2500-M-1F-C30",
-      "maquina": "Troqueladora Rotativa 1",
-      "etapa": "Preparacion",
-      "tipo": "Blanca",
-      "fecha_entrega": "21/07/2026",
-      "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "09/07/2026",
-      "dias_ofrecidos": 11,
-      "color_toc": "azul",
-      "pct_prioridad": "-126.60%",
-      "mts": 6145.0,
-      "pct_buffer": 45.5,
-      "en_impresion": true,
-      "tiempo_produccion": "Mayor al Standar"
-    },
-    {
-      "op": "104600",
-      "cliente": "FLOW CHEM SAS",
-      "referencia": "FD-TTT-40X33-R4000-M-2F-C10-VERDE-354C",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
-      "tipo": "Fondo",
-      "fecha_entrega": "21/07/2026",
-      "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "09/07/2026",
-      "dias_ofrecidos": 11,
-      "color_toc": "azul",
-      "pct_prioridad": "-51.06%",
-      "mts": 249.0,
-      "pct_buffer": 45.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5130,6 +5045,24 @@
       "color_toc": "azul",
       "pct_prioridad": "-126.60%",
       "mts": 872.0,
+      "pct_buffer": 45.5,
+      "en_impresion": true,
+      "tiempo_produccion": "Mayor al Standar"
+    },
+    {
+      "op": "104586",
+      "cliente": "COMPAÑÍA GLOBAL DE PINTURAS S.A.",
+      "referencia": "BL-TTT-96X55-R2500-M-1F-C30",
+      "maquina": "Troqueladora Rotativa 1",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "21/07/2026",
+      "fecha_entrega_raw": "2026-07-21",
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 11,
+      "color_toc": "azul",
+      "pct_prioridad": "-126.60%",
+      "mts": 6145.0,
       "pct_buffer": 45.5,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
@@ -5171,22 +5104,22 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104709",
-      "cliente": "SCHOTT ENVASES FARMACEUTICOS SAS",
-      "referencia": "BL-PPMATDIG-29X140-R1500-M-3F-C10",
-      "maquina": "Kromia",
+      "op": "104684",
+      "cliente": "HOKO COLOMBIA S.A.S",
+      "referencia": "BL-PPBBDGT-64X180-R550-M-1F-C30",
+      "maquina": "Troqueladora Plana",
       "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "21/07/2026",
       "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "14/07/2026",
-      "dias_ofrecidos": 6,
+      "fecha_creacion": "13/07/2026",
+      "dias_ofrecidos": 7,
       "color_toc": "azul",
       "pct_prioridad": "",
-      "mts": 3108.0,
-      "pct_buffer": 0.0,
+      "mts": 898.0,
+      "pct_buffer": 14.3,
       "en_impresion": true,
-      "tiempo_produccion": "Standar"
+      "tiempo_produccion": "Mayor al Standar"
     },
     {
       "op": "104671",
@@ -5207,10 +5140,10 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104680",
-      "cliente": "COLCAFE SAS",
-      "referencia": "BL-TTT-100X50-R6000-M-1F-C30-COLCAFE",
-      "maquina": "Troqueladora Rotativa 1",
+      "op": "104655",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "BL-PPB-035X065-R02000-S-03F-C30",
+      "maquina": "Troqueladora Plana",
       "etapa": "Preparacion",
       "tipo": "Blanca",
       "fecha_entrega": "21/07/2026",
@@ -5218,8 +5151,8 @@
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
       "color_toc": "azul",
-      "pct_prioridad": "",
-      "mts": 913.0,
+      "pct_prioridad": "-126.60%",
+      "mts": 1401.0,
       "pct_buffer": 0.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -5243,9 +5176,27 @@
       "tiempo_produccion": "Standar"
     },
     {
-      "op": "104548",
+      "op": "104709",
+      "cliente": "SCHOTT ENVASES FARMACEUTICOS SAS",
+      "referencia": "BL-PPMATDIG-29X140-R1500-M-3F-C10",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Blanca",
+      "fecha_entrega": "21/07/2026",
+      "fecha_entrega_raw": "2026-07-21",
+      "fecha_creacion": "14/07/2026",
+      "dias_ofrecidos": 6,
+      "color_toc": "azul",
+      "pct_prioridad": "",
+      "mts": 3108.0,
+      "pct_buffer": 0.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104547",
       "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-70X70-R6000-M-1F-C30- FRENTE TONICA OCEAN",
+      "referencia": "IC-PPB-65X70-R6000-M-1F-C30-TABLA-GING-BEER",
       "maquina": "Nilpeter 1",
       "etapa": "Preparacion",
       "tipo": "Impresa",
@@ -5255,7 +5206,7 @@
       "dias_ofrecidos": 12,
       "color_toc": "azul",
       "pct_prioridad": "-13.30%",
-      "mts": 3697.0,
+      "mts": 2491.0,
       "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
@@ -5279,22 +5230,22 @@
       "tiempo_produccion": "Mayor al Standar"
     },
     {
-      "op": "104547",
-      "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-      "referencia": "IC-PPB-65X70-R6000-M-1F-C30-TABLA-GING-BEER",
-      "maquina": "Nilpeter 1",
+      "op": "104600",
+      "cliente": "FLOW CHEM SAS",
+      "referencia": "FD-TTT-40X33-R4000-M-2F-C10-VERDE-354C",
+      "maquina": "Kromia",
       "etapa": "Preparacion",
-      "tipo": "Impresa",
+      "tipo": "Fondo",
       "fecha_entrega": "21/07/2026",
       "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "08/07/2026",
-      "dias_ofrecidos": 12,
+      "fecha_creacion": "09/07/2026",
+      "dias_ofrecidos": 11,
       "color_toc": "azul",
-      "pct_prioridad": "-13.30%",
-      "mts": 2491.0,
-      "pct_buffer": 50.0,
+      "pct_prioridad": "-51.06%",
+      "mts": 249.0,
+      "pct_buffer": 45.5,
       "en_impresion": true,
-      "tiempo_produccion": "Menor al Standar"
+      "tiempo_produccion": "Standar"
     },
     {
       "op": "104521",
@@ -5485,14 +5436,14 @@
       "tipo": "Fondo",
       "fecha_entrega": "21/07/2026",
       "fecha_entrega_raw": "2026-07-21",
-      "fecha_creacion": "10/07/2026",
-      "dias_ofrecidos": 10,
+      "fecha_creacion": "08/07/2026",
+      "dias_ofrecidos": 12,
       "color_toc": "azul",
       "pct_prioridad": "-51.06%",
       "mts": 888.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 50.0,
       "en_impresion": false,
-      "tiempo_produccion": "Standar"
+      "tiempo_produccion": "Mayor al Standar"
     },
     {
       "op": "104435",
@@ -7714,7 +7665,7 @@
     "verde": 24,
     "amarillo": 25,
     "rojo": 31,
-    "negro": 20
+    "negro": 19
   },
   "dia_total": 11,
   "dia_por_maquina": {},
@@ -8751,8 +8702,8 @@
       "op": "104438",
       "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
       "referencia": "IC-PPB-85X90-R1000-M-1F-C15-LPS-JUEGO-FRENTE-CONTRA-DETER-LIQ-CON-SUAVIZANTEX2 L",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "mts": 766.0,
       "familia": "F10",
@@ -8906,22 +8857,6 @@
       "fecha_creacion": "08/07/2026"
     },
     {
-      "fecha": "2026-07-14",
-      "fecha_entrega": "14/07/2026",
-      "op": "104645",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-76X127-R1100-M-1F-C30-AZUL-277C-PREP",
-      "maquina": "Rebobinadora",
-      "etapa": "RM4 - Reboninado",
-      "tipo": "Fondo",
-      "mts": 888.0,
-      "familia": "F6",
-      "color_toc": "negro",
-      "fecha_std": "2026-07-15",
-      "promesa_dias": 6,
-      "fecha_creacion": "08/07/2026"
-    },
-    {
       "fecha": "2026-07-21",
       "fecha_entrega": "21/07/2026",
       "op": "104646",
@@ -8933,9 +8868,9 @@
       "mts": 888.0,
       "familia": "F6",
       "color_toc": "azul",
-      "fecha_std": "2026-07-17",
+      "fecha_std": "2026-07-15",
       "promesa_dias": 6,
-      "fecha_creacion": "10/07/2026"
+      "fecha_creacion": "08/07/2026"
     },
     {
       "fecha": "2026-07-17",
@@ -11702,8 +11637,8 @@
       "2026-07-08": 15000.0,
       "2026-07-24": 54.0,
       "2026-07-23": 4928.0,
-      "2026-07-16": 5527.0,
       "2026-07-18": 30996.0,
+      "2026-07-16": 4761.0,
       "2026-07-17": 54040.0,
       "2026-07-21": 11061.0,
       "2026-07-20": 3528.0,
@@ -11772,9 +11707,9 @@
     "Nilpeter 1": {
       "mts_atrasados": 2462,
       "n_atrasadas": 2,
-      "mts_pendientes": 177398,
-      "n_pendientes": 62,
-      "mts_total": 179860,
+      "mts_pendientes": 176632,
+      "n_pendientes": 61,
+      "mts_total": 179094,
       "turnos_atrasados": 0.3,
       "dias_atrasados": 0.1,
       "cap_turno": 7962,
@@ -11782,38 +11717,38 @@
         {
           "dias": 3,
           "turnos": 9,
-          "mts_por_turno": 19984,
-          "vel_req": 87.8,
-          "efic_req": 125.5,
+          "mts_por_turno": 19899,
+          "vel_req": 87.5,
+          "efic_req": 125.0,
           "vel_comb": 42.0,
-          "efic_comb": 104.6
+          "efic_comb": 104.1
         },
         {
           "dias": 5,
           "turnos": 15,
-          "mts_por_turno": 11991,
-          "vel_req": 52.7,
-          "efic_req": 75.3,
+          "mts_por_turno": 11940,
+          "vel_req": 52.5,
+          "efic_req": 75.0,
           "vel_comb": 42.0,
-          "efic_comb": 62.7
+          "efic_comb": 62.5
         },
         {
           "dias": 7,
           "turnos": 21,
-          "mts_por_turno": 8565,
-          "vel_req": 37.6,
-          "efic_req": 53.8,
-          "vel_comb": 37.6,
-          "efic_comb": 50.1
+          "mts_por_turno": 8528,
+          "vel_req": 37.5,
+          "efic_req": 53.6,
+          "vel_comb": 37.5,
+          "efic_comb": 50.0
         },
         {
           "dias": 10,
           "turnos": 30,
-          "mts_por_turno": 5995,
-          "vel_req": 26.4,
-          "efic_req": 37.6,
-          "vel_comb": 26.4,
-          "efic_comb": 49.9
+          "mts_por_turno": 5970,
+          "vel_req": 26.2,
+          "efic_req": 37.5,
+          "vel_comb": 26.2,
+          "efic_comb": 50.1
         }
       ]
     },
@@ -11917,9 +11852,9 @@
   "cuellos": {
     "NP1": {
       "capacidad_dia": 23100,
-      "mts_total": 179860,
+      "mts_total": 179094,
       "dias_trabajo": 7.8,
-      "pct_cap": 38.9,
+      "pct_cap": 38.8,
       "ordenes": [
         {
           "op": "103550",
@@ -11991,15 +11926,6 @@
           "fecha": "15/07/2026",
           "color": "rojo",
           "tipo": "Otro",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104438",
-          "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-          "mts": 766.0,
-          "fecha": "17/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
           "etapa": "Preparacion"
         },
         {
@@ -12522,8 +12448,8 @@
           "ordenes": 1
         },
         "17/07/2026": {
-          "mts": 5411.0,
-          "ordenes": 4
+          "mts": 4645.0,
+          "ordenes": 3
         },
         "17/09/2026": {
           "mts": 1089.0,
@@ -13475,9 +13401,9 @@
     },
     "Rebobinadora 1": {
       "capacidad_dia": 16500,
-      "mts_total": 113737,
+      "mts_total": 113587,
       "dias_trabajo": 6.9,
-      "pct_cap": 34.5,
+      "pct_cap": 34.4,
       "ordenes": [
         {
           "op": "104310",
@@ -13630,7 +13556,7 @@
           "fecha": "17/07/2026",
           "color": "amarillo",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104453",
@@ -13645,24 +13571,6 @@
           "op": "104484",
           "cliente": "QUALA S A",
           "mts": 6980.0,
-          "fecha": "17/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104557",
-          "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-          "mts": 3138.0,
-          "fecha": "17/07/2026",
-          "color": "amarillo",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104556",
-          "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-          "mts": 1030.0,
           "fecha": "17/07/2026",
           "color": "amarillo",
           "tipo": "Impresa",
@@ -13687,36 +13595,18 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104564",
-          "cliente": "LAMINATE PACKAGING COLOMBIA SAS (ESSEL COLOMBIA SAS)",
-          "mts": 1460.0,
+          "op": "104493",
+          "cliente": "QUALA S A",
+          "mts": 8386.0,
           "fecha": "21/07/2026",
           "color": "verde",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
         {
-          "op": "104555",
+          "op": "104551",
           "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-          "mts": 1213.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104552",
-          "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-          "mts": 2126.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104550",
-          "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-          "mts": 1030.0,
+          "mts": 1395.0,
           "fecha": "21/07/2026",
           "color": "azul",
           "tipo": "Impresa",
@@ -13813,9 +13703,9 @@
           "etapa": "RM4 - Reboninado"
         },
         {
-          "op": "104489",
+          "op": "104487",
           "cliente": "QUALA S A",
-          "mts": 15425.0,
+          "mts": 15491.0,
           "fecha": "24/07/2026",
           "color": "azul",
           "tipo": "Impresa",
@@ -13980,8 +13870,8 @@
           "ordenes": 7
         },
         "17/07/2026": {
-          "mts": 19661.0,
-          "ordenes": 8
+          "mts": 15493.0,
+          "ordenes": 6
         },
         "17/09/2026": {
           "mts": 1089.0,
@@ -13992,8 +13882,8 @@
           "ordenes": 1
         },
         "21/07/2026": {
-          "mts": 9526.0,
-          "ordenes": 5
+          "mts": 13478.0,
+          "ordenes": 3
         },
         "22/07/2026": {
           "mts": 22273.0,
@@ -14008,7 +13898,7 @@
           "ordenes": 1
         },
         "24/07/2026": {
-          "mts": 20611.0,
+          "mts": 20677.0,
           "ordenes": 4
         },
         "27/07/2026": {
@@ -14039,9 +13929,9 @@
     },
     "Rebobinadora 2": {
       "capacidad_dia": 16500,
-      "mts_total": 114064,
+      "mts_total": 113859,
       "dias_trabajo": 6.9,
-      "pct_cap": 34.6,
+      "pct_cap": 34.5,
       "ordenes": [
         {
           "op": "104311",
@@ -14107,15 +13997,6 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104645",
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 888.0,
-          "fecha": "14/07/2026",
-          "color": "negro",
-          "tipo": "Fondo",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
           "op": "104692",
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 1062.0,
@@ -14143,15 +14024,6 @@
           "etapa": "RM4 - Reboninado"
         },
         {
-          "op": "104628",
-          "cliente": "Inversiones Montanel SAS",
-          "mts": 355.0,
-          "fecha": "17/07/2026",
-          "color": "verde",
-          "tipo": "Blanca",
-          "etapa": "Preparacion"
-        },
-        {
           "op": "104632",
           "cliente": "CANNABIAN PHARMA SAS",
           "mts": 2373.0,
@@ -14161,12 +14033,39 @@
           "etapa": "Preparacion"
         },
         {
+          "op": "104557",
+          "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+          "mts": 3138.0,
+          "fecha": "17/07/2026",
+          "color": "amarillo",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104556",
+          "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+          "mts": 1030.0,
+          "fecha": "17/07/2026",
+          "color": "amarillo",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
           "op": "102950",
           "cliente": "PDC VINOS Y LICORES SAS",
           "mts": 3598.0,
           "fecha": "19/05/2026",
           "color": "negro",
           "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104646",
+          "cliente": "LINEADATASCAN S.A.-BOGOTA",
+          "mts": 888.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
           "etapa": "RM4 - Reboninado"
         },
         {
@@ -14206,18 +14105,36 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104493",
-          "cliente": "QUALA S A",
-          "mts": 8386.0,
+          "op": "104564",
+          "cliente": "LAMINATE PACKAGING COLOMBIA SAS (ESSEL COLOMBIA SAS)",
+          "mts": 1460.0,
           "fecha": "21/07/2026",
           "color": "verde",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
         {
-          "op": "104551",
+          "op": "104555",
           "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
-          "mts": 1395.0,
+          "mts": 1213.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104552",
+          "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+          "mts": 2126.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104550",
+          "cliente": "DISTRIBUIDORA DE VINOS Y LICORES SAS",
+          "mts": 1030.0,
           "fecha": "21/07/2026",
           "color": "azul",
           "tipo": "Impresa",
@@ -14269,9 +14186,9 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104487",
+          "op": "104489",
           "cliente": "QUALA S A",
-          "mts": 15491.0,
+          "mts": 15425.0,
           "fecha": "24/07/2026",
           "color": "azul",
           "tipo": "Impresa",
@@ -14361,8 +14278,8 @@
           "ordenes": 1
         },
         "14/07/2026": {
-          "mts": 3007.0,
-          "ordenes": 3
+          "mts": 2119.0,
+          "ordenes": 2
         },
         "14/08/2026": {
           "mts": 1062.0,
@@ -14373,16 +14290,16 @@
           "ordenes": 2
         },
         "17/07/2026": {
-          "mts": 2728.0,
-          "ordenes": 2
+          "mts": 6541.0,
+          "ordenes": 3
         },
         "19/05/2026": {
           "mts": 3598.0,
           "ordenes": 1
         },
         "21/07/2026": {
-          "mts": 18323.0,
-          "ordenes": 8
+          "mts": 15259.0,
+          "ordenes": 11
         },
         "22/07/2026": {
           "mts": 13056.0,
@@ -14393,7 +14310,7 @@
           "ordenes": 1
         },
         "24/07/2026": {
-          "mts": 18308.0,
+          "mts": 18242.0,
           "ordenes": 4
         },
         "27/07/2026": {
@@ -14412,24 +14329,15 @@
     },
     "Rebobinadora 3": {
       "capacidad_dia": 16500,
-      "mts_total": 111624,
-      "dias_trabajo": 6.8,
-      "pct_cap": 33.8,
+      "mts_total": 132420,
+      "dias_trabajo": 8.0,
+      "pct_cap": 40.1,
       "ordenes": [
         {
-          "op": "104308",
-          "cliente": "HADA INTERNATIONAL SAS",
-          "mts": 6429.0,
-          "fecha": "03/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "103483",
-          "cliente": "HADA INTERNATIONAL SAS",
-          "mts": 2050.0,
-          "fecha": "05/06/2026",
+          "op": "104096",
+          "cliente": "BELLOTA COLOMBIA SAS CI",
+          "mts": 7161.0,
+          "fecha": "07/07/2026",
           "color": "negro",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
@@ -14460,15 +14368,6 @@
           "color": "negro",
           "tipo": "Fondo",
           "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104700",
-          "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-          "mts": 1697.0,
-          "fecha": "14/08/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
         },
         {
           "op": "104403",
@@ -14588,66 +14487,39 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104709",
-          "cliente": "SCHOTT ENVASES FARMACEUTICOS SAS",
-          "mts": 3108.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Blanca",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104597",
-          "cliente": "EDUARDO JOSE TAFUR",
-          "mts": 3352.0,
+          "op": "104491",
+          "cliente": "QUALA S A",
+          "mts": 7534.0,
           "fecha": "22/07/2026",
           "color": "azul",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
         {
-          "op": "104667",
+          "op": "104665",
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 1166.0,
+          "mts": 683.0,
           "fecha": "22/07/2026",
           "color": "azul",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
         {
-          "op": "104664",
+          "op": "104703",
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 1266.0,
+          "mts": 228.0,
           "fecha": "22/07/2026",
           "color": "azul",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
         {
-          "op": "104594",
-          "cliente": "LABORATORIOS GOTHAPLAST LTDA",
-          "mts": 569.0,
+          "op": "104490",
+          "cliente": "QUALA S A",
+          "mts": 19791.0,
           "fecha": "23/07/2026",
           "color": "azul",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104592",
-          "cliente": "LABORATORIOS GOTHAPLAST LTDA",
-          "mts": 1538.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104660",
-          "cliente": "CODITEQ",
-          "mts": 630.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Otro",
           "etapa": "Preparacion"
         },
         {
@@ -14669,58 +14541,49 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104488",
-          "cliente": "QUALA S A",
-          "mts": 21883.0,
+          "op": "104605",
+          "cliente": "POPPING BOBA INTERNATIONAL S.A.S.",
+          "mts": 1570.0,
           "fecha": "24/07/2026",
           "color": "azul",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
         {
-          "op": "104639",
-          "cliente": "CIBERGENIUS S A S",
-          "mts": 1026.0,
-          "fecha": "27/07/2026",
+          "op": "104621",
+          "cliente": "MORENOS SAS",
+          "mts": 1160.0,
+          "fecha": "24/07/2026",
           "color": "azul",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
         {
-          "op": "104687",
-          "cliente": "CARLOS BUITRAGO BUITRAGO Y/O LABORATORIOS LISSIA",
-          "mts": 1400.0,
-          "fecha": "27/07/2026",
+          "op": "104691",
+          "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
+          "mts": 1062.0,
+          "fecha": "24/07/2026",
           "color": "azul",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
         {
-          "op": "104689",
-          "cliente": "MERCADEO SIN LIMITES SAS",
-          "mts": 1332.0,
+          "op": "104481",
+          "cliente": "QUALA S.A",
+          "mts": 10934.0,
           "fecha": "27/07/2026",
           "color": "azul",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
-          "op": "104695",
-          "cliente": "SOFTYS GACHANCIPÁ SA",
-          "mts": 1316.0,
-          "fecha": "27/07/2026",
-          "color": "azul",
+          "op": "104100",
+          "cliente": "BELLOTA COLOMBIA SAS CI",
+          "mts": 1448.0,
+          "fecha": "30/06/2026",
+          "color": "negro",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104441",
-          "cliente": "CODITEQ",
-          "mts": 10000.0,
-          "fecha": "28/07/2026",
-          "color": "azul",
-          "tipo": "Otro",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104431",
@@ -14732,9 +14595,18 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104307",
-          "cliente": "HADA INTERNATIONAL SAS",
-          "mts": 4286.0,
+          "op": "104264",
+          "cliente": "NESTLE DE COLOMBIA SA",
+          "mts": 840.0,
+          "fecha": "30/07/2026",
+          "color": "verde",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104393",
+          "cliente": "AZUL K  SA",
+          "mts": 31433.0,
           "fecha": "31/07/2026",
           "color": "azul",
           "tipo": "Impresa",
@@ -14742,14 +14614,10 @@
         }
       ],
       "es_cuello": false,
-      "fecha_prometida": "22/07/2026",
+      "fecha_prometida": "24/07/2026",
       "carga_por_fecha": {
-        "03/08/2026": {
-          "mts": 6429.0,
-          "ordenes": 1
-        },
-        "05/06/2026": {
-          "mts": 2050.0,
+        "07/07/2026": {
+          "mts": 7161.0,
           "ordenes": 1
         },
         "07/09/2026": {
@@ -14759,10 +14627,6 @@
         "14/07/2026": {
           "mts": 1961.0,
           "ordenes": 2
-        },
-        "14/08/2026": {
-          "mts": 1697.0,
-          "ordenes": 1
         },
         "15/07/2026": {
           "mts": 2880.0,
@@ -14777,50 +14641,59 @@
           "ordenes": 4
         },
         "21/07/2026": {
-          "mts": 17484.0,
-          "ordenes": 7
+          "mts": 14376.0,
+          "ordenes": 6
         },
         "22/07/2026": {
-          "mts": 5784.0,
+          "mts": 8445.0,
           "ordenes": 3
         },
         "23/07/2026": {
-          "mts": 2737.0,
-          "ordenes": 3
+          "mts": 19791.0,
+          "ordenes": 1
         },
         "24/07/2026": {
-          "mts": 22295.0,
-          "ordenes": 3
+          "mts": 4204.0,
+          "ordenes": 5
         },
         "27/07/2026": {
-          "mts": 5074.0,
-          "ordenes": 4
+          "mts": 10934.0,
+          "ordenes": 1
         },
-        "28/07/2026": {
-          "mts": 10000.0,
+        "30/06/2026": {
+          "mts": 1448.0,
           "ordenes": 1
         },
         "30/07/2026": {
-          "mts": 2840.0,
-          "ordenes": 1
+          "mts": 3680.0,
+          "ordenes": 2
         },
         "31/07/2026": {
-          "mts": 4286.0,
+          "mts": 31433.0,
           "ordenes": 1
         }
       }
     },
     "Rebobinadora (T) 4": {
       "capacidad_dia": 16500,
-      "mts_total": 132626,
-      "dias_trabajo": 8.0,
-      "pct_cap": 40.2,
+      "mts_total": 111441,
+      "dias_trabajo": 6.8,
+      "pct_cap": 33.8,
       "ordenes": [
         {
-          "op": "104096",
-          "cliente": "BELLOTA COLOMBIA SAS CI",
-          "mts": 7161.0,
-          "fecha": "07/07/2026",
+          "op": "104308",
+          "cliente": "HADA INTERNATIONAL SAS",
+          "mts": 6429.0,
+          "fecha": "03/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "103483",
+          "cliente": "HADA INTERNATIONAL SAS",
+          "mts": 2050.0,
+          "fecha": "05/06/2026",
           "color": "negro",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
@@ -14916,6 +14789,15 @@
           "etapa": "Preparacion"
         },
         {
+          "op": "104628",
+          "cliente": "Inversiones Montanel SAS",
+          "mts": 355.0,
+          "fecha": "17/07/2026",
+          "color": "verde",
+          "tipo": "Blanca",
+          "etapa": "Preparacion"
+        },
+        {
           "op": "104654",
           "cliente": "CODITEQ",
           "mts": 103.0,
@@ -14923,15 +14805,6 @@
           "color": "azul",
           "tipo": "Otro",
           "etapa": "Preparacion"
-        },
-        {
-          "op": "104646",
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 888.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104445",
@@ -15000,245 +14873,6 @@
           "op": "104606",
           "cliente": "ANCLA Y VIENTO",
           "mts": 1032.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104491",
-          "cliente": "QUALA S A",
-          "mts": 7534.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104665",
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 683.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104702",
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 102.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104703",
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 228.0,
-          "fecha": "22/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104490",
-          "cliente": "QUALA S A",
-          "mts": 19791.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104605",
-          "cliente": "POPPING BOBA INTERNATIONAL S.A.S.",
-          "mts": 1570.0,
-          "fecha": "24/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104621",
-          "cliente": "MORENOS SAS",
-          "mts": 1160.0,
-          "fecha": "24/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104691",
-          "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-          "mts": 1062.0,
-          "fecha": "24/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104481",
-          "cliente": "QUALA S.A",
-          "mts": 10934.0,
-          "fecha": "27/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104100",
-          "cliente": "BELLOTA COLOMBIA SAS CI",
-          "mts": 1448.0,
-          "fecha": "30/06/2026",
-          "color": "negro",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104440",
-          "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-          "mts": 1570.0,
-          "fecha": "30/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104264",
-          "cliente": "NESTLE DE COLOMBIA SA",
-          "mts": 840.0,
-          "fecha": "30/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104393",
-          "cliente": "AZUL K  SA",
-          "mts": 31433.0,
-          "fecha": "31/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        }
-      ],
-      "es_cuello": false,
-      "fecha_prometida": "24/07/2026",
-      "carga_por_fecha": {
-        "07/07/2026": {
-          "mts": 7161.0,
-          "ordenes": 1
-        },
-        "13/08/2026": {
-          "mts": 649.0,
-          "ordenes": 1
-        },
-        "14/07/2026": {
-          "mts": 3938.0,
-          "ordenes": 5
-        },
-        "15/07/2026": {
-          "mts": 4544.0,
-          "ordenes": 1
-        },
-        "16/07/2026": {
-          "mts": 17994.0,
-          "ordenes": 1
-        },
-        "17/07/2026": {
-          "mts": 1299.0,
-          "ordenes": 3
-        },
-        "21/07/2026": {
-          "mts": 18686.0,
-          "ordenes": 9
-        },
-        "22/07/2026": {
-          "mts": 8547.0,
-          "ordenes": 4
-        },
-        "23/07/2026": {
-          "mts": 19791.0,
-          "ordenes": 1
-        },
-        "24/07/2026": {
-          "mts": 3792.0,
-          "ordenes": 3
-        },
-        "27/07/2026": {
-          "mts": 10934.0,
-          "ordenes": 1
-        },
-        "30/06/2026": {
-          "mts": 1448.0,
-          "ordenes": 1
-        },
-        "30/07/2026": {
-          "mts": 2410.0,
-          "ordenes": 2
-        },
-        "31/07/2026": {
-          "mts": 31433.0,
-          "ordenes": 1
-        }
-      }
-    },
-    "Rebobinadora KM": {
-      "capacidad_dia": 16500,
-      "mts_total": 115177,
-      "dias_trabajo": 7.0,
-      "pct_cap": 34.9,
-      "ordenes": [
-        {
-          "op": "104465",
-          "cliente": "QUALA S.A",
-          "mts": 110.0,
-          "fecha": "15/07/2026",
-          "color": "rojo",
-          "tipo": "Fondo",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104587",
-          "cliente": "CROWN COLOMBIANA SA",
-          "mts": 2509.0,
-          "fecha": "15/07/2026",
-          "color": "rojo",
-          "tipo": "Blanca",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104443",
-          "cliente": "INSTINCTS HUMAINS SAS",
-          "mts": 41745.0,
-          "fecha": "16/07/2026",
-          "color": "rojo",
-          "tipo": "Impresa",
-          "etapa": "RM4 - Reboninado"
-        },
-        {
-          "op": "104595",
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 2306.0,
-          "fecha": "17/07/2026",
-          "color": "amarillo",
-          "tipo": "Fondo",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104611",
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 888.0,
-          "fecha": "21/07/2026",
-          "color": "azul",
-          "tipo": "Fondo",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104612",
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 888.0,
           "fecha": "21/07/2026",
           "color": "azul",
           "tipo": "Fondo",
@@ -15326,6 +14960,15 @@
           "etapa": "Preparacion"
         },
         {
+          "op": "104702",
+          "cliente": "LINEADATASCAN S.A.-BOGOTA",
+          "mts": 102.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
+          "etapa": "Preparacion"
+        },
+        {
           "op": "104704",
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 228.0,
@@ -15371,6 +15014,276 @@
           "etapa": "Preparacion"
         },
         {
+          "op": "104660",
+          "cliente": "CODITEQ",
+          "mts": 630.0,
+          "fecha": "23/07/2026",
+          "color": "azul",
+          "tipo": "Otro",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104488",
+          "cliente": "QUALA S A",
+          "mts": 21883.0,
+          "fecha": "24/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104639",
+          "cliente": "CIBERGENIUS S A S",
+          "mts": 1026.0,
+          "fecha": "27/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104687",
+          "cliente": "CARLOS BUITRAGO BUITRAGO Y/O LABORATORIOS LISSIA",
+          "mts": 1400.0,
+          "fecha": "27/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104689",
+          "cliente": "MERCADEO SIN LIMITES SAS",
+          "mts": 1332.0,
+          "fecha": "27/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104695",
+          "cliente": "SOFTYS GACHANCIPÁ SA",
+          "mts": 1316.0,
+          "fecha": "27/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104441",
+          "cliente": "CODITEQ",
+          "mts": 10000.0,
+          "fecha": "28/07/2026",
+          "color": "azul",
+          "tipo": "Otro",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104440",
+          "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
+          "mts": 1570.0,
+          "fecha": "30/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104307",
+          "cliente": "HADA INTERNATIONAL SAS",
+          "mts": 4286.0,
+          "fecha": "31/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        }
+      ],
+      "es_cuello": false,
+      "fecha_prometida": "22/07/2026",
+      "carga_por_fecha": {
+        "03/08/2026": {
+          "mts": 6429.0,
+          "ordenes": 1
+        },
+        "05/06/2026": {
+          "mts": 2050.0,
+          "ordenes": 1
+        },
+        "13/08/2026": {
+          "mts": 649.0,
+          "ordenes": 1
+        },
+        "14/07/2026": {
+          "mts": 3938.0,
+          "ordenes": 5
+        },
+        "15/07/2026": {
+          "mts": 4544.0,
+          "ordenes": 1
+        },
+        "16/07/2026": {
+          "mts": 17994.0,
+          "ordenes": 1
+        },
+        "17/07/2026": {
+          "mts": 1654.0,
+          "ordenes": 4
+        },
+        "21/07/2026": {
+          "mts": 19199.0,
+          "ordenes": 9
+        },
+        "22/07/2026": {
+          "mts": 7025.0,
+          "ordenes": 10
+        },
+        "23/07/2026": {
+          "mts": 5146.0,
+          "ordenes": 5
+        },
+        "24/07/2026": {
+          "mts": 21883.0,
+          "ordenes": 1
+        },
+        "27/07/2026": {
+          "mts": 5074.0,
+          "ordenes": 4
+        },
+        "28/07/2026": {
+          "mts": 10000.0,
+          "ordenes": 1
+        },
+        "30/07/2026": {
+          "mts": 1570.0,
+          "ordenes": 1
+        },
+        "31/07/2026": {
+          "mts": 4286.0,
+          "ordenes": 1
+        }
+      }
+    },
+    "Rebobinadora KM": {
+      "capacidad_dia": 16500,
+      "mts_total": 115033,
+      "dias_trabajo": 7.0,
+      "pct_cap": 34.9,
+      "ordenes": [
+        {
+          "op": "104700",
+          "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
+          "mts": 1697.0,
+          "fecha": "14/08/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104465",
+          "cliente": "QUALA S.A",
+          "mts": 110.0,
+          "fecha": "15/07/2026",
+          "color": "rojo",
+          "tipo": "Fondo",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104587",
+          "cliente": "CROWN COLOMBIANA SA",
+          "mts": 2509.0,
+          "fecha": "15/07/2026",
+          "color": "rojo",
+          "tipo": "Blanca",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104443",
+          "cliente": "INSTINCTS HUMAINS SAS",
+          "mts": 41745.0,
+          "fecha": "16/07/2026",
+          "color": "rojo",
+          "tipo": "Impresa",
+          "etapa": "RM4 - Reboninado"
+        },
+        {
+          "op": "104595",
+          "cliente": "LINEADATASCAN S.A.-BOGOTA",
+          "mts": 2306.0,
+          "fecha": "17/07/2026",
+          "color": "amarillo",
+          "tipo": "Fondo",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104611",
+          "cliente": "LINEADATASCAN S.A.-BOGOTA",
+          "mts": 888.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104612",
+          "cliente": "LINEADATASCAN S.A.-BOGOTA",
+          "mts": 888.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104709",
+          "cliente": "SCHOTT ENVASES FARMACEUTICOS SAS",
+          "mts": 3108.0,
+          "fecha": "21/07/2026",
+          "color": "azul",
+          "tipo": "Blanca",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104597",
+          "cliente": "EDUARDO JOSE TAFUR",
+          "mts": 3352.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104667",
+          "cliente": "LINEADATASCAN S.A.-BOGOTA",
+          "mts": 1166.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104664",
+          "cliente": "LINEADATASCAN S.A.-BOGOTA",
+          "mts": 1266.0,
+          "fecha": "22/07/2026",
+          "color": "azul",
+          "tipo": "Fondo",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104594",
+          "cliente": "LABORATORIOS GOTHAPLAST LTDA",
+          "mts": 569.0,
+          "fecha": "23/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104592",
+          "cliente": "LABORATORIOS GOTHAPLAST LTDA",
+          "mts": 1538.0,
+          "fecha": "23/07/2026",
+          "color": "azul",
+          "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
           "op": "104710",
           "cliente": "EMPRESA COLOMBIANA DEL PLASTICO S.A.S",
           "mts": 14844.0,
@@ -15392,6 +15305,10 @@
       "es_cuello": false,
       "fecha_prometida": "23/07/2026",
       "carga_por_fecha": {
+        "14/08/2026": {
+          "mts": 1697.0,
+          "ordenes": 1
+        },
         "15/07/2026": {
           "mts": 2619.0,
           "ordenes": 2
@@ -15405,16 +15322,16 @@
           "ordenes": 1
         },
         "21/07/2026": {
-          "mts": 3177.0,
+          "mts": 4884.0,
           "ordenes": 3
         },
         "22/07/2026": {
-          "mts": 6923.0,
-          "ordenes": 9
+          "mts": 5784.0,
+          "ordenes": 3
         },
         "23/07/2026": {
-          "mts": 19360.0,
-          "ordenes": 5
+          "mts": 16951.0,
+          "ordenes": 3
         },
         "24/07/2026": {
           "mts": 39047.0,
@@ -16571,7 +16488,7 @@
       "por_fecha": {
         "2026-07-14": 2462.0,
         "2026-07-15": 15000.0,
-        "2026-07-17": 5411.0,
+        "2026-07-17": 4645.0,
         "2026-07-21": 37099.0,
         "2026-07-22": 16865.0,
         "2026-07-23": 18982.0,
@@ -16679,9 +16596,9 @@
           "estado": "ok"
         },
         "2026-07-17": {
-          "planeado": 5411.0,
+          "planeado": 4645.0,
           "capacidad": 23888,
-          "pct": 22.7,
+          "pct": 19.4,
           "estado": "ok"
         }
       }
