@@ -323,6 +323,12 @@ def fetch_and_process():
 
     # Agrupamos las OPs por referencia (sin ordenar por numero -- el emparejamiento
     # ahora se hace por cercania de fecha de creacion, ver mas abajo).
+    def _norm_op(x):
+        s = str(x).strip()
+        return s[:-2] if s.endswith('.0') else s
+
+    _raw_op_numbers = {_norm_op(op.get(OP['number'], '')) for op in ordenes}
+
     op_groups = defaultdict(list)
     for op in ordenes:
         proceso = op.get(OP['proceso'], '')
@@ -331,6 +337,9 @@ def fetch_and_process():
         ref = op.get(OP['referencia'], '').strip()
         if ref:
             op_groups[ref].append(op)
+
+    _op_groups_numbers = {_norm_op(op.get(OP['number'], ''))
+                           for ops in op_groups.values() for op in ops}
 
     def _parse_any_dt(s):
         try:
@@ -430,59 +439,14 @@ def fetch_and_process():
         print("[sync] ERROR: 0 filas construidas")
         return False
 
-    # --- DEBUG TEMPORAL: OPs problematicas y todas las Producciones de sus refs ---
-    _ops_debug = {'103483', '103482', '101362', '101363'}
-    _refs_debug = set()
-    for r in rows:
-        op_str = str(r.get('op_number', '')).strip()
-        if op_str.endswith('.0'):
-            op_str = op_str[:-2]
-        if op_str in _ops_debug:
-            _refs_debug.add(r['referencia'])
-            print(f"[DEBUG-OP-{op_str}] entrega_prod={repr(r['entrega_prod_raw'])} | "
-                  f"prod_id={r.get('prod_id')} | op_id={r.get('op_id')} | "
-                  f"prod_created={r['prod_createdtime']} | "
-                  f"op_created={r['op_createdtime']} | "
-                  f"diff_dias={abs((_parse_any_dt(r['op_createdtime']) - _parse_any_dt(r['prod_createdtime'])).days) if _parse_any_dt(r['op_createdtime']) and _parse_any_dt(r['prod_createdtime']) else '?'} | "
-                  f"ref={r['referencia']}")
-
-    # Mostrar TODAS las Producciones Y TODAS las OPs de las referencias problematicas
-    # incluyendo el NUMERO VISIBLE (NP...), TIMESTAMP COMPLETO (no solo fecha) y
-    # CANTIDAD como posible criterio de desempate cuando hay creacion el mismo dia
-    for ref in sorted(_refs_debug):
-        prods_ref = [p for p in producciones if p.get(PROD['referencia'], '').strip() == ref]
-        print(f"[DEBUG-REF-PROD] '{ref}': {len(prods_ref)} Producciones:")
-        for p in sorted(prods_ref, key=lambda x: str(x.get(PROD['fecha_creacion'], ''))):
-            print(f"[DEBUG-REF-PROD]   NUMERO={p.get('vtcmproduccionnumber')} | id={p.get('id')} | "
-                  f"created={p.get(PROD['fecha_creacion'],'')} | "
-                  f"cantidad={p.get('cf_vtcmproduccion_cantidad','')} | "
-                  f"entrega_prod={repr(p.get(PROD['entrega_prod'],''))} | "
-                  f"hab={_es_habilitado(p.get(PROD['entrega_prod'],''))}")
-        ops_ref = op_groups.get(ref, [])
-        print(f"[DEBUG-REF-OP] '{ref}': {len(ops_ref)} OPs disponibles:")
-        for o in sorted(ops_ref, key=lambda x: str(x.get('createdtime', ''))):
-            print(f"[DEBUG-REF-OP]   id={o.get('id')} | number={o.get(OP['number'])} | "
-                  f"created={o.get('createdtime','')} | "
-                  f"total_etiquetas={o.get(OP['total_etiquetas'],'')} | "
-                  f"fecha_entrega={o.get(OP['fecha_entrega'],'')}")
-
-    # Busqueda DIRECTA por numero visible NP106592, ANTES de cualquier filtro
-    # (asignado a plataforma, habilitado, etc.) para ver su estado real crudo
-    _np_buscar = {'NP106592'}
-    for p in producciones:
-        if p.get('vtcmproduccionnumber') in _np_buscar:
-            print(f"[DEBUG-NP] {p.get('vtcmproduccionnumber')} | id={p.get('id')} | "
-                  f"referencia={repr(p.get(PROD['referencia'], ''))} | "
-                  f"entrega_prod={repr(p.get(PROD['entrega_prod'], ''))} | "
-                  f"hab={_es_habilitado(p.get(PROD['entrega_prod'], ''))} | "
-                  f"asignado={p.get(PROD['asignado'])} | "
-                  f"created={str(p.get(PROD['fecha_creacion'], ''))[:10]}")
+    _matched_numbers = {_norm_op(r.get('op_number', '')) for r in rows}
 
     # --- FILTRO 1: excluir habilitadas (post-match) ---
     rows_pre = len(rows)
     rows = [r for r in rows if not _es_habilitado(r.get('entrega_prod_raw', ''))]
     print(f"[sync] Filas tras excluir habilitadas: {len(rows)} "
           f"(excluidas {rows_pre - len(rows)} habilitadas)")
+    _post_f1_numbers = {_norm_op(r.get('op_number', '')) for r in rows}
 
     # --- FILTRO 2: proximidad de fechas de creacion ---
     # Si la Produccion y la OP fueron creadas a mas de MAX_DIAS dias de
@@ -506,6 +470,7 @@ def fetch_and_process():
     if rows_pre2 != len(rows):
         print(f"[sync] Filas tras filtro proximidad: {len(rows)} "
               f"(excluidas {rows_pre2 - len(rows)} por diff >{_MAX_DIAS} dias)")
+    _post_f2_numbers = {_norm_op(r.get('op_number', '')) for r in rows}
 
     # --- FILTRO 3 (SEGURIDAD): excluir si CUALQUIER Produccion de la misma
     # referencia -- no solo la que quedo emparejada -- fue creada muy cerca
@@ -546,6 +511,58 @@ def fetch_and_process():
     if rows_pre3 != len(rows):
         print(f"[sync] Filas tras filtro SEGURIDAD habilitadas cercanas: {len(rows)} "
               f"(excluidas {rows_pre3 - len(rows)})")
+    _post_f3_numbers = {_norm_op(r.get('op_number', '')) for r in rows}
+
+    # --- DEBUG TEMPORAL: diagnostico contra reporte de Vtiger (250 OPs esperadas
+    # con criterio Asignado a Plataforma + Fecha Entrega Prometida 2025-2026 +
+    # Entrega de Produccion != Habilitado). Para cada OP del reporte que no
+    # sobrevivio hasta el resultado final, se indica en que etapa se perdio.
+    _VTIGER_250 = {
+        '101366', '101372', '103460', '103480', '103481', '103524', '103548', '103550', '103860', '103861',
+        '103883', '104095', '104097', '104098', '104210', '104223', '104264', '104306', '104307', '104308',
+        '104310', '104311', '104324', '104326', '104331', '104332', '104334', '104346', '104349', '104350',
+        '104352', '104353', '104354', '104378', '104379', '104391', '104393', '104394', '104403', '104404',
+        '104411', '104414', '104428', '104429', '104430', '104431', '104432', '104433', '104434', '104435',
+        '104436', '104437', '104438', '104439', '104440', '104441', '104443', '104444', '104445', '104446',
+        '104447', '104448', '104449', '104450', '104452', '104453', '104457', '104458', '104465', '104468',
+        '104478', '104479', '104481', '104482', '104484', '104485', '104486', '104487', '104488', '104489',
+        '104490', '104491', '104492', '104493', '104504', '104509', '104510', '104513', '104514', '104515',
+        '104516', '104521', '104526', '104541', '104543', '104545', '104547', '104548', '104549', '104550',
+        '104551', '104552', '104553', '104554', '104555', '104556', '104557', '104563', '104564', '104566',
+        '104568', '104569', '104570', '104571', '104572', '104573', '104575', '104576', '104578', '104579',
+        '104580', '104582', '104583', '104584', '104585', '104586', '104587', '104588', '104589', '104590',
+        '104591', '104592', '104593', '104594', '104595', '104596', '104597', '104598', '104599', '104600',
+        '104603', '104604', '104605', '104606', '104607', '104608', '104609', '104611', '104612', '104613',
+        '104616', '104617', '104619', '104620', '104621', '104622', '104623', '104624', '104626', '104627',
+        '104628', '104629', '104630', '104631', '104632', '104633', '104635', '104636', '104638', '104639',
+        '104640', '104641', '104642', '104647', '104648', '104650', '104651', '104652', '104653', '104654',
+        '104655', '104656', '104657', '104658', '104659', '104660', '104661', '104662', '104663', '104664',
+        '104665', '104666', '104667', '104668', '104669', '104670', '104671', '104672', '104673', '104674',
+        '104675', '104676', '104677', '104678', '104679', '104680', '104681', '104682', '104683', '104684',
+        '104685', '104686', '104687', '104688', '104689', '104690', '104691', '104692', '104693', '104694',
+        '104695', '104696', '104697', '104698', '104699', '104700', '104701', '104702', '104703', '104704',
+        '104705', '104706', '104707', '104708', '104709', '104710', '104711', '104712', '104713', '104714',
+        '104715', '104716', '104717', '104718', '104719', '104720', '104721', '104722', '104723', '104724',
+    }
+    _faltantes = sorted(_VTIGER_250 - _post_f3_numbers)
+    print(f"[sync] DIAGNOSTICO vs Vtiger: {len(_VTIGER_250)} esperadas, "
+          f"{len(_VTIGER_250 & _post_f3_numbers)} presentes, {len(_faltantes)} faltantes")
+    for op_n in _faltantes:
+        if op_n not in _raw_op_numbers:
+            razon = "NO existe en la respuesta de la API de Ordenes (fuera del filtro fechadeentrega>2024-12-31, o dato distinto)"
+        elif op_n not in _op_groups_numbers:
+            razon = "excluida por campo Proceso de Etiquetas vacio o '-'"
+        elif op_n not in _matched_numbers:
+            razon = "no fue seleccionada en el emparejamiento 1:1 (otra OP de la misma referencia gano la asignacion por cercania de fecha)"
+        elif op_n not in _post_f1_numbers:
+            razon = "excluida por FILTRO 1 (la Produccion emparejada esta habilitada)"
+        elif op_n not in _post_f2_numbers:
+            razon = "excluida por FILTRO 2 (proximidad de creacion Produccion/OP >2 dias)"
+        elif op_n not in _post_f3_numbers:
+            razon = "excluida por FILTRO 3 (seguridad: otra Produccion habilitada de la misma referencia cerca en el tiempo)"
+        else:
+            razon = "presente en resultado final -- revisar filtro adicional en construccion de Tambor General"
+        print(f"[DEBUG-FALTANTE] OP {op_n}: {razon}")
 
     # 4. Procesar
     df = pd.DataFrame(rows)
