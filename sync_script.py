@@ -301,6 +301,26 @@ def fetch_and_process():
         print("[sync] ERROR: Sin ordenes")
         return False
 
+    # --- DEBUG TEMPORAL: buscar OP 104100 en la lista CRUDA, antes de cualquier
+    # filtro/agrupacion, para saber si existe pero se pierde por proceso vacio
+    # o por referencia con formato distinto (espacios, mayusculas, etc.) ---
+    for op in ordenes:
+        if '104100' in str(op.get(OP['number'], '')):
+            print(f"[DEBUG-104100-CRUDO] number={repr(op.get(OP['number']))} | "
+                  f"proceso={repr(op.get(OP['proceso'], ''))} | "
+                  f"referencia={repr(op.get(OP['referencia'], ''))} | "
+                  f"createdtime={op.get('createdtime', '')} | "
+                  f"fecha_entrega={op.get(OP['fecha_entrega'], '')}")
+    _ref_104100 = 'IC-TTT-70X32-R10000-M-1F-C30-MACHE-GENER-MAX-RESIST'
+    _matches_prod = [k for k in prod_groups.keys() if k.strip() == _ref_104100.strip()]
+    print(f"[DEBUG-104100-REF] Buscando referencia exacta {repr(_ref_104100)} en prod_groups: "
+          f"{'ENCONTRADA' if _matches_prod else 'NO ENCONTRADA'} "
+          f"({len(prod_groups)} referencias totales en prod_groups)")
+    _similares = [k for k in prod_groups.keys() if 'MACHE-GENER-MAX-RESIST' in k]
+    if _similares:
+        for s in _similares:
+            print(f"[DEBUG-104100-REF]   similar en prod_groups: {repr(s)}")
+
     # Agrupamos las OPs por referencia (sin ordenar por numero -- el emparejamiento
     # ahora se hace por cercania de fecha de creacion, ver mas abajo).
     op_groups = defaultdict(list)
@@ -321,10 +341,16 @@ def fetch_and_process():
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
     # 1:1, no muchos a muchos). Cuando una referencia se reordena muchas veces
     # (hasta 15+ veces para el mismo diseno de etiqueta, casos reales
-    # observados), NO se puede confiar en "ordenar y recortar por numero de OP"
-    # -- se empareja cada Produccion con la OP cuya FECHA DE CREACION este mas
-    # cerca de la suya (la OP se crea el mismo dia o muy cerca de su
-    # Produccion, confirmado por el usuario), tomando OPs sin reemplazo.
+    # observados), el emparejamiento debe ser GLOBALMENTE optimo, no greedy por
+    # orden de procesamiento: si se procesa Produccion por Produccion en orden
+    # cronologico y cada una toma la OP disponible mas cercana, una Produccion
+    # antigua puede "robarle" la OP correcta a una mas reciente que en realidad
+    # tenia una coincidencia mucho mejor (fecha casi identica).
+    #
+    # Fix: para cada referencia, calcular TODAS las distancias Produccion-OP
+    # posibles, ordenarlas de menor a mayor diferencia, y asignar los pares
+    # mas cercanos primero (sin reemplazo). Esto aproxima un matching optimo
+    # de peso minimo (mejor que greedy-por-orden-de-produccion).
     rows = []
     sin_op = 0
     _n_ajustados = 0
@@ -332,19 +358,38 @@ def fetch_and_process():
         ops_disponibles = list(op_groups.get(ref, []))
         if len(ops_disponibles) > len(prods):
             _n_ajustados += 1
-        for prod in prods:
-            if not ops_disponibles:
+        if not ops_disponibles:
+            sin_op += len(prods)
+            continue
+
+        # Construir todas las distancias posibles (Produccion, OP) para esta referencia
+        pares = []
+        for pi, prod in enumerate(prods):
+            prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
+            for oi, op in enumerate(ops_disponibles):
+                op_dt = _parse_any_dt(op.get('createdtime', ''))
+                if prod_dt is not None and op_dt is not None:
+                    dist = abs((op_dt - prod_dt).total_seconds())
+                else:
+                    dist = float('inf')
+                pares.append((dist, pi, oi))
+        pares.sort(key=lambda x: x[0])
+
+        prod_usada = [False] * len(prods)
+        op_usada = [False] * len(ops_disponibles)
+        asignacion = {}  # pi -> oi
+        for dist, pi, oi in pares:
+            if prod_usada[pi] or op_usada[oi]:
+                continue
+            prod_usada[pi] = True
+            op_usada[oi] = True
+            asignacion[pi] = oi
+
+        for pi, prod in enumerate(prods):
+            if pi not in asignacion:
                 sin_op += 1
                 continue
-            prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
-            if prod_dt is None or all(_parse_any_dt(o.get('createdtime', '')) is None for o in ops_disponibles):
-                op = ops_disponibles.pop(0)
-            else:
-                def _dist(o):
-                    op_dt = _parse_any_dt(o.get('createdtime', ''))
-                    return abs((op_dt - prod_dt).total_seconds()) if op_dt else float('inf')
-                op = min(ops_disponibles, key=_dist)
-                ops_disponibles.remove(op)
+            op = ops_disponibles[asignacion[pi]]
             proceso = op.get(OP['proceso'], '')
 
             rows.append({
