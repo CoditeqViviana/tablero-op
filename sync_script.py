@@ -236,14 +236,15 @@ def fetch_and_process():
         print("[sync] ERROR: Sin producciones")
         return False
 
-    # === DIAGNOSTICO TEMPORAL: valor crudo de entrega_prod para un caso puntual ===
-    _ref_debug = 'IC-PPT-88X120-R2000-M-1F-C30-ELEMENTZ-3N1-COCONUT-HAIR-BODY-WASH-443ML'
+    # === DIAGNOSTICO TEMPORAL: catalogar TODOS los valores unicos de entrega_prod ===
+    _valores_vistos = {}
     for p in producciones:
-        if p.get(PROD['referencia'], '').strip() == _ref_debug:
-            v = p.get(PROD['entrega_prod'])
-            a = p.get(PROD['asignado'])
-            print(f"[DEBUG-HABILITADO] referencia={_ref_debug!r} (ANTES del filtro) "
-                  f"| entrega_prod RAW={v!r} (tipo: {type(v).__name__}) | asignado={a!r}")
+        v = p.get(PROD['entrega_prod'])
+        key = (repr(v), type(v).__name__)
+        _valores_vistos[key] = _valores_vistos.get(key, 0) + 1
+    print(f"[DEBUG-VALORES] Valores unicos de entrega_prod en las {len(producciones)} producciones brutas:")
+    for (val_repr, tipo), n in sorted(_valores_vistos.items(), key=lambda x: -x[1]):
+        print(f"[DEBUG-VALORES]   valor={val_repr} | tipo={tipo} | aparece {n} veces")
 
     # Filtros Python (deben cumplirse AMBAS condiciones - AND, no OR):
     # - Asignado a Plataforma de Produccion (20x5)
@@ -252,16 +253,12 @@ def fetch_and_process():
     #   '1', 1, True o 'true' segun el caso -- se normaliza a texto en
     #   minusculas antes de comparar para no dejar pasar ninguna variante.
     def _es_habilitado(val):
-        return str(val).strip().lower() in ('1', 'true', 'habilitado', 'yes', 'si', 'on')
+        return str(val).strip().lower() in ('1', 'true', 'habilitado', 'yes', 'si', 'on', 'verdadero')
 
     producciones = [p for p in producciones
                     if p.get(PROD['asignado'], '') == '20x5'
                     and not _es_habilitado(p.get(PROD['entrega_prod'], ''))]
     print(f"[sync] Producciones filtradas: {len(producciones)}")
-
-    _sigue = any(p.get(PROD['referencia'], '').strip() == _ref_debug for p in producciones)
-    print(f"[DEBUG-HABILITADO] Esa referencia sigue en producciones DESPUES del filtro: {_sigue} "
-          f"(debe ser False si el fix funciono)")
 
     # La API de Vtiger a veces no resuelve el campo Organizacion y devuelve el
     # ID interno crudo (ej. '3x6090') en vez del nombre de la cuenta. Se
