@@ -304,6 +304,25 @@ def fetch_and_process():
     for ref in op_groups:
         op_groups[ref].sort(key=_op_num)
 
+    # === DIAGNOSTICO TEMPORAL: comparar Fecha de Entrega cruda vs Excel ===
+    # Se puede borrar este bloque una vez identificada la causa.
+    _op_targets_debug = {
+        '104331': 'VENCIDA(Excel)=2026-07-14', '104332': 'VENCIDA(Excel)=2026-07-14',
+        '104456': 'VENCIDA(Excel)=2026-07-14', '104625': 'VENCIDA(Excel)=2026-07-14',
+        '104642': 'VENCIDA(Excel)=2026-07-14',
+        '101366': 'FUTURA(Excel)=2026-09-29', '101372': 'FUTURA(Excel)=2026-09-30',
+        '103460': 'FUTURA(Excel)=2026-08-04', '103481': 'FUTURA(Excel)=2026-08-04',
+        '103480': 'FUTURA(Excel)=2026-08-04',
+    }
+    print(f"[DEBUG-FECHA] Comparando {len(_op_targets_debug)} OPs contra el Excel...")
+    for op in ordenes:
+        onum = str(op.get(OP['number'], '')).strip()
+        if onum in _op_targets_debug:
+            raw_fecha = op.get(OP['fecha_entrega'], '')
+            print(f"[DEBUG-FECHA] OP {onum} | {_op_targets_debug[onum]} | "
+                  f"API RAW cf_vtcmordendeproduccion_fechadeentrega = {raw_fecha!r}")
+    print(f"[DEBUG-FECHA] === FIN DIAGNOSTICO ===")
+
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
     # 1:1, no muchos a muchos). Cuando una referencia se repite (reordenes), se
     # emparejan en el mismo orden cronologico en que fueron creadas ambos lados.
