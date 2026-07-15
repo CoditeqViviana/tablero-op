@@ -440,6 +440,12 @@ def fetch_and_process():
         return False
 
     _matched_numbers = {_norm_op(r.get('op_number', '')) for r in rows}
+    # Snapshot ANTES de cualquier filtro: se usa para construir el dataset de
+    # Tambor General (y demas pestanas operativas), que solo debe respetar
+    # Asignado a Plataforma + Fecha Entrega Prometida en rango + Entrega de
+    # Produccion != Habilitado -- SIN los filtros extra de proximidad/seguridad
+    # (esos son exclusivos de la alerta de Incumplidas, ver 'df' mas abajo).
+    _rows_all_matched = list(rows)
 
     # --- FILTRO 1: excluir habilitadas (post-match) ---
     rows_pre = len(rows)
@@ -578,6 +584,27 @@ def fetch_and_process():
     # Asignacion de maquina: usa etapa (rebobinado/troquelado) + primera maquina
     # listada en Centro de Proceso como fallback (separador '|##|' de la API)
     df['maquina'] = df.apply(asignar_maquina, axis=1)
+
+    # --- Dataset PARALELO exclusivo para Tambor General: NO usa los filtros de
+    # proximidad (2) ni seguridad (3), que son intencionalmente conservadores
+    # para la alerta de Incumplidas. Tambor General debe reflejar exactamente
+    # el criterio de negocio: Asignado a Plataforma + Fecha Entrega Prometida
+    # en rango + Entrega de Produccion != Habilitado -- sin filtrar por si esta
+    # vencida o no, y sin las heuristicas extra de seguridad del emparejamiento.
+    rows_tambor = [r for r in _rows_all_matched if not _es_habilitado(r.get('entrega_prod_raw', ''))]
+    df_tambor = pd.DataFrame(rows_tambor)
+    df_tambor['fecha_entrega'] = pd.to_datetime(df_tambor['fecha_entrega_raw'], errors='coerce')
+    df_tambor['fecha_creacion'] = pd.to_datetime(df_tambor['fecha_creacion_raw'], format='%d-%m-%Y %I:%M %p', errors='coerce')
+    df_tambor['mts'] = df_tambor['mts_lineales']
+    df_tambor['maquina'] = df_tambor.apply(asignar_maquina, axis=1)
+    print(f"[sync] df_tambor (Tambor General, solo Filtro 1): {len(df_tambor)} filas "
+          f"(vs {len(df)} en df principal con los 3 filtros)")
+    _tambor_numbers = {_norm_op(r.get('op_number', '')) for r in rows_tambor}
+    _tambor_faltantes = sorted(_VTIGER_250 - _tambor_numbers)
+    print(f"[sync] DIAGNOSTICO Tambor vs Vtiger: {len(_VTIGER_250)} esperadas, "
+          f"{len(_VTIGER_250 & _tambor_numbers)} presentes, {len(_tambor_faltantes)} faltantes")
+    if _tambor_faltantes:
+        print(f"[sync] Aun faltan en Tambor: {_tambor_faltantes}")
 
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
@@ -785,7 +812,7 @@ def fetch_and_process():
 
     urgentes = []
     todas_tambor = []
-    for _, row in df.sort_values('fecha_entrega').iterrows():
+    for _, row in df_tambor.sort_values('fecha_entrega').iterrows():
         fe = row['fecha_entrega']
         fc_ord = row['fecha_creacion']
         color_toc = get_color_toc(fc_ord, fe, today)
