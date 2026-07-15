@@ -304,14 +304,8 @@ def fetch_and_process():
         print("[sync] ERROR: Sin ordenes")
         return False
 
-    def _op_num(o):
-        try:
-            return int(str(o.get(OP['number'], 0)).strip() or 0)
-        except (ValueError, TypeError):
-            return 0
-
-    # Agrupamos las OPs por referencia (mismo criterio que arriba), ordenadas por
-    # numero de OP (proxy de orden cronologico), para emparejar 1 a 1 con producciones.
+    # Agrupamos las OPs por referencia (sin ordenar por numero -- el emparejamiento
+    # ahora se hace por cercania de fecha de creacion, ver mas abajo).
     op_groups = defaultdict(list)
     for op in ordenes:
         proceso = op.get(OP['proceso'], '')
@@ -320,33 +314,40 @@ def fetch_and_process():
         ref = op.get(OP['referencia'], '').strip()
         if ref:
             op_groups[ref].append(op)
-    for ref in op_groups:
-        op_groups[ref].sort(key=_op_num)
+
+    def _parse_any_dt(s):
+        try:
+            return datetime.strptime(str(s).strip()[:19], '%Y-%m-%d %H:%M:%S')
+        except (ValueError, TypeError):
+            return None
 
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
-    # 1:1, no muchos a muchos). Cuando una referencia se repite (reordenes), se
-    # emparejan en el mismo orden cronologico en que fueron creadas ambos lados.
-    #
-    # IMPORTANTE: op_groups puede traer OPs de reordenes HISTORICOS ya cerrados
-    # (su Produccion original ya no pasa el filtro de Asignado/Entrega, pero su
-    # propia Fecha de Entrega aun cae dentro del rango de la query). Si sobran
-    # OPs frente a Producciones vigentes para una referencia, nos quedamos con
-    # las OPs MAS RECIENTES (mayor numero) -- las antiguas casi siempre
-    # pertenecen a esos pedidos ya cerrados y no deben emparejarse con la
-    # Produccion actual.
+    # 1:1, no muchos a muchos). Cuando una referencia se reordena muchas veces
+    # (hasta 15+ veces para el mismo diseno de etiqueta, casos reales
+    # observados), NO se puede confiar en "ordenar y recortar por numero de OP"
+    # -- se empareja cada Produccion con la OP cuya FECHA DE CREACION este mas
+    # cerca de la suya (la OP se crea el mismo dia o muy cerca de su
+    # Produccion, confirmado por el usuario), tomando OPs sin reemplazo.
     rows = []
     sin_op = 0
     _n_ajustados = 0
     for ref, prods in prod_groups.items():
-        ops_for_ref = op_groups.get(ref, [])
-        if len(ops_for_ref) > len(prods):
-            ops_for_ref = ops_for_ref[-len(prods):]
+        ops_disponibles = list(op_groups.get(ref, []))
+        if len(ops_disponibles) > len(prods):
             _n_ajustados += 1
-        for i, prod in enumerate(prods):
-            if i >= len(ops_for_ref):
+        for prod in prods:
+            if not ops_disponibles:
                 sin_op += 1
                 continue
-            op = ops_for_ref[i]
+            prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
+            if prod_dt is None or all(_parse_any_dt(o.get('createdtime', '')) is None for o in ops_disponibles):
+                op = ops_disponibles.pop(0)
+            else:
+                def _dist(o):
+                    op_dt = _parse_any_dt(o.get('createdtime', ''))
+                    return abs((op_dt - prod_dt).total_seconds()) if op_dt else float('inf')
+                op = min(ops_disponibles, key=_dist)
+                ops_disponibles.remove(op)
             proceso = op.get(OP['proceso'], '')
 
             rows.append({
