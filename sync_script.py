@@ -246,19 +246,19 @@ def fetch_and_process():
     for (val_repr, tipo), n in sorted(_valores_vistos.items(), key=lambda x: -x[1]):
         print(f"[DEBUG-VALORES]   valor={val_repr} | tipo={tipo} | aparece {n} veces")
 
-    # Filtros Python (deben cumplirse AMBAS condiciones - AND, no OR):
-    # - Asignado a Plataforma de Produccion (20x5)
-    # - Entrega de Produccion != Habilitado (excluir habilitados). Es un
-    #   CHECKBOX en Vtiger: la API puede devolver el valor "encendido" como
-    #   '1', 1, True o 'true' segun el caso -- se normaliza a texto en
-    #   minusculas antes de comparar para no dejar pasar ninguna variante.
+    # Filtro pre-match: solo por Asignado a Plataforma de Produccion (20x5).
+    # El filtro de Entrega de Produccion (checkbox) se aplica DESPUES del
+    # emparejamiento Produccion-OP para evitar contaminacion cruzada: cuando
+    # una referencia tiene multiples reordenes, filtrar habilitadas ANTES del
+    # match hacia que OPs de Producciones habilitadas fueran "robadas" por
+    # Producciones no-habilitadas de la misma referencia.
     def _es_habilitado(val):
         return str(val).strip().lower() in ('1', 'true', 'habilitado', 'yes', 'si', 'on', 'verdadero')
 
     producciones = [p for p in producciones
-                    if p.get(PROD['asignado'], '') == '20x5'
-                    and not _es_habilitado(p.get(PROD['entrega_prod'], ''))]
-    print(f"[sync] Producciones filtradas: {len(producciones)}")
+                    if p.get(PROD['asignado'], '') == '20x5']
+    print(f"[sync] Producciones asignadas a Plataforma (20x5): {len(producciones)} "
+          f"(habilitadas AUN incluidas — se filtran DESPUES del emparejamiento)")
 
     # La API de Vtiger a veces no resuelve el campo Organizacion y devuelve el
     # ID interno crudo (ej. '3x6090') en vez del nombre de la cuenta. Se
@@ -372,13 +372,34 @@ def fetch_and_process():
                 'tiempo_prod': prod.get(PROD['tiempo_prod'], ''),
                 'z': op.get(OP['z'], ''),
                 'obs_ocop': prod.get(PROD['obs_ocop'], ''),
+                'entrega_prod_raw': prod.get(PROD['entrega_prod'], ''),
             })
 
-    print(f"[sync] {sin_op} Producciones sin OP, {len(rows)} filas OK "
+    print(f"[sync] {sin_op} Producciones sin OP, {len(rows)} filas ANTES de filtro habilitadas "
           f"({_n_ajustados} referencias con reordenes historicos ajustadas)")
     if not rows:
         print("[sync] ERROR: 0 filas construidas")
         return False
+
+    # --- DEBUG TEMPORAL: mostrar las 3 OPs problematicas ANTES del filtro ---
+    _ops_debug = {'101362', '104402', '101363'}
+    for r in rows:
+        op_str = str(r.get('op_number', '')).strip().rstrip('.0')
+        if op_str in _ops_debug:
+            print(f"[DEBUG-OP-{op_str}] entrega_prod_raw={repr(r['entrega_prod_raw'])} "
+                  f"tipo_python={type(r['entrega_prod_raw']).__name__} | "
+                  f"_es_habilitado={_es_habilitado(r['entrega_prod_raw'])} | "
+                  f"ref={r['referencia']} | org={r['organizacion']}")
+
+    # --- FILTRO POST-MATCH: excluir habilitadas DESPUES del emparejamiento ---
+    # Al filtrar DESPUES, cada Produccion (incluidas las habilitadas) reclama
+    # primero su OP correcta por cercania de fecha, y solo DESPUES se descartan
+    # las filas habilitadas. Esto evita que OPs de Producciones habilitadas
+    # queden "robadas" por Producciones no-habilitadas de la misma referencia.
+    rows_pre = len(rows)
+    rows = [r for r in rows if not _es_habilitado(r.get('entrega_prod_raw', ''))]
+    print(f"[sync] Filas tras excluir habilitadas: {len(rows)} "
+          f"(excluidas {rows_pre - len(rows)} habilitadas)")
 
     # 4. Procesar
     df = pd.DataFrame(rows)
