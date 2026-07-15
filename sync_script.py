@@ -381,15 +381,32 @@ def fetch_and_process():
         print("[sync] ERROR: 0 filas construidas")
         return False
 
-    # --- DEBUG TEMPORAL: mostrar las 3 OPs problematicas ANTES del filtro ---
-    _ops_debug = {'101362', '104402', '101363'}
+    # --- DEBUG TEMPORAL: volcado de campos para buscar campo relacional ---
+    # Necesitamos saber si hay algun campo en Produccion o en OP que enlace
+    # directamente uno con otro (sin depender del texto de referencia).
+    _ops_debug = {'104100', '103549', '103525', '104402', '104096', '103641'}
+    _dump_done = False
     for r in rows:
         op_str = str(r.get('op_number', '')).strip().rstrip('.0')
         if op_str in _ops_debug:
             print(f"[DEBUG-OP-{op_str}] entrega_prod_raw={repr(r['entrega_prod_raw'])} "
-                  f"tipo_python={type(r['entrega_prod_raw']).__name__} | "
                   f"_es_habilitado={_es_habilitado(r['entrega_prod_raw'])} | "
-                  f"ref={r['referencia']} | org={r['organizacion']}")
+                  f"ref={r['referencia']} | org={r['organizacion']} | "
+                  f"prod_created={r['fecha_creacion_raw']} | "
+                  f"op_fecha_entrega={r['fecha_entrega_raw']}")
+
+    # Volcar TODOS los campos del primer registro de Produccion y OP para buscar
+    # campo relacional directo (se imprime una sola vez).
+    if producciones:
+        sample_prod = producciones[0]
+        print(f"[DEBUG-CAMPOS-PROD] Campos del primer registro de Produccion ({len(sample_prod)} campos):")
+        for k in sorted(sample_prod.keys()):
+            print(f"[DEBUG-CAMPOS-PROD]   {k} = {repr(sample_prod[k])[:120]}")
+    if ordenes:
+        sample_op = ordenes[0]
+        print(f"[DEBUG-CAMPOS-OP] Campos del primer registro de OP ({len(sample_op)} campos):")
+        for k in sorted(sample_op.keys()):
+            print(f"[DEBUG-CAMPOS-OP]   {k} = {repr(sample_op[k])[:120]}")
 
     # --- FILTRO POST-MATCH: excluir habilitadas DESPUES del emparejamiento ---
     # Al filtrar DESPUES, cada Produccion (incluidas las habilitadas) reclama
