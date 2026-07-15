@@ -441,26 +441,29 @@ def fetch_and_process():
             _refs_debug.add(r['referencia'])
             print(f"[DEBUG-OP-{op_str}] entrega_prod={repr(r['entrega_prod_raw'])} | "
                   f"prod_id={r.get('prod_id')} | op_id={r.get('op_id')} | "
-                  f"prod_created={r['prod_createdtime'][:10]} | "
-                  f"op_created={r['op_createdtime'][:10]} | "
+                  f"prod_created={r['prod_createdtime']} | "
+                  f"op_created={r['op_createdtime']} | "
                   f"diff_dias={abs((_parse_any_dt(r['op_createdtime']) - _parse_any_dt(r['prod_createdtime'])).days) if _parse_any_dt(r['op_createdtime']) and _parse_any_dt(r['prod_createdtime']) else '?'} | "
                   f"ref={r['referencia']}")
 
     # Mostrar TODAS las Producciones Y TODAS las OPs de las referencias problematicas
-    # incluyendo el NUMERO VISIBLE (NP...) para poder cruzar contra lo que se ve en Vtiger
+    # incluyendo el NUMERO VISIBLE (NP...), TIMESTAMP COMPLETO (no solo fecha) y
+    # CANTIDAD como posible criterio de desempate cuando hay creacion el mismo dia
     for ref in sorted(_refs_debug):
         prods_ref = [p for p in producciones if p.get(PROD['referencia'], '').strip() == ref]
         print(f"[DEBUG-REF-PROD] '{ref}': {len(prods_ref)} Producciones:")
         for p in sorted(prods_ref, key=lambda x: str(x.get(PROD['fecha_creacion'], ''))):
             print(f"[DEBUG-REF-PROD]   NUMERO={p.get('vtcmproduccionnumber')} | id={p.get('id')} | "
-                  f"created={str(p.get(PROD['fecha_creacion'],''))[:10]} | "
+                  f"created={p.get(PROD['fecha_creacion'],'')} | "
+                  f"cantidad={p.get('cf_vtcmproduccion_cantidad','')} | "
                   f"entrega_prod={repr(p.get(PROD['entrega_prod'],''))} | "
                   f"hab={_es_habilitado(p.get(PROD['entrega_prod'],''))}")
         ops_ref = op_groups.get(ref, [])
         print(f"[DEBUG-REF-OP] '{ref}': {len(ops_ref)} OPs disponibles:")
         for o in sorted(ops_ref, key=lambda x: str(x.get('createdtime', ''))):
             print(f"[DEBUG-REF-OP]   id={o.get('id')} | number={o.get(OP['number'])} | "
-                  f"created={str(o.get('createdtime',''))[:10]} | "
+                  f"created={o.get('createdtime','')} | "
+                  f"total_etiquetas={o.get(OP['total_etiquetas'],'')} | "
                   f"fecha_entrega={o.get(OP['fecha_entrega'],'')}")
 
     # Busqueda DIRECTA por numero visible NP106592, ANTES de cualquier filtro
@@ -503,6 +506,46 @@ def fetch_and_process():
     if rows_pre2 != len(rows):
         print(f"[sync] Filas tras filtro proximidad: {len(rows)} "
               f"(excluidas {rows_pre2 - len(rows)} por diff >{_MAX_DIAS} dias)")
+
+    # --- FILTRO 3 (SEGURIDAD): excluir si CUALQUIER Produccion de la misma
+    # referencia -- no solo la que quedo emparejada -- fue creada muy cerca
+    # en el tiempo de esta OP y esta habilitada. El emparejamiento 1:1 es
+    # heuristico (no existe campo relacional directo en Vtiger) y puede
+    # fallar cuando varias Producciones de una misma referencia se crean casi
+    # simultaneamente (ej. FRENTE/CONTRA del mismo diseno, mismo lote).
+    # Prioridad de negocio: es mas critico NUNCA mostrar una orden cuya
+    # Produccion real este habilitada, que mostrar todas las incumplidas
+    # reales sin excepcion -- mejor ocultar de mas que mostrar de menos.
+    _MAX_DIAS_HAB = 2
+    _hab_por_ref = defaultdict(list)
+    for p in producciones:
+        if _es_habilitado(p.get(PROD['entrega_prod'], '')):
+            ref_p = p.get(PROD['referencia'], '').strip()
+            dt_p = _parse_any_dt(p.get(PROD['fecha_creacion'], ''))
+            if ref_p and dt_p:
+                _hab_por_ref[ref_p].append(dt_p)
+
+    rows_pre3 = len(rows)
+    rows_ok = []
+    for r in rows:
+        op_dt = _parse_any_dt(r.get('op_createdtime', ''))
+        ref = r['referencia']
+        riesgo = False
+        if op_dt and ref in _hab_por_ref:
+            for hab_dt in _hab_por_ref[ref]:
+                if abs((hab_dt - op_dt).days) <= _MAX_DIAS_HAB:
+                    riesgo = True
+                    break
+        if riesgo:
+            print(f"[sync] Excluida OP {r['op_number']} por SEGURIDAD: existe otra "
+                  f"Produccion habilitada de la misma referencia a <={_MAX_DIAS_HAB}d "
+                  f"de su creacion (posible emparejamiento erroneo) | ref={ref}")
+            continue
+        rows_ok.append(r)
+    rows = rows_ok
+    if rows_pre3 != len(rows):
+        print(f"[sync] Filas tras filtro SEGURIDAD habilitadas cercanas: {len(rows)} "
+              f"(excluidas {rows_pre3 - len(rows)})")
 
     # 4. Procesar
     df = pd.DataFrame(rows)
