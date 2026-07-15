@@ -373,6 +373,8 @@ def fetch_and_process():
                 'z': op.get(OP['z'], ''),
                 'obs_ocop': prod.get(PROD['obs_ocop'], ''),
                 'entrega_prod_raw': prod.get(PROD['entrega_prod'], ''),
+                'prod_createdtime': prod.get(PROD['fecha_creacion'], ''),
+                'op_createdtime': op.get('createdtime', ''),
             })
 
     print(f"[sync] {sin_op} Producciones sin OP, {len(rows)} filas ANTES de filtro habilitadas "
@@ -381,42 +383,63 @@ def fetch_and_process():
         print("[sync] ERROR: 0 filas construidas")
         return False
 
-    # --- DEBUG TEMPORAL: volcado de campos para buscar campo relacional ---
-    # Necesitamos saber si hay algun campo en Produccion o en OP que enlace
-    # directamente uno con otro (sin depender del texto de referencia).
-    _ops_debug = {'104100', '103549', '103525', '104402', '104096', '103641'}
-    _dump_done = False
+    # --- DEBUG TEMPORAL: OPs problematicas y todas las Producciones de sus refs ---
+    _ops_debug = {'104100', '103549', '103525', '104402', '104096', '103641', '103461'}
+    _refs_debug = set()
     for r in rows:
         op_str = str(r.get('op_number', '')).strip().rstrip('.0')
         if op_str in _ops_debug:
-            print(f"[DEBUG-OP-{op_str}] entrega_prod_raw={repr(r['entrega_prod_raw'])} "
-                  f"_es_habilitado={_es_habilitado(r['entrega_prod_raw'])} | "
-                  f"ref={r['referencia']} | org={r['organizacion']} | "
-                  f"prod_created={r['fecha_creacion_raw']} | "
-                  f"op_fecha_entrega={r['fecha_entrega_raw']}")
+            _refs_debug.add(r['referencia'])
+            print(f"[DEBUG-OP-{op_str}] entrega_prod={repr(r['entrega_prod_raw'])} | "
+                  f"prod_created={r['prod_createdtime'][:10]} | "
+                  f"op_created={r['op_createdtime'][:10]} | "
+                  f"diff_dias={abs((_parse_any_dt(r['op_createdtime']) - _parse_any_dt(r['prod_createdtime'])).days) if _parse_any_dt(r['op_createdtime']) and _parse_any_dt(r['prod_createdtime']) else '?'} | "
+                  f"ref={r['referencia']}")
+        # Busqueda amplia de 104100 por si el formato no matchea el strip/rstrip
+        if '104100' in str(r.get('op_number', '')):
+            print(f"[DEBUG-104100-BUSQ] op_number_raw={repr(r.get('op_number'))} | "
+                  f"entrega_prod={repr(r['entrega_prod_raw'])} | "
+                  f"prod_created={r['prod_createdtime'][:10]} | "
+                  f"op_created={r['op_createdtime'][:10]} | "
+                  f"ref={r['referencia']}")
 
-    # Volcar TODOS los campos del primer registro de Produccion y OP para buscar
-    # campo relacional directo (se imprime una sola vez).
-    if producciones:
-        sample_prod = producciones[0]
-        print(f"[DEBUG-CAMPOS-PROD] Campos del primer registro de Produccion ({len(sample_prod)} campos):")
-        for k in sorted(sample_prod.keys()):
-            print(f"[DEBUG-CAMPOS-PROD]   {k} = {repr(sample_prod[k])[:120]}")
-    if ordenes:
-        sample_op = ordenes[0]
-        print(f"[DEBUG-CAMPOS-OP] Campos del primer registro de OP ({len(sample_op)} campos):")
-        for k in sorted(sample_op.keys()):
-            print(f"[DEBUG-CAMPOS-OP]   {k} = {repr(sample_op[k])[:120]}")
+    # Mostrar TODAS las Producciones de las referencias problematicas
+    for ref in sorted(_refs_debug):
+        prods_ref = [p for p in producciones if p.get(PROD['referencia'], '').strip() == ref]
+        print(f"[DEBUG-REF] '{ref}': {len(prods_ref)} Producciones para esta referencia:")
+        for p in sorted(prods_ref, key=lambda x: str(x.get(PROD['fecha_creacion'], ''))):
+            print(f"[DEBUG-REF]   id={p.get('id')} | created={str(p.get(PROD['fecha_creacion'],''))[:10]} | "
+                  f"entrega_prod={repr(p.get(PROD['entrega_prod'],''))} | "
+                  f"hab={_es_habilitado(p.get(PROD['entrega_prod'],''))}")
 
-    # --- FILTRO POST-MATCH: excluir habilitadas DESPUES del emparejamiento ---
-    # Al filtrar DESPUES, cada Produccion (incluidas las habilitadas) reclama
-    # primero su OP correcta por cercania de fecha, y solo DESPUES se descartan
-    # las filas habilitadas. Esto evita que OPs de Producciones habilitadas
-    # queden "robadas" por Producciones no-habilitadas de la misma referencia.
+    # --- FILTRO 1: excluir habilitadas (post-match) ---
     rows_pre = len(rows)
     rows = [r for r in rows if not _es_habilitado(r.get('entrega_prod_raw', ''))]
     print(f"[sync] Filas tras excluir habilitadas: {len(rows)} "
           f"(excluidas {rows_pre - len(rows)} habilitadas)")
+
+    # --- FILTRO 2: proximidad de fechas de creacion ---
+    # Si la Produccion y la OP fueron creadas a mas de MAX_DIAS dias de
+    # diferencia, es muy probable un emparejamiento erroneo (la OP pertenece
+    # a otra Produccion de la misma referencia, de una reorden distinta).
+    _MAX_DIAS = 2
+    rows_pre2 = len(rows)
+    rows_ok = []
+    for r in rows:
+        prod_dt = _parse_any_dt(r.get('prod_createdtime', ''))
+        op_dt = _parse_any_dt(r.get('op_createdtime', ''))
+        if prod_dt and op_dt:
+            diff = abs((op_dt - prod_dt).days)
+            if diff > _MAX_DIAS:
+                print(f"[sync] Excluida OP {r['op_number']} por proximidad: "
+                      f"Prod={r['prod_createdtime'][:10]} OP={r['op_createdtime'][:10]} "
+                      f"diff={diff}d >{_MAX_DIAS}d | ref={r['referencia']}")
+                continue
+        rows_ok.append(r)
+    rows = rows_ok
+    if rows_pre2 != len(rows):
+        print(f"[sync] Filas tras filtro proximidad: {len(rows)} "
+              f"(excluidas {rows_pre2 - len(rows)} por diff >{_MAX_DIAS} dias)")
 
     # 4. Procesar
     df = pd.DataFrame(rows)
