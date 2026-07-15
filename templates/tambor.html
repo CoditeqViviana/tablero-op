@@ -72,7 +72,11 @@ tr:last-child td{border-bottom:none}
 tr:hover td{background:#fafafa}
 .badge{display:inline-block;font-size:10px;padding:2px 8px;border-radius:8px;font-weight:700}
 .empty{padding:40px;text-align:center;color:#9ca3af}
+.btn-excel{font-size:12px;padding:6px 14px;background:#15803d;color:#fff;border:none;border-radius:7px;cursor:pointer;font-weight:600;white-space:nowrap}
+.btn-excel:hover{background:#166534}
+.btn-excel:disabled{background:#9ca3af;cursor:not-allowed}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -132,7 +136,10 @@ tr:hover td{background:#fafafa}
 <div class="panel">
   <div class="panel-hdr">
     <h2>Todas las órdenes</h2>
-    <span class="badge-count" id="badge-total">{{ data.todas_tambor|length }} órdenes</span>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="badge-count" id="badge-total">{{ data.todas_tambor|length }} órdenes</span>
+      <button class="btn-excel" id="btn-excel" onclick="exportarExcel()" title="Descargar las órdenes visibles a Excel">⬇ Excel</button>
+    </div>
   </div>
 
   <!-- Filtros -->
@@ -221,6 +228,7 @@ const TIPO_MAP = {
 };
 
 let sortCol='color', sortAsc=true;
+let ultimoFiltrado = [];
 
 // Calcular semana actual (lun-vie)
 const hoyDate = new Date(HOY+'T12:00:00');
@@ -273,6 +281,9 @@ function filtrar() {
     vb=({op:b.op,cliente:b.cliente,maquina:b.maquina,fecha:b.fecha_entrega_raw})[sortCol]||'';
     return sortAsc?va.localeCompare(vb):vb.localeCompare(va);
   });
+
+  // Guardar el conjunto visible (filtrado + ordenado) para la exportación a Excel
+  ultimoFiltrado = filtrados;
 
   // Actualizar promedio dias por tipo
   function calcStats(arr) {
@@ -380,6 +391,55 @@ function limpiar(){
   document.querySelectorAll('.rango-btn').forEach(b=>b.classList.remove('active'));
   document.querySelector('.rango-btn[onclick*="todo"]').classList.add('active');
   filtrar();
+}
+
+// Exportar las órdenes visibles a Excel (.xlsx). Si el CDN de SheetJS no cargó,
+// cae automáticamente a CSV para no dejar sin descarga a la usuaria.
+function exportarExcel() {
+  const filas = (ultimoFiltrado && ultimoFiltrado.length) ? ultimoFiltrado : DATOS;
+  if (!filas || !filas.length) { alert('No hay órdenes para exportar.'); return; }
+
+  const COLOR_LBL = {negro:'Negro',rojo:'Rojo',amarillo:'Amarillo',verde:'Verde',azul:'Azul',gris:'—'};
+  const filasExport = filas.map(function(r){
+    return {
+      'Color': COLOR_LBL[r.color_toc] || r.color_toc || '—',
+      'OP': r.op || '',
+      'Cliente': r.cliente || '',
+      'Tipo': r.tipo || '',
+      'Máquina': r.maquina || '',
+      'Mts Lineales': Math.round(r.mts||0),
+      'F. Creación': r.fecha_creacion || '',
+      'F. Entrega': r.fecha_entrega || '',
+      'Días Ofrecidos': (r.dias_ofrecidos || r.dias_ofrecidos === 0) ? r.dias_ofrecidos : '',
+      'T. Producción': r.tiempo_produccion || '',
+      'Estatus': r.etapa || ''
+    };
+  });
+
+  const stamp = new Date().toISOString().slice(0,10);
+
+  if (typeof XLSX !== 'undefined') {
+    const ws = XLSX.utils.json_to_sheet(filasExport);
+    ws['!cols'] = [
+      {wch:10},{wch:10},{wch:32},{wch:9},{wch:20},
+      {wch:12},{wch:12},{wch:12},{wch:14},{wch:16},{wch:16}
+    ];
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Tambor');
+    XLSX.writeFile(wb, 'Tambor_ordenes_' + stamp + '.xlsx');
+  } else {
+    // Respaldo CSV (con BOM para que Excel respete acentos)
+    const cols = Object.keys(filasExport[0]);
+    const esc = function(v){ v = (v==null?'':String(v)); return '"' + v.replace(/"/g,'""') + '"'; };
+    let csv = cols.join(';') + '\n';
+    filasExport.forEach(function(row){ csv += cols.map(function(c){return esc(row[c]);}).join(';') + '\n'; });
+    const blob = new Blob(['\ufeff' + csv], {type:'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'Tambor_ordenes_' + stamp + '.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
 }
 
 // Inicializar
