@@ -420,6 +420,8 @@ def fetch_and_process():
                 'entrega_prod_raw': prod.get(PROD['entrega_prod'], ''),
                 'prod_createdtime': prod.get(PROD['fecha_creacion'], ''),
                 'op_createdtime': op.get('createdtime', ''),
+                'prod_id': prod.get('id'),
+                'op_id': op.get('id'),
             })
 
     print(f"[sync] {sin_op} Producciones sin OP, {len(rows)} filas ANTES de filtro habilitadas "
@@ -432,30 +434,32 @@ def fetch_and_process():
     _ops_debug = {'104100', '103549', '103525', '104402', '104096', '103641', '103461'}
     _refs_debug = set()
     for r in rows:
-        op_str = str(r.get('op_number', '')).strip().rstrip('.0')
+        op_str = str(r.get('op_number', '')).strip()
+        if op_str.endswith('.0'):
+            op_str = op_str[:-2]
         if op_str in _ops_debug:
             _refs_debug.add(r['referencia'])
             print(f"[DEBUG-OP-{op_str}] entrega_prod={repr(r['entrega_prod_raw'])} | "
+                  f"prod_id={r.get('prod_id')} | op_id={r.get('op_id')} | "
                   f"prod_created={r['prod_createdtime'][:10]} | "
                   f"op_created={r['op_createdtime'][:10]} | "
                   f"diff_dias={abs((_parse_any_dt(r['op_createdtime']) - _parse_any_dt(r['prod_createdtime'])).days) if _parse_any_dt(r['op_createdtime']) and _parse_any_dt(r['prod_createdtime']) else '?'} | "
                   f"ref={r['referencia']}")
-        # Busqueda amplia de 104100 por si el formato no matchea el strip/rstrip
-        if '104100' in str(r.get('op_number', '')):
-            print(f"[DEBUG-104100-BUSQ] op_number_raw={repr(r.get('op_number'))} | "
-                  f"entrega_prod={repr(r['entrega_prod_raw'])} | "
-                  f"prod_created={r['prod_createdtime'][:10]} | "
-                  f"op_created={r['op_createdtime'][:10]} | "
-                  f"ref={r['referencia']}")
 
-    # Mostrar TODAS las Producciones de las referencias problematicas
+    # Mostrar TODAS las Producciones Y TODAS las OPs de las referencias problematicas
     for ref in sorted(_refs_debug):
         prods_ref = [p for p in producciones if p.get(PROD['referencia'], '').strip() == ref]
-        print(f"[DEBUG-REF] '{ref}': {len(prods_ref)} Producciones para esta referencia:")
+        print(f"[DEBUG-REF-PROD] '{ref}': {len(prods_ref)} Producciones:")
         for p in sorted(prods_ref, key=lambda x: str(x.get(PROD['fecha_creacion'], ''))):
-            print(f"[DEBUG-REF]   id={p.get('id')} | created={str(p.get(PROD['fecha_creacion'],''))[:10]} | "
+            print(f"[DEBUG-REF-PROD]   id={p.get('id')} | created={str(p.get(PROD['fecha_creacion'],''))[:10]} | "
                   f"entrega_prod={repr(p.get(PROD['entrega_prod'],''))} | "
                   f"hab={_es_habilitado(p.get(PROD['entrega_prod'],''))}")
+        ops_ref = op_groups.get(ref, [])
+        print(f"[DEBUG-REF-OP] '{ref}': {len(ops_ref)} OPs disponibles:")
+        for o in sorted(ops_ref, key=lambda x: str(x.get('createdtime', ''))):
+            print(f"[DEBUG-REF-OP]   id={o.get('id')} | number={o.get(OP['number'])} | "
+                  f"created={str(o.get('createdtime',''))[:10]} | "
+                  f"fecha_entrega={o.get(OP['fecha_entrega'],'')}")
 
     # --- FILTRO 1: excluir habilitadas (post-match) ---
     rows_pre = len(rows)
