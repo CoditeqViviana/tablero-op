@@ -570,6 +570,52 @@ def fetch_and_process():
             razon = "presente en resultado final -- revisar filtro adicional en construccion de Tambor General"
         print(f"[DEBUG-FALTANTE] OP {op_n}: {razon}")
 
+    # --- DEBUG TEMPORAL: caso puntual OP 104571 / NP107946 (reportado como
+    # vencida en Vtiger pero no aparece en el tablero) ---
+    _op_caso = '104571'
+    _np_caso = 'NP107946'
+    for op in ordenes:
+        if _norm_op(op.get(OP['number'], '')) == _op_caso:
+            print(f"[DEBUG-CASO-OP] {_op_caso} CRUDO | referencia={repr(op.get(OP['referencia'], ''))} | "
+                  f"proceso={repr(op.get(OP['proceso'], ''))} | "
+                  f"createdtime={op.get('createdtime', '')} | "
+                  f"fecha_entrega={op.get(OP['fecha_entrega'], '')}")
+    for p in producciones:
+        if p.get('vtcmproduccionnumber') == _np_caso:
+            print(f"[DEBUG-CASO-NP] {_np_caso} CRUDO | id={p.get('id')} | "
+                  f"referencia={repr(p.get(PROD['referencia'], ''))} | "
+                  f"entrega_prod={repr(p.get(PROD['entrega_prod'], ''))} | "
+                  f"hab={_es_habilitado(p.get(PROD['entrega_prod'], ''))} | "
+                  f"asignado={p.get(PROD['asignado'])} | "
+                  f"created={p.get(PROD['fecha_creacion'], '')} | "
+                  f"fecha_prometida={p.get(PROD['fecha_prometida'], '')}")
+    # Con que Produccion quedo emparejada esta OP (si llego a emparejarse)
+    for r in _rows_all_matched:
+        if _norm_op(r.get('op_number', '')) == _op_caso:
+            print(f"[DEBUG-CASO-MATCH] OP {_op_caso} emparejada con prod_id={r.get('prod_id')} | "
+                  f"entrega_prod={repr(r.get('entrega_prod_raw'))} | "
+                  f"hab={_es_habilitado(r.get('entrega_prod_raw'))} | "
+                  f"prod_created={r.get('prod_createdtime')} | op_created={r.get('op_createdtime')} | "
+                  f"referencia={r.get('referencia')}")
+    if _op_caso not in _raw_op_numbers:
+        print(f"[DEBUG-CASO] {_op_caso}: NO existe en la respuesta cruda de Ordenes")
+    elif _op_caso not in _op_groups_numbers:
+        print(f"[DEBUG-CASO] {_op_caso}: excluida por Proceso de Etiquetas vacio o '-'")
+    elif _op_caso not in _matched_numbers:
+        print(f"[DEBUG-CASO] {_op_caso}: no fue seleccionada en el emparejamiento 1:1")
+    elif _op_caso not in _post_f1_numbers:
+        print(f"[DEBUG-CASO] {_op_caso}: excluida por FILTRO 1 (produccion emparejada habilitada)")
+    elif _op_caso not in _post_f2_numbers:
+        print(f"[DEBUG-CASO] {_op_caso}: excluida por FILTRO 2 (proximidad >2 dias)")
+    elif _op_caso not in _post_f3_numbers:
+        print(f"[DEBUG-CASO] {_op_caso}: excluida por FILTRO 3 (seguridad: habilitada cercana)")
+    else:
+        _hoy_bogota = datetime.now(BOGOTA).date()
+        _fe_caso = next((r.get('fecha_entrega_raw') for r in rows if _norm_op(r.get('op_number','')) == _op_caso), None)
+        print(f"[DEBUG-CASO] {_op_caso}: SOBREVIVIO los 3 filtros y esta en 'df' | "
+              f"fecha_entrega_raw={_fe_caso} | hoy_bogota={_hoy_bogota} | "
+              f"revisar si fecha_entrega < hoy para que cuente como vencida")
+
     # 4. Procesar
     df = pd.DataFrame(rows)
     # 'fecha_entrega' es la fuente unica de verdad para TODO el tablero (panorama
