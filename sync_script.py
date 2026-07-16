@@ -480,14 +480,19 @@ def fetch_and_process():
 
     # --- FILTRO 3 (SEGURIDAD): excluir si CUALQUIER Produccion de la misma
     # referencia -- no solo la que quedo emparejada -- fue creada muy cerca
-    # en el tiempo de esta OP y esta habilitada. El emparejamiento 1:1 es
-    # heuristico (no existe campo relacional directo en Vtiger) y puede
-    # fallar cuando varias Producciones de una misma referencia se crean casi
-    # simultaneamente (ej. FRENTE/CONTRA del mismo diseno, mismo lote).
-    # Prioridad de negocio: es mas critico NUNCA mostrar una orden cuya
-    # Produccion real este habilitada, que mostrar todas las incumplidas
-    # reales sin excepcion -- mejor ocultar de mas que mostrar de menos.
+    # en el tiempo de esta OP y esta habilitada -- PERO solo si esa Produccion
+    # habilitada compite genuinamente por esta OP (esta tan cerca o mas cerca
+    # que la Produccion con la que realmente quedo emparejada). Si el
+    # emparejamiento ya es claramente el mas cercano posible, se confia en el
+    # y NO se excluye -- version anterior (solo "existe alguna habilitada
+    # cerca") generaba falsos negativos: ocultaba emparejamientos correctos
+    # solo porque una Produccion habilitada de la misma referencia, MAS LEJANA
+    # en el tiempo que la real, tambien caia dentro de la ventana de dias.
+    # Caso real que corrigio esto: OP 104571 <-> NP107946 (match correcto,
+    # 30 min de diferencia) se ocultaba porque otra Produccion habilitada de
+    # la misma referencia, mas lejana, tambien estaba dentro de +-2 dias.
     _MAX_DIAS_HAB = 2
+    _MARGEN_SEGURIDAD_SEG = 12 * 3600  # 12h de margen para considerar "competencia real"
     _hab_por_ref = defaultdict(list)
     for p in producciones:
         if _es_habilitado(p.get(PROD['entrega_prod'], '')):
@@ -500,17 +505,34 @@ def fetch_and_process():
     rows_ok = []
     for r in rows:
         op_dt = _parse_any_dt(r.get('op_createdtime', ''))
+        prod_dt = _parse_any_dt(r.get('prod_createdtime', ''))
         ref = r['referencia']
         riesgo = False
+        candidata_riesgo = None
         if op_dt and ref in _hab_por_ref:
-            for hab_dt in _hab_por_ref[ref]:
-                if abs((hab_dt - op_dt).days) <= _MAX_DIAS_HAB:
-                    riesgo = True
-                    break
+            if prod_dt:
+                # Distancia real del emparejamiento actual: solo se excluye si
+                # existe una habilitada tan cerca o mas cerca (+margen) que ella.
+                d_matched = abs((prod_dt - op_dt).total_seconds())
+                for hab_dt in _hab_por_ref[ref]:
+                    d_hab = abs((hab_dt - op_dt).total_seconds())
+                    if d_hab <= d_matched + _MARGEN_SEGURIDAD_SEG:
+                        riesgo = True
+                        candidata_riesgo = hab_dt
+                        break
+            else:
+                # Sin fecha de creacion de la Produccion emparejada: no se
+                # puede comparar distancias, se mantiene el comportamiento
+                # conservador original (ventana absoluta de dias).
+                for hab_dt in _hab_por_ref[ref]:
+                    if abs((hab_dt - op_dt).days) <= _MAX_DIAS_HAB:
+                        riesgo = True
+                        candidata_riesgo = hab_dt
+                        break
         if riesgo:
-            print(f"[sync] Excluida OP {r['op_number']} por SEGURIDAD: existe otra "
-                  f"Produccion habilitada de la misma referencia a <={_MAX_DIAS_HAB}d "
-                  f"de su creacion (posible emparejamiento erroneo) | ref={ref}")
+            print(f"[sync] Excluida OP {r['op_number']} por SEGURIDAD: Produccion "
+                  f"habilitada de la misma referencia compite genuinamente "
+                  f"(creada {candidata_riesgo}) | ref={ref}")
             continue
         rows_ok.append(r)
     rows = rows_ok
