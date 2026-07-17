@@ -594,6 +594,22 @@ def fetch_and_process():
 
     # --- DEBUG TEMPORAL: caso puntual OP 104504 / NP107833 (reportado con
     # casilla Entrega de Produccion en TRUE pero sigue en Incumplidas) ---
+    _ref_caso_completa = 'BL-TTT-22X76-R8000-M-4F-C30-PINTUCO'
+    _prods_ref_caso = [p for p in producciones if p.get(PROD['referencia'], '').strip() == _ref_caso_completa]
+    print(f"[DEBUG-CASOREF-PROD] '{_ref_caso_completa}': {len(_prods_ref_caso)} Producciones:")
+    for p in sorted(_prods_ref_caso, key=lambda x: str(x.get(PROD['fecha_creacion'], ''))):
+        print(f"[DEBUG-CASOREF-PROD]   NUMERO={p.get('vtcmproduccionnumber')} | id={p.get('id')} | "
+              f"created={p.get(PROD['fecha_creacion'],'')} | "
+              f"fecha_prometida={p.get(PROD['fecha_prometida'],'')} | "
+              f"entrega_prod={repr(p.get(PROD['entrega_prod'],''))} | "
+              f"hab={_es_habilitado(p.get(PROD['entrega_prod'],''))}")
+    _ops_ref_caso = op_groups.get(_ref_caso_completa, [])
+    print(f"[DEBUG-CASOREF-OP] '{_ref_caso_completa}': {len(_ops_ref_caso)} OPs disponibles:")
+    for o in sorted(_ops_ref_caso, key=lambda x: str(x.get('createdtime', ''))):
+        print(f"[DEBUG-CASOREF-OP]   id={o.get('id')} | number={o.get(OP['number'])} | "
+              f"created={o.get('createdtime','')} | "
+              f"fecha_entrega={o.get(OP['fecha_entrega'],'')}")
+
     _op_caso = '104504'
     _np_caso = 'NP107833'
     for op in ordenes:
