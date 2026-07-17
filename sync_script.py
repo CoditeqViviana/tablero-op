@@ -592,10 +592,10 @@ def fetch_and_process():
             razon = "presente en resultado final -- revisar filtro adicional en construccion de Tambor General"
         print(f"[DEBUG-FALTANTE] OP {op_n}: {razon}")
 
-    # --- DEBUG TEMPORAL: caso puntual OP 104571 / NP107946 (reportado como
-    # vencida en Vtiger pero no aparece en el tablero) ---
-    _op_caso = '104571'
-    _np_caso = 'NP107946'
+    # --- DEBUG TEMPORAL: caso puntual OP 104504 / NP107833 (reportado con
+    # casilla Entrega de Produccion en TRUE pero sigue en Incumplidas) ---
+    _op_caso = '104504'
+    _np_caso = 'NP107833'
     for op in ordenes:
         if _norm_op(op.get(OP['number'], '')) == _op_caso:
             print(f"[DEBUG-CASO-OP] {_op_caso} CRUDO | referencia={repr(op.get(OP['referencia'], ''))} | "
