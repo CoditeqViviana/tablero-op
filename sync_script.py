@@ -396,6 +396,12 @@ def fetch_and_process():
         n_prod = len(prods)
         n_op = len(ops_disponibles)
         asignacion = {}  # pi -> oi
+        _debug_esta_ref = (ref.strip() == 'BL-TTT-22X76-R8000-M-4F-C30-PINTUCO')
+        if _debug_esta_ref:
+            print(f"[DEBUG-INLINE] ref={repr(ref)} | n_prod={n_prod} | n_op={n_op} | "
+                  f"scipy_ok={_SCIPY_OK}")
+            print(f"[DEBUG-INLINE] prods NP: {[p.get('vtcmproduccionnumber') for p in prods]}")
+            print(f"[DEBUG-INLINE] ops number: {[o.get(OP['number']) for o in ops_disponibles]}")
 
         if _SCIPY_OK:
             _n_optimo += 1
@@ -413,6 +419,16 @@ def fetch_and_process():
             for pi, oi in zip(row_ind, col_ind):
                 if cost[pi, oi] < _SIN_FECHA:
                     asignacion[pi] = oi
+            if _debug_esta_ref:
+                print(f"[DEBUG-INLINE] cost matrix (horas):")
+                for pi in range(n_prod):
+                    fila = [round(cost[pi,oi]/3600,1) if cost[pi,oi] < _SIN_FECHA else -1 for oi in range(n_op)]
+                    print(f"[DEBUG-INLINE]   NP={prods[pi].get('vtcmproduccionnumber')}: {fila}")
+                print(f"[DEBUG-INLINE] row_ind={list(row_ind)} col_ind={list(col_ind)}")
+                for pi, oi in asignacion.items():
+                    print(f"[DEBUG-INLINE] asignacion: NP={prods[pi].get('vtcmproduccionnumber')} "
+                          f"<-> OP={ops_disponibles[oi].get(OP['number'])} "
+                          f"(costo={cost[pi,oi]/3600:.1f}h)")
         else:
             _n_fallback += 1
             # Fallback greedy (subóptimo, ver comentario arriba)
