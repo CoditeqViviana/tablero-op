@@ -5,6 +5,12 @@ Union por nombre de referencia (muchos a muchos).
 import os, json, re, requests, pandas as pd
 from datetime import datetime
 import pytz, warnings
+import numpy as np
+try:
+    from scipy.optimize import linear_sum_assignment
+    _SCIPY_OK = True
+except ImportError:
+    _SCIPY_OK = False
 warnings.filterwarnings('ignore')
 
 VTIGER_URL = 'https://coditeq.od2.vtiger.com'
@@ -224,6 +230,11 @@ def _format_dt(v):
     except: return str(v)
 
 def fetch_and_process():
+    if _SCIPY_OK:
+        print("[sync] scipy disponible: emparejamiento Produccion-OP usara asignacion optima (Hungarian algorithm)")
+    else:
+        print("[sync] AVISO: scipy NO disponible -- emparejamiento Produccion-OP usara "
+              "greedy (subóptimo). Agregar 'scipy' a requirements.txt para mejor precision.")
     # 1. Producciones con filtro fecha (01-01-2025 a 31-12-2026, segun informe original)
     print("[sync] Consultando producciones (fecha entre 2025-01-01 y 2026-12-31)...")
     producciones = vtiger_query(
@@ -350,19 +361,30 @@ def fetch_and_process():
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
     # 1:1, no muchos a muchos). Cuando una referencia se reordena muchas veces
     # (hasta 15+ veces para el mismo diseno de etiqueta, casos reales
-    # observados), el emparejamiento debe ser GLOBALMENTE optimo, no greedy por
-    # orden de procesamiento: si se procesa Produccion por Produccion en orden
-    # cronologico y cada una toma la OP disponible mas cercana, una Produccion
-    # antigua puede "robarle" la OP correcta a una mas reciente que en realidad
-    # tenia una coincidencia mucho mejor (fecha casi identica).
+    # observados), el emparejamiento debe minimizar la distancia TOTAL del
+    # grupo completo, no solo la de cada par individual: un algoritmo greedy
+    # que toma el par mas cercano primero puede "robar" una OP casi perfecta
+    # para una Produccion vecina, empeorando la asignacion global.
     #
-    # Fix: para cada referencia, calcular TODAS las distancias Produccion-OP
-    # posibles, ordenarlas de menor a mayor diferencia, y asignar los pares
-    # mas cercanos primero (sin reemplazo). Esto aproxima un matching optimo
-    # de peso minimo (mejor que greedy-por-orden-de-produccion).
+    # Caso real que expuso esto: referencia con 13 Producciones y 13 OPs
+    # (proporcion 1:1 exacta). Greedy-por-par-mas-cercano-primero asigno
+    # NP107865 (la mas nueva, con match casi perfecto de 2h) a la OP 104504,
+    # dejando a NP107833 (la correcta segun Vtiger) forzada a emparejar con
+    # 104526 a 27h de distancia -- desajuste total del grupo: 29h.
+    # La asignacion OPTIMA (Hungarian algorithm) da NP107833<->104504 (20h) +
+    # NP107865<->104526 (4h) = 24h de desajuste total -- MENOR, y coincide
+    # exactamente con la relacion real confirmada en Vtiger.
+    #
+    # Fix: usar scipy.optimize.linear_sum_assignment (Hungarian algorithm)
+    # para encontrar la asignacion de MINIMA DISTANCIA TOTAL por referencia,
+    # en vez de greedy por par mas cercano primero. Si scipy no esta
+    # disponible en el entorno (ej. falta en requirements.txt), cae de
+    # vuelta al greedy anterior (funcional pero subóptimo) sin romper el sync.
     rows = []
     sin_op = 0
     _n_ajustados = 0
+    _n_optimo = 0
+    _n_fallback = 0
     for ref, prods in prod_groups.items():
         ops_disponibles = list(op_groups.get(ref, []))
         if len(ops_disponibles) > len(prods):
@@ -371,28 +393,48 @@ def fetch_and_process():
             sin_op += len(prods)
             continue
 
-        # Construir todas las distancias posibles (Produccion, OP) para esta referencia
-        pares = []
-        for pi, prod in enumerate(prods):
-            prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
-            for oi, op in enumerate(ops_disponibles):
-                op_dt = _parse_any_dt(op.get('createdtime', ''))
-                if prod_dt is not None and op_dt is not None:
-                    dist = abs((op_dt - prod_dt).total_seconds())
-                else:
-                    dist = float('inf')
-                pares.append((dist, pi, oi))
-        pares.sort(key=lambda x: x[0])
-
-        prod_usada = [False] * len(prods)
-        op_usada = [False] * len(ops_disponibles)
+        n_prod = len(prods)
+        n_op = len(ops_disponibles)
         asignacion = {}  # pi -> oi
-        for dist, pi, oi in pares:
-            if prod_usada[pi] or op_usada[oi]:
-                continue
-            prod_usada[pi] = True
-            op_usada[oi] = True
-            asignacion[pi] = oi
+
+        if _SCIPY_OK:
+            _n_optimo += 1
+            _SIN_FECHA = 1e15  # costo centinela para pares sin fecha valida (no se asignan)
+            cost = np.full((n_prod, n_op), _SIN_FECHA)
+            for pi, prod in enumerate(prods):
+                prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
+                if prod_dt is None:
+                    continue
+                for oi, op in enumerate(ops_disponibles):
+                    op_dt = _parse_any_dt(op.get('createdtime', ''))
+                    if op_dt is not None:
+                        cost[pi, oi] = abs((op_dt - prod_dt).total_seconds())
+            row_ind, col_ind = linear_sum_assignment(cost)
+            for pi, oi in zip(row_ind, col_ind):
+                if cost[pi, oi] < _SIN_FECHA:
+                    asignacion[pi] = oi
+        else:
+            _n_fallback += 1
+            # Fallback greedy (subóptimo, ver comentario arriba)
+            pares = []
+            for pi, prod in enumerate(prods):
+                prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
+                for oi, op in enumerate(ops_disponibles):
+                    op_dt = _parse_any_dt(op.get('createdtime', ''))
+                    if prod_dt is not None and op_dt is not None:
+                        dist = abs((op_dt - prod_dt).total_seconds())
+                    else:
+                        dist = float('inf')
+                    pares.append((dist, pi, oi))
+            pares.sort(key=lambda x: x[0])
+            prod_usada = [False] * n_prod
+            op_usada = [False] * n_op
+            for dist, pi, oi in pares:
+                if prod_usada[pi] or op_usada[oi]:
+                    continue
+                prod_usada[pi] = True
+                op_usada[oi] = True
+                asignacion[pi] = oi
 
         for pi, prod in enumerate(prods):
             if pi not in asignacion:
@@ -435,6 +477,8 @@ def fetch_and_process():
 
     print(f"[sync] {sin_op} Producciones sin OP, {len(rows)} filas ANTES de filtro habilitadas "
           f"({_n_ajustados} referencias con reordenes historicos ajustadas)")
+    print(f"[sync] Emparejamiento: {_n_optimo} referencias con asignacion optima, "
+          f"{_n_fallback} con greedy fallback")
     if not rows:
         print("[sync] ERROR: 0 filas construidas")
         return False

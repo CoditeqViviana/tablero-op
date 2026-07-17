@@ -5,3 +5,4 @@ xlrd==2.0.1
 pytz==2024.1
 gunicorn==22.0.0
 requests==2.32.3
+scipy==1.13.1
