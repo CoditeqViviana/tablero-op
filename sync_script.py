@@ -667,6 +667,28 @@ def fetch_and_process():
     df_tambor['maquina'] = df_tambor.apply(asignar_maquina, axis=1)
     print(f"[sync] df_tambor (Tambor General, solo Filtro 1): {len(df_tambor)} filas "
           f"(vs {len(df)} en df principal con los 3 filtros)")
+
+    # --- DEBUG TEMPORAL: diagnostico de "Dias Ofrecidos por Tipo de Etiqueta"
+    # en blanco -- verificar si fecha_creacion/fecha_entrega se parsean bien
+    # en df_tambor y si dias_ofrecidos resulta > 0 para las filas
+    _nat_fc_df = df['fecha_creacion'].isna().sum()
+    _nat_fe_df = df['fecha_entrega'].isna().sum()
+    _nat_fc_tb = df_tambor['fecha_creacion'].isna().sum()
+    _nat_fe_tb = df_tambor['fecha_entrega'].isna().sum()
+    print(f"[DEBUG-TAMBOR-FECHAS] df: fecha_creacion NaT={_nat_fc_df}/{len(df)} | "
+          f"fecha_entrega NaT={_nat_fe_df}/{len(df)}")
+    print(f"[DEBUG-TAMBOR-FECHAS] df_tambor: fecha_creacion NaT={_nat_fc_tb}/{len(df_tambor)} | "
+          f"fecha_entrega NaT={_nat_fe_tb}/{len(df_tambor)}")
+    _dias_tb = (df_tambor['fecha_entrega'] - df_tambor['fecha_creacion']).dt.days
+    _dias_positivos = (_dias_tb > 0).sum()
+    print(f"[DEBUG-TAMBOR-FECHAS] df_tambor: filas con dias_ofrecidos>0: "
+          f"{_dias_positivos}/{len(df_tambor)}")
+    for i, r in enumerate(rows_tambor[:8]):
+        print(f"[DEBUG-TAMBOR-SAMPLE] op={r.get('op_number')} | "
+              f"fecha_creacion_raw={repr(r.get('fecha_creacion_raw'))} | "
+              f"fecha_entrega_raw={repr(r.get('fecha_entrega_raw'))} | "
+              f"tiempo_prod={repr(r.get('tiempo_prod'))}")
+
     _tambor_numbers = {_norm_op(r.get('op_number', '')) for r in rows_tambor}
     _tambor_faltantes = sorted(_VTIGER_250 - _tambor_numbers)
     print(f"[sync] DIAGNOSTICO Tambor vs Vtiger: {len(_VTIGER_250)} esperadas, "
