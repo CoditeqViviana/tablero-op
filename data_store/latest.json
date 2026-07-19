@@ -1,10 +1,10 @@
 {
-  "updated_at": "18/07/2026 16:07",
+  "updated_at": "19/07/2026 07:07",
   "source": "vtiger_api_github_actions",
-  "today": "2026-07-18",
-  "hoy": "2026-07-18",
-  "hoy_label": "18/07/2026",
-  "hoy_nombre": "Sábado",
+  "today": "2026-07-19",
+  "hoy": "2026-07-19",
+  "hoy_label": "19/07/2026",
+  "hoy_nombre": "Domingo",
   "lun": "20/07",
   "vie": "24/07",
   "maquinas": [
@@ -48,21 +48,21 @@
       "2026-07-20": 0,
       "2026-07-21": 0,
       "2026-07-22": 3,
-      "2026-07-23": 4,
+      "2026-07-23": 3,
       "2026-07-24": 7
     },
     "Nilpeter 2": {
       "2026-07-20": 0,
       "2026-07-21": 0,
       "2026-07-22": 3,
-      "2026-07-23": 9,
+      "2026-07-23": 8,
       "2026-07-24": 4
     },
     "Rebobinadora": {
       "2026-07-20": 0,
       "2026-07-21": 14,
       "2026-07-22": 5,
-      "2026-07-23": 0,
+      "2026-07-23": 2,
       "2026-07-24": 0
     },
     "Troqueladora Plana": {
@@ -292,7 +292,7 @@
       "color_toc": "negro",
       "pct_prioridad": "",
       "mts": 2205.0,
-      "pct_buffer": 500.0,
+      "pct_buffer": 509.1,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -310,7 +310,7 @@
       "color_toc": "negro",
       "pct_prioridad": "",
       "mts": 2137.0,
-      "pct_buffer": 236.4,
+      "pct_buffer": 240.9,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -328,7 +328,7 @@
       "color_toc": "negro",
       "pct_prioridad": "",
       "mts": 638.0,
-      "pct_buffer": 185.7,
+      "pct_buffer": 189.3,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -346,7 +346,7 @@
       "color_toc": "negro",
       "pct_prioridad": "",
       "mts": 1448.0,
-      "pct_buffer": 263.6,
+      "pct_buffer": 272.7,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -364,7 +364,7 @@
       "color_toc": "negro",
       "pct_prioridad": "",
       "mts": 7161.0,
-      "pct_buffer": 161.1,
+      "pct_buffer": 166.7,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -382,7 +382,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 55494.0,
-      "pct_buffer": 111.1,
+      "pct_buffer": 122.2,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -400,7 +400,7 @@
       "color_toc": "negro",
       "pct_prioridad": "83.77%",
       "mts": 3715.0,
-      "pct_buffer": 107.1,
+      "pct_buffer": 114.3,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -418,7 +418,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 2373.0,
-      "pct_buffer": 116.7,
+      "pct_buffer": 133.3,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -436,7 +436,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 333.0,
-      "pct_buffer": 150.0,
+      "pct_buffer": 200.0,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -454,7 +454,7 @@
       "color_toc": "negro",
       "pct_prioridad": "83.77%",
       "mts": 3715.0,
-      "pct_buffer": 106.7,
+      "pct_buffer": 113.3,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -472,7 +472,7 @@
       "color_toc": "negro",
       "pct_prioridad": "83.77%",
       "mts": 766.0,
-      "pct_buffer": 110.0,
+      "pct_buffer": 120.0,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -490,7 +490,7 @@
       "color_toc": "negro",
       "pct_prioridad": "83.77%",
       "mts": 649.0,
-      "pct_buffer": 110.0,
+      "pct_buffer": 120.0,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -508,7 +508,7 @@
       "color_toc": "negro",
       "pct_prioridad": "78.36%",
       "mts": 3572.0,
-      "pct_buffer": 107.7,
+      "pct_buffer": 115.4,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -526,7 +526,7 @@
       "color_toc": "negro",
       "pct_prioridad": "91.88%",
       "mts": 76030.0,
-      "pct_buffer": 107.7,
+      "pct_buffer": 115.4,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -544,7 +544,7 @@
       "color_toc": "negro",
       "pct_prioridad": "87.01%",
       "mts": 477.0,
-      "pct_buffer": 111.1,
+      "pct_buffer": 122.2,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -562,7 +562,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 24821.0,
-      "pct_buffer": 112.5,
+      "pct_buffer": 125.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -580,7 +580,7 @@
       "color_toc": "negro",
       "pct_prioridad": "83.77%",
       "mts": 2840.0,
-      "pct_buffer": 107.7,
+      "pct_buffer": 115.4,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -598,7 +598,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 103.0,
-      "pct_buffer": 150.0,
+      "pct_buffer": 200.0,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -616,7 +616,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 16251.0,
-      "pct_buffer": 112.5,
+      "pct_buffer": 125.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -634,7 +634,7 @@
       "color_toc": "negro",
       "pct_prioridad": "78.36%",
       "mts": 2306.0,
-      "pct_buffer": 112.5,
+      "pct_buffer": 125.0,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -649,10 +649,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 913.0,
-      "pct_buffer": 50.0,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -667,10 +667,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 1570.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -688,7 +688,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "45.02%",
       "mts": 1032.0,
-      "pct_buffer": 72.7,
+      "pct_buffer": 81.8,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -703,10 +703,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 433.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -721,10 +721,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 3108.0,
-      "pct_buffer": 50.0,
+      "pct_buffer": 66.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -742,7 +742,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "17.53%",
       "mts": 6145.0,
-      "pct_buffer": 72.7,
+      "pct_buffer": 81.8,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -757,10 +757,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 713.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -775,10 +775,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 17994.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Menor al Standar"
     },
@@ -793,10 +793,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 5022.0,
-      "pct_buffer": 50.0,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -811,10 +811,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 1401.0,
-      "pct_buffer": 50.0,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -829,10 +829,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 1133.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -847,10 +847,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "17.53%",
       "mts": 5192.0,
-      "pct_buffer": 75.0,
+      "pct_buffer": 83.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -865,10 +865,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 680.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -883,10 +883,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "17.53%",
       "mts": 2224.0,
-      "pct_buffer": 75.0,
+      "pct_buffer": 83.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -901,10 +901,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 713.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -922,7 +922,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "17.53%",
       "mts": 872.0,
-      "pct_buffer": 72.7,
+      "pct_buffer": 81.8,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -937,10 +937,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 713.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -955,10 +955,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 1062.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -973,10 +973,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "13/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "45.02%",
       "mts": 802.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 71.4,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -991,10 +991,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "17.53%",
       "mts": 7930.0,
-      "pct_buffer": 75.0,
+      "pct_buffer": 83.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1009,10 +1009,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "-64.93%",
       "mts": 1000.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -1027,10 +1027,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 2829.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1045,10 +1045,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 103.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1063,10 +1063,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 1460.0,
-      "pct_buffer": 76.9,
+      "pct_buffer": 84.6,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -1081,10 +1081,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 1781.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1102,7 +1102,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "17.53%",
       "mts": 3296.0,
-      "pct_buffer": 70.0,
+      "pct_buffer": 80.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1117,10 +1117,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "17.53%",
       "mts": 1201.0,
-      "pct_buffer": 75.0,
+      "pct_buffer": 83.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1138,7 +1138,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "45.02%",
       "mts": 249.0,
-      "pct_buffer": 72.7,
+      "pct_buffer": 81.8,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -1153,10 +1153,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 754.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1171,10 +1171,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 1079.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1189,10 +1189,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "45.02%",
       "mts": 8386.0,
-      "pct_buffer": 76.9,
+      "pct_buffer": 84.6,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -1207,10 +1207,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "67.01%",
       "mts": 1460.0,
-      "pct_buffer": 76.9,
+      "pct_buffer": 84.6,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1225,10 +1225,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "13/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "17.53%",
       "mts": 898.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1243,10 +1243,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 2829.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1261,10 +1261,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 1061.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1282,7 +1282,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 466.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1297,10 +1297,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 683.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1315,10 +1315,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "11.69%",
       "mts": 249.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 75.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1336,7 +1336,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 100.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1354,7 +1354,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 874.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1372,7 +1372,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "33.77%",
       "mts": 1038.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1390,7 +1390,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 288.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1405,10 +1405,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 2172.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -1423,10 +1423,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "13/07/2026",
       "dias_ofrecidos": 8,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "-32.47%",
       "mts": 4534.0,
-      "pct_buffer": 50.0,
+      "pct_buffer": 62.5,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1441,10 +1441,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-32.47%",
       "mts": 523.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 75.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1459,10 +1459,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 558.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1477,10 +1477,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 102.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -1495,10 +1495,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 228.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -1513,10 +1513,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 228.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -1534,7 +1534,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "47.01%",
       "mts": 2396.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1549,10 +1549,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-32.47%",
       "mts": 792.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 75.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1567,10 +1567,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 958.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -1588,7 +1588,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "33.77%",
       "mts": 3352.0,
-      "pct_buffer": 69.2,
+      "pct_buffer": 76.9,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1606,7 +1606,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "33.77%",
       "mts": 3252.0,
-      "pct_buffer": 69.2,
+      "pct_buffer": 76.9,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1624,7 +1624,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "11.69%",
       "mts": 7534.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1642,7 +1642,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "11.69%",
       "mts": 12168.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1660,7 +1660,7 @@
       "color_toc": "rojo",
       "pct_prioridad": "47.01%",
       "mts": 10352.0,
-      "pct_buffer": 85.2,
+      "pct_buffer": 88.9,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1678,7 +1678,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "47.01%",
       "mts": 370.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -1696,7 +1696,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "33.77%",
       "mts": 1634.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1711,10 +1711,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "47.01%",
       "mts": 495.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 75.0,
       "en_impresion": false,
       "tiempo_produccion": "Menor al Standar"
     },
@@ -1729,10 +1729,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 1266.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1750,7 +1750,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 1046.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1768,7 +1768,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 509.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1783,10 +1783,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 1166.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1801,10 +1801,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "10/07/2026",
       "dias_ofrecidos": 11,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-32.47%",
       "mts": 8178.0,
-      "pct_buffer": 63.6,
+      "pct_buffer": 72.7,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -1819,10 +1819,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 368.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -1840,7 +1840,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 344.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1858,7 +1858,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 386.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1876,7 +1876,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 400.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1894,7 +1894,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "33.77%",
       "mts": 1739.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1912,7 +1912,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 111.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1930,7 +1930,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 941.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1948,7 +1948,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 409.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 25.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1966,7 +1966,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 450.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1981,10 +1981,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-32.47%",
       "mts": 1360.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 75.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -1999,10 +1999,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "10/07/2026",
       "dias_ofrecidos": 11,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "11.69%",
       "mts": 1053.0,
-      "pct_buffer": 63.6,
+      "pct_buffer": 72.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2020,7 +2020,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 206.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2035,10 +2035,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 859.0,
-      "pct_buffer": 64.3,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -2056,7 +2056,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 300.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2064,18 +2064,18 @@
       "op": "104622",
       "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
       "referencia": "IC-P60-95X90-R1000-P-1F-C15-FRENTE-CONTRA-LIMP-DESINCRUS-1 LT",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "23/07/2026",
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 1697.0,
-      "pct_buffer": 64.3,
-      "en_impresion": true,
+      "pct_buffer": 71.4,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -2092,7 +2092,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 2616.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2107,10 +2107,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 2662.0,
-      "pct_buffer": 64.3,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2125,10 +2125,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 2662.0,
-      "pct_buffer": 64.3,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -2146,7 +2146,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 324.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2161,10 +2161,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 15,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-21.64%",
       "mts": 19791.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 73.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -2182,7 +2182,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-82.47%",
       "mts": 6096.0,
-      "pct_buffer": 16.7,
+      "pct_buffer": 33.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2197,10 +2197,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 1465.0,
-      "pct_buffer": 61.5,
+      "pct_buffer": 69.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2218,7 +2218,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-82.47%",
       "mts": 1061.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -2236,7 +2236,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-82.47%",
       "mts": 898.0,
-      "pct_buffer": 16.7,
+      "pct_buffer": 33.3,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
     },
@@ -2251,10 +2251,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 830.0,
-      "pct_buffer": 61.5,
+      "pct_buffer": 69.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2272,7 +2272,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "54.38%",
       "mts": 6810.0,
-      "pct_buffer": 76.2,
+      "pct_buffer": 81.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2287,10 +2287,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 569.0,
-      "pct_buffer": 61.5,
+      "pct_buffer": 69.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2305,10 +2305,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "27.01%",
       "mts": 3217.0,
-      "pct_buffer": 64.3,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2326,7 +2326,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 2253.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2344,7 +2344,7 @@
       "color_toc": "azul",
       "pct_prioridad": "27.01%",
       "mts": 630.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2362,7 +2362,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 5304.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2380,7 +2380,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 512.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2398,7 +2398,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "-264.93%",
       "mts": 10000.0,
-      "pct_buffer": 68.8,
+      "pct_buffer": 75.0,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -2416,7 +2416,7 @@
       "color_toc": "azul",
       "pct_prioridad": "8.77%",
       "mts": 1380.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2431,10 +2431,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 1538.0,
-      "pct_buffer": 61.5,
+      "pct_buffer": 69.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2442,18 +2442,18 @@
       "op": "104694",
       "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
       "referencia": "IC-PPB-90X55-R1000-M-1F-C15-DORS-JAB -LAVAN-ULTR-LIMP-OLIMPICA-1LT",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "23/07/2026",
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "13/07/2026",
       "dias_ofrecidos": 9,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "8.77%",
       "mts": 495.0,
-      "pct_buffer": 44.4,
-      "en_impresion": true,
+      "pct_buffer": 55.6,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -2470,7 +2470,7 @@
       "color_toc": "verde",
       "pct_prioridad": "8.77%",
       "mts": 416.0,
-      "pct_buffer": 58.3,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
     },
@@ -2488,7 +2488,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-82.47%",
       "mts": 1962.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -2506,7 +2506,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 5768.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2521,10 +2521,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 1481.0,
-      "pct_buffer": 64.3,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2542,7 +2542,7 @@
       "color_toc": "azul",
       "pct_prioridad": "8.77%",
       "mts": 850.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2560,7 +2560,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 5023.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -2578,7 +2578,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 853.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2596,7 +2596,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 461.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2611,10 +2611,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "13/07/2026",
       "dias_ofrecidos": 9,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "-82.47%",
       "mts": 6179.0,
-      "pct_buffer": 44.4,
+      "pct_buffer": 55.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2632,7 +2632,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 404.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2650,7 +2650,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-82.47%",
       "mts": 407.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -2668,7 +2668,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-82.47%",
       "mts": 726.0,
-      "pct_buffer": 58.3,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -2686,7 +2686,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-16.23%",
       "mts": 795.0,
-      "pct_buffer": 14.3,
+      "pct_buffer": 28.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2704,7 +2704,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-54.98%",
       "mts": 645.0,
-      "pct_buffer": 14.3,
+      "pct_buffer": 28.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2722,7 +2722,7 @@
       "color_toc": "verde",
       "pct_prioridad": "7.01%",
       "mts": 1062.0,
-      "pct_buffer": 53.8,
+      "pct_buffer": 61.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2740,7 +2740,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 391.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2758,7 +2758,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-16.23%",
       "mts": 795.0,
-      "pct_buffer": 14.3,
+      "pct_buffer": 28.6,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
     },
@@ -2776,7 +2776,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-16.23%",
       "mts": 358.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2794,7 +2794,7 @@
       "color_toc": "azul",
       "pct_prioridad": "7.01%",
       "mts": 354.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2812,7 +2812,7 @@
       "color_toc": "verde",
       "pct_prioridad": "7.01%",
       "mts": 795.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 64.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2830,7 +2830,7 @@
       "color_toc": "azul",
       "pct_prioridad": "7.01%",
       "mts": 1905.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2848,7 +2848,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-16.23%",
       "mts": 1160.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 64.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -2866,7 +2866,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 3718.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2884,7 +2884,7 @@
       "color_toc": "verde",
       "pct_prioridad": "7.01%",
       "mts": 1570.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 64.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2899,10 +2899,10 @@
       "fecha_entrega_raw": "2026-07-24",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 16,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-54.98%",
       "mts": 15425.0,
-      "pct_buffer": 62.5,
+      "pct_buffer": 68.8,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2920,7 +2920,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-16.23%",
       "mts": 1951.0,
-      "pct_buffer": 53.8,
+      "pct_buffer": 61.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2938,7 +2938,7 @@
       "color_toc": "verde",
       "pct_prioridad": "7.01%",
       "mts": 1330.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 64.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2953,10 +2953,10 @@
       "fecha_entrega_raw": "2026-07-24",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 16,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-54.98%",
       "mts": 15491.0,
-      "pct_buffer": 62.5,
+      "pct_buffer": 68.8,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2974,7 +2974,7 @@
       "color_toc": "verde",
       "pct_prioridad": "7.01%",
       "mts": 977.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 64.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -2992,7 +2992,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 252.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3007,10 +3007,10 @@
       "fecha_entrega_raw": "2026-07-24",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 16,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-54.98%",
       "mts": 21883.0,
-      "pct_buffer": 62.5,
+      "pct_buffer": 68.8,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3028,7 +3028,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 121.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3046,7 +3046,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 5254.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3064,7 +3064,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-16.23%",
       "mts": 1045.0,
-      "pct_buffer": 53.8,
+      "pct_buffer": 61.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     }
@@ -3085,7 +3085,7 @@
       "color_toc": "negro",
       "pct_prioridad": "",
       "mts": 2205.0,
-      "pct_buffer": 500.0,
+      "pct_buffer": 509.1,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -3103,7 +3103,7 @@
       "color_toc": "negro",
       "pct_prioridad": "",
       "mts": 2137.0,
-      "pct_buffer": 236.4,
+      "pct_buffer": 240.9,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -3121,7 +3121,7 @@
       "color_toc": "negro",
       "pct_prioridad": "",
       "mts": 638.0,
-      "pct_buffer": 185.7,
+      "pct_buffer": 189.3,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3139,7 +3139,7 @@
       "color_toc": "negro",
       "pct_prioridad": "",
       "mts": 1448.0,
-      "pct_buffer": 263.6,
+      "pct_buffer": 272.7,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -3157,7 +3157,7 @@
       "color_toc": "negro",
       "pct_prioridad": "",
       "mts": 7161.0,
-      "pct_buffer": 161.1,
+      "pct_buffer": 166.7,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -3175,7 +3175,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 55494.0,
-      "pct_buffer": 111.1,
+      "pct_buffer": 122.2,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3193,7 +3193,7 @@
       "color_toc": "negro",
       "pct_prioridad": "83.77%",
       "mts": 3715.0,
-      "pct_buffer": 107.1,
+      "pct_buffer": 114.3,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3211,7 +3211,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 2373.0,
-      "pct_buffer": 116.7,
+      "pct_buffer": 133.3,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3229,7 +3229,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 333.0,
-      "pct_buffer": 150.0,
+      "pct_buffer": 200.0,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3247,7 +3247,7 @@
       "color_toc": "negro",
       "pct_prioridad": "83.77%",
       "mts": 3715.0,
-      "pct_buffer": 106.7,
+      "pct_buffer": 113.3,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3265,7 +3265,7 @@
       "color_toc": "negro",
       "pct_prioridad": "83.77%",
       "mts": 766.0,
-      "pct_buffer": 110.0,
+      "pct_buffer": 120.0,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3283,7 +3283,7 @@
       "color_toc": "negro",
       "pct_prioridad": "83.77%",
       "mts": 649.0,
-      "pct_buffer": 110.0,
+      "pct_buffer": 120.0,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -3301,7 +3301,7 @@
       "color_toc": "negro",
       "pct_prioridad": "78.36%",
       "mts": 3572.0,
-      "pct_buffer": 107.7,
+      "pct_buffer": 115.4,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -3319,7 +3319,7 @@
       "color_toc": "negro",
       "pct_prioridad": "91.88%",
       "mts": 76030.0,
-      "pct_buffer": 107.7,
+      "pct_buffer": 115.4,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3337,7 +3337,7 @@
       "color_toc": "negro",
       "pct_prioridad": "87.01%",
       "mts": 477.0,
-      "pct_buffer": 111.1,
+      "pct_buffer": 122.2,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3355,7 +3355,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 24821.0,
-      "pct_buffer": 112.5,
+      "pct_buffer": 125.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3373,7 +3373,7 @@
       "color_toc": "negro",
       "pct_prioridad": "83.77%",
       "mts": 2840.0,
-      "pct_buffer": 107.7,
+      "pct_buffer": 115.4,
       "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
@@ -3391,7 +3391,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 103.0,
-      "pct_buffer": 150.0,
+      "pct_buffer": 200.0,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3409,7 +3409,7 @@
       "color_toc": "negro",
       "pct_prioridad": "67.53%",
       "mts": 16251.0,
-      "pct_buffer": 112.5,
+      "pct_buffer": 125.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3427,7 +3427,7 @@
       "color_toc": "negro",
       "pct_prioridad": "78.36%",
       "mts": 2306.0,
-      "pct_buffer": 112.5,
+      "pct_buffer": 125.0,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3442,10 +3442,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 913.0,
-      "pct_buffer": 50.0,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3460,10 +3460,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 1570.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3481,7 +3481,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "45.02%",
       "mts": 1032.0,
-      "pct_buffer": 72.7,
+      "pct_buffer": 81.8,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3496,10 +3496,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 433.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3514,10 +3514,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 3108.0,
-      "pct_buffer": 50.0,
+      "pct_buffer": 66.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3535,7 +3535,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "17.53%",
       "mts": 6145.0,
-      "pct_buffer": 72.7,
+      "pct_buffer": 81.8,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3550,10 +3550,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 713.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3568,10 +3568,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 17994.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Menor al Standar"
     },
@@ -3586,10 +3586,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 5022.0,
-      "pct_buffer": 50.0,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3604,10 +3604,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 6,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 1401.0,
-      "pct_buffer": 50.0,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3622,10 +3622,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 1133.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3640,10 +3640,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "17.53%",
       "mts": 5192.0,
-      "pct_buffer": 75.0,
+      "pct_buffer": 83.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3658,10 +3658,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 680.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3676,10 +3676,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "17.53%",
       "mts": 2224.0,
-      "pct_buffer": 75.0,
+      "pct_buffer": 83.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3694,10 +3694,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 713.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3715,7 +3715,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "17.53%",
       "mts": 872.0,
-      "pct_buffer": 72.7,
+      "pct_buffer": 81.8,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3730,10 +3730,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 713.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3748,10 +3748,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 1062.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3766,10 +3766,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "13/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "45.02%",
       "mts": 802.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 71.4,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3784,10 +3784,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "17.53%",
       "mts": 7930.0,
-      "pct_buffer": 75.0,
+      "pct_buffer": 83.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3802,10 +3802,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "-64.93%",
       "mts": 1000.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -3820,10 +3820,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 2829.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3838,10 +3838,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 103.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3856,10 +3856,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 1460.0,
-      "pct_buffer": 76.9,
+      "pct_buffer": 84.6,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3874,10 +3874,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 1781.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3895,7 +3895,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "17.53%",
       "mts": 3296.0,
-      "pct_buffer": 70.0,
+      "pct_buffer": 80.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3910,10 +3910,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "17.53%",
       "mts": 1201.0,
-      "pct_buffer": 75.0,
+      "pct_buffer": 83.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3931,7 +3931,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "45.02%",
       "mts": 249.0,
-      "pct_buffer": 72.7,
+      "pct_buffer": 81.8,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -3946,10 +3946,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 754.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -3964,10 +3964,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 1079.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -3982,10 +3982,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "45.02%",
       "mts": 8386.0,
-      "pct_buffer": 76.9,
+      "pct_buffer": 84.6,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -4000,10 +4000,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "67.01%",
       "mts": 1460.0,
-      "pct_buffer": 76.9,
+      "pct_buffer": 84.6,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4018,10 +4018,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "13/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "17.53%",
       "mts": 898.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4036,10 +4036,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "pct_prioridad": "58.77%",
       "mts": 2829.0,
-      "pct_buffer": 78.6,
+      "pct_buffer": 85.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4054,10 +4054,10 @@
       "fecha_entrega_raw": "2026-07-21",
       "fecha_creacion": "15/07/2026",
       "dias_ofrecidos": 5,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "17.53%",
       "mts": 1061.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4075,7 +4075,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 466.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4090,10 +4090,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 683.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4108,10 +4108,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "11.69%",
       "mts": 249.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 75.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4129,7 +4129,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 100.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4147,7 +4147,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 874.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4165,7 +4165,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "33.77%",
       "mts": 1038.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4183,7 +4183,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 288.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4198,10 +4198,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 2172.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -4216,10 +4216,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "13/07/2026",
       "dias_ofrecidos": 8,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "-32.47%",
       "mts": 4534.0,
-      "pct_buffer": 50.0,
+      "pct_buffer": 62.5,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4234,10 +4234,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-32.47%",
       "mts": 523.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 75.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4252,10 +4252,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 558.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4270,10 +4270,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 102.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -4288,10 +4288,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 228.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -4306,10 +4306,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 228.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -4327,7 +4327,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "47.01%",
       "mts": 2396.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4342,10 +4342,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-32.47%",
       "mts": 792.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 75.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4360,10 +4360,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 958.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -4381,7 +4381,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "33.77%",
       "mts": 3352.0,
-      "pct_buffer": 69.2,
+      "pct_buffer": 76.9,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4399,7 +4399,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "33.77%",
       "mts": 3252.0,
-      "pct_buffer": 69.2,
+      "pct_buffer": 76.9,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4417,7 +4417,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "11.69%",
       "mts": 7534.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4435,7 +4435,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "11.69%",
       "mts": 12168.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4453,7 +4453,7 @@
       "color_toc": "rojo",
       "pct_prioridad": "47.01%",
       "mts": 10352.0,
-      "pct_buffer": 85.2,
+      "pct_buffer": 88.9,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4471,7 +4471,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "47.01%",
       "mts": 370.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -4489,7 +4489,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "33.77%",
       "mts": 1634.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4504,10 +4504,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "47.01%",
       "mts": 495.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 75.0,
       "en_impresion": false,
       "tiempo_produccion": "Menor al Standar"
     },
@@ -4522,10 +4522,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 1266.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4543,7 +4543,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 1046.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4561,7 +4561,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 509.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4576,10 +4576,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 1166.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4594,10 +4594,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "10/07/2026",
       "dias_ofrecidos": 11,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-32.47%",
       "mts": 8178.0,
-      "pct_buffer": 63.6,
+      "pct_buffer": 72.7,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4612,10 +4612,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "14/07/2026",
       "dias_ofrecidos": 7,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "11.69%",
       "mts": 368.0,
-      "pct_buffer": 42.9,
+      "pct_buffer": 57.1,
       "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
@@ -4633,7 +4633,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 344.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4651,7 +4651,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 386.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4669,7 +4669,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 400.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4687,7 +4687,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "33.77%",
       "mts": 1739.0,
-      "pct_buffer": 71.4,
+      "pct_buffer": 78.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4705,7 +4705,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 111.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4723,7 +4723,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 941.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4741,7 +4741,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 409.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 25.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4759,7 +4759,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 450.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4774,10 +4774,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 12,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-32.47%",
       "mts": 1360.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 75.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4792,10 +4792,10 @@
       "fecha_entrega_raw": "2026-07-22",
       "fecha_creacion": "10/07/2026",
       "dias_ofrecidos": 11,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "11.69%",
       "mts": 1053.0,
-      "pct_buffer": 63.6,
+      "pct_buffer": 72.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4813,7 +4813,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.47%",
       "mts": 206.0,
-      "pct_buffer": 20.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4828,10 +4828,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 859.0,
-      "pct_buffer": 64.3,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4849,7 +4849,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 300.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4857,18 +4857,18 @@
       "op": "104622",
       "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
       "referencia": "IC-P60-95X90-R1000-P-1F-C15-FRENTE-CONTRA-LIMP-DESINCRUS-1 LT",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "23/07/2026",
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 1697.0,
-      "pct_buffer": 64.3,
-      "en_impresion": true,
+      "pct_buffer": 71.4,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -4885,7 +4885,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 2616.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4900,10 +4900,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 2662.0,
-      "pct_buffer": 64.3,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4918,10 +4918,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 2662.0,
-      "pct_buffer": 64.3,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4939,7 +4939,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 324.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4954,10 +4954,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 15,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-21.64%",
       "mts": 19791.0,
-      "pct_buffer": 66.7,
+      "pct_buffer": 73.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -4975,7 +4975,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-82.47%",
       "mts": 6096.0,
-      "pct_buffer": 16.7,
+      "pct_buffer": 33.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -4990,10 +4990,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 1465.0,
-      "pct_buffer": 61.5,
+      "pct_buffer": 69.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5011,7 +5011,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-82.47%",
       "mts": 1061.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -5029,7 +5029,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-82.47%",
       "mts": 898.0,
-      "pct_buffer": 16.7,
+      "pct_buffer": 33.3,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
     },
@@ -5044,10 +5044,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 830.0,
-      "pct_buffer": 61.5,
+      "pct_buffer": 69.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5065,7 +5065,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "54.38%",
       "mts": 6810.0,
-      "pct_buffer": 76.2,
+      "pct_buffer": 81.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5080,10 +5080,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 569.0,
-      "pct_buffer": 61.5,
+      "pct_buffer": 69.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5098,10 +5098,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "27.01%",
       "mts": 3217.0,
-      "pct_buffer": 64.3,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5119,7 +5119,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 2253.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5137,7 +5137,7 @@
       "color_toc": "azul",
       "pct_prioridad": "27.01%",
       "mts": 630.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5155,7 +5155,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 5304.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5173,7 +5173,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 512.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5191,7 +5191,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "-264.93%",
       "mts": 10000.0,
-      "pct_buffer": 68.8,
+      "pct_buffer": 75.0,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -5209,7 +5209,7 @@
       "color_toc": "azul",
       "pct_prioridad": "8.77%",
       "mts": 1380.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5224,10 +5224,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 13,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 1538.0,
-      "pct_buffer": 61.5,
+      "pct_buffer": 69.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5235,18 +5235,18 @@
       "op": "104694",
       "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
       "referencia": "IC-PPB-90X55-R1000-M-1F-C15-DORS-JAB -LAVAN-ULTR-LIMP-OLIMPICA-1LT",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "23/07/2026",
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "13/07/2026",
       "dias_ofrecidos": 9,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "8.77%",
       "mts": 495.0,
-      "pct_buffer": 44.4,
-      "en_impresion": true,
+      "pct_buffer": 55.6,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -5263,7 +5263,7 @@
       "color_toc": "verde",
       "pct_prioridad": "8.77%",
       "mts": 416.0,
-      "pct_buffer": 58.3,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
     },
@@ -5281,7 +5281,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-82.47%",
       "mts": 1962.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -5299,7 +5299,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 5768.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5314,10 +5314,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "08/07/2026",
       "dias_ofrecidos": 14,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "8.77%",
       "mts": 1481.0,
-      "pct_buffer": 64.3,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5335,7 +5335,7 @@
       "color_toc": "azul",
       "pct_prioridad": "8.77%",
       "mts": 850.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5353,7 +5353,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 5023.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -5371,7 +5371,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 853.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5389,7 +5389,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 461.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5404,10 +5404,10 @@
       "fecha_entrega_raw": "2026-07-23",
       "fecha_creacion": "13/07/2026",
       "dias_ofrecidos": 9,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "-82.47%",
       "mts": 6179.0,
-      "pct_buffer": 44.4,
+      "pct_buffer": 55.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5425,7 +5425,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 404.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5443,7 +5443,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-82.47%",
       "mts": 407.0,
-      "pct_buffer": 37.5,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -5461,7 +5461,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-82.47%",
       "mts": 726.0,
-      "pct_buffer": 58.3,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -5479,7 +5479,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-16.23%",
       "mts": 795.0,
-      "pct_buffer": 14.3,
+      "pct_buffer": 28.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5497,7 +5497,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-54.98%",
       "mts": 645.0,
-      "pct_buffer": 14.3,
+      "pct_buffer": 28.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5515,7 +5515,7 @@
       "color_toc": "verde",
       "pct_prioridad": "7.01%",
       "mts": 1062.0,
-      "pct_buffer": 53.8,
+      "pct_buffer": 61.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5533,7 +5533,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 391.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5551,7 +5551,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-16.23%",
       "mts": 795.0,
-      "pct_buffer": 14.3,
+      "pct_buffer": 28.6,
       "en_impresion": true,
       "tiempo_produccion": "Menor al Standar"
     },
@@ -5569,7 +5569,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-16.23%",
       "mts": 358.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5587,7 +5587,7 @@
       "color_toc": "azul",
       "pct_prioridad": "7.01%",
       "mts": 354.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5605,7 +5605,7 @@
       "color_toc": "verde",
       "pct_prioridad": "7.01%",
       "mts": 795.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 64.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5623,7 +5623,7 @@
       "color_toc": "azul",
       "pct_prioridad": "7.01%",
       "mts": 1905.0,
-      "pct_buffer": 40.0,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5641,7 +5641,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-16.23%",
       "mts": 1160.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 64.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -5659,7 +5659,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 3718.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5677,7 +5677,7 @@
       "color_toc": "verde",
       "pct_prioridad": "7.01%",
       "mts": 1570.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 64.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5692,10 +5692,10 @@
       "fecha_entrega_raw": "2026-07-24",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 16,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-54.98%",
       "mts": 15425.0,
-      "pct_buffer": 62.5,
+      "pct_buffer": 68.8,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5713,7 +5713,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-16.23%",
       "mts": 1951.0,
-      "pct_buffer": 53.8,
+      "pct_buffer": 61.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5731,7 +5731,7 @@
       "color_toc": "verde",
       "pct_prioridad": "7.01%",
       "mts": 1330.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 64.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5746,10 +5746,10 @@
       "fecha_entrega_raw": "2026-07-24",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 16,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-54.98%",
       "mts": 15491.0,
-      "pct_buffer": 62.5,
+      "pct_buffer": 68.8,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5767,7 +5767,7 @@
       "color_toc": "verde",
       "pct_prioridad": "7.01%",
       "mts": 977.0,
-      "pct_buffer": 57.1,
+      "pct_buffer": 64.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5785,7 +5785,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 252.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5800,10 +5800,10 @@
       "fecha_entrega_raw": "2026-07-24",
       "fecha_creacion": "07/07/2026",
       "dias_ofrecidos": 16,
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "pct_prioridad": "-54.98%",
       "mts": 21883.0,
-      "pct_buffer": 62.5,
+      "pct_buffer": 68.8,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5821,7 +5821,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 121.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5839,7 +5839,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 5254.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5857,7 +5857,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-16.23%",
       "mts": 1045.0,
-      "pct_buffer": 53.8,
+      "pct_buffer": 61.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5875,7 +5875,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-12.99%",
       "mts": 1570.0,
-      "pct_buffer": 30.8,
+      "pct_buffer": 38.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5893,7 +5893,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 795.0,
-      "pct_buffer": 43.8,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5911,7 +5911,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 1924.0,
-      "pct_buffer": 30.8,
+      "pct_buffer": 38.5,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -5929,7 +5929,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-12.99%",
       "mts": 1570.0,
-      "pct_buffer": 30.8,
+      "pct_buffer": 38.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -5947,7 +5947,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-182.47%",
       "mts": 12427.0,
-      "pct_buffer": 18.2,
+      "pct_buffer": 27.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -5965,7 +5965,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 22702.0,
-      "pct_buffer": 30.8,
+      "pct_buffer": 38.5,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -5983,7 +5983,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 1026.0,
-      "pct_buffer": 43.8,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6001,7 +6001,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 1189.0,
-      "pct_buffer": 43.8,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6019,7 +6019,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 1924.0,
-      "pct_buffer": 30.8,
+      "pct_buffer": 38.5,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6037,7 +6037,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-12.99%",
       "mts": 1332.0,
-      "pct_buffer": 43.8,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6055,7 +6055,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-12.99%",
       "mts": 2300.0,
-      "pct_buffer": 43.8,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6073,7 +6073,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-12.99%",
       "mts": 1400.0,
-      "pct_buffer": 43.8,
+      "pct_buffer": 50.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6091,7 +6091,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-88.31%",
       "mts": 2050.0,
-      "pct_buffer": 10.0,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6109,7 +6109,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 1480.0,
-      "pct_buffer": 30.8,
+      "pct_buffer": 38.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6127,7 +6127,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 6640.0,
-      "pct_buffer": 25.0,
+      "pct_buffer": 33.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6145,7 +6145,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-12.99%",
       "mts": 2205.0,
-      "pct_buffer": 30.8,
+      "pct_buffer": 38.5,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6163,7 +6163,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 3094.0,
-      "pct_buffer": 25.0,
+      "pct_buffer": 33.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6181,7 +6181,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 1427.0,
-      "pct_buffer": 25.0,
+      "pct_buffer": 33.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6199,7 +6199,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 1316.0,
-      "pct_buffer": 30.8,
+      "pct_buffer": 38.5,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -6214,10 +6214,10 @@
       "fecha_entrega_raw": "2026-07-27",
       "fecha_creacion": "09/07/2026",
       "dias_ofrecidos": 17,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "-12.99%",
       "mts": 2112.0,
-      "pct_buffer": 47.1,
+      "pct_buffer": 52.9,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6235,7 +6235,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-464.93%",
       "mts": 10000.0,
-      "pct_buffer": 55.0,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -6253,7 +6253,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-88.31%",
       "mts": 19167.0,
-      "pct_buffer": 52.6,
+      "pct_buffer": 57.9,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6271,7 +6271,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-41.23%",
       "mts": 1062.0,
-      "pct_buffer": 30.8,
+      "pct_buffer": 38.5,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -6289,7 +6289,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-66.23%",
       "mts": 1951.0,
-      "pct_buffer": 16.7,
+      "pct_buffer": 25.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6307,7 +6307,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-66.23%",
       "mts": 440.0,
-      "pct_buffer": 28.6,
+      "pct_buffer": 35.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6325,7 +6325,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-66.23%",
       "mts": 783.0,
-      "pct_buffer": 16.7,
+      "pct_buffer": 25.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6343,7 +6343,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-66.23%",
       "mts": 376.0,
-      "pct_buffer": 28.6,
+      "pct_buffer": 35.7,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6361,7 +6361,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-564.93%",
       "mts": 10000.0,
-      "pct_buffer": 52.4,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -6379,7 +6379,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-32.99%",
       "mts": 1456.0,
-      "pct_buffer": 23.1,
+      "pct_buffer": 30.8,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6397,7 +6397,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-66.23%",
       "mts": 681.0,
-      "pct_buffer": 16.7,
+      "pct_buffer": 25.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6415,7 +6415,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 1375.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 10.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6433,7 +6433,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-66.23%",
       "mts": 440.0,
-      "pct_buffer": 16.7,
+      "pct_buffer": 25.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6451,7 +6451,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-66.23%",
       "mts": 478.0,
-      "pct_buffer": 16.7,
+      "pct_buffer": 25.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6469,7 +6469,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-154.98%",
       "mts": 1294.0,
-      "pct_buffer": 15.4,
+      "pct_buffer": 23.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6487,7 +6487,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-52.99%",
       "mts": 2523.0,
-      "pct_buffer": 8.3,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6505,7 +6505,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 2624.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 9.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6523,7 +6523,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 795.0,
-      "pct_buffer": 8.3,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6541,7 +6541,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 243.0,
-      "pct_buffer": 15.4,
+      "pct_buffer": 23.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6559,7 +6559,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 643.0,
-      "pct_buffer": 15.4,
+      "pct_buffer": 23.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6577,7 +6577,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 1334.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 9.1,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6595,7 +6595,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-52.99%",
       "mts": 935.0,
-      "pct_buffer": 15.4,
+      "pct_buffer": 23.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6613,7 +6613,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-52.99%",
       "mts": 1401.0,
-      "pct_buffer": 8.3,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6631,7 +6631,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-52.99%",
       "mts": 2099.0,
-      "pct_buffer": 21.4,
+      "pct_buffer": 28.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6649,7 +6649,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 1411.0,
-      "pct_buffer": 21.4,
+      "pct_buffer": 28.6,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6667,7 +6667,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 830.0,
-      "pct_buffer": 15.4,
+      "pct_buffer": 23.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6685,7 +6685,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 1348.0,
-      "pct_buffer": 8.3,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6703,7 +6703,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 1062.0,
-      "pct_buffer": 15.4,
+      "pct_buffer": 23.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6721,7 +6721,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 8240.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 9.1,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6739,7 +6739,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 562.0,
-      "pct_buffer": 15.4,
+      "pct_buffer": 23.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6757,7 +6757,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 766.0,
-      "pct_buffer": 8.3,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6775,7 +6775,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 766.0,
-      "pct_buffer": 8.3,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6793,7 +6793,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 645.0,
-      "pct_buffer": 8.3,
+      "pct_buffer": 16.7,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6811,7 +6811,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-52.99%",
       "mts": 795.0,
-      "pct_buffer": 15.4,
+      "pct_buffer": 23.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6829,7 +6829,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-116.23%",
       "mts": 11933.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6847,7 +6847,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-116.23%",
       "mts": 840.0,
-      "pct_buffer": 63.6,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -6865,7 +6865,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-72.99%",
       "mts": 4708.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6883,7 +6883,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-116.23%",
       "mts": 5239.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6901,7 +6901,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-116.23%",
       "mts": 2840.0,
-      "pct_buffer": 53.8,
+      "pct_buffer": 57.7,
       "en_impresion": false,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6916,10 +6916,10 @@
       "fecha_entrega_raw": "2026-07-30",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 23,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "-116.23%",
       "mts": 1570.0,
-      "pct_buffer": 47.8,
+      "pct_buffer": 52.2,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6937,7 +6937,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-116.23%",
       "mts": 4250.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -6952,10 +6952,10 @@
       "fecha_entrega_raw": "2026-07-30",
       "fecha_creacion": "06/07/2026",
       "dias_ofrecidos": 23,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "-116.23%",
       "mts": 559.0,
-      "pct_buffer": 47.8,
+      "pct_buffer": 52.2,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -6973,7 +6973,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-72.99%",
       "mts": 2535.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -6991,7 +6991,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-72.99%",
       "mts": 2535.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7009,7 +7009,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-116.23%",
       "mts": 1062.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7027,7 +7027,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-116.23%",
       "mts": 1164.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7045,7 +7045,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-116.23%",
       "mts": 1231.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7063,7 +7063,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-72.99%",
       "mts": 2535.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7081,7 +7081,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-116.23%",
       "mts": 42469.0,
-      "pct_buffer": 14.3,
+      "pct_buffer": 21.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7099,7 +7099,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-116.23%",
       "mts": 2396.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7117,7 +7117,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "-116.23%",
       "mts": 899.0,
-      "pct_buffer": 75.5,
+      "pct_buffer": 77.6,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7135,7 +7135,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-116.23%",
       "mts": 1291.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7153,7 +7153,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-72.99%",
       "mts": 700.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 15.4,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7171,7 +7171,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-382.47%",
       "mts": 4909.0,
-      "pct_buffer": 63.9,
+      "pct_buffer": 66.7,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7189,7 +7189,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-141.23%",
       "mts": 6429.0,
-      "pct_buffer": 56.7,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7207,7 +7207,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-16.23%",
       "mts": 39047.0,
-      "pct_buffer": 43.5,
+      "pct_buffer": 47.8,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7225,7 +7225,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-92.99%",
       "mts": 2840.0,
-      "pct_buffer": 7.1,
+      "pct_buffer": 14.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7243,7 +7243,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-92.99%",
       "mts": 3221.0,
-      "pct_buffer": 13.3,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7261,7 +7261,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-141.23%",
       "mts": 816.0,
-      "pct_buffer": 7.1,
+      "pct_buffer": 14.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7279,7 +7279,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-141.23%",
       "mts": 4286.0,
-      "pct_buffer": 7.1,
+      "pct_buffer": 14.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7297,7 +7297,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "-92.99%",
       "mts": 2046.0,
-      "pct_buffer": 69.0,
+      "pct_buffer": 71.4,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7315,7 +7315,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-92.99%",
       "mts": 2880.0,
-      "pct_buffer": 35.0,
+      "pct_buffer": 40.0,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7333,7 +7333,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-141.23%",
       "mts": 1824.0,
-      "pct_buffer": 53.6,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7351,7 +7351,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-141.23%",
       "mts": 4286.0,
-      "pct_buffer": 56.7,
+      "pct_buffer": 60.0,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7369,7 +7369,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-382.47%",
       "mts": 3381.0,
-      "pct_buffer": 53.6,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7387,7 +7387,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-141.23%",
       "mts": 1697.0,
-      "pct_buffer": 13.3,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7405,7 +7405,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-141.23%",
       "mts": 31433.0,
-      "pct_buffer": 53.6,
+      "pct_buffer": 57.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7423,7 +7423,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-92.99%",
       "mts": 2833.0,
-      "pct_buffer": 7.1,
+      "pct_buffer": 14.3,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7441,7 +7441,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-92.99%",
       "mts": 3221.0,
-      "pct_buffer": 13.3,
+      "pct_buffer": 20.0,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7459,7 +7459,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-116.23%",
       "mts": 588.0,
-      "pct_buffer": 5.9,
+      "pct_buffer": 11.8,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7477,7 +7477,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-166.23%",
       "mts": 1758.0,
-      "pct_buffer": 51.5,
+      "pct_buffer": 54.5,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7495,7 +7495,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-166.23%",
       "mts": 6429.0,
-      "pct_buffer": 51.5,
+      "pct_buffer": 54.5,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7513,7 +7513,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-166.23%",
       "mts": 1758.0,
-      "pct_buffer": 51.5,
+      "pct_buffer": 54.5,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7531,7 +7531,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-191.23%",
       "mts": 713.0,
-      "pct_buffer": 19.0,
+      "pct_buffer": 23.8,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7549,7 +7549,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "-191.23%",
       "mts": 1758.0,
-      "pct_buffer": 75.7,
+      "pct_buffer": 77.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7567,7 +7567,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "-191.23%",
       "mts": 1758.0,
-      "pct_buffer": 75.7,
+      "pct_buffer": 77.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7585,7 +7585,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-191.23%",
       "mts": 1824.0,
-      "pct_buffer": 10.5,
+      "pct_buffer": 15.8,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7603,7 +7603,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-45.62%",
       "mts": 6562.0,
-      "pct_buffer": 29.2,
+      "pct_buffer": 33.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7618,10 +7618,10 @@
       "fecha_entrega_raw": "2026-08-04",
       "fecha_creacion": "01/07/2026",
       "dias_ofrecidos": 33,
-      "color_toc": "azul",
+      "color_toc": "verde",
       "pct_prioridad": "-191.23%",
       "mts": 976.0,
-      "pct_buffer": 48.5,
+      "pct_buffer": 51.5,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7639,7 +7639,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-482.47%",
       "mts": 10955.0,
-      "pct_buffer": 19.0,
+      "pct_buffer": 23.8,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7657,7 +7657,7 @@
       "color_toc": "amarillo",
       "pct_prioridad": "-191.23%",
       "mts": 864.0,
-      "pct_buffer": 75.4,
+      "pct_buffer": 76.8,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7675,7 +7675,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-216.23%",
       "mts": 713.0,
-      "pct_buffer": 37.9,
+      "pct_buffer": 41.4,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7693,7 +7693,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-172.99%",
       "mts": 1162.0,
-      "pct_buffer": 13.6,
+      "pct_buffer": 18.2,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7711,7 +7711,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-354.98%",
       "mts": 650.0,
-      "pct_buffer": 13.6,
+      "pct_buffer": 18.2,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7729,7 +7729,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-241.23%",
       "mts": 3248.0,
-      "pct_buffer": 9.5,
+      "pct_buffer": 14.3,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7747,7 +7747,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-582.47%",
       "mts": 148.0,
-      "pct_buffer": 13.6,
+      "pct_buffer": 18.2,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7765,7 +7765,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-91.23%",
       "mts": 580.0,
-      "pct_buffer": 7.7,
+      "pct_buffer": 11.5,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7783,7 +7783,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-341.23%",
       "mts": 2777.0,
-      "pct_buffer": 21.2,
+      "pct_buffer": 24.2,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7801,7 +7801,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-366.23%",
       "mts": 1697.0,
-      "pct_buffer": 12.9,
+      "pct_buffer": 16.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7819,7 +7819,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-366.23%",
       "mts": 1062.0,
-      "pct_buffer": 20.6,
+      "pct_buffer": 23.5,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7837,7 +7837,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-366.23%",
       "mts": 713.0,
-      "pct_buffer": 12.9,
+      "pct_buffer": 16.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7855,7 +7855,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-566.23%",
       "mts": 1062.0,
-      "pct_buffer": 4.8,
+      "pct_buffer": 7.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7873,7 +7873,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-432.99%",
       "mts": 1697.0,
-      "pct_buffer": 4.8,
+      "pct_buffer": 7.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7891,7 +7891,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-591.23%",
       "mts": 681.0,
-      "pct_buffer": 28.1,
+      "pct_buffer": 29.8,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7909,7 +7909,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-591.23%",
       "mts": 564.0,
-      "pct_buffer": 28.1,
+      "pct_buffer": 29.8,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7927,7 +7927,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-616.23%",
       "mts": 899.0,
-      "pct_buffer": 45.7,
+      "pct_buffer": 46.9,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7945,7 +7945,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-666.23%",
       "mts": 6601.0,
-      "pct_buffer": 13.2,
+      "pct_buffer": 15.1,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -7963,7 +7963,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-691.23%",
       "mts": 1824.0,
-      "pct_buffer": 4.1,
+      "pct_buffer": 6.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -7981,7 +7981,7 @@
       "color_toc": "azul",
       "pct_prioridad": "",
       "mts": 12360.0,
-      "pct_buffer": 0.0,
+      "pct_buffer": 2.1,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     },
@@ -7999,7 +7999,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-716.23%",
       "mts": 1991.0,
-      "pct_buffer": 25.0,
+      "pct_buffer": 26.6,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -8017,7 +8017,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-741.23%",
       "mts": 2777.0,
-      "pct_buffer": 12.1,
+      "pct_buffer": 13.8,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -8035,7 +8035,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-1,732.47%",
       "mts": 7210.0,
-      "pct_buffer": 41.3,
+      "pct_buffer": 42.4,
       "en_impresion": true,
       "tiempo_produccion": "Mayor al Standar"
     },
@@ -8053,7 +8053,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-1,982.47%",
       "mts": 2223.0,
-      "pct_buffer": 20.8,
+      "pct_buffer": 22.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -8071,7 +8071,7 @@
       "color_toc": "azul",
       "pct_prioridad": "-941.23%",
       "mts": 1089.0,
-      "pct_buffer": 20.8,
+      "pct_buffer": 22.1,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -8089,7 +8089,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-1,141.23%",
       "mts": 8003.0,
-      "pct_buffer": 65.2,
+      "pct_buffer": 65.7,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -8107,7 +8107,7 @@
       "color_toc": "verde",
       "pct_prioridad": "-1,166.23%",
       "mts": 7648.0,
-      "pct_buffer": 64.9,
+      "pct_buffer": 65.4,
       "en_impresion": true,
       "tiempo_produccion": "Programada"
     },
@@ -8125,16 +8125,16 @@
       "color_toc": "azul",
       "pct_prioridad": "-2,482.47%",
       "mts": 9418.0,
-      "pct_buffer": 1.3,
+      "pct_buffer": 2.6,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
     }
   ],
   "colores_resumen": {
-    "azul": 163,
-    "verde": 44,
-    "amarillo": 36,
-    "rojo": 1,
+    "azul": 135,
+    "verde": 49,
+    "amarillo": 42,
+    "rojo": 18,
     "negro": 12
   },
   "dia_total": 0,
@@ -8193,7 +8193,7 @@
       "tipo": "Blanca",
       "mts": 3108.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-18",
       "promesa_dias": 4,
       "fecha_creacion": "14/07/2026"
@@ -8209,7 +8209,7 @@
       "tipo": "Blanca",
       "mts": 1360.0,
       "familia": "F2",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-14",
       "promesa_dias": 4,
       "fecha_creacion": "09/07/2026"
@@ -8417,7 +8417,7 @@
       "tipo": "Blanca",
       "mts": 913.0,
       "familia": "F1",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-20",
       "promesa_dias": 5,
       "fecha_creacion": "14/07/2026"
@@ -8449,7 +8449,7 @@
       "tipo": "Blanca",
       "mts": 7930.0,
       "familia": "F2",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-13",
       "promesa_dias": 4,
       "fecha_creacion": "08/07/2026"
@@ -8513,7 +8513,7 @@
       "tipo": "Blanca",
       "mts": 8178.0,
       "familia": "F2",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-15",
       "promesa_dias": 4,
       "fecha_creacion": "10/07/2026"
@@ -8529,7 +8529,7 @@
       "tipo": "Blanca",
       "mts": 1781.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-20",
       "promesa_dias": 4,
       "fecha_creacion": "15/07/2026"
@@ -8545,7 +8545,7 @@
       "tipo": "Fondo",
       "mts": 1166.0,
       "familia": "F6",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-21",
       "promesa_dias": 6,
       "fecha_creacion": "14/07/2026"
@@ -8561,7 +8561,7 @@
       "tipo": "Blanca",
       "mts": 1201.0,
       "familia": "F2",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-13",
       "promesa_dias": 4,
       "fecha_creacion": "08/07/2026"
@@ -8673,7 +8673,7 @@
       "tipo": "Blanca",
       "mts": 1061.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-20",
       "promesa_dias": 4,
       "fecha_creacion": "15/07/2026"
@@ -8748,12 +8748,12 @@
       "op": "104622",
       "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
       "referencia": "IC-P60-95X90-R1000-P-1F-C15-FRENTE-CONTRA-LIMP-DESINCRUS-1 LT",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "mts": 1697.0,
       "familia": "F10",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-18",
       "promesa_dias": 9,
       "fecha_creacion": "08/07/2026"
@@ -8977,7 +8977,7 @@
       "tipo": "Blanca",
       "mts": 1401.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-18",
       "promesa_dias": 4,
       "fecha_creacion": "14/07/2026"
@@ -9009,7 +9009,7 @@
       "tipo": "Blanca",
       "mts": 5192.0,
       "familia": "F2",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-13",
       "promesa_dias": 4,
       "fecha_creacion": "08/07/2026"
@@ -9041,7 +9041,7 @@
       "tipo": "Blanca",
       "mts": 2224.0,
       "familia": "F2",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-13",
       "promesa_dias": 4,
       "fecha_creacion": "08/07/2026"
@@ -9057,7 +9057,7 @@
       "tipo": "Impresa",
       "mts": 976.0,
       "familia": "F10",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-11",
       "promesa_dias": 9,
       "fecha_creacion": "01/07/2026"
@@ -9153,7 +9153,7 @@
       "tipo": "Fondo",
       "mts": 1053.0,
       "familia": "F6",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-17",
       "promesa_dias": 6,
       "fecha_creacion": "10/07/2026"
@@ -9185,7 +9185,7 @@
       "tipo": "Fondo",
       "mts": 802.0,
       "familia": "F6",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-20",
       "promesa_dias": 6,
       "fecha_creacion": "13/07/2026"
@@ -9217,7 +9217,7 @@
       "tipo": "Fondo",
       "mts": 368.0,
       "familia": "F6",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-21",
       "promesa_dias": 6,
       "fecha_creacion": "14/07/2026"
@@ -9233,7 +9233,7 @@
       "tipo": "Blanca",
       "mts": 1079.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-20",
       "promesa_dias": 4,
       "fecha_creacion": "15/07/2026"
@@ -9265,7 +9265,7 @@
       "tipo": "Fondo",
       "mts": 1266.0,
       "familia": "F6",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-21",
       "promesa_dias": 6,
       "fecha_creacion": "14/07/2026"
@@ -9345,7 +9345,7 @@
       "tipo": "Blanca",
       "mts": 792.0,
       "familia": "F2",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-14",
       "promesa_dias": 4,
       "fecha_creacion": "09/07/2026"
@@ -9489,7 +9489,7 @@
       "tipo": "Impresa",
       "mts": 1460.0,
       "familia": "F10",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-17",
       "promesa_dias": 9,
       "fecha_creacion": "07/07/2026"
@@ -9505,7 +9505,7 @@
       "tipo": "Impresa",
       "mts": 1460.0,
       "familia": "F9",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-18",
       "promesa_dias": 10,
       "fecha_creacion": "07/07/2026"
@@ -9569,7 +9569,7 @@
       "tipo": "Impresa",
       "mts": 1481.0,
       "familia": "F10",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-18",
       "promesa_dias": 9,
       "fecha_creacion": "08/07/2026"
@@ -9697,7 +9697,7 @@
       "tipo": "Impresa",
       "mts": 713.0,
       "familia": "F10",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -9729,7 +9729,7 @@
       "tipo": "Fondo",
       "mts": 683.0,
       "familia": "F6",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-21",
       "promesa_dias": 6,
       "fecha_creacion": "14/07/2026"
@@ -9841,7 +9841,7 @@
       "tipo": "Impresa",
       "mts": 1062.0,
       "familia": "F10",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -9857,7 +9857,7 @@
       "tipo": "Blanca",
       "mts": 6179.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-17",
       "promesa_dias": 4,
       "fecha_creacion": "13/07/2026"
@@ -9905,7 +9905,7 @@
       "tipo": "Impresa",
       "mts": 495.0,
       "familia": "F9",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-21",
       "promesa_dias": 10,
       "fecha_creacion": "09/07/2026"
@@ -9916,12 +9916,12 @@
       "op": "104694",
       "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
       "referencia": "IC-PPB-90X55-R1000-M-1F-C15-DORS-JAB -LAVAN-ULTR-LIMP-OLIMPICA-1LT",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "mts": 495.0,
       "familia": "F10",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-23",
       "promesa_dias": 9,
       "fecha_creacion": "13/07/2026"
@@ -9937,7 +9937,7 @@
       "tipo": "Otro",
       "mts": 2112.0,
       "familia": "F11",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-22",
       "promesa_dias": 11,
       "fecha_creacion": "09/07/2026"
@@ -9953,7 +9953,7 @@
       "tipo": "Impresa",
       "mts": 1570.0,
       "familia": "F10",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -9969,7 +9969,7 @@
       "tipo": "Impresa",
       "mts": 1570.0,
       "familia": "F10",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -9985,7 +9985,7 @@
       "tipo": "Impresa",
       "mts": 713.0,
       "familia": "F10",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -10001,7 +10001,7 @@
       "tipo": "Blanca",
       "mts": 680.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-20",
       "promesa_dias": 4,
       "fecha_creacion": "15/07/2026"
@@ -10017,7 +10017,7 @@
       "tipo": "Blanca",
       "mts": 1133.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-20",
       "promesa_dias": 4,
       "fecha_creacion": "15/07/2026"
@@ -10033,7 +10033,7 @@
       "tipo": "Impresa",
       "mts": 559.0,
       "familia": "F10",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -10129,7 +10129,7 @@
       "tipo": "Blanca",
       "mts": 5022.0,
       "familia": "F1",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-20",
       "promesa_dias": 5,
       "fecha_creacion": "14/07/2026"
@@ -10305,7 +10305,7 @@
       "tipo": "Impresa",
       "mts": 17994.0,
       "familia": "F10",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -10321,7 +10321,7 @@
       "tipo": "Blanca",
       "mts": 4534.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-17",
       "promesa_dias": 4,
       "fecha_creacion": "13/07/2026"
@@ -10337,7 +10337,7 @@
       "tipo": "Impresa",
       "mts": 2662.0,
       "familia": "F10",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-18",
       "promesa_dias": 9,
       "fecha_creacion": "08/07/2026"
@@ -10353,7 +10353,7 @@
       "tipo": "Impresa",
       "mts": 2662.0,
       "familia": "F10",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-18",
       "promesa_dias": 9,
       "fecha_creacion": "08/07/2026"
@@ -10417,7 +10417,7 @@
       "tipo": "Blanca",
       "mts": 523.0,
       "familia": "F2",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-14",
       "promesa_dias": 4,
       "fecha_creacion": "09/07/2026"
@@ -10433,7 +10433,7 @@
       "tipo": "Fondo",
       "mts": 2172.0,
       "familia": "F6",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-21",
       "promesa_dias": 6,
       "fecha_creacion": "14/07/2026"
@@ -10449,7 +10449,7 @@
       "tipo": "Fondo",
       "mts": 558.0,
       "familia": "F6",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-21",
       "promesa_dias": 6,
       "fecha_creacion": "14/07/2026"
@@ -10513,7 +10513,7 @@
       "tipo": "Fondo",
       "mts": 102.0,
       "familia": "F6",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-21",
       "promesa_dias": 6,
       "fecha_creacion": "14/07/2026"
@@ -10529,7 +10529,7 @@
       "tipo": "Fondo",
       "mts": 228.0,
       "familia": "F6",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-21",
       "promesa_dias": 6,
       "fecha_creacion": "14/07/2026"
@@ -10545,7 +10545,7 @@
       "tipo": "Fondo",
       "mts": 228.0,
       "familia": "F6",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-21",
       "promesa_dias": 6,
       "fecha_creacion": "14/07/2026"
@@ -10577,7 +10577,7 @@
       "tipo": "Impresa",
       "mts": 19791.0,
       "familia": "F6",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-14",
       "promesa_dias": 6,
       "fecha_creacion": "07/07/2026"
@@ -10657,7 +10657,7 @@
       "tipo": "Impresa",
       "mts": 859.0,
       "familia": "F10",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-18",
       "promesa_dias": 9,
       "fecha_creacion": "08/07/2026"
@@ -10849,7 +10849,7 @@
       "tipo": "Impresa",
       "mts": 1538.0,
       "familia": "F10",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-20",
       "promesa_dias": 9,
       "fecha_creacion": "09/07/2026"
@@ -10865,7 +10865,7 @@
       "tipo": "Impresa",
       "mts": 713.0,
       "familia": "F10",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -10881,7 +10881,7 @@
       "tipo": "Impresa",
       "mts": 754.0,
       "familia": "F10",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -10945,7 +10945,7 @@
       "tipo": "Impresa",
       "mts": 830.0,
       "familia": "F10",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-20",
       "promesa_dias": 9,
       "fecha_creacion": "09/07/2026"
@@ -10993,7 +10993,7 @@
       "tipo": "Impresa",
       "mts": 1465.0,
       "familia": "F10",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-20",
       "promesa_dias": 9,
       "fecha_creacion": "09/07/2026"
@@ -11009,7 +11009,7 @@
       "tipo": "Fondo",
       "mts": 958.0,
       "familia": "F6",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-21",
       "promesa_dias": 6,
       "fecha_creacion": "14/07/2026"
@@ -11025,7 +11025,7 @@
       "tipo": "Impresa",
       "mts": 569.0,
       "familia": "F10",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-20",
       "promesa_dias": 9,
       "fecha_creacion": "09/07/2026"
@@ -11041,7 +11041,7 @@
       "tipo": "Impresa",
       "mts": 2829.0,
       "familia": "F10",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -11089,7 +11089,7 @@
       "tipo": "Impresa",
       "mts": 3217.0,
       "familia": "F9",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-20",
       "promesa_dias": 10,
       "fecha_creacion": "08/07/2026"
@@ -11153,7 +11153,7 @@
       "tipo": "Blanca",
       "mts": 898.0,
       "familia": "F2",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-17",
       "promesa_dias": 4,
       "fecha_creacion": "13/07/2026"
@@ -11185,7 +11185,7 @@
       "tipo": "Impresa",
       "mts": 8386.0,
       "familia": "F6",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-14",
       "promesa_dias": 6,
       "fecha_creacion": "07/07/2026"
@@ -11217,7 +11217,7 @@
       "tipo": "Impresa",
       "mts": 21883.0,
       "familia": "F6",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-14",
       "promesa_dias": 6,
       "fecha_creacion": "07/07/2026"
@@ -11233,7 +11233,7 @@
       "tipo": "Impresa",
       "mts": 15491.0,
       "familia": "F6",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-14",
       "promesa_dias": 6,
       "fecha_creacion": "07/07/2026"
@@ -11313,7 +11313,7 @@
       "tipo": "Impresa",
       "mts": 15425.0,
       "familia": "F6",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-14",
       "promesa_dias": 6,
       "fecha_creacion": "07/07/2026"
@@ -11361,7 +11361,7 @@
       "tipo": "Blanca",
       "mts": 103.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-20",
       "promesa_dias": 4,
       "fecha_creacion": "15/07/2026"
@@ -11505,7 +11505,7 @@
       "tipo": "Otro",
       "mts": 1000.0,
       "familia": "F4",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-08",
       "promesa_dias": 2,
       "fecha_creacion": "06/07/2026"
@@ -11521,7 +11521,7 @@
       "tipo": "Impresa",
       "mts": 2829.0,
       "familia": "F10",
-      "color_toc": "amarillo",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-16",
       "promesa_dias": 9,
       "fecha_creacion": "06/07/2026"
@@ -11569,7 +11569,7 @@
       "tipo": "Blanca",
       "mts": 433.0,
       "familia": "F2",
-      "color_toc": "azul",
+      "color_toc": "verde",
       "fecha_std": "2026-07-20",
       "promesa_dias": 4,
       "fecha_creacion": "15/07/2026"
@@ -11633,7 +11633,7 @@
       "tipo": "Fondo",
       "mts": 249.0,
       "familia": "F5",
-      "color_toc": "verde",
+      "color_toc": "amarillo",
       "fecha_std": "2026-07-17",
       "promesa_dias": 7,
       "fecha_creacion": "09/07/2026"
@@ -12270,7 +12270,7 @@
   ],
   "std_data": {
     "Nilpeter 1": {
-      "2026-07-23": 27630.0,
+      "2026-07-23": 27135.0,
       "2026-07-07": 840.0,
       "2026-07-10": 10715.0,
       "2026-07-27": 28999.0,
@@ -12292,10 +12292,10 @@
       "2026-07-10": 9945.0,
       "2026-07-23": 2242.0,
       "2026-07-27": 8515.0,
-      "2026-07-18": 8502.0,
       "2026-07-25": 6350.0,
       "2026-07-28": 4624.0,
       "2026-07-13": 33257.0,
+      "2026-07-18": 6805.0,
       "2026-07-16": 713.0,
       "2026-07-20": 10027.0,
       "2026-07-24": 10067.0,
@@ -12340,9 +12340,9 @@
     "Nilpeter 1": {
       "mts_atrasados": 0,
       "n_atrasadas": 0,
-      "mts_pendientes": 230269,
-      "n_pendientes": 66,
-      "mts_total": 230269,
+      "mts_pendientes": 229774,
+      "n_pendientes": 65,
+      "mts_total": 229774,
       "turnos_atrasados": 0.0,
       "dias_atrasados": 0.0,
       "cap_turno": 7962,
@@ -12350,47 +12350,47 @@
         {
           "dias": 3,
           "turnos": 9,
-          "mts_por_turno": 25585,
-          "vel_req": 112.5,
-          "efic_req": 160.7,
+          "mts_por_turno": 25530,
+          "vel_req": 112.2,
+          "efic_req": 160.3,
           "vel_comb": 42.0,
-          "efic_comb": 133.9
+          "efic_comb": 133.6
         },
         {
           "dias": 5,
           "turnos": 15,
-          "mts_por_turno": 15351,
-          "vel_req": 67.5,
-          "efic_req": 96.4,
+          "mts_por_turno": 15318,
+          "vel_req": 67.3,
+          "efic_req": 96.2,
           "vel_comb": 42.0,
-          "efic_comb": 80.3
+          "efic_comb": 80.2
         },
         {
           "dias": 7,
           "turnos": 21,
-          "mts_por_turno": 10965,
-          "vel_req": 48.2,
-          "efic_req": 68.9,
+          "mts_por_turno": 10942,
+          "vel_req": 48.1,
+          "efic_req": 68.7,
           "vel_comb": 42.0,
-          "efic_comb": 57.4
+          "efic_comb": 57.3
         },
         {
           "dias": 10,
           "turnos": 30,
-          "mts_por_turno": 7676,
+          "mts_por_turno": 7659,
           "vel_req": 33.7,
-          "efic_req": 48.2,
+          "efic_req": 48.1,
           "vel_comb": 33.7,
-          "efic_comb": 50.1
+          "efic_comb": 49.9
         }
       ]
     },
     "Nilpeter 2": {
       "mts_atrasados": 0,
       "n_atrasadas": 0,
-      "mts_pendientes": 99448,
-      "n_pendientes": 43,
-      "mts_total": 99448,
+      "mts_pendientes": 97751,
+      "n_pendientes": 42,
+      "mts_total": 97751,
       "turnos_atrasados": 0.0,
       "dias_atrasados": 0.0,
       "cap_turno": 7962,
@@ -12398,38 +12398,38 @@
         {
           "dias": 3,
           "turnos": 9,
-          "mts_por_turno": 11050,
-          "vel_req": 48.6,
-          "efic_req": 69.4,
+          "mts_por_turno": 10861,
+          "vel_req": 47.7,
+          "efic_req": 68.2,
           "vel_comb": 42.0,
-          "efic_comb": 57.8
+          "efic_comb": 56.8
         },
         {
           "dias": 5,
           "turnos": 15,
-          "mts_por_turno": 6630,
-          "vel_req": 29.1,
-          "efic_req": 41.6,
-          "vel_comb": 29.1,
+          "mts_por_turno": 6517,
+          "vel_req": 28.6,
+          "efic_req": 40.9,
+          "vel_comb": 28.6,
           "efic_comb": 50.1
         },
         {
           "dias": 7,
           "turnos": 21,
-          "mts_por_turno": 4736,
-          "vel_req": 20.8,
-          "efic_req": 29.7,
-          "vel_comb": 20.8,
-          "efic_comb": 50.0
+          "mts_por_turno": 4655,
+          "vel_req": 20.5,
+          "efic_req": 29.2,
+          "vel_comb": 20.5,
+          "efic_comb": 49.9
         },
         {
           "dias": 10,
           "turnos": 30,
-          "mts_por_turno": 3315,
-          "vel_req": 14.6,
-          "efic_req": 20.8,
-          "vel_comb": 14.6,
-          "efic_comb": 49.9
+          "mts_por_turno": 3258,
+          "vel_req": 14.3,
+          "efic_req": 20.5,
+          "vel_comb": 14.3,
+          "efic_comb": 50.1
         }
       ]
     },
@@ -12485,9 +12485,9 @@
   "cuellos": {
     "NP1": {
       "capacidad_dia": 23100,
-      "mts_total": 230269,
-      "dias_trabajo": 10.0,
-      "pct_cap": 49.8,
+      "mts_total": 229774,
+      "dias_trabajo": 9.9,
+      "pct_cap": 49.7,
       "ordenes": [
         {
           "op": "104763",
@@ -12503,7 +12503,7 @@
           "cliente": "FLEISCHMANN FOODS SA",
           "mts": 976.0,
           "fecha": "04/08/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -12580,20 +12580,11 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104694",
-          "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-          "mts": 495.0,
-          "fecha": "23/07/2026",
-          "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
           "op": "104619",
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 859.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -12602,7 +12593,7 @@
           "cliente": "LABORATORIOS GOTHAPLAST LTDA",
           "mts": 1538.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -12611,7 +12602,7 @@
           "cliente": "LABORATORIOS GOTHAPLAST LTDA",
           "mts": 830.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -12881,7 +12872,7 @@
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 1570.0,
           "fecha": "30/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -12890,7 +12881,7 @@
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 559.0,
           "fecha": "30/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13085,7 +13076,7 @@
         }
       ],
       "es_cuello": false,
-      "fecha_prometida": "30/07/2026",
+      "fecha_prometida": "29/07/2026",
       "carga_por_fecha": {
         "03/09/2026": {
           "mts": 1824.0,
@@ -13112,8 +13103,8 @@
           "ordenes": 3
         },
         "23/07/2026": {
-          "mts": 3722.0,
-          "ordenes": 4
+          "mts": 3227.0,
+          "ordenes": 3
         },
         "24/07/2026": {
           "mts": 6794.0,
@@ -13155,9 +13146,9 @@
     },
     "NP2": {
       "capacidad_dia": 23100,
-      "mts_total": 99448,
-      "dias_trabajo": 4.3,
-      "pct_cap": 21.5,
+      "mts_total": 97751,
+      "dias_trabajo": 4.2,
+      "pct_cap": 21.2,
       "ordenes": [
         {
           "op": "104308",
@@ -13259,20 +13250,11 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104622",
-          "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
-          "mts": 1697.0,
-          "fecha": "23/07/2026",
-          "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
           "op": "104576",
           "cliente": "RIMOPLASTICAS S.A.S",
           "mts": 1481.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13290,7 +13272,7 @@
           "cliente": "RIMOPLASTICAS S.A.S",
           "mts": 2662.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13299,7 +13281,7 @@
           "cliente": "RIMOPLASTICAS S.A.S",
           "mts": 2662.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13308,7 +13290,7 @@
           "cliente": "MERCICO SAS",
           "mts": 3217.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13579,8 +13561,8 @@
           "ordenes": 3
         },
         "23/07/2026": {
-          "mts": 21389.0,
-          "ordenes": 9
+          "mts": 19692.0,
+          "ordenes": 8
         },
         "24/07/2026": {
           "mts": 4290.0,
@@ -13659,7 +13641,7 @@
           "cliente": "LAMINATE PACKAGING COLOMBIA SAS (ESSEL COLOMBIA SAS)",
           "mts": 1460.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13677,7 +13659,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1166.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -13686,7 +13668,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1053.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -13695,7 +13677,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1266.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -13704,7 +13686,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 683.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -13713,7 +13695,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 558.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -13749,7 +13731,7 @@
           "cliente": "FLOW CHEM SAS",
           "mts": 249.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -13758,7 +13740,7 @@
           "cliente": "QUALA S A",
           "mts": 19791.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13776,7 +13758,7 @@
           "cliente": "LABORATORIOS GOTHAPLAST LTDA",
           "mts": 1465.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13785,7 +13767,7 @@
           "cliente": "LABORATORIOS GOTHAPLAST LTDA",
           "mts": 569.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13803,7 +13785,7 @@
           "cliente": "QUALA S A",
           "mts": 21883.0,
           "fecha": "24/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13812,7 +13794,7 @@
           "cliente": "QUALA S A",
           "mts": 15491.0,
           "fecha": "24/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13821,7 +13803,7 @@
           "cliente": "QUALA S A",
           "mts": 15425.0,
           "fecha": "24/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -13866,7 +13848,7 @@
           "cliente": "COMPAÑÍA GLOBAL DE PINTURAS S.A.",
           "mts": 2112.0,
           "fecha": "27/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Otro",
           "etapa": "Preparacion"
         },
@@ -14061,7 +14043,7 @@
           "cliente": "SCHOTT ENVASES FARMACEUTICOS SAS",
           "mts": 3108.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "RM4 - Reboninado"
         },
@@ -14070,7 +14052,7 @@
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 1062.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -14079,7 +14061,7 @@
           "cliente": "LABORATORIOS NUTRIPHARMA",
           "mts": 713.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -14088,7 +14070,7 @@
           "cliente": "LABORATORIOS NUTRIPHARMA",
           "mts": 754.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -14097,7 +14079,7 @@
           "cliente": "RAINFOREST FARMS & BOUQUETS COMERCIALIZADORA INTARNACIONAL S.A.S",
           "mts": 2829.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -14106,7 +14088,7 @@
           "cliente": "CODITEQ",
           "mts": 1000.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Otro",
           "etapa": "Preparacion"
         },
@@ -14115,7 +14097,7 @@
           "cliente": "RAINFOREST FARMS & BOUQUETS COMERCIALIZADORA INTARNACIONAL S.A.S",
           "mts": 2829.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -14124,7 +14106,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 683.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -14142,7 +14124,7 @@
           "cliente": "FLOW CHEM SAS",
           "mts": 249.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -14151,7 +14133,7 @@
           "cliente": "LABORATORIOS GOTHAPLAST LTDA",
           "mts": 830.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -14160,7 +14142,7 @@
           "cliente": "LABORATORIOS GOTHAPLAST LTDA",
           "mts": 1465.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -14187,7 +14169,7 @@
           "cliente": "QUALA S A",
           "mts": 21883.0,
           "fecha": "24/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -14232,7 +14214,7 @@
           "cliente": "COMPAÑÍA GLOBAL DE PINTURAS S.A.",
           "mts": 2112.0,
           "fecha": "27/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Otro",
           "etapa": "Preparacion"
         },
@@ -14455,7 +14437,7 @@
           "cliente": "LAMINATE PACKAGING COLOMBIA SAS (ESSEL COLOMBIA SAS)",
           "mts": 1460.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -14482,7 +14464,7 @@
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 495.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -14509,7 +14491,7 @@
           "cliente": "QUALA S A",
           "mts": 15491.0,
           "fecha": "24/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -14608,7 +14590,7 @@
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 1570.0,
           "fecha": "30/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -14744,7 +14726,7 @@
           "cliente": "FLEISCHMANN FOODS SA",
           "mts": 976.0,
           "fecha": "04/08/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -14798,7 +14780,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1401.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -14807,7 +14789,7 @@
           "cliente": "LABORATORIOS NUTRIPHARMA",
           "mts": 713.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -14816,7 +14798,7 @@
           "cliente": "LABORATORIOS NUTRIPHARMA",
           "mts": 713.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -14825,7 +14807,7 @@
           "cliente": "INSTINCTS HUMAINS SAS",
           "mts": 17994.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -14852,7 +14834,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 368.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "RM4 - Reboninado"
         },
@@ -14861,7 +14843,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1266.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -14906,16 +14888,16 @@
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 495.0,
           "fecha": "23/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104619",
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 859.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -14924,7 +14906,7 @@
           "cliente": "LABORATORIOS GOTHAPLAST LTDA",
           "mts": 569.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -15239,7 +15221,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1166.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -15248,7 +15230,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1053.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -15257,7 +15239,7 @@
           "cliente": "ILUMINATA S.A",
           "mts": 4534.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -15275,9 +15257,9 @@
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 1697.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104657",
@@ -15302,7 +15284,7 @@
           "cliente": "QUALA S A",
           "mts": 15425.0,
           "fecha": "24/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -15437,7 +15419,7 @@
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 559.0,
           "fecha": "30/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -15605,7 +15587,7 @@
           "cliente": "LAMINATE PACKAGING COLOMBIA SAS (ESSEL COLOMBIA SAS)",
           "mts": 1460.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -15614,7 +15596,7 @@
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 1570.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -15623,7 +15605,7 @@
           "cliente": "HOKO COLOMBIA S.A.S",
           "mts": 898.0,
           "fecha": "21/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -15632,7 +15614,7 @@
           "cliente": "QUALA S A",
           "mts": 8386.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "RM4 - Reboninado"
         },
@@ -15650,7 +15632,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 523.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -15659,7 +15641,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 2172.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Troquelado"
         },
@@ -15668,7 +15650,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 102.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Troquelado"
         },
@@ -15677,7 +15659,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 228.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Troquelado"
         },
@@ -15686,7 +15668,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 228.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Troquelado"
         },
@@ -15704,7 +15686,7 @@
           "cliente": "QUALA S A",
           "mts": 19791.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -15713,7 +15695,7 @@
           "cliente": "LABORATORIOS GOTHAPLAST LTDA",
           "mts": 1538.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -15994,7 +15976,7 @@
           "cliente": "COLCAFE SAS",
           "mts": 913.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16003,7 +15985,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1781.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16012,7 +15994,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1061.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16021,7 +16003,7 @@
           "cliente": "COMPAÑÍA GLOBAL DE PINTURAS S.A.",
           "mts": 5192.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16030,7 +16012,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1360.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16217,7 +16199,7 @@
           "cliente": "STERINOVA SAS",
           "mts": 2224.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16226,7 +16208,7 @@
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 802.0,
           "fecha": "21/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Fondo",
           "etapa": "Troquelado"
         },
@@ -16235,7 +16217,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1079.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16262,7 +16244,7 @@
           "cliente": "KOYOMAD SAS",
           "mts": 8178.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16271,7 +16253,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 792.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16280,7 +16262,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 558.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -16289,7 +16271,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 958.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Troquelado"
         },
@@ -16325,7 +16307,7 @@
           "cliente": "BUSCALIBRE COLOMBIA",
           "mts": 6179.0,
           "fecha": "23/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16418,7 +16400,7 @@
           "cliente": "COMPAÑÍA GLOBAL DE PINTURAS S.A.",
           "mts": 7930.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16427,7 +16409,7 @@
           "cliente": "BEST FARMS SAS",
           "mts": 1201.0,
           "fecha": "21/07/2026",
-          "color": "amarillo",
+          "color": "rojo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16436,7 +16418,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 680.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16445,7 +16427,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1133.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16454,7 +16436,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 5022.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16472,7 +16454,7 @@
           "cliente": "FABRIASEO SAS  - SOGAMOSO",
           "mts": 103.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16481,7 +16463,7 @@
           "cliente": "INDUTRIAS MASTERPLAST SAS",
           "mts": 433.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16746,7 +16728,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 1401.0,
           "fecha": "21/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16755,7 +16737,7 @@
           "cliente": "HOKO COLOMBIA S.A.S",
           "mts": 898.0,
           "fecha": "21/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16782,7 +16764,7 @@
           "cliente": "ILUMINATA S.A",
           "mts": 4534.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16791,7 +16773,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 523.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Blanca",
           "etapa": "Preparacion"
         },
@@ -16800,7 +16782,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 102.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Troquelado"
         },
@@ -16809,7 +16791,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 228.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Troquelado"
         },
@@ -16818,7 +16800,7 @@
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
           "mts": 228.0,
           "fecha": "22/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Fondo",
           "etapa": "Troquelado"
         },
@@ -16845,7 +16827,7 @@
           "cliente": "FLOW CHEM SAS",
           "mts": 249.0,
           "fecha": "22/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
@@ -16872,7 +16854,7 @@
           "cliente": "MERCICO SAS",
           "mts": 3217.0,
           "fecha": "23/07/2026",
-          "color": "verde",
+          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -16962,7 +16944,7 @@
           "cliente": "COMPAÑÍA GLOBAL DE PINTURAS S.A.",
           "mts": 2112.0,
           "fecha": "27/07/2026",
-          "color": "azul",
+          "color": "verde",
           "tipo": "Otro",
           "etapa": "Preparacion"
         },
@@ -17119,7 +17101,7 @@
         }
       ],
       "es_cuello": false,
-      "fecha_prometida": "18/07/2026",
+      "fecha_prometida": "19/07/2026",
       "carga_por_fecha": {
         "04/08/2026": {
           "mts": 6562.0,
@@ -17137,7 +17119,7 @@
       "capacidad_dia": 23888,
       "por_fecha": {
         "2026-07-22": 16000.0,
-        "2026-07-23": 3722.0,
+        "2026-07-23": 3227.0,
         "2026-07-24": 6794.0,
         "2026-07-27": 38091.0,
         "2026-07-28": 5311.0,
@@ -17158,7 +17140,7 @@
       "capacidad_dia": 23888,
       "por_fecha": {
         "2026-07-22": 4411.0,
-        "2026-07-23": 21389.0,
+        "2026-07-23": 19692.0,
         "2026-07-24": 4290.0,
         "2026-07-27": 4521.0,
         "2026-07-28": 816.0,
@@ -17237,9 +17219,9 @@
           "estado": "ok"
         },
         "2026-07-23": {
-          "planeado": 3722.0,
+          "planeado": 3227.0,
           "capacidad": 23888,
-          "pct": 15.6,
+          "pct": 13.5,
           "estado": "ok"
         },
         "2026-07-24": {
@@ -17272,9 +17254,9 @@
           "estado": "ok"
         },
         "2026-07-23": {
-          "planeado": 21389.0,
+          "planeado": 19692.0,
           "capacidad": 23888,
-          "pct": 89.5,
+          "pct": 82.4,
           "estado": "ok"
         },
         "2026-07-24": {
