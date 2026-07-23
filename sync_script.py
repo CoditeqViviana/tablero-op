@@ -826,6 +826,40 @@ def fetch_and_process():
                       f"hab={_es_habilitado(p.get(PROD['entrega_prod'], ''))} | "
                       f"created={p.get(PROD['fecha_creacion'], '')}")
 
+    # --- DEBUG TEMPORAL: volcado completo de las 6 referencias problematicas
+    # con campos candidatos de desempate cuando Produccion/OP se crean casi
+    # simultaneamente (mismo lote/batch, diferencia de segundos) y la cercania
+    # de tiempo ya no alcanza para distinguir cual va con cual.
+    _refs_batch = {
+        'IC-PPT-88X120-R2000-M-1F-C30-ELEMENTZ-3N1-COCONUT-HAIR-BODY-WASH-443ML',
+        'BL-PPB-110X80-R2000-S-1F-C30-CORTE-ESPECIAL-SUPERF',
+        'IC-ESM-95X220-R1500-S-1F-C30-ESEN-FLEISCH-VAINILLA-OSCURA-500ml-COLOMBIA',
+        'IC-TTT-70X42-R5000-M-1F-C30-ETQ-CUCHILLA-BELLOTA',
+        'IC-TTT-70X32-R10000-M-1F-C30-MACHE-GENER-MAX-RESIST',
+        'IC-P60-100X245-R500-P-1F-C15-ETQ-LAV-LIQ-ANTBAC-LIM-ALKS-X-3,7L',
+    }
+    for ref_b in sorted(_refs_batch):
+        prods_b = [p for p in producciones if p.get(PROD['referencia'], '').strip() == ref_b]
+        # Solo mostrar las mas recientes (2026) para no saturar el log
+        prods_b = [p for p in prods_b if str(p.get(PROD['fecha_creacion'], '')).startswith('2026')]
+        print(f"[DEBUG-BATCH-PROD] '{ref_b}': {len(prods_b)} Producciones 2026:")
+        for p in sorted(prods_b, key=lambda x: str(x.get(PROD['fecha_creacion'], ''))):
+            print(f"[DEBUG-BATCH-PROD]   NUMERO={p.get('vtcmproduccionnumber')} | id={p.get('id')} | "
+                  f"created={p.get(PROD['fecha_creacion'],'')} | "
+                  f"entrega_prod={repr(p.get(PROD['entrega_prod'],''))} | "
+                  f"repeticiones={p.get('cf_vtcmproduccion_repeticionesproduccin','')} | "
+                  f"noprod_anterior={p.get('cf_vtcmproduccion_noproduccionanterior','')} | "
+                  f"noorden_anterior={p.get('cf_vtcmproduccion_noordendeproduccionanterior','')}")
+        ops_b = op_groups.get(ref_b, [])
+        ops_b = [o for o in ops_b if str(o.get('createdtime', '')).startswith('2026')]
+        print(f"[DEBUG-BATCH-OP] '{ref_b}': {len(ops_b)} OPs 2026:")
+        for o in sorted(ops_b, key=lambda x: str(x.get('createdtime', ''))):
+            print(f"[DEBUG-BATCH-OP]   number={o.get(OP['number'])} | id={o.get('id')} | "
+                  f"created={o.get('createdtime','')} | "
+                  f"repeticiones={o.get('cf_vtcmordendeproduccion_repeticiones','')} | "
+                  f"numprod_anterior={o.get('cf_vtcmordendeproduccion_numeroproduccionanterior','')} | "
+                  f"noprod_anterior={o.get('cf_vtcmordendeproduccion_noproduccionanterior','')}")
+
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
     days_until_monday = (7 - today.weekday()) % 7
