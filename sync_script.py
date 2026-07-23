@@ -93,10 +93,18 @@ def get_color_toc(fecha_creacion, fecha_entrega, today):
         return 'negro'
     if pd.isna(fecha_creacion):
         return 'rojo'
-    duracion = (fecha_entrega - fecha_creacion).days
+    # Normalizar a solo-fecha (medianoche) antes de restar: fecha_creacion
+    # trae hora (ej. "23-05-2026 05:09 PM") mientras fecha_entrega/today son
+    # solo fecha -- restar un datetime con hora contra uno sin hora trunca el
+    # resultado de .days 1 dia menos del real (bug reportado: columnas Dias/
+    # Color del tablero sistematicamente "menos 1" dia).
+    fc_norm = fecha_creacion.normalize()
+    fe_norm = fecha_entrega.normalize()
+    today_norm = today.normalize()
+    duracion = (fe_norm - fc_norm).days
     if duracion <= 0:
         return 'rojo'
-    consumido = (today - fecha_creacion).days
+    consumido = (today_norm - fc_norm).days
     pct = consumido / duracion
     if pct <= 0.50:
         return 'azul'
@@ -608,35 +616,36 @@ def fetch_and_process():
     _VTIGER_250 = {
         '101366', '101372', '103460', '103480', '103481', '103524', '103548', '103550', '103860', '103861',
         '103883', '104095', '104097', '104098', '104210', '104223', '104264', '104306', '104307', '104308',
-        '104310', '104311', '104324', '104326', '104334', '104346', '104349', '104350', '104352', '104353',
-        '104354', '104378', '104379', '104391', '104393', '104394', '104404', '104411', '104430', '104431',
-        '104432', '104433', '104434', '104435', '104436', '104438', '104439', '104440', '104441', '104444',
-        '104445', '104446', '104447', '104448', '104449', '104450', '104452', '104453', '104457', '104458',
-        '104478', '104479', '104484', '104485', '104486', '104487', '104488', '104489', '104490', '104491',
-        '104492', '104493', '104509', '104510', '104513', '104516', '104521', '104526', '104543', '104545',
-        '104547', '104548', '104549', '104550', '104551', '104552', '104553', '104554', '104555', '104556',
-        '104557', '104563', '104564', '104566', '104568', '104569', '104570', '104572', '104573', '104575',
-        '104576', '104578', '104579', '104580', '104584', '104586', '104588', '104590', '104591', '104592',
-        '104594', '104595', '104596', '104597', '104598', '104600', '104604', '104605', '104606', '104608',
-        '104609', '104617', '104619', '104620', '104621', '104622', '104623', '104628', '104630', '104632',
-        '104635', '104637', '104638', '104639', '104648', '104650', '104651', '104654', '104655', '104657',
-        '104658', '104660', '104661', '104662', '104663', '104664', '104665', '104666', '104667', '104668',
-        '104669', '104670', '104671', '104673', '104674', '104675', '104676', '104677', '104678', '104679',
-        '104680', '104681', '104682', '104683', '104684', '104685', '104686', '104687', '104688', '104689',
-        '104690', '104691', '104692', '104693', '104694', '104695', '104696', '104698', '104699', '104700',
-        '104701', '104702', '104703', '104704', '104705', '104708', '104709', '104711', '104712', '104713',
-        '104714', '104715', '104716', '104718', '104719', '104720', '104721', '104722', '104723', '104724',
-        '104725', '104726', '104727', '104728', '104729', '104730', '104731', '104732', '104733', '104734',
-        '104735', '104736', '104737', '104738', '104739', '104740', '104741', '104742', '104743', '104744',
-        '104745', '104746', '104747', '104748', '104749', '104750', '104751', '104752', '104753', '104754',
-        '104755', '104756', '104757', '104758', '104759', '104760', '104761', '104762', '104763', '104764',
-        '104765', '104766', '104767', '104768', '104769', '104770', '104771', '104772', '104773', '104774',
-        '104775', '104776', '104777', '104778', '104779', '104780', '104781', '104782', '104783', '104784',
-        '104785', '104786', '104787', '104788', '104789', '104790', '104791', '104792', '104793', '104794',
-        '104795', '104796', '104797', '104798', '104799', '104800', '104801', '104802', '104803', '104804',
-        '104805', '104806', '104807', '104808', '104809', '104810', '104811', '104812', '104813', '104814',
-        '104815', '104816', '104817', '104818', '104819', '104820', '104821', '104822', '104823', '104824',
-        '104825', '104826', '104827', '104828', '104829', '104830', '104831',
+        '104310', '104311', '104324', '104326', '104346', '104349', '104350', '104352', '104353', '104354',
+        '104393', '104394', '104431', '104436', '104439', '104440', '104441', '104449', '104450', '104478',
+        '104486', '104487', '104488', '104489', '104490', '104491', '104492', '104509', '104510', '104516',
+        '104575', '104576', '104578', '104592', '104594', '104605', '104608', '104619', '104621', '104622',
+        '104623', '104637', '104638', '104639', '104648', '104650', '104657', '104658', '104660', '104661',
+        '104663', '104666', '104668', '104670', '104679', '104681', '104683', '104685', '104686', '104687',
+        '104689', '104690', '104691', '104692', '104693', '104695', '104696', '104699', '104700', '104701',
+        '104711', '104712', '104713', '104714', '104715', '104716', '104719', '104721', '104726', '104734',
+        '104735', '104736', '104737', '104738', '104739', '104740', '104743', '104744', '104745', '104746',
+        '104747', '104748', '104749', '104750', '104751', '104752', '104753', '104754', '104755', '104756',
+        '104757', '104758', '104759', '104760', '104762', '104763', '104764', '104766', '104767', '104768',
+        '104769', '104771', '104774', '104775', '104776', '104777', '104778', '104779', '104780', '104781',
+        '104782', '104783', '104784', '104785', '104790', '104791', '104792', '104793', '104794', '104795',
+        '104796', '104797', '104798', '104799', '104800', '104801', '104802', '104803', '104804', '104805',
+        '104806', '104807', '104808', '104809', '104810', '104811', '104812', '104813', '104814', '104815',
+        '104816', '104817', '104818', '104820', '104821', '104822', '104823', '104824', '104825', '104826',
+        '104827', '104828', '104829', '104830', '104831', '104832', '104835', '104836', '104837', '104838',
+        '104839', '104840', '104841', '104842', '104843', '104844', '104845', '104846', '104847', '104848',
+        '104849', '104850', '104851', '104852', '104853', '104854', '104855', '104856', '104857', '104858',
+        '104859', '104860', '104861', '104862', '104863', '104864', '104865', '104866', '104867', '104868',
+        '104869', '104870', '104871', '104872', '104873', '104874', '104875', '104876', '104877', '104878',
+        '104879', '104880', '104881', '104882', '104883', '104884', '104885', '104886', '104887', '104888',
+        '104889', '104890', '104891', '104892', '104893', '104894', '104895', '104896', '104897', '104898',
+        '104899', '104900', '104901', '104902', '104903', '104904', '104905', '104906', '104907', '104908',
+        '104909', '104910', '104911', '104912', '104913', '104914', '104915', '104916', '104917', '104918',
+        '104919', '104920', '104921', '104922', '104923', '104924', '104925', '104926', '104927', '104928',
+        '104929', '104930', '104931', '104932', '104933', '104934', '104935', '104936', '104937', '104938',
+        '104939', '104940', '104941', '104942', '104943', '104944', '104945', '104946', '104947', '104948',
+        '104950', '104951', '104952', '104953', '104954', '104955', '104956', '104957', '104958', '104959',
+        '104960', '104961', '104962', '104963', '104964', '104965', '104966', '104967', '104968', '104969',
     }
     _faltantes = sorted(_VTIGER_250 - _post_f3_numbers)
     print(f"[sync] DIAGNOSTICO vs Vtiger: {len(_VTIGER_250)} esperadas, "
@@ -761,7 +770,7 @@ def fetch_and_process():
           f"fecha_entrega NaT={_nat_fe_df}/{len(df)}")
     print(f"[DEBUG-TAMBOR-FECHAS] df_tambor: fecha_creacion NaT={_nat_fc_tb}/{len(df_tambor)} | "
           f"fecha_entrega NaT={_nat_fe_tb}/{len(df_tambor)}")
-    _dias_tb = (df_tambor['fecha_entrega'] - df_tambor['fecha_creacion']).dt.days
+    _dias_tb = (df_tambor['fecha_entrega'].dt.normalize() - df_tambor['fecha_creacion'].dt.normalize()).dt.days
     _dias_positivos = (_dias_tb > 0).sum()
     print(f"[DEBUG-TAMBOR-FECHAS] df_tambor: filas con dias_ofrecidos>0: "
           f"{_dias_positivos}/{len(df_tambor)}")
@@ -777,6 +786,45 @@ def fetch_and_process():
           f"{len(_VTIGER_250 & _tambor_numbers)} presentes, {len(_tambor_faltantes)} faltantes")
     if _tambor_faltantes:
         print(f"[sync] Aun faltan en Tambor: {_tambor_faltantes}")
+
+    # --- DEBUG TEMPORAL: traza de las OPs reportadas en Tambor General ---
+    # "Deberian estar" (con su NP correcta segun Vtiger, confirmada por el
+    # usuario) y "No deberian estar" (actualmente mal, sin NP confirmada).
+    _casos_deberian_estar = {
+        '103460': 'NP106568', '103548': 'NP106652', '103524': 'NP106655',
+        '104098': 'NP107360', '104095': 'NP107362', '104431': 'NP107734',
+    }
+    _casos_no_deberian_estar = {'103461', '104100', '103525', '103549', '104096', '104434'}
+    _todos_casos = set(_casos_deberian_estar.keys()) | _casos_no_deberian_estar
+
+    for op_c in sorted(_todos_casos):
+        etiqueta = f"DEBERIA ({_casos_deberian_estar[op_c]})" if op_c in _casos_deberian_estar else "NO DEBERIA"
+        match_row = next((r for r in _rows_all_matched if _norm_op(r.get('op_number', '')) == op_c), None)
+        en_tambor = op_c in _tambor_numbers
+        if match_row:
+            prod_id = match_row.get('prod_id')
+            np_match = next((p.get('vtcmproduccionnumber') for p in producciones if p.get('id') == prod_id), '?')
+            print(f"[DEBUG-TAMBORCASO] OP {op_c} [{etiqueta}]: emparejada con {np_match} (id={prod_id}) | "
+                  f"entrega_prod={repr(match_row.get('entrega_prod_raw'))} | "
+                  f"hab={_es_habilitado(match_row.get('entrega_prod_raw'))} | "
+                  f"prod_created={match_row.get('prod_createdtime')} | op_created={match_row.get('op_createdtime')} | "
+                  f"referencia={match_row.get('referencia')} | EN_TAMBOR={en_tambor}")
+        else:
+            razon = ("NO existe en Ordenes" if op_c not in _raw_op_numbers else
+                      "excluida por Proceso vacio" if op_c not in _op_groups_numbers else
+                      "no emparejada 1:1")
+            print(f"[DEBUG-TAMBORCASO] OP {op_c} [{etiqueta}]: SIN match -- {razon} | EN_TAMBOR={en_tambor}")
+
+    # Volcado de la NP esperada (para las 6 que "deberian estar") con su
+    # estado real: confirmar si esta habilitada o no
+    for op_c, np_esperada in _casos_deberian_estar.items():
+        for p in producciones:
+            if p.get('vtcmproduccionnumber') == np_esperada:
+                print(f"[DEBUG-TAMBORCASO-NP] {np_esperada} (esperada para OP {op_c}) | id={p.get('id')} | "
+                      f"referencia={repr(p.get(PROD['referencia'], ''))} | "
+                      f"entrega_prod={repr(p.get(PROD['entrega_prod'], ''))} | "
+                      f"hab={_es_habilitado(p.get(PROD['entrega_prod'], ''))} | "
+                      f"created={p.get(PROD['fecha_creacion'], '')}")
 
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
@@ -990,12 +1038,25 @@ def fetch_and_process():
         color_toc = get_color_toc(fc_ord, fe, today)
         etapa_str = str(row['etapa']).strip()
         if pd.notna(fe) and pd.notna(fc_ord):
-            dur = (fe - fc_ord).days
-            pct_buf = round((today - fc_ord).days / dur * 100, 1) if dur > 0 else 0
+            # Normalizar a solo-fecha antes de restar (ver comentario en
+            # get_color_toc): fc_ord trae hora, fe/today son solo fecha.
+            _fc_n, _fe_n, _today_n = fc_ord.normalize(), fe.normalize(), today.normalize()
+            dur = (_fe_n - _fc_n).days
+            pct_buf = round((_today_n - _fc_n).days / dur * 100, 1) if dur > 0 else 0
         else:
             pct_buf = 0
-        op_key = str(row['op_number']).strip().rstrip('.0')
+        op_key = _norm_op(row['op_number'])
         prio_info = prioridad_map.get(op_key, {})
+        if not prio_info:
+            # Fallback de compatibilidad: liberacion.json pudo guardarse con
+            # la clave corrupta por un bug historico en app.py (.rstrip('.0')
+            # recorta caracteres, no el sufijo -- '104100' quedaba '1041').
+            # Se prueba tambien esa variante para no perder prioridades ya
+            # cargadas mientras no se resuba liberacion.json con la clave
+            # correcta (ver fix pendiente en app.py: upload_liberacion()).
+            _op_legacy = str(row['op_number']).strip().rstrip('.0')
+            if _op_legacy != op_key:
+                prio_info = prioridad_map.get(_op_legacy, {})
         pct_prio = prio_info.get('pct', '') if prio_info else ''
         tprod = row.get('tiempo_prod', '')
 
@@ -1006,7 +1067,7 @@ def fetch_and_process():
             'fecha_entrega': fe.strftime('%d/%m/%Y') if pd.notna(fe) else '',
             'fecha_entrega_raw': fe.strftime('%Y-%m-%d') if pd.notna(fe) else '',
             'fecha_creacion': fc_ord.strftime('%d/%m/%Y') if pd.notna(fc_ord) else '',
-            'dias_ofrecidos': int((fe - fc_ord).days) if pd.notna(fe) and pd.notna(fc_ord) else 0,
+            'dias_ofrecidos': int(dur) if pd.notna(fe) and pd.notna(fc_ord) else 0,
             'color_toc': color_toc, 'pct_prioridad': pct_prio, 'mts': float(row['mts']),
             'pct_buffer': pct_buf,
             'en_impresion': etapa_str in ETAPAS_IMP_STD,
