@@ -847,18 +847,19 @@ def fetch_and_process():
             print(f"[DEBUG-BATCH-PROD]   NUMERO={p.get('vtcmproduccionnumber')} | id={p.get('id')} | "
                   f"created={p.get(PROD['fecha_creacion'],'')} | "
                   f"entrega_prod={repr(p.get(PROD['entrega_prod'],''))} | "
-                  f"repeticiones={p.get('cf_vtcmproduccion_repeticionesproduccin','')} | "
-                  f"noprod_anterior={p.get('cf_vtcmproduccion_noproduccionanterior','')} | "
-                  f"noorden_anterior={p.get('cf_vtcmproduccion_noordendeproduccionanterior','')}")
+                  f"fecha_prometida={p.get(PROD['fecha_prometida'],'')} | "
+                  f"cantidad={p.get('cf_vtcmproduccion_cantidad','')} | "
+                  f"repeticiones={p.get('cf_vtcmproduccion_repeticionesproduccin','')}")
         ops_b = op_groups.get(ref_b, [])
         ops_b = [o for o in ops_b if str(o.get('createdtime', '')).startswith('2026')]
         print(f"[DEBUG-BATCH-OP] '{ref_b}': {len(ops_b)} OPs 2026:")
         for o in sorted(ops_b, key=lambda x: str(x.get('createdtime', ''))):
             print(f"[DEBUG-BATCH-OP]   number={o.get(OP['number'])} | id={o.get('id')} | "
                   f"created={o.get('createdtime','')} | "
-                  f"repeticiones={o.get('cf_vtcmordendeproduccion_repeticiones','')} | "
-                  f"numprod_anterior={o.get('cf_vtcmordendeproduccion_numeroproduccionanterior','')} | "
-                  f"noprod_anterior={o.get('cf_vtcmordendeproduccion_noproduccionanterior','')}")
+                  f"fecha_entrega={o.get(OP['fecha_entrega'],'')} | "
+                  f"total_etiquetas={o.get(OP['total_etiquetas'],'')} | "
+                  f"repeticiones={o.get('cf_vtcmordendeproduccion_repeticiones','')}")
+
 
     now_bogota = datetime.now(BOGOTA)
     today = pd.Timestamp(now_bogota.date())
