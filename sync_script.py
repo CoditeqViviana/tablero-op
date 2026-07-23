@@ -366,28 +366,36 @@ def fetch_and_process():
         except (ValueError, TypeError):
             return None
 
+    def _parse_date_only(s):
+        try:
+            return datetime.strptime(str(s).strip()[:10], '%Y-%m-%d')
+        except (ValueError, TypeError):
+            return None
+
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
     # 1:1, no muchos a muchos). Cuando una referencia se reordena muchas veces
     # (hasta 15+ veces para el mismo diseno de etiqueta, casos reales
     # observados), el emparejamiento debe minimizar la distancia TOTAL del
-    # grupo completo, no solo la de cada par individual: un algoritmo greedy
-    # que toma el par mas cercano primero puede "robar" una OP casi perfecta
-    # para una Produccion vecina, empeorando la asignacion global.
+    # grupo completo, no solo la de cada par individual.
     #
-    # Caso real que expuso esto: referencia con 13 Producciones y 13 OPs
-    # (proporcion 1:1 exacta). Greedy-por-par-mas-cercano-primero asigno
-    # NP107865 (la mas nueva, con match casi perfecto de 2h) a la OP 104504,
-    # dejando a NP107833 (la correcta segun Vtiger) forzada a emparejar con
-    # 104526 a 27h de distancia -- desajuste total del grupo: 29h.
-    # La asignacion OPTIMA (Hungarian algorithm) da NP107833<->104504 (20h) +
-    # NP107865<->104526 (4h) = 24h de desajuste total -- MENOR, y coincide
-    # exactamente con la relacion real confirmada en Vtiger.
+    # METRICA DE COSTO: |Fecha de Entrega (OP) - Fecha Entrega Prometida
+    # (Produccion)|, NO cercania de fecha de creacion. Confirmado con multiples
+    # casos reales (referencias con 2-9 Producciones/OPs creadas casi
+    # simultaneamente, segundos/minutos de diferencia, donde la cercania de
+    # CREACION resulta en un empate matematico exacto entre las dos
+    # asignaciones posibles -- imposible de resolver por ese lado). La fecha
+    # prometida y la fecha de entrega SI son una decision de negocio
+    # deliberada: en TODOS los casos reales verificados, la pareja correcta
+    # tiene Fecha de Entrega (OP) 1-3 dias antes de la Fecha Entrega Prometida
+    # (Produccion) -- la pareja incorrecta difiere en 9-60+ dias. Señal mucho
+    # mas confiable que el timestamp de creacion.
     #
-    # Fix: usar scipy.optimize.linear_sum_assignment (Hungarian algorithm)
-    # para encontrar la asignacion de MINIMA DISTANCIA TOTAL por referencia,
-    # en vez de greedy por par mas cercano primero. Si scipy no esta
-    # disponible en el entorno (ej. falta en requirements.txt), cae de
-    # vuelta al greedy anterior (funcional pero subóptimo) sin romper el sync.
+    # Fallback: si a alguna Produccion/OP le falta fecha_prometida o
+    # fecha_entrega, se usa distancia de fecha de creacion como respaldo.
+    #
+    # Se usa scipy.optimize.linear_sum_assignment (Hungarian algorithm) para
+    # la asignacion de MINIMA DISTANCIA TOTAL por referencia. Si scipy no esta
+    # disponible, cae de vuelta al greedy (funcional pero subóptimo).
     rows = []
     sin_op = 0
     _n_ajustados = 0
@@ -411,44 +419,52 @@ def fetch_and_process():
             print(f"[DEBUG-INLINE] prods NP: {[p.get('vtcmproduccionnumber') for p in prods]}")
             print(f"[DEBUG-INLINE] ops number: {[o.get(OP['number']) for o in ops_disponibles]}")
 
+        def _costo_par(prod, op):
+            """Costo en dias entre Fecha Entrega Prometida (Produccion) y
+            Fecha de Entrega (OP). Fallback a distancia de fecha de creacion
+            (convertida a dias equivalentes) si falta alguna fecha."""
+            prom = _parse_date_only(prod.get(PROD['fecha_prometida'], ''))
+            ent = _parse_date_only(op.get(OP['fecha_entrega'], ''))
+            if prom is not None and ent is not None:
+                return abs((ent - prom).days)
+            prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
+            op_dt = _parse_any_dt(op.get('createdtime', ''))
+            if prod_dt is not None and op_dt is not None:
+                return abs((op_dt - prod_dt).total_seconds()) / 86400.0
+            return None
+
         if _SCIPY_OK:
             _n_optimo += 1
             _SIN_FECHA = 1e15  # costo centinela para pares sin fecha valida (no se asignan)
             cost = np.full((n_prod, n_op), _SIN_FECHA)
             for pi, prod in enumerate(prods):
-                prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
-                if prod_dt is None:
-                    continue
                 for oi, op in enumerate(ops_disponibles):
-                    op_dt = _parse_any_dt(op.get('createdtime', ''))
-                    if op_dt is not None:
-                        cost[pi, oi] = abs((op_dt - prod_dt).total_seconds())
+                    c = _costo_par(prod, op)
+                    if c is not None:
+                        cost[pi, oi] = c
             row_ind, col_ind = linear_sum_assignment(cost)
             for pi, oi in zip(row_ind, col_ind):
                 if cost[pi, oi] < _SIN_FECHA:
                     asignacion[pi] = oi
             if _debug_esta_ref:
-                print(f"[DEBUG-INLINE] cost matrix (horas):")
+                print(f"[DEBUG-INLINE] cost matrix (dias):")
                 for pi in range(n_prod):
-                    fila = [round(cost[pi,oi]/3600,1) if cost[pi,oi] < _SIN_FECHA else -1 for oi in range(n_op)]
+                    fila = [round(cost[pi,oi],1) if cost[pi,oi] < _SIN_FECHA else -1 for oi in range(n_op)]
                     print(f"[DEBUG-INLINE]   NP={prods[pi].get('vtcmproduccionnumber')}: {fila}")
                 print(f"[DEBUG-INLINE] row_ind={list(row_ind)} col_ind={list(col_ind)}")
                 for pi, oi in asignacion.items():
                     print(f"[DEBUG-INLINE] asignacion: NP={prods[pi].get('vtcmproduccionnumber')} "
                           f"<-> OP={ops_disponibles[oi].get(OP['number'])} "
-                          f"(costo={cost[pi,oi]/3600:.1f}h)")
+                          f"(costo={cost[pi,oi]:.1f}d)")
         else:
             _n_fallback += 1
-            # Fallback greedy (subóptimo, ver comentario arriba)
+            # Fallback greedy (subóptimo, ver comentario arriba) -- usa la misma
+            # metrica de costo (prometida vs entrega, con fallback a createdtime)
             pares = []
             for pi, prod in enumerate(prods):
-                prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
                 for oi, op in enumerate(ops_disponibles):
-                    op_dt = _parse_any_dt(op.get('createdtime', ''))
-                    if prod_dt is not None and op_dt is not None:
-                        dist = abs((op_dt - prod_dt).total_seconds())
-                    else:
-                        dist = float('inf')
+                    c = _costo_par(prod, op)
+                    dist = c if c is not None else float('inf')
                     pares.append((dist, pi, oi))
             pares.sort(key=lambda x: x[0])
             prod_usada = [False] * n_prod
@@ -522,21 +538,26 @@ def fetch_and_process():
           f"(excluidas {rows_pre - len(rows)} habilitadas)")
     _post_f1_numbers = {_norm_op(r.get('op_number', '')) for r in rows}
 
-    # --- FILTRO 2: proximidad de fechas de creacion ---
-    # Si la Produccion y la OP fueron creadas a mas de MAX_DIAS dias de
-    # diferencia, es muy probable un emparejamiento erroneo (la OP pertenece
-    # a otra Produccion de la misma referencia, de una reorden distinta).
-    _MAX_DIAS = 2
+    # --- FILTRO 2: proximidad Fecha Entrega Prometida (Produccion) vs Fecha
+    # de Entrega (OP) -- MISMA metrica que ahora usa el emparejamiento (ver
+    # comentario en el bucle de matching). Si el emparejamiento final quedo
+    # con una diferencia grande entre estas dos fechas, es señal de que no
+    # habia ninguna Produccion razonable para esa OP en su referencia (huerfana
+    # forzada a emparejar con la menos mala). Umbral generoso (15 dias): en
+    # TODOS los casos reales verificados la pareja correcta cae en 1-3 dias,
+    # las incorrectas en 9-60+ dias -- 15 deja margen de sobra sin arriesgar
+    # excluir matches legitimos con variacion normal de negocio.
+    _MAX_DIAS = 15
     rows_pre2 = len(rows)
     rows_ok = []
     for r in rows:
-        prod_dt = _parse_any_dt(r.get('prod_createdtime', ''))
-        op_dt = _parse_any_dt(r.get('op_createdtime', ''))
-        if prod_dt and op_dt:
-            diff = abs((op_dt - prod_dt).days)
+        prom_dt = _parse_date_only(r.get('fecha_prometida', ''))
+        ent_dt = _parse_date_only(r.get('fecha_entrega_raw', ''))
+        if prom_dt and ent_dt:
+            diff = abs((ent_dt - prom_dt).days)
             if diff > _MAX_DIAS:
                 print(f"[sync] Excluida OP {r['op_number']} por proximidad: "
-                      f"Prod={r['prod_createdtime'][:10]} OP={r['op_createdtime'][:10]} "
+                      f"Prometida={r['fecha_prometida']} Entrega={r['fecha_entrega_raw']} "
                       f"diff={diff}d >{_MAX_DIAS}d | ref={r['referencia']}")
                 continue
         rows_ok.append(r)
@@ -547,60 +568,55 @@ def fetch_and_process():
     _post_f2_numbers = {_norm_op(r.get('op_number', '')) for r in rows}
 
     # --- FILTRO 3 (SEGURIDAD): excluir si CUALQUIER Produccion de la misma
-    # referencia -- no solo la que quedo emparejada -- fue creada muy cerca
-    # en el tiempo de esta OP y esta habilitada -- PERO solo si esa Produccion
-    # habilitada compite genuinamente por esta OP (esta tan cerca o mas cerca
-    # que la Produccion con la que realmente quedo emparejada). Si el
-    # emparejamiento ya es claramente el mas cercano posible, se confia en el
-    # y NO se excluye -- version anterior (solo "existe alguna habilitada
-    # cerca") generaba falsos negativos: ocultaba emparejamientos correctos
-    # solo porque una Produccion habilitada de la misma referencia, MAS LEJANA
-    # en el tiempo que la real, tambien caia dentro de la ventana de dias.
-    # Caso real que corrigio esto: OP 104571 <-> NP107946 (match correcto,
-    # 30 min de diferencia) se ocultaba porque otra Produccion habilitada de
-    # la misma referencia, mas lejana, tambien estaba dentro de +-2 dias.
-    _MAX_DIAS_HAB = 2
-    _MARGEN_SEGURIDAD_SEG = 12 * 3600  # 12h de margen para considerar "competencia real"
+    # referencia -- no solo la que quedo emparejada -- esta habilitada Y
+    # compite genuinamente por esta OP segun la MISMA metrica del matching
+    # (Fecha Entrega Prometida vs Fecha de Entrega de la OP), no por cercania
+    # de creacion. Solo se excluye si esa Produccion habilitada esta tan cerca
+    # o mas cerca (+margen) que la Produccion con la que realmente quedo
+    # emparejada -- si el emparejamiento ya es claramente el mejor, se confia
+    # en el y no se excluye.
+    _MAX_DIAS_HAB = 15  # mismo umbral generoso que Filtro 2, ver justificacion arriba
+    _MARGEN_SEGURIDAD_DIAS = 3  # margen para considerar "competencia real"
     _hab_por_ref = defaultdict(list)
     for p in producciones:
         if _es_habilitado(p.get(PROD['entrega_prod'], '')):
             ref_p = p.get(PROD['referencia'], '').strip()
-            dt_p = _parse_any_dt(p.get(PROD['fecha_creacion'], ''))
-            if ref_p and dt_p:
-                _hab_por_ref[ref_p].append(dt_p)
+            prom_p = _parse_date_only(p.get(PROD['fecha_prometida'], ''))
+            if ref_p and prom_p:
+                _hab_por_ref[ref_p].append(prom_p)
 
     rows_pre3 = len(rows)
     rows_ok = []
     for r in rows:
-        op_dt = _parse_any_dt(r.get('op_createdtime', ''))
-        prod_dt = _parse_any_dt(r.get('prod_createdtime', ''))
+        ent_dt = _parse_date_only(r.get('fecha_entrega_raw', ''))
+        prom_dt = _parse_date_only(r.get('fecha_prometida', ''))
         ref = r['referencia']
         riesgo = False
         candidata_riesgo = None
-        if op_dt and ref in _hab_por_ref:
-            if prod_dt:
+        if ent_dt and ref in _hab_por_ref:
+            if prom_dt:
                 # Distancia real del emparejamiento actual: solo se excluye si
                 # existe una habilitada tan cerca o mas cerca (+margen) que ella.
-                d_matched = abs((prod_dt - op_dt).total_seconds())
-                for hab_dt in _hab_por_ref[ref]:
-                    d_hab = abs((hab_dt - op_dt).total_seconds())
-                    if d_hab <= d_matched + _MARGEN_SEGURIDAD_SEG:
+                d_matched = abs((ent_dt - prom_dt).days)
+                for hab_prom in _hab_por_ref[ref]:
+                    d_hab = abs((ent_dt - hab_prom).days)
+                    if d_hab <= d_matched + _MARGEN_SEGURIDAD_DIAS:
                         riesgo = True
-                        candidata_riesgo = hab_dt
+                        candidata_riesgo = hab_prom
                         break
             else:
-                # Sin fecha de creacion de la Produccion emparejada: no se
-                # puede comparar distancias, se mantiene el comportamiento
+                # Sin fecha prometida de la Produccion emparejada: no se puede
+                # comparar distancias, se mantiene el comportamiento
                 # conservador original (ventana absoluta de dias).
-                for hab_dt in _hab_por_ref[ref]:
-                    if abs((hab_dt - op_dt).days) <= _MAX_DIAS_HAB:
+                for hab_prom in _hab_por_ref[ref]:
+                    if abs((ent_dt - hab_prom).days) <= _MAX_DIAS_HAB:
                         riesgo = True
-                        candidata_riesgo = hab_dt
+                        candidata_riesgo = hab_prom
                         break
         if riesgo:
             print(f"[sync] Excluida OP {r['op_number']} por SEGURIDAD: Produccion "
                   f"habilitada de la misma referencia compite genuinamente "
-                  f"(creada {candidata_riesgo}) | ref={ref}")
+                  f"(prometida {candidata_riesgo}) | ref={ref}")
             continue
         rows_ok.append(r)
     rows = rows_ok
