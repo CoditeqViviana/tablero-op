@@ -222,6 +222,7 @@ OP = {
     'total_m2': 'cf_vtcmordendeproduccion_totalm2',
     'tipo_orden': 'cf_vtcmordendeproduccion_tipodeorden',
     'z': 'cf_vtcmordendeproduccion_z',
+    'numero_np': 'cf_vtcmordendeproduccion_numbernp',
 }
 
 def _safe_num(val):
@@ -372,6 +373,20 @@ def fetch_and_process():
         except (ValueError, TypeError):
             return None
 
+    def _costo_par(prod, op):
+        """Costo en dias entre Fecha Entrega Prometida (Produccion) y
+        Fecha de Entrega (OP). Fallback a distancia de fecha de creacion
+        (convertida a dias equivalentes) si falta alguna fecha."""
+        prom = _parse_date_only(prod.get(PROD['fecha_prometida'], ''))
+        ent = _parse_date_only(op.get(OP['fecha_entrega'], ''))
+        if prom is not None and ent is not None:
+            return abs((ent - prom).days)
+        prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
+        op_dt = _parse_any_dt(op.get('createdtime', ''))
+        if prod_dt is not None and op_dt is not None:
+            return abs((op_dt - prod_dt).total_seconds()) / 86400.0
+        return None
+
     # 3. Union 1 a 1: cada Produccion se empareja con UNA sola OP (relacion real es
     # 1:1, no muchos a muchos). Cuando una referencia se reordena muchas veces
     # (hasta 15+ veces para el mismo diseno de etiqueta, casos reales
@@ -401,6 +416,7 @@ def fetch_and_process():
     _n_ajustados = 0
     _n_optimo = 0
     _n_fallback = 0
+    _n_directos = 0
     for ref, prods in prod_groups.items():
         ops_disponibles = list(op_groups.get(ref, []))
         if len(ops_disponibles) > len(prods):
@@ -419,62 +435,78 @@ def fetch_and_process():
             print(f"[DEBUG-INLINE] prods NP: {[p.get('vtcmproduccionnumber') for p in prods]}")
             print(f"[DEBUG-INLINE] ops number: {[o.get(OP['number']) for o in ops_disponibles]}")
 
-        def _costo_par(prod, op):
-            """Costo en dias entre Fecha Entrega Prometida (Produccion) y
-            Fecha de Entrega (OP). Fallback a distancia de fecha de creacion
-            (convertida a dias equivalentes) si falta alguna fecha."""
-            prom = _parse_date_only(prod.get(PROD['fecha_prometida'], ''))
-            ent = _parse_date_only(op.get(OP['fecha_entrega'], ''))
-            if prom is not None and ent is not None:
-                return abs((ent - prom).days)
-            prod_dt = _parse_any_dt(prod.get(PROD['fecha_creacion'], ''))
-            op_dt = _parse_any_dt(op.get('createdtime', ''))
-            if prod_dt is not None and op_dt is not None:
-                return abs((op_dt - prod_dt).total_seconds()) / 86400.0
-            return None
-
-        if _SCIPY_OK:
-            _n_optimo += 1
-            _SIN_FECHA = 1e15  # costo centinela para pares sin fecha valida (no se asignan)
-            cost = np.full((n_prod, n_op), _SIN_FECHA)
-            for pi, prod in enumerate(prods):
-                for oi, op in enumerate(ops_disponibles):
-                    c = _costo_par(prod, op)
-                    if c is not None:
-                        cost[pi, oi] = c
-            row_ind, col_ind = linear_sum_assignment(cost)
-            for pi, oi in zip(row_ind, col_ind):
-                if cost[pi, oi] < _SIN_FECHA:
-                    asignacion[pi] = oi
-            if _debug_esta_ref:
-                print(f"[DEBUG-INLINE] cost matrix (dias):")
-                for pi in range(n_prod):
-                    fila = [round(cost[pi,oi],1) if cost[pi,oi] < _SIN_FECHA else -1 for oi in range(n_op)]
-                    print(f"[DEBUG-INLINE]   NP={prods[pi].get('vtcmproduccionnumber')}: {fila}")
-                print(f"[DEBUG-INLINE] row_ind={list(row_ind)} col_ind={list(col_ind)}")
-                for pi, oi in asignacion.items():
-                    print(f"[DEBUG-INLINE] asignacion: NP={prods[pi].get('vtcmproduccionnumber')} "
-                          f"<-> OP={ops_disponibles[oi].get(OP['number'])} "
-                          f"(costo={cost[pi,oi]:.1f}d)")
-        else:
-            _n_fallback += 1
-            # Fallback greedy (subóptimo, ver comentario arriba) -- usa la misma
-            # metrica de costo (prometida vs entrega, con fallback a createdtime)
-            pares = []
-            for pi, prod in enumerate(prods):
-                for oi, op in enumerate(ops_disponibles):
-                    c = _costo_par(prod, op)
-                    dist = c if c is not None else float('inf')
-                    pares.append((dist, pi, oi))
-            pares.sort(key=lambda x: x[0])
-            prod_usada = [False] * n_prod
-            op_usada = [False] * n_op
-            for dist, pi, oi in pares:
-                if prod_usada[pi] or op_usada[oi]:
-                    continue
-                prod_usada[pi] = True
-                op_usada[oi] = True
+        # --- ETAPA 1: emparejamiento DIRECTO via campo informativo numbernp ---
+        # Campo cf_vtcmordendeproduccion_numbernp (creado 24-07-2026): Vtiger
+        # lo llena automaticamente al crear la OP desde la Produccion, con el
+        # numero de esa Produccion (NPxxxxx). Es informativo (no una relacion
+        # de verdad en Vtiger) pero para nuestro proposito es un link 1:1 sin
+        # ambiguedad -- se usa como fuente PRIMARIA de verdad, sin pasar por
+        # ninguna heuristica. Solo aplica a OPs creadas despues de esa fecha;
+        # las historicas (campo vacio) caen a la Etapa 2 (heuristica).
+        _prod_por_numero = {}
+        for pi, p in enumerate(prods):
+            num = p.get('vtcmproduccionnumber')
+            if num:
+                _prod_por_numero[num] = pi
+        for oi, op in enumerate(ops_disponibles):
+            np_op = str(op.get(OP['numero_np'], '')).strip()
+            if not np_op:
+                continue
+            pi = _prod_por_numero.get(np_op)
+            if pi is not None and pi not in asignacion:
                 asignacion[pi] = oi
+                _n_directos += 1
+
+        # --- ETAPA 2: heuristica (Hungarian/greedy) SOLO para lo que quedo
+        # sin emparejar directamente en la Etapa 1 (ver comentarios de la
+        # metrica de costo -- Fecha Entrega Prometida vs Fecha de Entrega --
+        # mas arriba en el bloque original). Trabaja unicamente sobre las
+        # Producciones y OPs restantes, sin tocar lo ya resuelto en Etapa 1.
+        pi_restantes = [pi for pi in range(n_prod) if pi not in asignacion]
+        oi_usadas_directo = set(asignacion.values())
+        oi_restantes = [oi for oi in range(n_op) if oi not in oi_usadas_directo]
+
+        if pi_restantes and oi_restantes:
+            if _SCIPY_OK:
+                _n_optimo += 1
+                _SIN_FECHA = 1e15  # costo centinela para pares sin fecha valida (no se asignan)
+                cost = np.full((len(pi_restantes), len(oi_restantes)), _SIN_FECHA)
+                for li, pi in enumerate(pi_restantes):
+                    for lj, oi in enumerate(oi_restantes):
+                        c = _costo_par(prods[pi], ops_disponibles[oi])
+                        if c is not None:
+                            cost[li, lj] = c
+                row_ind, col_ind = linear_sum_assignment(cost)
+                for li, lj in zip(row_ind, col_ind):
+                    if cost[li, lj] < _SIN_FECHA:
+                        asignacion[pi_restantes[li]] = oi_restantes[lj]
+                if _debug_esta_ref:
+                    print(f"[DEBUG-INLINE] cost matrix (dias, solo restantes tras Etapa 1):")
+                    for li, pi in enumerate(pi_restantes):
+                        fila = [round(cost[li,lj],1) if cost[li,lj] < _SIN_FECHA else -1
+                                for lj in range(len(oi_restantes))]
+                        print(f"[DEBUG-INLINE]   NP={prods[pi].get('vtcmproduccionnumber')}: {fila}")
+                    for pi, oi in asignacion.items():
+                        print(f"[DEBUG-INLINE] asignacion: NP={prods[pi].get('vtcmproduccionnumber')} "
+                              f"<-> OP={ops_disponibles[oi].get(OP['number'])}")
+            else:
+                _n_fallback += 1
+                # Fallback greedy (subóptimo, ver comentario en _costo_par)
+                pares = []
+                for pi in pi_restantes:
+                    for oi in oi_restantes:
+                        c = _costo_par(prods[pi], ops_disponibles[oi])
+                        dist = c if c is not None else float('inf')
+                        pares.append((dist, pi, oi))
+                pares.sort(key=lambda x: x[0])
+                prod_usada = set()
+                op_usada = set()
+                for dist, pi, oi in pares:
+                    if pi in prod_usada or oi in op_usada:
+                        continue
+                    prod_usada.add(pi)
+                    op_usada.add(oi)
+                    asignacion[pi] = oi
 
         for pi, prod in enumerate(prods):
             if pi not in asignacion:
@@ -517,7 +549,8 @@ def fetch_and_process():
 
     print(f"[sync] {sin_op} Producciones sin OP, {len(rows)} filas ANTES de filtro habilitadas "
           f"({_n_ajustados} referencias con reordenes historicos ajustadas)")
-    print(f"[sync] Emparejamiento: {_n_optimo} referencias con asignacion optima, "
+    print(f"[sync] Emparejamiento: {_n_directos} DIRECTOS (campo numbernp), "
+          f"{_n_optimo} referencias con asignacion optima (heuristica), "
           f"{_n_fallback} con greedy fallback")
     if not rows:
         print("[sync] ERROR: 0 filas construidas")
