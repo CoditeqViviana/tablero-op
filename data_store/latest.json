@@ -1,5 +1,5 @@
 {
-  "updated_at": "25/07/2026 13:10",
+  "updated_at": "25/07/2026 16:06",
   "source": "vtiger_api_github_actions",
   "today": "2026-07-25",
   "hoy": "2026-07-25",
@@ -38,14 +38,14 @@
   ],
   "pivot": {
     "Kromia": {
-      "2026-07-27": 7,
+      "2026-07-27": 6,
       "2026-07-28": 6,
       "2026-07-29": 4,
       "2026-07-30": 5,
       "2026-07-31": 9
     },
     "Nilpeter 1": {
-      "2026-07-27": 3,
+      "2026-07-27": 2,
       "2026-07-28": 5,
       "2026-07-29": 3,
       "2026-07-30": 12,
@@ -59,7 +59,7 @@
       "2026-07-31": 5
     },
     "Rebobinadora": {
-      "2026-07-27": 4,
+      "2026-07-27": 6,
       "2026-07-28": 4,
       "2026-07-29": 1,
       "2026-07-30": 1,
@@ -476,8 +476,8 @@
       "op": "104856",
       "cliente": "PRECOCIDOS DEL ORIENTE SA",
       "referencia": "FD-TTT-100X50-R2750-M-1F-C30 PROCESS YELLOW",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Fondo",
       "fecha_entrega": "27/07/2026",
       "fecha_entrega_raw": "2026-07-27",
@@ -487,7 +487,7 @@
       "pct_prioridad": "-32.54%",
       "mts": 2375.0,
       "pct_buffer": 71.4,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -836,8 +836,8 @@
       "op": "104696",
       "cliente": "SOFTYS GACHANCIPÁ SA",
       "referencia": "IC-PPB-140X240-R1500-M-1F-C30-PH-ARO-JUMBO-DH-BLANCO-250mt-4",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "27/07/2026",
       "fecha_entrega_raw": "2026-07-27",
@@ -847,7 +847,7 @@
       "pct_prioridad": "33.73%",
       "mts": 1062.0,
       "pct_buffer": 85.7,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
     {
@@ -3287,8 +3287,8 @@
       "op": "104856",
       "cliente": "PRECOCIDOS DEL ORIENTE SA",
       "referencia": "FD-TTT-100X50-R2750-M-1F-C30 PROCESS YELLOW",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Fondo",
       "fecha_entrega": "27/07/2026",
       "fecha_entrega_raw": "2026-07-27",
@@ -3298,7 +3298,7 @@
       "pct_prioridad": "-32.54%",
       "mts": 2375.0,
       "pct_buffer": 71.4,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -3647,8 +3647,8 @@
       "op": "104696",
       "cliente": "SOFTYS GACHANCIPÁ SA",
       "referencia": "IC-PPB-140X240-R1500-M-1F-C30-PH-ARO-JUMBO-DH-BLANCO-250mt-4",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "27/07/2026",
       "fecha_entrega_raw": "2026-07-27",
@@ -3658,7 +3658,7 @@
       "pct_prioridad": "33.73%",
       "mts": 1062.0,
       "pct_buffer": 85.7,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
     {
@@ -6239,8 +6239,8 @@
       "op": "104310",
       "cliente": "HADA INTERNATIONAL SAS",
       "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-CONTRA-SHAM-LITTLE-ANG",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "03/08/2026",
       "fecha_entrega_raw": "2026-08-03",
@@ -6250,7 +6250,7 @@
       "pct_prioridad": "-91.27%",
       "mts": 1758.0,
       "pct_buffer": 73.5,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
     {
@@ -6599,8 +6599,8 @@
       "op": "103480",
       "cliente": "HADA INTERNATIONAL SAS",
       "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-CONTRA-SHAM-LITTLE-ANG",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "04/08/2026",
       "fecha_entrega_raw": "2026-08-04",
@@ -6610,7 +6610,7 @@
       "pct_prioridad": "-116.27%",
       "mts": 1758.0,
       "pct_buffer": 85.9,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
     {
@@ -8752,8 +8752,8 @@
       "op": "104696",
       "cliente": "SOFTYS GACHANCIPÁ SA",
       "referencia": "IC-PPB-140X240-R1500-M-1F-C30-PH-ARO-JUMBO-DH-BLANCO-250mt-4",
-      "maquina": "Nilpeter 1",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "mts": 1062.0,
       "familia": "F10",
@@ -10352,8 +10352,8 @@
       "op": "104856",
       "cliente": "PRECOCIDOS DEL ORIENTE SA",
       "referencia": "FD-TTT-100X50-R2750-M-1F-C30 PROCESS YELLOW",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Fondo",
       "mts": 2375.0,
       "familia": "F2",
@@ -10928,8 +10928,8 @@
       "op": "103480",
       "cliente": "HADA INTERNATIONAL SAS",
       "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-CONTRA-SHAM-LITTLE-ANG",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "mts": 1758.0,
       "familia": "F10",
@@ -10944,8 +10944,8 @@
       "op": "104310",
       "cliente": "HADA INTERNATIONAL SAS",
       "referencia": "IC-PME-94X55.3-R5000-M-1F-C30-CONTRA-SHAM-LITTLE-ANG",
-      "maquina": "Nilpeter 2",
-      "etapa": "Preparacion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "mts": 1758.0,
       "familia": "F10",
@@ -13234,7 +13234,6 @@
   ],
   "std_data": {
     "Nilpeter 1": {
-      "2026-07-23": 2759.0,
       "2026-08-03": 35936.0,
       "2026-07-07": 840.0,
       "2026-07-10": 10715.0,
@@ -13249,6 +13248,7 @@
       "2026-07-28": 46598.0,
       "2026-06-05": 1502.0,
       "2026-08-04": 10420.0,
+      "2026-07-23": 1697.0,
       "2026-06-20": 1798.0,
       "2026-08-01": 11903.0,
       "2026-07-17": 39047.0,
@@ -13267,8 +13267,8 @@
       "2026-07-22": 2880.0,
       "2026-07-27": 4839.0,
       "2026-07-16": 713.0,
-      "2026-06-04": 3516.0,
-      "2026-07-10": 3516.0,
+      "2026-06-04": 1758.0,
+      "2026-07-10": 1758.0,
       "2026-07-24": 4505.0,
       "2026-03-12": 15651.0,
       "2026-07-30": 8749.0,
@@ -13283,7 +13283,7 @@
       "2026-07-28": 6649.0,
       "2026-06-29": 12401.0,
       "2026-07-27": 13274.0,
-      "2026-07-24": 18755.0,
+      "2026-07-24": 16380.0,
       "2026-07-30": 32083.0,
       "2026-07-21": 650.0,
       "2026-07-22": 3487.0,
@@ -13325,9 +13325,9 @@
     "Nilpeter 1": {
       "mts_atrasados": 1045,
       "n_atrasadas": 1,
-      "mts_pendientes": 236194,
-      "n_pendientes": 73,
-      "mts_total": 237239,
+      "mts_pendientes": 235132,
+      "n_pendientes": 72,
+      "mts_total": 236177,
       "turnos_atrasados": 0.1,
       "dias_atrasados": 0.0,
       "cap_turno": 7962,
@@ -13335,47 +13335,47 @@
         {
           "dias": 3,
           "turnos": 9,
-          "mts_por_turno": 26360,
-          "vel_req": 115.9,
-          "efic_req": 165.5,
+          "mts_por_turno": 26242,
+          "vel_req": 115.3,
+          "efic_req": 164.8,
           "vel_comb": 42.0,
-          "efic_comb": 137.9
+          "efic_comb": 137.3
         },
         {
           "dias": 5,
           "turnos": 15,
-          "mts_por_turno": 15816,
-          "vel_req": 69.5,
-          "efic_req": 99.3,
+          "mts_por_turno": 15745,
+          "vel_req": 69.2,
+          "efic_req": 98.9,
           "vel_comb": 42.0,
-          "efic_comb": 82.8
+          "efic_comb": 82.4
         },
         {
           "dias": 7,
           "turnos": 21,
-          "mts_por_turno": 11297,
-          "vel_req": 49.7,
-          "efic_req": 70.9,
+          "mts_por_turno": 11247,
+          "vel_req": 49.4,
+          "efic_req": 70.6,
           "vel_comb": 42.0,
-          "efic_comb": 59.1
+          "efic_comb": 58.9
         },
         {
           "dias": 10,
           "turnos": 30,
-          "mts_por_turno": 7908,
-          "vel_req": 34.8,
-          "efic_req": 49.7,
-          "vel_comb": 34.8,
-          "efic_comb": 49.9
+          "mts_por_turno": 7873,
+          "vel_req": 34.6,
+          "efic_req": 49.4,
+          "vel_comb": 34.6,
+          "efic_comb": 50.0
         }
       ]
     },
     "Nilpeter 2": {
       "mts_atrasados": 0,
       "n_atrasadas": 0,
-      "mts_pendientes": 243098,
-      "n_pendientes": 68,
-      "mts_total": 243098,
+      "mts_pendientes": 239582,
+      "n_pendientes": 66,
+      "mts_total": 239582,
       "turnos_atrasados": 0.0,
       "dias_atrasados": 0.0,
       "cap_turno": 7962,
@@ -13383,37 +13383,37 @@
         {
           "dias": 3,
           "turnos": 9,
-          "mts_por_turno": 27011,
-          "vel_req": 118.7,
-          "efic_req": 169.6,
+          "mts_por_turno": 26620,
+          "vel_req": 117.0,
+          "efic_req": 167.2,
           "vel_comb": 42.0,
-          "efic_comb": 141.3
+          "efic_comb": 139.3
         },
         {
           "dias": 5,
           "turnos": 15,
-          "mts_por_turno": 16207,
-          "vel_req": 71.2,
-          "efic_req": 101.8,
+          "mts_por_turno": 15972,
+          "vel_req": 70.2,
+          "efic_req": 100.3,
           "vel_comb": 42.0,
-          "efic_comb": 84.8
+          "efic_comb": 83.6
         },
         {
           "dias": 7,
           "turnos": 21,
-          "mts_por_turno": 11576,
-          "vel_req": 50.9,
-          "efic_req": 72.7,
+          "mts_por_turno": 11409,
+          "vel_req": 50.1,
+          "efic_req": 71.6,
           "vel_comb": 42.0,
-          "efic_comb": 60.6
+          "efic_comb": 59.7
         },
         {
           "dias": 10,
           "turnos": 30,
-          "mts_por_turno": 8103,
-          "vel_req": 35.6,
-          "efic_req": 50.9,
-          "vel_comb": 35.6,
+          "mts_por_turno": 7986,
+          "vel_req": 35.1,
+          "efic_req": 50.1,
+          "vel_comb": 35.1,
           "efic_comb": 50.0
         }
       ]
@@ -13421,9 +13421,9 @@
     "Kromia": {
       "mts_atrasados": 0,
       "n_atrasadas": 0,
-      "mts_pendientes": 181236,
-      "n_pendientes": 52,
-      "mts_total": 181236,
+      "mts_pendientes": 178861,
+      "n_pendientes": 51,
+      "mts_total": 178861,
       "turnos_atrasados": 0.0,
       "dias_atrasados": 0.0,
       "cap_turno": 7962,
@@ -13431,38 +13431,38 @@
         {
           "dias": 3,
           "turnos": 9,
-          "mts_por_turno": 20137,
-          "vel_req": 88.5,
-          "efic_req": 126.4,
+          "mts_por_turno": 19873,
+          "vel_req": 87.4,
+          "efic_req": 124.8,
           "vel_comb": 42.0,
-          "efic_comb": 105.4
+          "efic_comb": 104.0
         },
         {
           "dias": 5,
           "turnos": 15,
-          "mts_por_turno": 12082,
-          "vel_req": 53.1,
-          "efic_req": 75.9,
+          "mts_por_turno": 11924,
+          "vel_req": 52.4,
+          "efic_req": 74.9,
           "vel_comb": 42.0,
-          "efic_comb": 63.2
+          "efic_comb": 62.4
         },
         {
           "dias": 7,
           "turnos": 21,
-          "mts_por_turno": 8630,
-          "vel_req": 37.9,
-          "efic_req": 54.2,
-          "vel_comb": 37.9,
+          "mts_por_turno": 8517,
+          "vel_req": 37.4,
+          "efic_req": 53.5,
+          "vel_comb": 37.4,
           "efic_comb": 50.0
         },
         {
           "dias": 10,
           "turnos": 30,
-          "mts_por_turno": 6041,
-          "vel_req": 26.6,
-          "efic_req": 37.9,
-          "vel_comb": 26.6,
-          "efic_comb": 49.9
+          "mts_por_turno": 5962,
+          "vel_req": 26.2,
+          "efic_req": 37.4,
+          "vel_comb": 26.2,
+          "efic_comb": 50.0
         }
       ]
     }
@@ -13470,9 +13470,9 @@
   "cuellos": {
     "NP1": {
       "capacidad_dia": 23100,
-      "mts_total": 237239,
-      "dias_trabajo": 10.3,
-      "pct_cap": 51.4,
+      "mts_total": 236177,
+      "dias_trabajo": 10.2,
+      "pct_cap": 51.1,
       "ordenes": [
         {
           "op": "104886",
@@ -13813,15 +13813,6 @@
           "mts": 1045.0,
           "fecha": "24/07/2026",
           "color": "negro",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104696",
-          "cliente": "SOFTYS GACHANCIPÁ SA",
-          "mts": 1062.0,
-          "fecha": "27/07/2026",
-          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -14181,8 +14172,8 @@
           "ordenes": 1
         },
         "27/07/2026": {
-          "mts": 9102.0,
-          "ordenes": 3
+          "mts": 8040.0,
+          "ordenes": 2
         },
         "27/08/2026": {
           "mts": 1697.0,
@@ -14216,9 +14207,9 @@
     },
     "NP2": {
       "capacidad_dia": 23100,
-      "mts_total": 243098,
-      "dias_trabajo": 10.5,
-      "pct_cap": 52.6,
+      "mts_total": 239582,
+      "dias_trabajo": 10.4,
+      "pct_cap": 51.9,
       "ordenes": [
         {
           "op": "104734",
@@ -14235,15 +14226,6 @@
           "mts": 2342.0,
           "fecha": "03/08/2026",
           "color": "azul",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104310",
-          "cliente": "HADA INTERNATIONAL SAS",
-          "mts": 1758.0,
-          "fecha": "03/08/2026",
-          "color": "amarillo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -14334,15 +14316,6 @@
           "mts": 713.0,
           "fecha": "04/08/2026",
           "color": "verde",
-          "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "103480",
-          "cliente": "HADA INTERNATIONAL SAS",
-          "mts": 1758.0,
-          "fecha": "04/08/2026",
-          "color": "rojo",
           "tipo": "Impresa",
           "etapa": "Preparacion"
         },
@@ -14841,12 +14814,12 @@
           "ordenes": 1
         },
         "03/08/2026": {
-          "mts": 10307.0,
-          "ordenes": 10
+          "mts": 8549.0,
+          "ordenes": 9
         },
         "04/08/2026": {
-          "mts": 18129.0,
-          "ordenes": 9
+          "mts": 16371.0,
+          "ordenes": 8
         },
         "05/08/2026": {
           "mts": 4187.0,
@@ -14920,9 +14893,9 @@
     },
     "Kromia": {
       "capacidad_dia": 23100,
-      "mts_total": 183282,
-      "dias_trabajo": 7.9,
-      "pct_cap": 39.7,
+      "mts_total": 180907,
+      "dias_trabajo": 7.8,
+      "pct_cap": 39.2,
       "ordenes": [
         {
           "op": "104937",
@@ -15138,15 +15111,6 @@
           "fecha": "27/07/2026",
           "color": "rojo",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
-        },
-        {
-          "op": "104856",
-          "cliente": "PRECOCIDOS DEL ORIENTE SA",
-          "mts": 2375.0,
-          "fecha": "27/07/2026",
-          "color": "amarillo",
-          "tipo": "Fondo",
           "etapa": "Preparacion"
         },
         {
@@ -15426,8 +15390,8 @@
           "ordenes": 2
         },
         "27/07/2026": {
-          "mts": 29735.0,
-          "ordenes": 7
+          "mts": 27360.0,
+          "ordenes": 6
         },
         "28/07/2026": {
           "mts": 41999.0,
@@ -15523,7 +15487,7 @@
           "fecha": "04/08/2026",
           "color": "rojo",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "103481",
@@ -16699,7 +16663,7 @@
           "fecha": "27/07/2026",
           "color": "amarillo",
           "tipo": "Fondo",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104689",
@@ -16985,7 +16949,7 @@
           "fecha": "03/08/2026",
           "color": "amarillo",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104311",
@@ -17165,7 +17129,7 @@
           "fecha": "27/07/2026",
           "color": "rojo",
           "tipo": "Impresa",
-          "etapa": "Preparacion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104751",
@@ -19023,7 +18987,7 @@
       "capacidad_dia": 23888,
       "por_fecha": {
         "2026-07-24": 1045.0,
-        "2026-07-27": 9102.0,
+        "2026-07-27": 8040.0,
         "2026-07-28": 5311.0,
         "2026-07-29": 3806.0,
         "2026-07-30": 27891.0,
@@ -19049,8 +19013,8 @@
         "2026-07-29": 9840.0,
         "2026-07-30": 1864.0,
         "2026-07-31": 36967.0,
-        "2026-08-03": 10307.0,
-        "2026-08-04": 18129.0,
+        "2026-08-03": 8549.0,
+        "2026-08-04": 16371.0,
         "2026-08-05": 4187.0,
         "2026-08-06": 22872.0,
         "2026-08-10": 45295.0,
@@ -19069,7 +19033,7 @@
     "Kromia": {
       "capacidad_dia": 23888,
       "por_fecha": {
-        "2026-07-27": 29735.0,
+        "2026-07-27": 27360.0,
         "2026-07-28": 41999.0,
         "2026-07-29": 2742.0,
         "2026-07-30": 30579.0,
@@ -19114,9 +19078,9 @@
       "capacidad": 23888,
       "por_dia": {
         "2026-07-27": {
-          "planeado": 9102.0,
+          "planeado": 8040.0,
           "capacidad": 23888,
-          "pct": 38.1,
+          "pct": 33.7,
           "estado": "ok"
         },
         "2026-07-28": {
@@ -19184,9 +19148,9 @@
       "capacidad": 23888,
       "por_dia": {
         "2026-07-27": {
-          "planeado": 29735.0,
+          "planeado": 27360.0,
           "capacidad": 23888,
-          "pct": 124.5,
+          "pct": 114.5,
           "estado": "sobrecarga"
         },
         "2026-07-28": {
