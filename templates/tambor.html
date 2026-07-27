@@ -187,7 +187,6 @@ tr:hover td{background:#fafafa}
   <table>
     <thead>
       <tr>
-        <th style="width:80px" onclick="sortBy('color')"><span id="h-color">Color ↑</span></th>
         <th class="th-left" style="width:70px" onclick="sortBy('op')"><span id="h-op">OP</span></th>
         <th class="th-left" style="width:180px" onclick="sortBy('cliente')"><span id="h-cliente">Cliente</span></th>
         <th style="width:55px">Tipo</th>
@@ -227,7 +226,7 @@ const TIPO_MAP = {
   Fondo:  ['#dcfce7','#15803d','FD'],
 };
 
-let sortCol='color', sortAsc=true;
+let sortCol='fecha', sortAsc=true;
 let ultimoFiltrado = [];
 
 // Calcular semana actual (lun-vie)
@@ -351,12 +350,8 @@ function filtrar() {
   document.getElementById('conteo').innerHTML = 'Mostrando <strong>'+filtrados.length+'</strong> de '+DATOS.length+' órdenes';
 
   document.getElementById('tbl-body').innerHTML = filtrados.map(r => {
-    const c = COLOR_MAP[r.color_toc] || COLOR_MAP.gris;
     const t = TIPO_MAP[r.tipo] || ['#f3f4f6','#9ca3af','—'];
     return `<tr>
-      <td>
-        <span class="badge" style="background:${c[0]};color:${c[1]};padding:3px 10px;font-size:11px;font-weight:700">${c[2]}</span>
-      </td>
       <td class="td-left" style="font-weight:700;font-size:11px">${r.op}</td>
       <td class="td-left" style="font-size:11px">${r.cliente}</td>
       <td><span class="badge" style="background:${t[0]};color:${t[1]}">${t[2]}</span></td>
