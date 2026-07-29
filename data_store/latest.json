@@ -1,5 +1,5 @@
 {
-  "updated_at": "29/07/2026 07:10",
+  "updated_at": "29/07/2026 08:08",
   "source": "vtiger_api_github_actions",
   "today": "2026-07-29",
   "hoy": "2026-07-29",
@@ -47,8 +47,8 @@
     },
     "Kromia": {
       "2026-07-27": 0,
-      "2026-07-28": 1,
-      "2026-07-29": 4,
+      "2026-07-28": 0,
+      "2026-07-29": 5,
       "2026-07-30": 6,
       "2026-07-31": 10
     },
@@ -56,7 +56,7 @@
       "2026-07-27": 0,
       "2026-07-28": 0,
       "2026-07-29": 0,
-      "2026-07-30": 4,
+      "2026-07-30": 3,
       "2026-07-31": 3
     },
     "Nilpeter 2": {
@@ -64,14 +64,14 @@
       "2026-07-28": 0,
       "2026-07-29": 0,
       "2026-07-30": 1,
-      "2026-07-31": 4
+      "2026-07-31": 3
     },
     "Rebobinadora": {
       "2026-07-27": 0,
       "2026-07-28": 0,
       "2026-07-29": 6,
-      "2026-07-30": 5,
-      "2026-07-31": 3
+      "2026-07-30": 6,
+      "2026-07-31": 4
     },
     "Troqueladora Plana": {
       "2026-07-27": 0,
@@ -90,64 +90,22 @@
   },
   "totales_dia": {
     "2026-07-27": 0,
-    "2026-07-28": 1,
-    "2026-07-29": 14,
+    "2026-07-28": 0,
+    "2026-07-29": 15,
     "2026-07-30": 21,
     "2026-07-31": 31
   },
   "total_semana": 67,
   "total_ordenes": 273,
-  "inc_total": 1,
-  "inc_maq": {
-    "Kromia": 1
-  },
-  "inc_etapas": {
-    "Preparacion": {
-      "total": 1,
-      "ordenes": [
-        {
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "tipo": "Fondo",
-          "op": "104852"
-        }
-      ]
-    }
-  },
-  "etapas_unicas": [
-    "Preparacion"
-  ],
-  "inc_detalle": [
-    {
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-100X150-R950-M-1F-C30-AZUL-PROCESS-CP",
-      "op": "104852",
-      "tipo": "Fondo",
-      "etapa": "Preparacion",
-      "fecha_entrega": "28/07/2026"
-    }
-  ],
+  "inc_total": 0,
+  "inc_maq": {},
+  "inc_etapas": {},
+  "etapas_unicas": [],
+  "inc_detalle": [],
   "dia_max_nombre": "Viernes",
   "dia_max_val": 31,
   "dia_max_fecha": "31/07",
   "urgentes": [
-    {
-      "op": "104852",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-100X150-R950-M-1F-C30-AZUL-PROCESS-CP",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
-      "tipo": "Fondo",
-      "fecha_entrega": "28/07/2026",
-      "fecha_entrega_raw": "2026-07-28",
-      "fecha_creacion": "21/07/2026",
-      "dias_ofrecidos": 7,
-      "color_toc": "negro",
-      "pct_prioridad": "78.77%",
-      "mts": 3620.0,
-      "pct_buffer": 114.3,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
     {
       "op": "104743",
       "cliente": "SOFTYS COLOMBIA",
@@ -162,6 +120,24 @@
       "color_toc": "rojo",
       "pct_prioridad": "59.08%",
       "mts": 562.0,
+      "pct_buffer": 100.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104852",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "FD-TTT-100X150-R950-M-1F-C30-AZUL-PROCESS-CP",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Fondo",
+      "fecha_entrega": "29/07/2026",
+      "fecha_entrega_raw": "2026-07-29",
+      "fecha_creacion": "21/07/2026",
+      "dias_ofrecidos": 8,
+      "color_toc": "rojo",
+      "pct_prioridad": "78.77%",
+      "mts": 3620.0,
       "pct_buffer": 100.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -494,8 +470,8 @@
       "op": "104808",
       "cliente": "Protekting Phytosanitary Colombia S.A.S",
       "referencia": "IC-PPB-142X267-R2000-M-1F-C30-FURIOUS247-SC-1L",
-      "maquina": "Nilpeter 1",
-      "etapa": "Impresion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "30/07/2026",
       "fecha_entrega_raw": "2026-07-30",
@@ -505,7 +481,7 @@
       "pct_prioridad": "47.26%",
       "mts": 4708.0,
       "pct_buffer": 92.9,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -998,8 +974,8 @@
       "op": "104393",
       "cliente": "AZUL K  SA",
       "referencia": "IC-PPB-123X61-R4000-M-1F-C30-LAVAL-LIQ-ANTIBA-ENZIMA-BRILLAKING-750ml",
-      "maquina": "Nilpeter 2",
-      "etapa": "Impresion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "31/07/2026",
       "fecha_entrega_raw": "2026-07-31",
@@ -1009,7 +985,7 @@
       "pct_prioridad": "9.08%",
       "mts": 31433.0,
       "pct_buffer": 93.1,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
     {
@@ -2978,24 +2954,6 @@
   "urgentes_total": 158,
   "todas_tambor": [
     {
-      "op": "104852",
-      "cliente": "LINEADATASCAN S.A.-BOGOTA",
-      "referencia": "FD-TTT-100X150-R950-M-1F-C30-AZUL-PROCESS-CP",
-      "maquina": "Kromia",
-      "etapa": "Preparacion",
-      "tipo": "Fondo",
-      "fecha_entrega": "28/07/2026",
-      "fecha_entrega_raw": "2026-07-28",
-      "fecha_creacion": "21/07/2026",
-      "dias_ofrecidos": 7,
-      "color_toc": "negro",
-      "pct_prioridad": "78.77%",
-      "mts": 3620.0,
-      "pct_buffer": 114.3,
-      "en_impresion": true,
-      "tiempo_produccion": "Standar"
-    },
-    {
       "op": "104743",
       "cliente": "SOFTYS COLOMBIA",
       "referencia": "IC-TTT-132X8-R10000-M-1F-C30-DISNEY-PAÑUELOS-94GR",
@@ -3009,6 +2967,24 @@
       "color_toc": "rojo",
       "pct_prioridad": "59.08%",
       "mts": 562.0,
+      "pct_buffer": 100.0,
+      "en_impresion": true,
+      "tiempo_produccion": "Standar"
+    },
+    {
+      "op": "104852",
+      "cliente": "LINEADATASCAN S.A.-BOGOTA",
+      "referencia": "FD-TTT-100X150-R950-M-1F-C30-AZUL-PROCESS-CP",
+      "maquina": "Kromia",
+      "etapa": "Preparacion",
+      "tipo": "Fondo",
+      "fecha_entrega": "29/07/2026",
+      "fecha_entrega_raw": "2026-07-29",
+      "fecha_creacion": "21/07/2026",
+      "dias_ofrecidos": 8,
+      "color_toc": "rojo",
+      "pct_prioridad": "78.77%",
+      "mts": 3620.0,
       "pct_buffer": 100.0,
       "en_impresion": true,
       "tiempo_produccion": "Standar"
@@ -3341,8 +3317,8 @@
       "op": "104808",
       "cliente": "Protekting Phytosanitary Colombia S.A.S",
       "referencia": "IC-PPB-142X267-R2000-M-1F-C30-FURIOUS247-SC-1L",
-      "maquina": "Nilpeter 1",
-      "etapa": "Impresion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "30/07/2026",
       "fecha_entrega_raw": "2026-07-30",
@@ -3352,7 +3328,7 @@
       "pct_prioridad": "47.26%",
       "mts": 4708.0,
       "pct_buffer": 92.9,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Standar"
     },
     {
@@ -3845,8 +3821,8 @@
       "op": "104393",
       "cliente": "AZUL K  SA",
       "referencia": "IC-PPB-123X61-R4000-M-1F-C30-LAVAL-LIQ-ANTIBA-ENZIMA-BRILLAKING-750ml",
-      "maquina": "Nilpeter 2",
-      "etapa": "Impresion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "fecha_entrega": "31/07/2026",
       "fecha_entrega_raw": "2026-07-31",
@@ -3856,7 +3832,7 @@
       "pct_prioridad": "9.08%",
       "mts": 31433.0,
       "pct_buffer": 93.1,
-      "en_impresion": true,
+      "en_impresion": false,
       "tiempo_produccion": "Programada"
     },
     {
@@ -7950,13 +7926,12 @@
     "azul": 157,
     "verde": 43,
     "amarillo": 28,
-    "rojo": 44,
-    "negro": 1
+    "rojo": 45,
+    "negro": 0
   },
-  "dia_total": 14,
+  "dia_total": 15,
   "dia_por_maquina": {},
   "fechas_disponibles": [
-    "2026-07-28",
     "2026-07-29",
     "2026-07-30",
     "2026-07-31",
@@ -9540,8 +9515,8 @@
       "fecha_creacion": "27/07/2026"
     },
     {
-      "fecha": "2026-07-28",
-      "fecha_entrega": "28/07/2026",
+      "fecha": "2026-07-29",
+      "fecha_entrega": "29/07/2026",
       "op": "104852",
       "cliente": "LINEADATASCAN S.A.-BOGOTA",
       "referencia": "FD-TTT-100X150-R950-M-1F-C30-AZUL-PROCESS-CP",
@@ -9550,7 +9525,7 @@
       "tipo": "Fondo",
       "mts": 3620.0,
       "familia": "F6",
-      "color_toc": "negro",
+      "color_toc": "rojo",
       "fecha_std": "2026-07-28",
       "promesa_dias": 6,
       "fecha_creacion": "21/07/2026"
@@ -10265,8 +10240,8 @@
       "op": "104393",
       "cliente": "AZUL K  SA",
       "referencia": "IC-PPB-123X61-R4000-M-1F-C30-LAVAL-LIQ-ANTIBA-ENZIMA-BRILLAKING-750ml",
-      "maquina": "Nilpeter 2",
-      "etapa": "Impresion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "mts": 31433.0,
       "familia": "F10",
@@ -11145,8 +11120,8 @@
       "op": "104808",
       "cliente": "Protekting Phytosanitary Colombia S.A.S",
       "referencia": "IC-PPB-142X267-R2000-M-1F-C30-FURIOUS247-SC-1L",
-      "maquina": "Nilpeter 1",
-      "etapa": "Impresion",
+      "maquina": "Rebobinadora",
+      "etapa": "RM4 - Reboninado",
       "tipo": "Impresa",
       "mts": 4708.0,
       "familia": "F9",
@@ -12375,7 +12350,7 @@
       "2026-08-05": 1176.0,
       "2026-07-16": 1570.0,
       "2026-07-29": 2882.0,
-      "2026-07-28": 34803.0,
+      "2026-07-28": 30095.0,
       "2026-06-05": 1502.0,
       "2026-07-23": 1697.0,
       "2026-06-20": 899.0,
@@ -12391,7 +12366,7 @@
       "2026-08-07": 26933.0,
       "2026-07-21": 12155.0,
       "2026-07-25": 1642.0,
-      "2026-07-13": 33257.0,
+      "2026-07-13": 1824.0,
       "2026-08-01": 22842.0,
       "2026-07-22": 2880.0,
       "2026-07-28": 4499.0,
@@ -12454,9 +12429,9 @@
     "Nilpeter 1": {
       "mts_atrasados": 0,
       "n_atrasadas": 0,
-      "mts_pendientes": 281856,
-      "n_pendientes": 82,
-      "mts_total": 281856,
+      "mts_pendientes": 277148,
+      "n_pendientes": 81,
+      "mts_total": 277148,
       "turnos_atrasados": 0.0,
       "dias_atrasados": 0.0,
       "cap_turno": 7962,
@@ -12464,37 +12439,37 @@
         {
           "dias": 3,
           "turnos": 9,
-          "mts_por_turno": 31317,
-          "vel_req": 137.7,
-          "efic_req": 196.7,
+          "mts_por_turno": 30794,
+          "vel_req": 135.4,
+          "efic_req": 193.4,
           "vel_comb": 42.0,
-          "efic_comb": 163.9
+          "efic_comb": 161.1
         },
         {
           "dias": 5,
           "turnos": 15,
-          "mts_por_turno": 18790,
-          "vel_req": 82.6,
-          "efic_req": 118.0,
+          "mts_por_turno": 18477,
+          "vel_req": 81.2,
+          "efic_req": 116.0,
           "vel_comb": 42.0,
-          "efic_comb": 98.3
+          "efic_comb": 96.7
         },
         {
           "dias": 7,
           "turnos": 21,
-          "mts_por_turno": 13422,
-          "vel_req": 59.0,
-          "efic_req": 84.3,
+          "mts_por_turno": 13198,
+          "vel_req": 58.0,
+          "efic_req": 82.9,
           "vel_comb": 42.0,
-          "efic_comb": 70.2
+          "efic_comb": 69.1
         },
         {
           "dias": 10,
           "turnos": 30,
-          "mts_por_turno": 9395,
-          "vel_req": 41.3,
-          "efic_req": 59.0,
-          "vel_comb": 41.3,
+          "mts_por_turno": 9238,
+          "vel_req": 40.6,
+          "efic_req": 58.0,
+          "vel_comb": 40.6,
           "efic_comb": 50.0
         }
       ]
@@ -12502,9 +12477,9 @@
     "Nilpeter 2": {
       "mts_atrasados": 0,
       "n_atrasadas": 0,
-      "mts_pendientes": 257530,
-      "n_pendientes": 58,
-      "mts_total": 257530,
+      "mts_pendientes": 226097,
+      "n_pendientes": 57,
+      "mts_total": 226097,
       "turnos_atrasados": 0.0,
       "dias_atrasados": 0.0,
       "cap_turno": 7962,
@@ -12512,49 +12487,49 @@
         {
           "dias": 3,
           "turnos": 9,
-          "mts_por_turno": 28614,
-          "vel_req": 125.8,
-          "efic_req": 179.7,
+          "mts_por_turno": 25122,
+          "vel_req": 110.4,
+          "efic_req": 157.8,
           "vel_comb": 42.0,
-          "efic_comb": 149.7
+          "efic_comb": 131.5
         },
         {
           "dias": 5,
           "turnos": 15,
-          "mts_por_turno": 17169,
-          "vel_req": 75.5,
-          "efic_req": 107.8,
+          "mts_por_turno": 15073,
+          "vel_req": 66.3,
+          "efic_req": 94.6,
           "vel_comb": 42.0,
-          "efic_comb": 89.8
+          "efic_comb": 78.9
         },
         {
           "dias": 7,
           "turnos": 21,
-          "mts_por_turno": 12263,
-          "vel_req": 53.9,
-          "efic_req": 77.0,
+          "mts_por_turno": 10767,
+          "vel_req": 47.3,
+          "efic_req": 67.6,
           "vel_comb": 42.0,
-          "efic_comb": 64.2
+          "efic_comb": 56.3
         },
         {
           "dias": 10,
           "turnos": 30,
-          "mts_por_turno": 8584,
-          "vel_req": 37.7,
-          "efic_req": 53.9,
-          "vel_comb": 37.7,
+          "mts_por_turno": 7537,
+          "vel_req": 33.1,
+          "efic_req": 47.3,
+          "vel_comb": 33.1,
           "efic_comb": 50.0
         }
       ]
     },
     "Kromia": {
-      "mts_atrasados": 3620,
-      "n_atrasadas": 1,
-      "mts_pendientes": 128913,
-      "n_pendientes": 56,
+      "mts_atrasados": 0,
+      "n_atrasadas": 0,
+      "mts_pendientes": 132533,
+      "n_pendientes": 57,
       "mts_total": 132533,
-      "turnos_atrasados": 0.5,
-      "dias_atrasados": 0.2,
+      "turnos_atrasados": 0.0,
+      "dias_atrasados": 0.0,
       "cap_turno": 7962,
       "planes": [
         {
@@ -12599,9 +12574,9 @@
   "cuellos": {
     "NP1": {
       "capacidad_dia": 23100,
-      "mts_total": 281856,
-      "dias_trabajo": 12.2,
-      "pct_cap": 61.0,
+      "mts_total": 277148,
+      "dias_trabajo": 12.0,
+      "pct_cap": 60.0,
       "ordenes": [
         {
           "op": "104886",
@@ -13279,15 +13254,6 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104808",
-          "cliente": "Protekting Phytosanitary Colombia S.A.S",
-          "mts": 4708.0,
-          "fecha": "30/07/2026",
-          "color": "rojo",
-          "tipo": "Impresa",
-          "etapa": "Impresion"
-        },
-        {
           "op": "104766",
           "cliente": "LABORATORIOS INDUSTRIALES LPS SAS",
           "mts": 1697.0,
@@ -13406,8 +13372,8 @@
           "ordenes": 2
         },
         "30/07/2026": {
-          "mts": 8349.0,
-          "ordenes": 4
+          "mts": 3641.0,
+          "ordenes": 3
         },
         "31/07/2026": {
           "mts": 41560.0,
@@ -13421,9 +13387,9 @@
     },
     "NP2": {
       "capacidad_dia": 23100,
-      "mts_total": 257530,
-      "dias_trabajo": 11.1,
-      "pct_cap": 55.7,
+      "mts_total": 226097,
+      "dias_trabajo": 9.8,
+      "pct_cap": 48.9,
       "ordenes": [
         {
           "op": "104734",
@@ -13912,15 +13878,6 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104393",
-          "cliente": "AZUL K  SA",
-          "mts": 31433.0,
-          "fecha": "31/07/2026",
-          "color": "rojo",
-          "tipo": "Impresa",
-          "etapa": "Impresion"
-        },
-        {
           "op": "105049",
           "cliente": "HORTIFRUT COLOMBIA SAS",
           "mts": 998.0,
@@ -13948,8 +13905,8 @@
           "etapa": "Preparacion"
         }
       ],
-      "es_cuello": true,
-      "fecha_prometida": "11/08/2026",
+      "es_cuello": false,
+      "fecha_prometida": "08/08/2026",
       "carga_por_fecha": {
         "02/09/2026": {
           "mts": 6601.0,
@@ -14020,8 +13977,8 @@
           "ordenes": 1
         },
         "31/07/2026": {
-          "mts": 37135.0,
-          "ordenes": 4
+          "mts": 5702.0,
+          "ordenes": 3
         },
         "31/08/2026": {
           "mts": 42229.0,
@@ -14360,18 +14317,18 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104852",
+          "op": "104854",
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 3620.0,
-          "fecha": "28/07/2026",
-          "color": "negro",
+          "mts": 1244.0,
+          "fecha": "29/07/2026",
+          "color": "rojo",
           "tipo": "Fondo",
           "etapa": "Preparacion"
         },
         {
-          "op": "104854",
+          "op": "104852",
           "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 1244.0,
+          "mts": 3620.0,
           "fecha": "29/07/2026",
           "color": "rojo",
           "tipo": "Fondo",
@@ -14589,13 +14546,9 @@
           "mts": 4106.0,
           "ordenes": 3
         },
-        "28/07/2026": {
-          "mts": 3620.0,
-          "ordenes": 1
-        },
         "29/07/2026": {
-          "mts": 3343.0,
-          "ordenes": 4
+          "mts": 6963.0,
+          "ordenes": 5
         },
         "30/07/2026": {
           "mts": 31100.0,
@@ -15361,21 +15314,21 @@
           "etapa": "Preparacion"
         },
         {
-          "op": "104852",
-          "cliente": "LINEADATASCAN S.A.-BOGOTA",
-          "mts": 3620.0,
-          "fecha": "28/07/2026",
-          "color": "negro",
-          "tipo": "Fondo",
-          "etapa": "Preparacion"
-        },
-        {
           "op": "104352",
           "cliente": "FLEISCHMANN FOODS SA",
           "mts": 681.0,
           "fecha": "28/08/2026",
           "color": "azul",
           "tipo": "Impresa",
+          "etapa": "Preparacion"
+        },
+        {
+          "op": "104852",
+          "cliente": "LINEADATASCAN S.A.-BOGOTA",
+          "mts": 3620.0,
+          "fecha": "29/07/2026",
+          "color": "rojo",
+          "tipo": "Fondo",
           "etapa": "Preparacion"
         },
         {
@@ -15421,7 +15374,7 @@
           "fecha": "30/07/2026",
           "color": "rojo",
           "tipo": "Impresa",
-          "etapa": "Impresion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "104766",
@@ -15457,7 +15410,7 @@
           "fecha": "31/07/2026",
           "color": "rojo",
           "tipo": "Impresa",
-          "etapa": "Impresion"
+          "etapa": "RM4 - Reboninado"
         },
         {
           "op": "105005",
@@ -15504,17 +15457,13 @@
           "mts": 2834.0,
           "ordenes": 2
         },
-        "28/07/2026": {
-          "mts": 3620.0,
-          "ordenes": 1
-        },
         "28/08/2026": {
           "mts": 681.0,
           "ordenes": 1
         },
         "29/07/2026": {
-          "mts": 15425.0,
-          "ordenes": 1
+          "mts": 19045.0,
+          "ordenes": 2
         },
         "30/07/2026": {
           "mts": 9943.0,
@@ -17825,7 +17774,7 @@
     "Nilpeter 1": {
       "capacidad_dia": 23888,
       "por_fecha": {
-        "2026-07-30": 8349.0,
+        "2026-07-30": 3641.0,
         "2026-07-31": 41560.0,
         "2026-08-03": 29601.0,
         "2026-08-04": 40174.0,
@@ -17849,7 +17798,7 @@
       "capacidad_dia": 23888,
       "por_fecha": {
         "2026-07-30": 1164.0,
-        "2026-07-31": 37135.0,
+        "2026-07-31": 5702.0,
         "2026-08-03": 5999.0,
         "2026-08-04": 13000.0,
         "2026-08-05": 7642.0,
@@ -17872,8 +17821,7 @@
     "Kromia": {
       "capacidad_dia": 23888,
       "por_fecha": {
-        "2026-07-28": 3620.0,
-        "2026-07-29": 3343.0,
+        "2026-07-29": 6963.0,
         "2026-07-30": 31100.0,
         "2026-07-31": 34109.0,
         "2026-08-03": 29917.0,
@@ -17887,7 +17835,6 @@
     }
   },
   "fechas_rrc": [
-    "2026-07-28",
     "2026-07-29",
     "2026-07-30",
     "2026-07-31",
@@ -17937,9 +17884,9 @@
           "estado": "ok"
         },
         "2026-07-30": {
-          "planeado": 8349.0,
+          "planeado": 3641.0,
           "capacidad": 23888,
-          "pct": 35.0,
+          "pct": 15.2,
           "estado": "ok"
         },
         "2026-07-31": {
@@ -17978,10 +17925,10 @@
           "estado": "ok"
         },
         "2026-07-31": {
-          "planeado": 37135.0,
+          "planeado": 5702.0,
           "capacidad": 23888,
-          "pct": 155.5,
-          "estado": "sobrecarga"
+          "pct": 23.9,
+          "estado": "ok"
         }
       }
     },
@@ -17995,15 +17942,15 @@
           "estado": "ok"
         },
         "2026-07-28": {
-          "planeado": 3620.0,
+          "planeado": 0,
           "capacidad": 23888,
-          "pct": 15.2,
+          "pct": 0.0,
           "estado": "ok"
         },
         "2026-07-29": {
-          "planeado": 3343.0,
+          "planeado": 6963.0,
           "capacidad": 23888,
-          "pct": 14.0,
+          "pct": 29.1,
           "estado": "ok"
         },
         "2026-07-30": {
